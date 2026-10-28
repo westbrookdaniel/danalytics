@@ -145,7 +145,6 @@ export default function App() {
             <a href="#/" className="text-[17px] font-semibold tracking-tight">
               danalytics
             </a>
-            <BenchmarkSelect />
             <nav className="ml-2 flex items-center gap-1">
               {PAGES.map((p) => (
                 <a
@@ -165,7 +164,7 @@ export default function App() {
         </header>
 
         <div
-          className="mx-auto grid max-w-[1600px] gap-8 px-4 pt-5 pb-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_var(--sidebar-w)]"
+          className="mx-auto grid max-w-[1600px] gap-8 px-4 py-5 sm:px-6 lg:grid-cols-[minmax(0,1fr)_var(--sidebar-w)]"
           style={{ "--sidebar-w": `${sidebarWidth}px` } as CSSProperties}
         >
           <main className="min-w-0 space-y-16">
@@ -192,7 +191,8 @@ export default function App() {
                       <SelectItem value="api">API</SelectItem>
                     </SelectContent>
                   </Select>
-                  cost per task
+                  cost per task on
+                  <BenchmarkSelect />
                 </h1>
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
                   {sub ? <BudgetControls filters={filters} setFilters={setFilters} /> : null}
@@ -310,11 +310,13 @@ function BenchmarkSelect() {
   const current = BENCHMARKS.find((b) => b.id === value)!
   return (
     <Select value={value} onValueChange={setValue}>
-      <SelectTrigger size="sm" className="hidden h-8 gap-2 text-[13px] sm:flex" aria-label="Benchmark">
-        <span className="font-medium">{current.name}</span>
-        <span className="text-muted-foreground">main</span>
+      <SelectTrigger className="h-9 gap-2 px-3 text-[15px] font-semibold" aria-label="Benchmark">
+        {/* SelectValue with custom children: Radix needs the node to position the menu. */}
+        <SelectValue>
+          {current.name} <span className="font-normal text-muted-foreground">main</span>
+        </SelectValue>
       </SelectTrigger>
-      <SelectContent align="start">
+      <SelectContent position="popper" align="start">
         {BENCHMARKS.map((b) => (
           <SelectItem key={b.id} value={b.id}>
             <span className="flex flex-col">
@@ -391,10 +393,10 @@ function ViewMenu({
 function BudgetControls({ filters, setFilters }: { filters: Filters; setFilters: (u: (f: Filters) => Filters) => void }) {
   const patch = (p: Partial<Filters>) => setFilters((f) => ({ ...f, ...p }))
   return (
-    <>
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
       <div className="flex items-center gap-3">
         <span className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
-          Max subscription
+          Max cost
           <Info info="Ignore any plan whose monthly fee is above this. Slide down to see what the best model costs per task on a cheaper budget." />
         </span>
         <Slider
@@ -406,7 +408,7 @@ function BudgetControls({ filters, setFilters }: { filters: Filters; setFilters:
           onValueChange={([v]) => patch({ maxFee: v })}
           aria-label="Maximum monthly subscription cost"
         />
-        <span className="w-16 text-[13px] font-medium tabular-nums">{filters.maxFee >= MAX_FEE ? "Any" : `${feeShort(filters.maxFee)}/mo`}</span>
+        <span className="min-w-12 text-[13px] font-medium tabular-nums">{filters.maxFee >= MAX_FEE ? "Any" : `${feeShort(filters.maxFee)}/mo`}</span>
       </div>
       <div className="flex flex-wrap items-center gap-2">
         <span className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
@@ -415,7 +417,7 @@ function BudgetControls({ filters, setFilters }: { filters: Filters; setFilters:
         </span>
         <BracketSelect value={filters.brackets} onChange={(brackets) => patch({ brackets })} />
       </div>
-    </>
+    </div>
   )
 }
 
@@ -496,33 +498,52 @@ function PlansView({ filters, palette }: { filters: Filters; palette: ChartPalet
 
 const CURRENCY_KEY = "danalytics-currency"
 
-/** Display currency, remembered per browser. */
+const EURO_REGIONS = new Set(["AT", "BE", "CY", "DE", "EE", "ES", "FI", "FR", "GR", "HR", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PT", "SI", "SK"])
+const REGION_CURRENCY: Record<string, CurrencyCode> = { AU: "AUD", GB: "GBP", CA: "CAD", NZ: "NZD", JP: "JPY", CN: "CNY", IN: "INR" }
+
+/** Best guess at the viewer's currency from the browser locale's region; USD when unsure. */
+function localeCurrency(): CurrencyCode {
+  try {
+    const region = new Intl.Locale(navigator.language).maximize().region ?? ""
+    if (EURO_REGIONS.has(region)) return "EUR"
+    return REGION_CURRENCY[region] ?? "USD"
+  } catch {
+    return "USD"
+  }
+}
+
+/** Display currency: a saved choice if there is one, otherwise the locale's currency. */
 function useStoredCurrency() {
   const [code, setCode] = useState<CurrencyCode>(() => {
     try {
       const saved = localStorage.getItem(CURRENCY_KEY)
-      return CURRENCIES.some((c) => c.code === saved) ? (saved as CurrencyCode) : "USD"
+      if (CURRENCIES.some((c) => c.code === saved)) return saved as CurrencyCode
     } catch {
-      return "USD"
+      // Storage can be blocked; fall back to the locale.
     }
+    return localeCurrency()
   })
-  useEffect(() => {
+  // Only an explicit pick is saved, so the locale default keeps tracking the browser.
+  const choose = (next: CurrencyCode) => {
+    setCode(next)
     try {
-      localStorage.setItem(CURRENCY_KEY, code)
+      localStorage.setItem(CURRENCY_KEY, next)
     } catch {
       // Storage can be blocked; the currency still applies for this visit.
     }
-  }, [code])
-  return [code, setCode] as const
+  }
+  return [code, choose] as const
 }
 
 function CurrencySelect({ value, onChange }: { value: CurrencyCode; onChange: (c: CurrencyCode) => void }) {
   return (
     <Select value={value} onValueChange={(v) => onChange(v as CurrencyCode)}>
+      <span className="hidden text-[13px] text-muted-foreground sm:inline">Currency</span>
       <SelectTrigger size="sm" className="h-8 gap-1.5 text-[13px] font-medium tabular-nums" aria-label="Currency">
-        {value}
+        {/* SelectValue with custom children: Radix needs the node to position the menu. */}
+        <SelectValue>{value}</SelectValue>
       </SelectTrigger>
-      <SelectContent align="end">
+      <SelectContent position="popper" align="end">
         {CURRENCIES.map((c) => (
           <SelectItem key={c.code} value={c.code}>
             <span className="font-medium tabular-nums">{c.code}</span>
