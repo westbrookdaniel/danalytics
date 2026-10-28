@@ -1,5 +1,15 @@
 import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react"
-import { ChevronDownIcon, InfoIcon, MonitorIcon, MoonIcon, SlidersHorizontalIcon, SunIcon, TriangleAlertIcon } from "lucide-react"
+import {
+  ChevronDownIcon,
+  InfoIcon,
+  ListFilterIcon,
+  MonitorIcon,
+  MoonIcon,
+  Settings2Icon,
+  SlidersHorizontalIcon,
+  SunIcon,
+  TriangleAlertIcon,
+} from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -11,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Slider } from "@/components/ui/slider"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { TooltipProvider } from "@/components/ui/tooltip"
@@ -161,16 +172,30 @@ export default function App() {
   const rows = useMemo(() => buildRows(filters, models), [filters, models])
   const setMode = (mode: Filters["mode"]) => setFilters((f) => ({ ...f, mode }))
 
+  // Desktop shows this in the right column; phones open it from the Filters button.
+  const sidebar = (
+    <Sidebar
+      filters={filters}
+      setFilters={setFilters}
+      palette={palette}
+      highlight={hovered}
+      onHover={setHovered}
+      onReset={() => setFilters(INITIAL_FILTERS)}
+      showPlans={sub || onPlans}
+      models={models}
+    />
+  )
+
   return (
     <TooltipProvider>
       <div className="min-h-dvh bg-background">
         <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur">
-          <div className="mx-auto flex h-14 max-w-[1600px] items-center gap-4 px-4 sm:px-6">
+          <div className="mx-auto flex h-14 max-w-[1600px] items-center gap-2 px-4 sm:gap-4 sm:px-6">
             <Link to={{ pathname: "/", search }} className="flex items-center gap-2 text-[17px] font-semibold tracking-tight">
               <LogoMark className="size-6" />
-              danalytics
+              <span className="max-[359px]:sr-only">danalytics</span>
             </Link>
-            <nav className="ml-2 flex items-center gap-1">
+            <nav className="flex items-center gap-0.5 sm:ml-2 sm:gap-1">
               {PAGES.map((p) => (
                 // NavLink sets aria-current="page" on the active route; keep ?benchmark= across pages.
                 <NavLink
@@ -185,13 +210,17 @@ export default function App() {
             </nav>
             <UpdatedBadge />
             <span className="ml-auto" />
-            <CurrencySelect value={currency} onChange={setCurrencyState} />
-            <ThemeSwitch pref={pref} onChange={setPref} />
+            <div className="hidden items-center gap-4 md:flex">
+              <CurrencySelect value={currency} onChange={setCurrencyState} />
+              <ThemeSwitch pref={pref} onChange={setPref} />
+            </div>
+            {/* Phones: currency and theme fold into one menu so the bar fits on a single row. */}
+            <MobileSettings currency={currency} onCurrency={setCurrencyState} pref={pref} onPref={setPref} />
           </div>
         </header>
 
         <div
-          className="mx-auto grid max-w-[1600px] gap-8 px-4 py-5 sm:px-6 lg:grid-cols-[minmax(0,1fr)_var(--sidebar-w)]"
+          className="mx-auto grid max-w-[1600px] grid-cols-[minmax(0,1fr)] gap-8 px-4 py-5 sm:px-6 lg:grid-cols-[minmax(0,1fr)_var(--sidebar-w)]"
           style={{ "--sidebar-w": `${sidebarWidth}px` } as CSSProperties}
         >
           <main className="min-w-0 space-y-16">
@@ -207,7 +236,7 @@ export default function App() {
               <>
             <section id="chart">
               <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
-                <h1 className="flex flex-wrap items-center gap-2 text-xl font-semibold tracking-tight">
+                <h1 className="flex flex-wrap items-center gap-2 text-lg font-semibold tracking-tight sm:text-xl">
                   Score vs
                   <Select value={filters.mode} onValueChange={(v) => setMode(v as Filters["mode"])}>
                     <SelectTrigger className="h-9 gap-2 px-3 text-[15px] font-semibold" aria-label="Pricing">
@@ -224,6 +253,7 @@ export default function App() {
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
                   {sub ? <BudgetControls filters={filters} setFilters={setFilters} /> : null}
                   <ViewMenu view={view} setView={setView} sub={sub} />
+                  <FiltersSheet>{sidebar}</FiltersSheet>
                 </div>
               </div>
 
@@ -292,7 +322,7 @@ export default function App() {
           </main>
 
           {/* Sticky offset = header (56px + 1px border) + main's top padding (20px), so the panel doesn't jump when scrolling starts. */}
-          <aside className="relative lg:sticky lg:top-[77px] lg:max-h-[calc(100dvh-97px)] lg:self-start lg:overflow-y-auto lg:rounded-xl lg:border lg:bg-card/50">
+          <aside className="relative hidden lg:sticky lg:top-[77px] lg:block lg:max-h-[calc(100dvh-97px)] lg:self-start lg:overflow-y-auto lg:rounded-xl lg:border lg:bg-card/50">
             <div
               role="separator"
               aria-orientation="vertical"
@@ -302,16 +332,7 @@ export default function App() {
               onDoubleClick={resetWidth}
               className="absolute inset-y-0 left-0 z-20 hidden w-1.5 cursor-col-resize rounded-full transition-colors hover:bg-primary/40 active:bg-primary/60 lg:block"
             />
-            <Sidebar
-              filters={filters}
-              setFilters={setFilters}
-              palette={palette}
-              highlight={hovered}
-              onHover={setHovered}
-              onReset={() => setFilters(INITIAL_FILTERS)}
-              showPlans={sub || onPlans}
-              models={models}
-            />
+            {sidebar}
           </aside>
         </div>
       </div>
@@ -328,20 +349,23 @@ function SubscriptionDisclaimer() {
   return (
     <div
       role="note"
-      className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/[0.07] px-4 py-2.5 text-center text-[13px]"
+      className="mt-4 flex items-start justify-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/[0.07] px-4 py-2.5 text-[13px] sm:items-center"
     >
-      <TriangleAlertIcon className="size-4 shrink-0 text-amber-600 dark:text-amber-400" />
-      <span className="font-medium">Subscription costs are rough estimates.</span>
-      <a
-        href="#method"
-        onClick={(e) => {
-          e.preventDefault()
-          document.getElementById("method")?.scrollIntoView({ behavior: "smooth", block: "start" })
-        }}
-        className="text-muted-foreground underline underline-offset-2 hover:text-foreground"
-      >
-        How these are computed
-      </a>
+      <TriangleAlertIcon className="mt-0.5 size-4 shrink-0 text-amber-600 sm:mt-0 dark:text-amber-400" />
+      {/* One paragraph so phones wrap it as a sentence rather than two squeezed columns. */}
+      <p>
+        <span className="font-medium">Subscription costs are rough estimates.</span>{" "}
+        <a
+          href="#method"
+          onClick={(e) => {
+            e.preventDefault()
+            document.getElementById("method")?.scrollIntoView({ behavior: "smooth", block: "start" })
+          }}
+          className="text-muted-foreground underline underline-offset-2 hover:text-foreground"
+        >
+          How these are computed
+        </a>
+      </p>
     </div>
   )
 }
@@ -359,7 +383,7 @@ function UpdatedBadge() {
         </div>
       }
     >
-      <span tabIndex={0} className="hidden cursor-default border-l pl-4 text-[12px] text-muted-foreground sm:inline">
+      <span tabIndex={0} className="hidden cursor-default border-l pl-4 text-[12px] whitespace-nowrap text-muted-foreground lg:inline">
         Updated {formatDate(LAST_UPDATED)}
       </span>
     </Hint>
@@ -635,9 +659,70 @@ function CurrencySelect({ value, onChange }: { value: CurrencyCode; onChange: (c
   )
 }
 
+/** Phone-only menu holding the currency and theme controls from the desktop header. */
+function MobileSettings({
+  currency,
+  onCurrency,
+  pref,
+  onPref,
+}: {
+  currency: CurrencyCode
+  onCurrency: (c: CurrencyCode) => void
+  pref: ThemePref
+  onPref: (p: ThemePref) => void
+}) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        aria-label="Currency and theme"
+        className="inline-flex h-8 items-center gap-1.5 rounded-md border px-2 text-[13px] font-medium tabular-nums transition-colors hover:bg-accent data-[state=open]:bg-accent md:hidden"
+      >
+        {currency}
+        <Settings2Icon className="size-3.5" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-60">
+        <DropdownMenuLabel className="text-[12px] text-muted-foreground">Currency (converted from USD)</DropdownMenuLabel>
+        <DropdownMenuRadioGroup value={currency} onValueChange={(v) => onCurrency(v as CurrencyCode)}>
+          {CURRENCIES.map((c) => (
+            <DropdownMenuRadioItem key={c.code} value={c.code}>
+              <span className="font-medium tabular-nums">{c.code}</span>
+              <span className="text-muted-foreground">{c.name}</span>
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel className="text-[12px] text-muted-foreground">Theme</DropdownMenuLabel>
+        <DropdownMenuRadioGroup value={pref} onValueChange={(v) => onPref(v as ThemePref)}>
+          <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+/** Phone-only button that opens the sidebar filters in a slide-over sheet. */
+function FiltersSheet({ children }: { children: ReactNode }) {
+  return (
+    <Sheet>
+      <SheetTrigger className="inline-flex h-8 items-center gap-2 rounded-md border px-2.5 text-[13px] transition-colors hover:bg-accent data-[state=open]:bg-accent lg:hidden">
+        <ListFilterIcon className="size-3.5" />
+        Filters
+      </SheetTrigger>
+      <SheetContent side="right" className="w-[min(22rem,90vw)] gap-0 overflow-y-auto p-0">
+        <SheetHeader className="border-b px-4 py-3">
+          <SheetTitle className="text-[15px]">Filters</SheetTitle>
+        </SheetHeader>
+        {children}
+      </SheetContent>
+    </Sheet>
+  )
+}
+
 function ThemeSwitch({ pref, onChange }: { pref: ThemePref; onChange: (p: ThemePref) => void }) {
   return (
-    <ToggleGroup type="single" variant="outline" size="sm" value={pref} onValueChange={(v) => v && onChange(v as ThemePref)} aria-label="Theme" className="ml-auto md:ml-0">
+    <ToggleGroup type="single" variant="outline" size="sm" value={pref} onValueChange={(v) => v && onChange(v as ThemePref)} aria-label="Theme">
       <ToggleGroupItem value="light" aria-label="Light">
         <SunIcon />
       </ToggleGroupItem>

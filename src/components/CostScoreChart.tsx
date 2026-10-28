@@ -265,7 +265,7 @@ function placeLabels(scene: SceneInfo, rows: readonly Row[], compact: boolean): 
     if (!cur || r.score > cur.score) best.set(r.modelId, r)
   }
   let anchors = [...best.values()].sort((a, b) => b.score - a.score)
-  if (compact) anchors = anchors.slice(0, 6)
+  if (compact) anchors = anchors.slice(0, 4)
 
   const b = scene.bounds
   const placed: PlacedLabel[] = []
