@@ -21,7 +21,7 @@ import { ResultsTable } from "@/components/ResultsTable"
 import { Sidebar } from "@/components/Sidebar"
 import { benchmarkById, BRACKETS, data, DEFAULT_BENCHMARK, MAX_FEE, modelsFor, type BracketId, type LabGroup, type Model } from "@/lib/data"
 import { bracketLabel, CURRENCIES, feeShort, setCurrency, setScoreUnit, type CurrencyCode } from "@/lib/format"
-import { buildRows, isLowConfidence, type Filters } from "@/lib/pricing"
+import { buildRows, type Filters } from "@/lib/pricing"
 import { CHART_COLORS, useTheme, type ChartPalette, type ThemePref } from "@/lib/theme"
 
 /** Effort levels that start hidden: the extremes, which most people don't run day to day. */
@@ -33,8 +33,7 @@ const INITIAL_FILTERS: Filters = {
   brackets: new Set<BracketId>(BRACKETS.map((b) => b.id)),
   kinds: new Set(["lab", "tool"]),
   disabledPlans: new Set(),
-  // Low-confidence allowances are estimates from other models or single reports; opt in via the sidebar.
-  hideLowConfidence: true,
+  hideLowConfidence: false,
   glmScenario: "mid",
   efforts: new Set(DEFAULT_EFFORTS),
   models: new Set(data.models.filter((m) => !m.superseded).map((m) => m.id)),
@@ -240,7 +239,6 @@ export default function App() {
                 <Legend
                   showUnpriced={sub}
                   showFrontier={view.showFrontier}
-                  showLowConfidence={sub && rows.some(isLowConfidence)}
                   palette={palette}
                 />
               </div>
@@ -480,12 +478,10 @@ function BracketSelect({ value, onChange }: { value: ReadonlySet<BracketId>; onC
 function Legend({
   showUnpriced,
   showFrontier,
-  showLowConfidence,
   palette,
 }: {
   showUnpriced: boolean
   showFrontier: boolean
-  showLowConfidence: boolean
   palette: ChartPalette
 }) {
   const groups: LabGroup[] = ["OpenAI", "Anthropic", "Other labs"]
@@ -497,12 +493,7 @@ function Legend({
           {g}
         </span>
       ))}
-      {showUnpriced || showFrontier || showLowConfidence ? <span className="hidden h-3 w-px bg-border sm:block" /> : null}
-      {showLowConfidence ? (
-        <span className="inline-flex items-center gap-1.5">
-          <span className="size-3 rounded-full border border-dashed border-foreground/70" /> low-confidence allowance estimate
-        </span>
-      ) : null}
+      {showUnpriced || showFrontier ? <span className="hidden h-3 w-px bg-border sm:block" /> : null}
       {showUnpriced ? (
         <span className="inline-flex items-center gap-1.5">
           <span className="size-2.5 rounded-full border-2 border-muted-foreground" /> no plan in range, API price

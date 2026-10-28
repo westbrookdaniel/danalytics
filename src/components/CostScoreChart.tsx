@@ -5,7 +5,7 @@ import { scaleLinear } from "@tanstack/charts/scales/linear"
 import { scaleLog } from "d3-scale"
 import { labGroup } from "@/lib/data"
 import { cheaper, type CurrencyCode, EFFORT_LABEL, fee, money, moneyTick, scoreText, tokens, toCurrency } from "@/lib/format"
-import { isLowConfidence, paretoFrontier, type Row } from "@/lib/pricing"
+import { paretoFrontier, type Row } from "@/lib/pricing"
 import type { ChartPalette } from "@/lib/theme"
 
 /** A row with its plotted x position; unmetered (free) rows sit on a dedicated "Free" guide. */
@@ -198,7 +198,6 @@ export function CostScoreChart(props: Props) {
           setScene((prev) => (prev?.sig === sig ? prev : { sig, bounds: s.chart, width: s.width, height: s.height, dots }))
         }}
       />
-      {scene ? <LowConfidenceRings scene={scene} rows={rows} active={active} /> : null}
       {scene && showLabels ? <LabelLayer labels={labels} active={active} faded={unpricedModels(rows, mode, dimUnpriced)} /> : null}
       {focus && scene ? <HoverOverlay point={focus} scene={scene} palette={palette} mode={mode} showCard={showCard} scoreLabel={scoreLabel} /> : null}
     </div>
@@ -304,31 +303,6 @@ function placeLabels(scene: SceneInfo, rows: readonly Row[], compact: boolean): 
     placed.push({ modelId: r.modelId, text, ax: p.x, ay: p.y, ...chosen.rect, leader: chosen.radius > RADII[0] })
   }
   return placed
-}
-
-/** Dashed rings marking points whose plan price is a low-confidence allowance estimate. */
-function LowConfidenceRings({ scene, rows, active }: { scene: SceneInfo; rows: readonly Row[]; active: string | null }) {
-  const flagged = new Map(rows.filter(isLowConfidence).map((r) => [r.key, r.modelId]))
-  if (!flagged.size) return null
-  return (
-    <svg className="pointer-events-none absolute inset-0 size-full overflow-visible">
-      {scene.dots
-        .filter((d) => flagged.has(d.key))
-        .map((d) => (
-          <circle
-            key={d.key}
-            cx={d.x}
-            cy={d.y}
-            r={8}
-            fill="none"
-            className="stroke-foreground/70"
-            strokeWidth={1.25}
-            strokeDasharray="2.5 2.5"
-            opacity={active && active !== flagged.get(d.key) ? 0.25 : 1}
-          />
-        ))}
-    </svg>
-  )
 }
 
 function LabelLayer({ labels, active, faded }: { labels: PlacedLabel[]; active: string | null; faded: ReadonlySet<string> }) {
@@ -441,7 +415,6 @@ function DetailCard({ row, mode, scoreLabel, style }: { row: Row; mode: "subscri
         {stat("Output tokens", tokens(row.outputTokens))}
       </dl>
       {mode === "subscription" && row.source === "api" ? <p className="mt-2.5 text-muted-foreground">No plan in range, so this is the API price.</p> : null}
-      {isLowConfidence(row) ? <p className="mt-2.5 text-muted-foreground">≈ Plan allowance is a low-confidence estimate.</p> : null}
       {row.offer?.unmetered && row.offer.promoUntil ? <p className="mt-2.5 text-muted-foreground">Unmetered promo until {row.offer.promoUntil}.</p> : null}
     </div>
   )
