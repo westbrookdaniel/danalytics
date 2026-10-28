@@ -7,6 +7,8 @@ export interface Filters {
   kinds: ReadonlySet<PlanKind>
   disabledPlans: ReadonlySet<string>
   hideLowConfidence: boolean
+  /** Count Codex shared resets as extra allowance on OpenAI's plans. */
+  codexResets: boolean
   glmScenario: GlmScenario
   /** Reasoning-effort levels to keep; a model with none of them left drops out. */
   efforts: ReadonlySet<string>
@@ -49,11 +51,16 @@ export function lowConfidenceModels(plan: Plan): string[] {
   return plan.offers.filter((o) => o.confidence === "low").map((o) => o.modelId)
 }
 
+/** How many times over a plan's measured allowance refills: Codex shared resets top up OpenAI's plans. */
+export function allowanceMultiplier(plan: Plan, f: Filters): number {
+  return f.codexResets && data.codexResets.providers.includes(plan.provider) ? data.codexResets.multiplier : 1
+}
+
 /** Subscription cost of one task: API $/task scaled by the plan's share of list price, at full allowance use. */
-export function taskCost(model: Model, apiCost: number, offer: Offer): number {
+export function taskCost(model: Model, apiCost: number, offer: Offer, multiplier = 1): number {
   if (offer.unmetered) return 0
   if (!model.api) return NaN
-  return (apiCost * offer.usdPerMtok) / model.api.usdPerMtok
+  return (apiCost * offer.usdPerMtok) / model.api.usdPerMtok / multiplier
 }
 
 export interface PlanQuote {
@@ -73,7 +80,7 @@ export function quotesFor(model: Model, apiCost: number, f: Filters): PlanQuote[
     if (plan.scenario && plan.scenario !== f.glmScenario) continue
     let excludedBy = planExclusion(plan, f)
     if (!excludedBy && f.hideLowConfidence && offer.confidence === "low") excludedBy = "Low-confidence estimate"
-    quotes.push({ plan, offer, cost: taskCost(model, apiCost, offer), excludedBy })
+    quotes.push({ plan, offer, cost: taskCost(model, apiCost, offer, allowanceMultiplier(plan, f)), excludedBy })
   }
   return quotes.sort((a, b) => a.cost - b.cost || a.plan.fee - b.plan.fee)
 }

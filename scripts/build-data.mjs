@@ -14,6 +14,7 @@ const cognition = read("data-src/cognition-frontiercode-2.0.json");
 const pricing = read("data-src/real-api-pricing-points.json");
 const fx = read("data-src/fx.json");
 const aa = read("data-src/artificial-analysis.json");
+const resetHistory = read("data-src/resetbeacon-history.json");
 
 // Token mixes from real-api-pricing/data/conventions.json.
 const MIX = {
@@ -307,6 +308,36 @@ for (const p of points) {
   });
 }
 
+// Codex shared resets: OpenAI's Codex team sometimes resets everyone's usage limits early. A confirmed reset is a
+// completed event that applies to all plans (scope "all"); several posts on one day count once. Over the last
+// RESET_WINDOW_DAYS, the mean gap between consecutive reset days says how often the weekly allowance refills, so a
+// subscriber who uses it all gets 7 / gap weeks of allowance per week (never less than 1).
+const RESET_WINDOW_DAYS = 90;
+const RESET_PROVIDERS = ["OpenAI"];
+const DAY_MS = 86_400_000;
+function codexResets() {
+  const end = Date.parse(resetHistory.fetched);
+  const start = end - RESET_WINDOW_DAYS * DAY_MS;
+  const dates = [
+    ...new Set(
+      resetHistory.items
+        .filter((i) => i.eventKind === "completed" && i.status === "completed" && i.scope === "all")
+        .map((i) => i.date)
+        .filter((d) => Date.parse(d) > start && Date.parse(d) <= end),
+    ),
+  ].sort();
+  const avgGapDays = dates.length > 1 ? (Date.parse(dates.at(-1)) - Date.parse(dates[0])) / DAY_MS / (dates.length - 1) : null;
+  return {
+    fetched: resetHistory.fetched,
+    url: "https://resetbeacon.com/?filter=all",
+    windowDays: RESET_WINDOW_DAYS,
+    providers: RESET_PROVIDERS,
+    dates,
+    avgGapDays,
+    multiplier: avgGapDays ? Math.max(1, 7 / avgGapDays) : 1,
+  };
+}
+
 const out = {
   generatedAt: new Date().toISOString().slice(0, 10),
   sources: {
@@ -318,9 +349,12 @@ const out = {
   fx: { date: fx.date, source: "ECB reference rates via Frankfurter", rates: { USD: 1, ...fx.rates } },
   benchmarks,
   models,
+  codexResets: codexResets(),
   plans: [...plans.values()].sort((a, b) => a.fee - b.fee || a.name.localeCompare(b.name)),
 };
 writeFileSync(new URL("src/data/frontiercode.json", root), JSON.stringify(out, null, 1) + "\n");
+const cr = out.codexResets;
+console.log(`Codex resets: ${cr.dates.length} in ${cr.windowDays} days, every ${cr.avgGapDays?.toFixed(2)} days → ×${cr.multiplier.toFixed(2)}`);
 console.log(`${models.length} models, ${out.plans.length} plans, ${out.plans.reduce((n, p) => n + p.offers.length, 0)} plan×model offers`);
 for (const b of benchmarks) console.log(`${b.name}: ${Object.keys(b.results).length} models, ${Object.values(b.results).flat().length} results`);
 for (const m of models) console.log(m.short.padEnd(22), m.api ? `${m.api.usdPerMtok.toFixed(4)} ${m.api.basis}` : "no API $/Mtok");

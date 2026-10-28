@@ -1,0 +1,1112 @@
+{
+ "fetched": "2026-10-28",
+ "items": [
+  {
+   "id": "1968163721034994139",
+   "date": "2025-09-16",
+   "announcedAt": "2025-09-17T04:02:52.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "model",
+   "evidenceUrl": "/evidence/692ef6f5-4e5d-431a-8fab-5b1413428e57/"
+  },
+  {
+   "id": "1986166501435711936",
+   "date": "2025-11-05",
+   "announcedAt": "2025-11-05T20:19:29.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/3c57dd01-148c-44b9-84bd-8c0a28fe0285/"
+  },
+  {
+   "id": "1992370994028388670",
+   "date": "2025-11-22",
+   "announcedAt": "2025-11-22T23:13:56.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/ddec6b1d-0f22-414b-8780-0570ae464799/"
+  },
+  {
+   "id": "1995988609896513743",
+   "date": "2025-12-02",
+   "announcedAt": "2025-12-02T22:49:02.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/7381d432-cf0c-45bf-b3e7-7059a674e6ab/"
+  },
+  {
+   "id": "2001114683047317723",
+   "date": "2025-12-16",
+   "announcedAt": "2025-12-17T02:18:14.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/83b7b51a-867b-40ad-907e-c5a3a218b852/"
+  },
+  {
+   "id": "2002137269134819610",
+   "date": "2025-12-19",
+   "announcedAt": "2025-12-19T22:01:37.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/6037fa4e-3ad6-4dc3-b40f-dd99b86229bf/"
+  },
+  {
+   "id": "2004100061933064395",
+   "date": "2025-12-25",
+   "announcedAt": "2025-12-25T08:01:03.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/00f23159-6e32-46d6-8cf7-37fa1f923776/"
+  },
+  {
+   "id": "2028649088594436225",
+   "date": "2026-03-02",
+   "announcedAt": "2026-03-03T01:50:07.000Z",
+   "eventKind": "intent",
+   "status": "expired",
+   "scope": "all",
+   "evidenceUrl": "/evidence/0743b5e4-b06e-48a4-846e-f57d668ed994/"
+  },
+  {
+   "id": "2029308599835738218",
+   "date": "2026-03-04",
+   "announcedAt": "2026-03-04T21:30:47.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "plus_pro",
+   "evidenceUrl": "/evidence/00eddc4b-c50f-4c01-9619-164eaa9e0749/"
+  },
+  {
+   "id": "2030474136024400173",
+   "date": "2026-03-07",
+   "announcedAt": "2026-03-08T02:42:13.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "plus_pro",
+   "evidenceUrl": "/evidence/606fb8e6-4337-407a-a7c2-cee974df6d5d/"
+  },
+  {
+   "id": "2031216405266481489",
+   "date": "2026-03-09",
+   "announcedAt": "2026-03-10T03:51:43.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/2567e448-78c9-4cc8-95e2-903ef6a54cf2/"
+  },
+  {
+   "id": "2031605592352313567",
+   "date": "2026-03-10",
+   "announcedAt": "2026-03-11T05:38:13.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/3e965b8b-1c82-4b1f-b986-f74816935451/"
+  },
+  {
+   "id": "2037346989244096581",
+   "date": "2026-03-26",
+   "announcedAt": "2026-03-27T01:52:28.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/0cd83a51-2076-4fb1-ae5c-b33fe6fa8549/"
+  },
+  {
+   "id": "2039248564967424483",
+   "date": "2026-04-01",
+   "announcedAt": "2026-04-01T07:48:39.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/6c8fd92f-b2d3-4a27-b3c9-7f373dcb4ded/"
+  },
+  {
+   "id": "2041655710346572085",
+   "date": "2026-04-07",
+   "announcedAt": "2026-04-07T23:13:48.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/441ad352-3359-4852-a652-14c72024b827/"
+  },
+  {
+   "id": "2042299371602264319",
+   "date": "2026-04-09",
+   "announcedAt": "2026-04-09T17:51:28.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/2908b2c6-f77d-461a-a50b-2ae6537bfed4/"
+  },
+  {
+   "id": "2044943514832871564",
+   "date": "2026-04-16",
+   "announcedAt": "2026-04-17T00:58:21.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/04b2c44f-8d84-4ff0-bc3b-16cf8cf233c4/"
+  },
+  {
+   "id": "2046367145588916687",
+   "date": "2026-04-20",
+   "announcedAt": "2026-04-20T23:15:21.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/d625ef65-e646-4f2b-af73-e5e9e9c5cd89/"
+  },
+  {
+   "id": "community-1379548-2",
+   "date": "2026-04-22",
+   "announcedAt": "2026-04-22T22:16:11.037Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": null
+  },
+  {
+   "id": "2048997818673537399",
+   "date": "2026-04-27",
+   "announcedAt": "2026-04-28T05:28:43.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/6dcec3a8-c7f1-4b1b-9126-01bceb91c1b2/"
+  },
+  {
+   "id": "2055707616605835333",
+   "date": "2026-05-16",
+   "announcedAt": "2026-05-16T17:51:03.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/6590dcc7-b443-41cd-b934-e18c246f1887/"
+  },
+  {
+   "id": "2058280452851638313",
+   "date": "2026-05-23",
+   "announcedAt": "2026-05-23T20:14:35.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/0156661e-d290-4d18-97bc-40dbf0543956/"
+  },
+  {
+   "id": "2061106703446450392",
+   "date": "2026-05-31",
+   "announcedAt": "2026-05-31T15:25:06.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/f6cf8e13-b392-441e-90ad-97517e97f898/"
+  },
+  {
+   "id": "2062329981548802523",
+   "date": "2026-06-03",
+   "announcedAt": "2026-06-04T00:25:58.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/6efef422-287e-4113-9846-f57f369ffc7b/"
+  },
+  {
+   "id": "2067399435009622521",
+   "date": "2026-06-17",
+   "announcedAt": "2026-06-18T00:10:10.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/2fce7b20-b9da-4396-b027-5e53a18aee05/"
+  },
+  {
+   "id": "2070653282440405046",
+   "date": "2026-06-26",
+   "announcedAt": "2026-06-26T23:39:48.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/487fbbbc-35a7-4d73-8256-0bc815695620/"
+  },
+  {
+   "id": "2071381664853319742",
+   "date": "2026-06-28",
+   "announcedAt": "2026-06-28T23:54:07.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/060944ce-fb63-4deb-9f74-c2572147a955/"
+  },
+  {
+   "id": "2071740419030053227",
+   "date": "2026-06-29",
+   "announcedAt": "2026-06-29T23:39:41.000Z",
+   "eventKind": "scheduled",
+   "status": "missed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/319286c4-c392-4f58-8b43-d28c8df3ccb2/"
+  },
+  {
+   "id": "2075330198887940337",
+   "date": "2026-07-09",
+   "announcedAt": "2026-07-09T21:24:11.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/f8858828-77cb-4c41-93dd-acd98672604a/"
+  },
+  {
+   "id": "2075641131002700120",
+   "date": "2026-07-10",
+   "announcedAt": "2026-07-10T17:59:43.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/aab56aa2-ff91-4e5d-9572-04216be6ed16/"
+  },
+  {
+   "id": "2075820987833274448",
+   "date": "2026-07-10",
+   "announcedAt": "2026-07-11T05:54:25.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/da1bda15-c26a-45c1-872e-dd0aaafcc172/"
+  },
+  {
+   "id": "2076418567143408112",
+   "date": "2026-07-12",
+   "announcedAt": "2026-07-12T21:28:59.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/ab89f35a-a68f-4d0f-a213-192fd292f570/"
+  },
+  {
+   "id": "2076735790567338203",
+   "date": "2026-07-13",
+   "announcedAt": "2026-07-13T18:29:31.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/c78caf1e-0d9c-4a7d-bbfd-a5f2045dbf8f/"
+  },
+  {
+   "id": "2077114635308986427",
+   "date": "2026-07-14",
+   "announcedAt": "2026-07-14T19:34:54.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/fb984693-1a8c-4f5b-9245-4f75c588454a/"
+  },
+  {
+   "id": "2077607697487188198",
+   "date": "2026-07-15",
+   "announcedAt": "2026-07-16T04:14:09.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/1b38b2f8-0293-46fb-8172-892ee194331f/"
+  },
+  {
+   "id": "2078320950488297917",
+   "date": "2026-07-17",
+   "announcedAt": "2026-07-18T03:28:22.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/804c41d0-1b4f-4a8f-88b1-71193ef5aa6b/"
+  },
+  {
+   "id": "2079609157934886975",
+   "date": "2026-07-21",
+   "announcedAt": "2026-07-21T16:47:15.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/69ba4844-25c8-4317-99e0-70c6a3f667b7/"
+  },
+  {
+   "id": "2081096447718723984",
+   "date": "2026-07-25",
+   "announcedAt": "2026-07-25T19:17:12.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/d6571fe2-2af6-4dfa-aade-f8473a987301/"
+  },
+  {
+   "id": "2081940052154933696",
+   "date": "2026-07-27",
+   "announcedAt": "2026-07-28T03:09:23.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/2b57c0b2-a438-4019-9ba0-4b13067cbc47/"
+  },
+  {
+   "id": "2082317452755751098",
+   "date": "2026-07-28",
+   "announcedAt": "2026-07-29T04:09:02.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/a82bf833-495c-489a-bf00-7da24e0c2e5b/"
+  },
+  {
+   "id": "2083395449814229287",
+   "date": "2026-07-31",
+   "announcedAt": "2026-08-01T03:32:37.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/3790b889-8b92-455b-9ba3-0c1155880c8e/"
+  },
+  {
+   "id": "2086188036493344823",
+   "date": "2026-08-08",
+   "announcedAt": "2026-08-08T20:29:22.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/8537076c-e2e1-4b67-a66f-9d6b0df80d83/"
+  },
+  {
+   "id": "2086189414292865249",
+   "date": "2026-08-08",
+   "announcedAt": "2026-08-08T20:34:50.000Z",
+   "eventKind": "intent",
+   "status": "superseded",
+   "scope": "all",
+   "evidenceUrl": null
+  },
+  {
+   "id": "2086972802457063486",
+   "date": "2026-08-10",
+   "announcedAt": "2026-08-11T00:27:44.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/0105014a-649f-4577-8b58-8d6fdcc89889/"
+  },
+  {
+   "id": "2087706104814023111",
+   "date": "2026-08-12",
+   "announcedAt": "2026-08-13T01:01:37.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/6634b707-ecb8-4210-9244-7d7e5b0a6a5b/"
+  },
+  {
+   "id": "2090766694897619318",
+   "date": "2026-08-21",
+   "announcedAt": "2026-08-21T11:43:19.000Z",
+   "eventKind": "policy_change",
+   "status": "superseded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/ac2514dc-5451-48ef-a0cd-290fa5992f46/"
+  },
+  {
+   "id": "2090947107469558188",
+   "date": "2026-08-21",
+   "announcedAt": "2026-08-21T23:40:12.000Z",
+   "eventKind": "policy_change",
+   "status": "superseded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/6defd593-413b-4574-aa92-53ed8bfbf68a/"
+  },
+  {
+   "id": "2090947196107764189",
+   "date": "2026-08-21",
+   "announcedAt": "2026-08-21T23:40:34.000Z",
+   "eventKind": "policy_change",
+   "status": "superseded",
+   "scope": "all",
+   "evidenceUrl": null
+  },
+  {
+   "id": "2090964822422949999",
+   "date": "2026-08-21",
+   "announcedAt": "2026-08-22T00:50:36.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/f66ca8d8-74f2-4ba2-80ba-cd192d3fc940/"
+  },
+  {
+   "id": "2091407991736332689",
+   "date": "2026-08-22",
+   "announcedAt": "2026-08-23T06:11:36.000Z",
+   "eventKind": "intent",
+   "status": "superseded",
+   "scope": "all",
+   "evidenceUrl": null
+  },
+  {
+   "id": "2091412393368945027",
+   "date": "2026-08-22",
+   "announcedAt": "2026-08-23T06:29:05.000Z",
+   "eventKind": "scheduled",
+   "status": "superseded",
+   "scope": "all",
+   "evidenceUrl": null
+  },
+  {
+   "id": "2091413240337326588",
+   "date": "2026-08-22",
+   "announcedAt": "2026-08-23T06:32:27.000Z",
+   "eventKind": "scheduled",
+   "status": "superseded",
+   "scope": "all",
+   "evidenceUrl": null
+  },
+  {
+   "id": "2091688655828246890",
+   "date": "2026-08-23",
+   "announcedAt": "2026-08-24T00:46:51.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/2a6a894f-9e09-42b4-ba5e-a5a122a702f7/"
+  },
+  {
+   "id": "2092058556707344708",
+   "date": "2026-08-24",
+   "announcedAt": "2026-08-25T01:16:43.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "plus",
+   "evidenceUrl": "/evidence/7c85793f-92a9-4ff8-9162-6d95b7555e2a/"
+  },
+  {
+   "id": "2092311059197808936",
+   "date": "2026-08-25",
+   "announcedAt": "2026-08-25T18:00:04.000Z",
+   "eventKind": "completed",
+   "status": "superseded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/dbe6a012-b21d-4ee7-a2e2-dcf6161aae52/"
+  },
+  {
+   "id": "2092316228497063958",
+   "date": "2026-08-25",
+   "announcedAt": "2026-08-25T18:20:36.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/1d3bd24c-76c8-4637-be1b-4a5b885b2e9a/"
+  },
+  {
+   "id": "2092862554632826968",
+   "date": "2026-08-26",
+   "announcedAt": "2026-08-27T06:31:31.187Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/9bb2a02f-ea49-451e-bbac-73abd1bf20e9/"
+  },
+  {
+   "id": "2092993835953787255",
+   "date": "2026-08-27",
+   "announcedAt": "2026-08-27T15:13:11.093Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "unknown",
+   "evidenceUrl": "/evidence/1ed8927b-e499-4011-b889-9fbbff359a08/"
+  },
+  {
+   "id": "2093014447833116908",
+   "date": "2026-08-27",
+   "announcedAt": "2026-08-27T16:35:05.348Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/6948c701-0a94-4cba-92fc-bd2388f25bf9/"
+  },
+  {
+   "id": "2093551005711679557",
+   "date": "2026-08-28",
+   "announcedAt": "2026-08-29T04:07:10.715Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/e2726a58-44a7-45ea-abe4-53989579baa1/"
+  },
+  {
+   "id": "2093573991965557198",
+   "date": "2026-08-28",
+   "announcedAt": "2026-08-29T05:38:31.065Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/77f8286d-5fee-4d43-801f-53a47141b3d5/"
+  },
+  {
+   "id": "2093801758665715784",
+   "date": "2026-08-29",
+   "announcedAt": "2026-08-29T20:43:34.878Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/6448cd70-7276-46ee-8e2e-358901a07a9f/"
+  },
+  {
+   "id": "2093801838504186008",
+   "date": "2026-08-29",
+   "announcedAt": "2026-08-29T20:43:53.000Z",
+   "eventKind": "scheduled",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": null
+  },
+  {
+   "id": "2093811840258293947",
+   "date": "2026-08-30",
+   "announcedAt": "2026-08-29T21:23:38.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/9ffa31c6-1a02-4a8e-84a2-4c03a01b94ed/"
+  },
+  {
+   "id": "2094143054039183573",
+   "date": "2026-08-30",
+   "announcedAt": "2026-08-30T19:19:46.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/be7de2a0-4866-491c-8e80-a4bad765452b/"
+  },
+  {
+   "id": "2094144275957350900",
+   "date": "2026-08-30",
+   "announcedAt": "2026-08-30T19:24:37.000Z",
+   "eventKind": "scheduled",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/969f6ff1-ae02-4b6e-964f-07ffa69b2806/"
+  },
+  {
+   "id": "2094251180121854309",
+   "date": "2026-08-30",
+   "announcedAt": "2026-08-31T02:29:25.303Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/de210028-fb4d-46be-ac0b-b15707eeb2af/"
+  },
+  {
+   "id": "2094254532020818191",
+   "date": "2026-08-30",
+   "announcedAt": "2026-08-31T02:42:44.458Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "pro",
+   "evidenceUrl": "/evidence/5c52a9c4-524a-4d13-90f9-e90f01f4dabe/"
+  },
+  {
+   "id": "2095651088502591861",
+   "date": "2026-09-03",
+   "announcedAt": "2026-09-03T23:12:09.470Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/acb0cc9f-faaf-4ceb-b65b-c220cc6ebe8a/"
+  },
+  {
+   "id": "2095979536043401428",
+   "date": "2026-09-04",
+   "announcedAt": "2026-09-04T20:57:17.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "unknown",
+   "evidenceUrl": "/evidence/97806a18-5e94-4027-b895-ef376759dfc3/"
+  },
+  {
+   "id": "2096035437299237298",
+   "date": "2026-09-04",
+   "announcedAt": "2026-09-05T00:39:25.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "plus_pro",
+   "evidenceUrl": "/evidence/d039b3f6-fa7c-4272-9d4c-e6aafd5e5676/"
+  },
+  {
+   "id": "2096692394435752258",
+   "date": "2026-09-06",
+   "announcedAt": "2026-09-06T20:09:56.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/ff1ac898-b1b5-4fd8-b67c-87f1aebffe0d/"
+  },
+  {
+   "id": "2097043464538264003",
+   "date": "2026-09-07",
+   "announcedAt": "2026-09-07T19:24:57.000Z",
+   "eventKind": "scheduled",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/8f6e2f3b-6dad-475b-9099-32febaa6092c/"
+  },
+  {
+   "id": "2097174560412246215",
+   "date": "2026-09-07",
+   "announcedAt": "2026-09-08T04:05:53.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/db6adb56-46b3-4842-be0b-c9eafca69318/"
+  },
+  {
+   "id": "2097175062566846501",
+   "date": "2026-09-07",
+   "announcedAt": "2026-09-08T04:07:53.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/b84bc4cb-d496-4002-b39a-3f29fdd7ae39/"
+  },
+  {
+   "id": "2097183639356489952",
+   "date": "2026-09-07",
+   "announcedAt": "2026-09-08T04:41:58.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/bba11353-e735-4fe4-9efa-857b40a31bde/"
+  },
+  {
+   "id": "2098612714704891959",
+   "date": "2026-09-11",
+   "announcedAt": "2026-09-12T03:20:36.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/926c4339-3677-4d7f-b040-a25f8a3e5a6e/"
+  },
+  {
+   "id": "2098685367058612394",
+   "date": "2026-09-12",
+   "announcedAt": "2026-09-12T08:09:17.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/b05c45e1-5cd6-42b2-9de9-8f1e0fa396a5/"
+  },
+  {
+   "id": "2101352781219258527",
+   "date": "2026-09-19",
+   "announcedAt": "2026-09-19T16:48:38.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "unknown",
+   "evidenceUrl": "/evidence/449405b8-d553-49de-9740-c126517ae642/"
+  },
+  {
+   "id": "2102254445082116335",
+   "date": "2026-09-21",
+   "announcedAt": "2026-09-22T04:31:32.000Z",
+   "eventKind": "scheduled",
+   "status": "missed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/c9c6d1ff-9eb0-4a8d-b13b-94d17bc20d0b/"
+  },
+  {
+   "id": "2102463847714247142",
+   "date": "2026-09-22",
+   "announcedAt": "2026-09-22T18:23:37.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "plus_pro",
+   "evidenceUrl": "/evidence/8eaed0a7-8b11-4d4e-b720-71ba91203663/"
+  },
+  {
+   "id": "2103637477760311522",
+   "date": "2026-09-25",
+   "announcedAt": "2026-09-26T00:07:13.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/95a0a970-fd44-4b12-a4d8-d01919074777/"
+  },
+  {
+   "id": "2103911959544610829",
+   "date": "2026-09-26",
+   "announcedAt": "2026-09-26T18:17:54.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/42e9ad30-4987-4425-9a70-b3db4e3c9c43/"
+  },
+  {
+   "id": "2103963215885701493",
+   "date": "2026-09-26",
+   "announcedAt": "2026-09-26T21:41:35.000Z",
+   "eventKind": "scheduled",
+   "status": "active",
+   "scope": "all",
+   "evidenceUrl": "/evidence/be1f590e-b1df-40f6-8b4b-fe027f57fec3/"
+  },
+  {
+   "id": "2104823812042940713",
+   "date": "2026-09-28",
+   "announcedAt": "2026-09-29T06:41:17.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "pro",
+   "evidenceUrl": "/evidence/b5e697d9-4222-4826-9556-adb903c8fcf9/"
+  },
+  {
+   "id": "2104951965184925941",
+   "date": "2026-09-29",
+   "announcedAt": "2026-09-29T15:10:31.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "plus_pro",
+   "evidenceUrl": "/evidence/20023438-0c57-4996-b3cf-14c9cda8e36e/"
+  },
+  {
+   "id": "2105173168281506088",
+   "date": "2026-09-29",
+   "announcedAt": "2026-09-30T05:49:30.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "unknown",
+   "evidenceUrl": "/evidence/94ebba07-31c0-422f-be61-9e504a92ee21/"
+  },
+  {
+   "id": "2105843926221660585",
+   "date": "2026-10-02",
+   "announcedAt": "2026-10-02T02:14:51.000Z",
+   "eventKind": "scheduled",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/e067f551-33ed-4593-9e7a-7938098c5946/"
+  },
+  {
+   "id": "2106131810921136451",
+   "date": "2026-10-02",
+   "announcedAt": "2026-10-02T21:18:48.417Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/53f47255-53f7-4444-b849-0bf6f1d10150/"
+  },
+  {
+   "id": "2106239435461579088",
+   "date": "2026-10-02",
+   "announcedAt": "2026-10-03T04:26:28.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "pro",
+   "evidenceUrl": "/evidence/1ba93219-ad34-4b62-af13-a3b87a72b052/"
+  },
+  {
+   "id": "2106239912932692085",
+   "date": "2026-10-02",
+   "announcedAt": "2026-10-03T04:28:21.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/dd7c81c4-2c4e-4b4b-b280-5a1ab649b933/"
+  },
+  {
+   "id": "2106845241357824205",
+   "date": "2026-10-04",
+   "announcedAt": "2026-10-04T20:33:43.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/a5011094-4a0a-499f-885e-1edafcb4755f/"
+  },
+  {
+   "id": "2107368734981517634",
+   "date": "2026-10-06",
+   "announcedAt": "2026-10-06T07:13:54.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/3a1ddebd-c3f7-4757-8765-81b025e76436/"
+  },
+  {
+   "id": "2107575657014468879",
+   "date": "2026-10-06",
+   "announcedAt": "2026-10-06T20:56:08.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/f9e002ae-e9c1-4762-98e6-cc9fba3c29cf/"
+  },
+  {
+   "id": "2107676072871600470",
+   "date": "2026-10-06",
+   "announcedAt": "2026-10-07T03:35:09.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/130db3d6-a5e8-44f3-ac78-2ccc55847f14/"
+  },
+  {
+   "id": "2107913674593644711",
+   "date": "2026-10-07",
+   "announcedAt": "2026-10-07T19:19:17.822Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/9971db5f-ac8b-4944-92a1-1b35bae21761/"
+  },
+  {
+   "id": "2107913738791596286",
+   "date": "2026-10-07",
+   "announcedAt": "2026-10-07T19:19:33.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/c6e3c321-7bb3-46ed-a4a3-83d7d56ebe20/"
+  },
+  {
+   "id": "2108040921044639779",
+   "date": "2026-10-07",
+   "announcedAt": "2026-10-08T03:44:55.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/990cc75b-f4e7-4887-89b5-ccbcb5402726/"
+  },
+  {
+   "id": "2108645667451318747",
+   "date": "2026-10-09",
+   "announcedAt": "2026-10-09T19:47:58.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "pro",
+   "evidenceUrl": "/evidence/8d43f361-0b8a-455f-9ab7-b361dd2df5a8/"
+  },
+  {
+   "id": "2109045220411351517",
+   "date": "2026-10-10",
+   "announcedAt": "2026-10-10T22:15:39.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/4d2561fd-205f-4d43-bed6-288f6cf713e0/"
+  },
+  {
+   "id": "2109045392684032299",
+   "date": "2026-10-10",
+   "announcedAt": "2026-10-10T22:16:20.000Z",
+   "eventKind": "scheduled",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/79e12d1e-c252-425d-a7b6-bfa5e756dcd2/"
+  },
+  {
+   "id": "2109090080497508356",
+   "date": "2026-10-10",
+   "announcedAt": "2026-10-11T01:13:54.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/57e95707-89db-426f-83e2-7893dfd9c68f/"
+  },
+  {
+   "id": "2109132167112782291",
+   "date": "2026-10-10",
+   "announcedAt": "2026-10-11T04:01:09.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/5868ed03-e760-45cd-b963-e2235c2051bb/"
+  },
+  {
+   "id": "2109430894604026039",
+   "date": "2026-10-11",
+   "announcedAt": "2026-10-11T23:48:11.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/5a69d530-b27c-4407-8c29-0a5d93edd1d3/"
+  },
+  {
+   "id": "2109812216212099456",
+   "date": "2026-10-12",
+   "announcedAt": "2026-10-13T01:03:25.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/73f3e029-45cd-4304-9343-ce57dd311868/"
+  },
+  {
+   "id": "2109812360596865224",
+   "date": "2026-10-12",
+   "announcedAt": "2026-10-13T01:03:59.000Z",
+   "eventKind": "scheduled",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/e9218fed-ce03-4aa2-a29e-5b2911716c15/"
+  },
+  {
+   "id": "2109873287853707513",
+   "date": "2026-10-12",
+   "announcedAt": "2026-10-13T05:06:06.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/40963f5b-b11e-4032-b3d4-fd708b10d780/"
+  },
+  {
+   "id": "2109892247580000595",
+   "date": "2026-10-12",
+   "announcedAt": "2026-10-13T06:21:26.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/a3750d19-764c-42ee-b9f3-8d83ba6eee6f/"
+  },
+  {
+   "id": "2110595484180214059",
+   "date": "2026-10-14",
+   "announcedAt": "2026-10-15T04:55:51.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/ab366285-d980-4828-81c8-6383c0574437/"
+  },
+  {
+   "id": "2110595554036400151",
+   "date": "2026-10-14",
+   "announcedAt": "2026-10-15T04:56:07.000Z",
+   "eventKind": "scheduled",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/37f44b14-87d2-4fe3-93d9-ff3c02f05f4f/"
+  },
+  {
+   "id": "2110618732666257557",
+   "date": "2026-10-14",
+   "announcedAt": "2026-10-15T06:28:13.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/7b840421-ab76-4d50-8894-de09db022513/"
+  },
+  {
+   "id": "2110951585983631505",
+   "date": "2026-10-15",
+   "announcedAt": "2026-10-16T04:30:52.339Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/5c77be43-acd9-4884-99ae-90f3ff0c4537/"
+  },
+  {
+   "id": "2111492738025959922",
+   "date": "2026-10-17",
+   "announcedAt": "2026-10-17T16:21:13.000Z",
+   "eventKind": "scheduled",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/4b4d8f49-0375-4aa1-80c9-934c39daef2e/"
+  },
+  {
+   "id": "2111566005684289735",
+   "date": "2026-10-17",
+   "announcedAt": "2026-10-17T21:12:21.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/5a1763fa-ff9a-43b1-aaac-87caa1d6d83a/"
+  },
+  {
+   "id": "2112432076767289678",
+   "date": "2026-10-19",
+   "announcedAt": "2026-10-20T06:33:48.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/408a24ae-fc00-4e20-ae71-1d1eea18a1f8/"
+  },
+  {
+   "id": "2113029854417600834",
+   "date": "2026-10-21",
+   "announcedAt": "2026-10-21T22:09:10.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "pro",
+   "evidenceUrl": "/evidence/54058d94-6caf-4f0f-b5b4-ba7906da3c02/"
+  },
+  {
+   "id": "2113162277688070445",
+   "date": "2026-10-21",
+   "announcedAt": "2026-10-22T06:55:22.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/1d230aa0-f7c8-4773-a349-e35b48f8b058/"
+  },
+  {
+   "id": "2113162413008884099",
+   "date": "2026-10-22",
+   "announcedAt": "2026-10-22T06:55:54.000Z",
+   "eventKind": "scheduled",
+   "status": "missed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/ed91b497-d6c5-481f-88d5-aed165314e9b/"
+  },
+  {
+   "id": "2113492502355562875",
+   "date": "2026-10-23",
+   "announcedAt": "2026-10-23T04:47:34.000Z",
+   "eventKind": "scheduled",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/a7b812e9-ca5c-4860-94a9-bb7f223db983/"
+  },
+  {
+   "id": "2114200291319124163",
+   "date": "2026-10-24",
+   "announcedAt": "2026-10-25T03:40:04.000Z",
+   "eventKind": "scheduled",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/2cd26159-1cea-4304-abcc-81342afad683/"
+  },
+  {
+   "id": "2114237083652882932",
+   "date": "2026-10-24",
+   "announcedAt": "2026-10-25T06:06:16.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/03cddcdc-69ed-4f93-9a8e-569d26de60af/"
+  },
+  {
+   "id": "2114588174249071102",
+   "date": "2026-10-25",
+   "announcedAt": "2026-10-26T05:21:22.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/f27ec56a-0020-41ab-a9ac-0ca4281faee8/"
+  },
+  {
+   "id": "2115273253711409208",
+   "date": "2026-10-27",
+   "announcedAt": "2026-10-28T02:43:38.000Z",
+   "eventKind": "scheduled",
+   "status": "active",
+   "scope": "all",
+   "evidenceUrl": "/evidence/aa5f7cdb-4a64-4817-be49-8e0449771694/"
+  }
+ ]
+}

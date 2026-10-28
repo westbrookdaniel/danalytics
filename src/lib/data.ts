@@ -66,6 +66,20 @@ export interface Plan {
   offers: Offer[]
 }
 
+/** Shared Codex usage resets from Reset Beacon, and the allowance multiplier they imply for OpenAI's plans. */
+export interface CodexResets {
+  fetched: string
+  url: string
+  windowDays: number
+  /** Plan providers whose allowance the resets refill. */
+  providers: string[]
+  /** Days (Pacific) with a confirmed reset inside the window. */
+  dates: string[]
+  avgGapDays: number | null
+  /** 7 ÷ average gap, at least 1: weekly allowances per week for a subscriber who uses them all. */
+  multiplier: number
+}
+
 export interface Dataset {
   generatedAt: string
   sources: Record<"pricing" | "reference", { name: string; url: string; snapshot?: string }>
@@ -73,6 +87,7 @@ export interface Dataset {
   fx: { date: string; source: string; rates: Record<string, number> }
   benchmarks: Benchmark[]
   models: ModelMeta[]
+  codexResets: CodexResets
   plans: Plan[]
 }
 
@@ -84,6 +99,7 @@ export const DEFAULT_BENCHMARK = data.benchmarks[0].id
 export const SOURCE_DATES: { name: string; date: string }[] = [
   ...data.benchmarks.flatMap((b) => (b.source.fetched ? [{ name: b.name, date: b.source.fetched }] : [])),
   ...(data.sources.pricing.snapshot ? [{ name: "Plan allowances", date: data.sources.pricing.snapshot }] : []),
+  { name: "Codex resets", date: data.codexResets.fetched },
   { name: "Exchange rates", date: data.fx.date },
 ]
 

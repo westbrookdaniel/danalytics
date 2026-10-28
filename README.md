@@ -12,6 +12,7 @@ Two benchmarks, picked from the select in the chart title (or `?benchmark=` in t
 - a **max monthly cost** slider and **fee bracket** select (≤ $20, $21–60, 5x, 20x, $250+)
 - lab plans vs third-party tools (Cursor, OpenCode) and low-confidence allowances; only prices new customers can buy today are included
 - GLM peak / blended / off-peak metering
+- Codex shared resets (on by default): extra ChatGPT-plan allowance from OpenAI's early limit resets
 - model and reasoning-effort selection, a log/linear cost axis and the Pareto frontier
 - a display currency (USD, AUD, EUR, GBP, CAD, NZD, JPY, CNY, INR), converted at a dated ECB reference-rate snapshot in `data-src/fx.json`
 
@@ -38,6 +39,8 @@ Real API Pricing has no API price for some models. `scripts/build-data.mjs` docu
 
 Low-confidence allowances (estimates carried over from another model or plan tier, or a single report) are included by default and can be switched off in the sidebar; the leaderboard marks plans priced from one with ≈.
 
+OpenAI's Codex team often resets everyone's usage limits early. `scripts/build-data.mjs` takes the confirmed resets from [Reset Beacon](https://resetbeacon.com/?filter=all) (completed, scope `all`, one per day) over the last 90 days, and treats each as a fresh week of allowance: ChatGPT plans allow 7 ÷ (average days between resets) times their measured tokens. It assumes you use the whole weekly allowance between resets. The sidebar switch turns it off.
+
 For GPT-6.1 Terra and DeepSeek V4.1 Flash 1017 on FrontierCode 2.0, the cost per task is Artificial Analysis's FrontierCode share of the Intelligence Index cost (× 6). That matches the cost from its FrontierCode token totals within 3%, and Cognition's own figures within a few percent, for models where both are published.
 
 ## Stack
@@ -50,7 +53,7 @@ Vite, React 19, TypeScript, Tailwind CSS v4, shadcn/ui (radix-nova), [TanStack C
 npm install
 npm run dev            # http://localhost:5173
 npm run build
-npm run fetch-sources  # refresh data-src/ from Cognition, Real API Pricing and Frankfurter (FX rates)
+npm run fetch-sources  # refresh data-src/ from Cognition, Real API Pricing, Frankfurter (FX rates) and Reset Beacon
 npm run fetch-aa       # refresh data-src/artificial-analysis.json (one model page at a time, ~2 min)
 npm run data           # rebuild src/data/frontiercode.json from data-src/
 ```

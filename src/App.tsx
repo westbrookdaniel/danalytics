@@ -59,6 +59,7 @@ const INITIAL_FILTERS: Filters = {
   kinds: new Set(["lab", "tool"]),
   disabledPlans: new Set(),
   hideLowConfidence: false,
+  codexResets: true,
   glmScenario: "mid",
   efforts: new Set(DEFAULT_EFFORTS),
   models: new Set(data.models.filter((m) => !m.superseded).map((m) => m.id)),
@@ -773,6 +774,24 @@ function Method() {
           </p>
         </MethodSection>
 
+        <MethodSection title="Codex shared resets">
+          <p>
+            OpenAI's Codex team regularly resets everyone's usage limits early, on top of each plan's normal weekly reset.{" "}
+            <a className="text-foreground underline underline-offset-2" href={data.codexResets.url} target="_blank" rel="noreferrer">
+              Reset Beacon
+            </a>{" "}
+            logs each one. Over the {data.codexResets.windowDays} days to {data.codexResets.fetched} it confirmed{" "}
+            <Em>{data.codexResets.dates.length} resets</Em>, one every <Em>{data.codexResets.avgGapDays?.toFixed(1)} days</Em> on average (several posts on
+            one day count once; hints and schedules that never landed don't count).
+          </p>
+          <p>
+            With the switch on (the default), each reset counts as a fresh week of allowance, so ChatGPT plans allow 7 ÷ {data.codexResets.avgGapDays?.toFixed(1)}{" "}
+            = <Em>×{data.codexResets.multiplier.toFixed(2)}</Em> their measured tokens and cost that much less per task. This assumes you use the whole weekly
+            allowance between resets and that the weekly limit, not the five-hour one, is what stops you. Resets are announced, not scheduled, so past
+            frequency is no promise. Turn it off in the sidebar to price ChatGPT plans on the measured allowance alone.
+          </p>
+        </MethodSection>
+
         <MethodSection title="Gaps and estimates">
           <p>
             GPT-6 Astra, Sol and 6.1 Sol have no published API price in the pricing data, so their per-token basis is implied from mypriors' ChatGPT Plus
@@ -806,6 +825,13 @@ function Method() {
                 {pricing.name}
               </a>{" "}
               (snapshot {pricing.snapshot})
+            </li>
+            <li>
+              Codex shared resets:{" "}
+              <a className="text-foreground underline underline-offset-2" href={data.codexResets.url} target="_blank" rel="noreferrer">
+                Reset Beacon
+              </a>{" "}
+              (fetched {data.codexResets.fetched})
             </li>
             <li>
               Inspired by{" "}

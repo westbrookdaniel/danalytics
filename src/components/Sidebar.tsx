@@ -261,6 +261,13 @@ function PlanControls({
             checked={!filters.hideLowConfidence}
             onChange={(on) => patch({ hideLowConfidence: !on })}
           />
+          <SwitchRow
+            id="codex-resets"
+            label="Codex shared resets"
+            info={`OpenAI resets everyone's Codex limits early every ${data.codexResets.avgGapDays?.toFixed(1)} days on average (last ${data.codexResets.windowDays} days, Reset Beacon). On: ChatGPT plans get ×${data.codexResets.multiplier.toFixed(2)} their measured allowance. See Method.`}
+            checked={filters.codexResets}
+            onChange={(on) => patch({ codexResets: on })}
+          />
         </div>
         <div className="flex items-center justify-between gap-3 pt-1">
           <LabelWithInfo label="GLM hours" info="Zhipu meters GLM Coding plans faster during Beijing peak hours. Blended assumes a typical day; off-peak assumes you only code outside peak." />
