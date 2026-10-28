@@ -3,7 +3,7 @@ import { ArrowDownIcon } from "lucide-react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { labGroup } from "@/lib/data"
-import { cheaper, EFFORT_LABEL, fee, pct, tokens, usd } from "@/lib/format"
+import { cheaper, currencySymbol, EFFORT_LABEL, fee, money, pct, tokens, toCurrency } from "@/lib/format"
 import type { Row } from "@/lib/pricing"
 import type { ChartPalette } from "@/lib/theme"
 import { cn } from "@/lib/utils"
@@ -16,8 +16,8 @@ interface Props {
   palette: ChartPalette
 }
 
-/** Score points per dollar; free rows sort first. */
-const value = (r: Row) => (r.cost === 0 ? Infinity : r.score / r.cost)
+/** Score points per unit of display currency; free rows sort first. */
+const value = (r: Row) => (r.cost === 0 ? Infinity : r.score / toCurrency(r.cost))
 
 /** One row per model: its highest-scoring visible effort level. */
 function bestPerModel(rows: readonly Row[]): Row[] {
@@ -64,9 +64,9 @@ export function ResultsTable({ rows, mode, palette }: Props) {
               <TableHead>Model</TableHead>
               <TableHead className="w-[28%]">{header("score", "Score")}</TableHead>
               {sub ? <TableHead>Cheapest plan</TableHead> : null}
-              <TableHead className="text-right">{header("cost", sub ? "$ / task" : "API $ / task")}</TableHead>
-              {sub ? <TableHead className="text-right">API $ / task</TableHead> : null}
-              <TableHead className="text-right">{header("value", "Pts per $")}</TableHead>
+              <TableHead className="text-right">{header("cost", sub ? `${currencySymbol()} / task` : `API ${currencySymbol()} / task`)}</TableHead>
+              {sub ? <TableHead className="text-right">API {currencySymbol()} / task</TableHead> : null}
+              <TableHead className="text-right">{header("value", `Pts per ${currencySymbol()}`)}</TableHead>
               <TableHead className="text-right">Out tok</TableHead>
             </TableRow>
           </TableHeader>
@@ -104,10 +104,10 @@ export function ResultsTable({ rows, mode, palette }: Props) {
                     </TableCell>
                   ) : null}
                   <TableCell className="text-right font-medium">
-                    {usd(r.cost)}
+                    {money(r.cost)}
                     {saving ? <span className="ml-1.5 text-xs font-normal text-muted-foreground">{saving}</span> : null}
                   </TableCell>
-                  {sub ? <TableCell className="text-right text-muted-foreground">{usd(r.apiCost)}</TableCell> : null}
+                  {sub ? <TableCell className="text-right text-muted-foreground">{money(r.apiCost)}</TableCell> : null}
                   <TableCell className="text-right">{r.cost === 0 ? "∞" : Math.round(value(r)).toLocaleString()}</TableCell>
                   <TableCell className="text-right text-muted-foreground">{tokens(r.outputTokens)}</TableCell>
                 </TableRow>

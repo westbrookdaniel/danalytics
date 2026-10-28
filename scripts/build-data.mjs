@@ -11,6 +11,7 @@ const read = (path) => JSON.parse(readFileSync(new URL(path, root), "utf8"));
 
 const cognition = read("data-src/cognition-frontiercode-2.0.json");
 const pricing = read("data-src/real-api-pricing-points.json");
+const fx = read("data-src/fx.json");
 
 // Token mixes from real-api-pricing/data/conventions.json.
 const MIX = {
@@ -222,6 +223,8 @@ const out = {
     reference: { name: "mypriors FrontierCode 2.0", url: "https://mypriors.com/benchmarks/frontiercode-2.0-main" },
   },
   labs: LABS,
+  // USD → currency multipliers for the currency select; every price in the data stays in USD.
+  fx: { date: fx.date, source: "ECB reference rates via Frankfurter", rates: { USD: 1, ...fx.rates } },
   models,
   plans: [...plans.values()].sort((a, b) => a.fee - b.fee || a.name.localeCompare(b.name)),
 };

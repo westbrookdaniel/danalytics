@@ -7,7 +7,7 @@ import { Switch } from "@/components/ui/switch"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { LAB_MARK, labOf } from "@/lib/colors"
 import { BRACKETS, bracketOf, data, EFFORT_ORDER, labGroup, type GlmScenario, type Model, type Plan } from "@/lib/data"
-import { EFFORT_LABEL, fee } from "@/lib/format"
+import { bracketLabel, EFFORT_LABEL, fee } from "@/lib/format"
 import { lowConfidenceModels, planExclusion, type Filters } from "@/lib/pricing"
 import { flip } from "@/lib/sets"
 import type { ChartPalette } from "@/lib/theme"
@@ -282,7 +282,7 @@ function PlanControls({
         return (
           <Section
             key={b.id}
-            title={b.label}
+            title={bracketLabel(b)}
             hint={b.hint}
             action={
               <button type="button" onClick={() => setPlansOn(inBracket, !allOn)} className="text-[12px] text-muted-foreground hover:text-foreground">

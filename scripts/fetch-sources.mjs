@@ -5,6 +5,8 @@ const root = new URL("..", import.meta.url)
 
 const COGNITION = "https://cognition.com/data/frontier-code-2.0/data.json"
 const PRICING = "https://raw.githubusercontent.com/Fei2411/real-api-pricing/main/derived/points.json"
+// ECB reference rates via Frankfurter (no key). Keep in sync with CURRENCIES in src/lib/format.ts.
+const FX = "https://api.frankfurter.dev/v1/latest?base=USD&symbols=AUD,EUR,GBP,CAD,NZD,JPY,CNY,INR"
 
 async function getJson(url) {
   const res = await fetch(url, { headers: { "user-agent": "frontiercode-costs data refresh" } })
@@ -23,4 +25,9 @@ writeFileSync(
   JSON.stringify({ generatedAt: pricing.generatedAt, mix: pricing.mix, points }, null, 1),
 )
 
-console.log(`Cognition: ${cognition.models.length} models · Real API Pricing: ${points.length} points (snapshot ${pricing.generatedAt})`)
+const fx = await getJson(FX)
+writeFileSync(new URL("data-src/fx.json", root), JSON.stringify(fx))
+
+console.log(
+  `Cognition: ${cognition.models.length} models · Real API Pricing: ${points.length} points (snapshot ${pricing.generatedAt}) · FX ${fx.date}`,
+)

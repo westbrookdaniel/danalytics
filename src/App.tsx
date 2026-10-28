@@ -16,11 +16,11 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { CostScoreChart, type XScale } from "@/components/CostScoreChart"
 import { Hint } from "@/components/Hint"
-import { PenguinMark } from "@/components/PenguinMark"
 import { PlanBreakdown } from "@/components/PlanBreakdown"
 import { ResultsTable } from "@/components/ResultsTable"
 import { Sidebar } from "@/components/Sidebar"
 import { BRACKETS, data, MAX_FEE, type BracketId, type LabGroup } from "@/lib/data"
+import { bracketLabel, CURRENCIES, feeShort, setCurrency, type CurrencyCode } from "@/lib/format"
 import { buildRows, type Filters } from "@/lib/pricing"
 import { CHART_COLORS, useTheme, type ChartPalette, type ThemePref } from "@/lib/theme"
 
@@ -129,6 +129,9 @@ export default function App() {
   const wide = useWide()
   const [sidebarWidth, startResize, resetWidth] = useSidebarWidth()
   const page = usePage()
+  const [currency, setCurrencyState] = useStoredCurrency()
+  // Formatting helpers read the display currency from module state; set it before children render.
+  setCurrency(currency)
 
   const rows = useMemo(() => buildRows(filters), [filters])
   const sub = filters.mode === "subscription"
@@ -139,9 +142,8 @@ export default function App() {
       <div className="min-h-dvh bg-background">
         <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur">
           <div className="mx-auto flex h-14 max-w-[1600px] items-center gap-4 px-4 sm:px-6">
-            <a href="#/" className="flex items-center gap-2.5">
-              <PenguinMark className="size-6" />
-              <span className="text-[17px] font-semibold tracking-tight">danalytics</span>
+            <a href="#/" className="text-[17px] font-semibold tracking-tight">
+              danalytics
             </a>
             <BenchmarkSelect />
             <nav className="ml-2 flex items-center gap-1">
@@ -157,6 +159,7 @@ export default function App() {
               ))}
             </nav>
             <span className="ml-auto" />
+            <CurrencySelect value={currency} onChange={setCurrencyState} />
             <ThemeSwitch pref={pref} onChange={setPref} />
           </div>
         </header>
@@ -219,6 +222,7 @@ export default function App() {
                     compact={!wide}
                     showCard={showCard}
                     dimOnHover={dimOnHover}
+                    currency={currency}
                   />
                 ) : (
                   <div className="grid h-[460px] place-items-center text-sm text-muted-foreground">Nothing to plot. Pick some models or loosen the plan filters.</div>
@@ -248,6 +252,12 @@ export default function App() {
                   Real API Pricing
                 </a>{" "}
                 ({data.sources.pricing.snapshot})
+                {currency !== "USD" ? (
+                  <>
+                    {" "}
+                    · prices converted from USD at 1 USD = {data.fx.rates[currency]} {currency} ({data.fx.source}, {data.fx.date})
+                  </>
+                ) : null}
               </span>
               <span>
                 Penguin by{" "}
@@ -396,7 +406,7 @@ function BudgetControls({ filters, setFilters }: { filters: Filters; setFilters:
           onValueChange={([v]) => patch({ maxFee: v })}
           aria-label="Maximum monthly subscription cost"
         />
-        <span className="w-16 text-[13px] font-medium tabular-nums">{filters.maxFee >= MAX_FEE ? "Any" : `$${filters.maxFee}/mo`}</span>
+        <span className="w-16 text-[13px] font-medium tabular-nums">{filters.maxFee >= MAX_FEE ? "Any" : `${feeShort(filters.maxFee)}/mo`}</span>
       </div>
       <div className="flex flex-wrap items-center gap-2">
         <span className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
@@ -412,7 +422,7 @@ function BudgetControls({ filters, setFilters }: { filters: Filters; setFilters:
 /** Select-style multi-pick for fee brackets; stays open while ticking. */
 function BracketSelect({ value, onChange }: { value: ReadonlySet<BracketId>; onChange: (next: Set<BracketId>) => void }) {
   const all = value.size === BRACKETS.length
-  const summary = all ? "All" : value.size === 0 ? "None" : BRACKETS.filter((b) => value.has(b.id)).map((b) => b.label).join(", ")
+  const summary = all ? "All" : value.size === 0 ? "None" : BRACKETS.filter((b) => value.has(b.id)).map((b) => bracketLabel(b)).join(", ")
   const toggle = (id: BracketId, on: boolean) => {
     const next = new Set(value)
     if (on) next.add(id)
@@ -429,7 +439,7 @@ function BracketSelect({ value, onChange }: { value: ReadonlySet<BracketId>; onC
         {BRACKETS.map((b) => (
           <DropdownMenuCheckboxItem key={b.id} checked={value.has(b.id)} onCheckedChange={(v) => toggle(b.id, v === true)} onSelect={(e) => e.preventDefault()}>
             <span className="flex w-full items-baseline justify-between gap-3">
-              <span className="tabular-nums">{b.label}</span>
+              <span className="tabular-nums">{bracketLabel(b)}</span>
               <span className="text-[12px] text-muted-foreground">{b.hint}</span>
             </span>
           </DropdownMenuCheckboxItem>
@@ -481,6 +491,46 @@ function PlansView({ filters, palette }: { filters: Filters; palette: ChartPalet
         </div>
       ))}
     </div>
+  )
+}
+
+const CURRENCY_KEY = "danalytics-currency"
+
+/** Display currency, remembered per browser. */
+function useStoredCurrency() {
+  const [code, setCode] = useState<CurrencyCode>(() => {
+    try {
+      const saved = localStorage.getItem(CURRENCY_KEY)
+      return CURRENCIES.some((c) => c.code === saved) ? (saved as CurrencyCode) : "USD"
+    } catch {
+      return "USD"
+    }
+  })
+  useEffect(() => {
+    try {
+      localStorage.setItem(CURRENCY_KEY, code)
+    } catch {
+      // Storage can be blocked; the currency still applies for this visit.
+    }
+  }, [code])
+  return [code, setCode] as const
+}
+
+function CurrencySelect({ value, onChange }: { value: CurrencyCode; onChange: (c: CurrencyCode) => void }) {
+  return (
+    <Select value={value} onValueChange={(v) => onChange(v as CurrencyCode)}>
+      <SelectTrigger size="sm" className="h-8 gap-1.5 text-[13px] font-medium tabular-nums" aria-label="Currency">
+        {value}
+      </SelectTrigger>
+      <SelectContent align="end">
+        {CURRENCIES.map((c) => (
+          <SelectItem key={c.code} value={c.code}>
+            <span className="font-medium tabular-nums">{c.code}</span>
+            <span className="text-muted-foreground">{c.name}</span>
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   )
 }
 

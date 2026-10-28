@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { EFFORT_ORDER, labGroup, type Model } from "@/lib/data"
-import { cheaper, EFFORT_LABEL, fee, pct, usd } from "@/lib/format"
+import { cheaper, currencySymbol, EFFORT_LABEL, fee, money, pct, toCurrency } from "@/lib/format"
 import { quotesFor, type Filters } from "@/lib/pricing"
 import type { ChartPalette } from "@/lib/theme"
 
@@ -38,7 +38,10 @@ export function PlanBreakdown({ model, filters, palette }: Props) {
         {model.api ? (
           <Badge variant="secondary" title={model.api.note}>
             API basis
-            <span className="font-semibold text-foreground tabular-nums">${model.api.usdPerMtok.toFixed(3)}/Mtok</span>
+            <span className="font-semibold text-foreground tabular-nums">
+              {currencySymbol()}
+              {toCurrency(model.api.usdPerMtok).toFixed(3)}/Mtok
+            </span>
             <span className="text-muted-foreground/80">{model.api.basis}</span>
           </Badge>
         ) : null}
@@ -62,7 +65,7 @@ export function PlanBreakdown({ model, filters, palette }: Props) {
                 <span className="block h-full rounded-r-full" style={{ width: `${width(q.cost)}%`, background: color }} />
               </span>
               <span className="w-28 text-right tabular-nums">
-                {usd(q.cost)} {saving ? <span className="text-muted-foreground">· {saving}</span> : null}
+                {money(q.cost)} {saving ? <span className="text-muted-foreground">· {saving}</span> : null}
               </span>
             </li>
           )
@@ -72,7 +75,7 @@ export function PlanBreakdown({ model, filters, palette }: Props) {
           <span className="h-2.5 rounded-r-full bg-muted">
             <span className="block h-full rounded-r-full bg-foreground/35" style={{ width: `${width(best.apiCost)}%` }} />
           </span>
-          <span className="w-28 text-right tabular-nums">{usd(best.apiCost)}</span>
+          <span className="w-28 text-right tabular-nums">{money(best.apiCost)}</span>
         </li>
       </ul>
       {quotes.some((q) => q.offer.confidence === "low") ? (

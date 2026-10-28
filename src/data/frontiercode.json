@@ -38,6 +38,21 @@
    "name": "Other"
   }
  },
+ "fx": {
+  "date": "2026-10-27",
+  "source": "ECB reference rates via Frankfurter",
+  "rates": {
+   "USD": 1,
+   "AUD": 1.4221,
+   "CAD": 1.4023,
+   "CNY": 6.6675,
+   "EUR": 0.89686,
+   "GBP": 0.7503,
+   "INR": 95.12,
+   "JPY": 157.82,
+   "NZD": 1.7535
+  }
+ },
  "models": [
   {
    "id": "swe-2",

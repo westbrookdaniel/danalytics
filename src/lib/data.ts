@@ -53,6 +53,8 @@ export interface Plan {
 export interface Dataset {
   generatedAt: string
   sources: Record<"benchmark" | "pricing" | "reference", { name: string; url: string; snapshot?: string }>
+  /** USD → currency multipliers (ECB reference rates) for the display-currency select. */
+  fx: { date: string; source: string; rates: Record<string, number> }
   models: Model[]
   plans: Plan[]
 }
