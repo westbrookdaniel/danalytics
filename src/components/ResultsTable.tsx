@@ -3,7 +3,7 @@ import { ArrowDownIcon } from "lucide-react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { labGroup } from "@/lib/data"
-import { cheaper, currencySymbol, EFFORT_LABEL, fee, money, pct, tokens, toCurrency } from "@/lib/format"
+import { cheaper, currencySymbol, EFFORT_LABEL, fee, money, scoreText, tokens, toCurrency } from "@/lib/format"
 import type { Row } from "@/lib/pricing"
 import type { ChartPalette } from "@/lib/theme"
 import { cn } from "@/lib/utils"
@@ -89,7 +89,7 @@ export function ResultsTable({ rows, mode, palette }: Props) {
                       <span className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
                         <span className="block h-full rounded-full" style={{ width: `${(r.score / top) * 100}%`, background: color }} />
                       </span>
-                      <span className="w-12 text-right font-medium">{pct(r.score)}</span>
+                      <span className="w-12 text-right font-medium">{scoreText(r.score)}</span>
                     </span>
                   </TableCell>
                   {sub ? (

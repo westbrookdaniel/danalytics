@@ -19,13 +19,11 @@ import { Hint } from "@/components/Hint"
 import { PlanBreakdown } from "@/components/PlanBreakdown"
 import { ResultsTable } from "@/components/ResultsTable"
 import { Sidebar } from "@/components/Sidebar"
-import { BRACKETS, data, MAX_FEE, type BracketId, type LabGroup } from "@/lib/data"
-import { bracketLabel, CURRENCIES, feeShort, setCurrency, type CurrencyCode } from "@/lib/format"
+import { benchmarkById, BRACKETS, data, DEFAULT_BENCHMARK, MAX_FEE, modelsFor, type BracketId, type LabGroup, type Model } from "@/lib/data"
+import { bracketLabel, CURRENCIES, feeShort, setCurrency, setScoreUnit, type CurrencyCode } from "@/lib/format"
 import { buildRows, type Filters } from "@/lib/pricing"
 import { CHART_COLORS, useTheme, type ChartPalette, type ThemePref } from "@/lib/theme"
 
-/** Models that start hidden: niche or near-zero scorers that crowd the low end of the chart. */
-const HIDDEN_BY_DEFAULT = new Set(["swe-2", "mistral-large-4", "inkling-small", "beam-1.0"])
 /** Effort levels that start hidden: the extremes, which most people don't run day to day. */
 const DEFAULT_EFFORTS = ["low", "medium", "high", "xhigh", "na"]
 
@@ -38,19 +36,24 @@ const INITIAL_FILTERS: Filters = {
   hideLowConfidence: false,
   glmScenario: "mid",
   efforts: new Set(DEFAULT_EFFORTS),
-  models: new Set(data.models.filter((m) => !m.superseded && !HIDDEN_BY_DEFAULT.has(m.id)).map((m) => m.id)),
+  models: new Set(data.models.filter((m) => !m.superseded).map((m) => m.id)),
 }
 
-const BENCHMARKS = [{ id: "frontiercode-2.0-main", name: "FrontierCode 2.0", detail: "Cognition · main subset · 132 tasks" }]
 
 type Page = "overview" | "plans"
 
 const PAGES: { id: Page; label: string; href: string }[] = [
-  { id: "overview", label: "Overview", href: "#/" },
+  { id: "overview", label: "Benchmarks", href: "#/" },
   { id: "plans", label: "Plans", href: "#/plans" },
 ]
 
 const pageFromHash = (): Page => (location.hash === "#/plans" ? "plans" : "overview")
+
+/** Benchmark from `?benchmark=`, falling back to the default when it's missing or unknown. */
+const benchmarkFromUrl = (): string => {
+  const id = new URLSearchParams(location.search).get("benchmark")
+  return data.benchmarks.some((b) => b.id === id) ? id! : DEFAULT_BENCHMARK
+}
 
 /** Tiny hash router: `#/plans` is the plans page, anything else the overview. */
 function usePage() {
@@ -133,7 +136,21 @@ export default function App() {
   // Formatting helpers read the display currency from module state; set it before children render.
   setCurrency(currency)
 
-  const rows = useMemo(() => buildRows(filters), [filters])
+  const [benchmarkId, setBenchmarkState] = useState(benchmarkFromUrl)
+  // Mirror a non-default benchmark in `?benchmark=` so a view can be linked to directly.
+  const setBenchmarkId = (id: string) => {
+    setBenchmarkState(id)
+    const url = new URL(location.href)
+    if (id === DEFAULT_BENCHMARK) url.searchParams.delete("benchmark")
+    else url.searchParams.set("benchmark", id)
+    history.replaceState(null, "", url)
+  }
+  const benchmark = benchmarkById(benchmarkId)
+  const models = modelsFor(benchmarkId)
+  // Like the currency, the score unit is read by formatting helpers; set it before children render.
+  setScoreUnit(benchmark.scoreUnit)
+
+  const rows = useMemo(() => buildRows(filters, models), [filters, models])
   const sub = filters.mode === "subscription"
   const setMode = (mode: Filters["mode"]) => setFilters((f) => ({ ...f, mode }))
 
@@ -174,7 +191,7 @@ export default function App() {
                   title="Plans by model"
                   detail="Every plan that serves each model, priced at its best effort level. Faded plans are outside your filters; bars are log-scaled against the API price."
                 />
-                <PlansView filters={filters} palette={palette} />
+                <PlansView filters={filters} palette={palette} models={models} />
               </section>
             ) : (
               <>
@@ -192,7 +209,7 @@ export default function App() {
                     </SelectContent>
                   </Select>
                   cost per task on
-                  <BenchmarkSelect />
+                  <BenchmarkSelect value={benchmarkId} onChange={setBenchmarkId} />
                 </h1>
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
                   {sub ? <BudgetControls filters={filters} setFilters={setFilters} /> : null}
@@ -223,6 +240,8 @@ export default function App() {
                     showCard={showCard}
                     dimOnHover={dimOnHover}
                     currency={currency}
+                    scoreLabel={benchmark.scoreLabel}
+                    scoreUnit={benchmark.scoreUnit}
                   />
                 ) : (
                   <div className="grid h-[460px] place-items-center text-sm text-muted-foreground">Nothing to plot. Pick some models or loosen the plan filters.</div>
@@ -244,8 +263,8 @@ export default function App() {
             <footer className="flex flex-wrap justify-between gap-2 border-t pt-4 text-[12px] text-muted-foreground">
               <span>
                 Data from{" "}
-                <a className="text-foreground hover:underline" href={data.sources.benchmark.url} target="_blank" rel="noreferrer">
-                  Cognition FrontierCode 2.0
+                <a className="text-foreground hover:underline" href={benchmark.source.url} target="_blank" rel="noreferrer">
+                  {benchmark.source.name}
                 </a>{" "}
                 and{" "}
                 <a className="text-foreground hover:underline" href={data.sources.pricing.url} target="_blank" rel="noreferrer">
@@ -288,6 +307,7 @@ export default function App() {
               onHover={setHovered}
               onReset={() => setFilters(INITIAL_FILTERS)}
               showPlans={sub || page === "plans"}
+              models={models}
             />
           </aside>
         </div>
@@ -305,19 +325,15 @@ function PageHeading({ title, detail }: { title: string; detail: string }) {
   )
 }
 
-function BenchmarkSelect() {
-  const [value, setValue] = useState(BENCHMARKS[0].id)
-  const current = BENCHMARKS.find((b) => b.id === value)!
+function BenchmarkSelect({ value, onChange }: { value: string; onChange: (id: string) => void }) {
   return (
-    <Select value={value} onValueChange={setValue}>
+    <Select value={value} onValueChange={onChange}>
       <SelectTrigger className="h-9 gap-2 px-3 text-[15px] font-semibold" aria-label="Benchmark">
         {/* SelectValue with custom children: Radix needs the node to position the menu. */}
-        <SelectValue>
-          {current.name} <span className="font-normal text-muted-foreground">main</span>
-        </SelectValue>
+        <SelectValue>{benchmarkById(value).name}</SelectValue>
       </SelectTrigger>
       <SelectContent position="popper" align="start">
-        {BENCHMARKS.map((b) => (
+        {data.benchmarks.map((b) => (
           <SelectItem key={b.id} value={b.id}>
             <span className="flex flex-col">
               <span className="font-medium">{b.name}</span>
@@ -481,8 +497,8 @@ function Legend({ sub, showFrontier, palette }: { sub: boolean; showFrontier: bo
   )
 }
 
-function PlansView({ filters, palette }: { filters: Filters; palette: ChartPalette }) {
-  const models = data.models
+function PlansView({ filters, palette, models: all }: { filters: Filters; palette: ChartPalette; models: readonly Model[] }) {
+  const models = all
     .filter((m) => filters.models.has(m.id))
     .sort((a, b) => Math.max(...b.efforts.map((e) => e.score)) - Math.max(...a.efforts.map((e) => e.score)))
   return (
@@ -562,13 +578,13 @@ function ThemeSwitch({ pref, onChange }: { pref: ThemePref; onChange: (p: ThemeP
 }
 
 function Method() {
-  const { benchmark, pricing, reference } = data.sources
+  const { pricing, reference } = data.sources
   return (
     <div className="max-w-3xl">
       <PageHeading title="Method" detail="How subscription costs per task are computed" />
       <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
         <p>
-          <span className="font-medium text-foreground">Subscription $ / task</span> = Cognition's API $ / task × (plan's real $ per million tokens ÷ the
+          <span className="font-medium text-foreground">Subscription $ / task</span> = the benchmark's API $ / task × (plan's real $ per million tokens ÷ the
           model's API $ per million tokens), assuming the whole monthly allowance is used. Both per-token prices use Real API Pricing's standard workload (97%
           cache reads, 2.5% fresh input, 0.5% output; Anthropic bills fresh input as cache writes, Google uses a low-cache mix), so the ratio is the share of list
           price a subscriber pays.
@@ -578,13 +594,22 @@ function Method() {
           model. GPT-6 Astra, Sol and 6.1 Sol have no published API price in the dataset, so their per-token basis is implied from mypriors' ChatGPT Plus
           figures; GPT-6 Luna is estimated from Factory Droid multipliers. Models with no measurable allowance stay at API price, drawn hollow.
         </p>
+        <p>
+          <span className="font-medium text-foreground">Intelligence Index v5</span> scores and costs per task come from Artificial Analysis, which runs every
+          effort level itself. <span className="font-medium text-foreground">FrontierCode 2.0</span> uses Cognition's own published runs; GPT-6.1 Terra, which
+          Cognition hasn't published yet, uses Artificial Analysis's FrontierCode 2.0 run (its cost per task is that run's share of the index cost, which
+          matches Cognition's figures within a few percent for models both have run).
+        </p>
         <ul className="space-y-1">
-          <li>
-            Scores and API costs:{" "}
-            <a className="text-foreground underline underline-offset-2" href={benchmark.url} target="_blank" rel="noreferrer">
-              {benchmark.name}
-            </a>
-          </li>
+          {data.benchmarks.map((b) => (
+            <li key={b.id}>
+              {b.name} scores and API costs:{" "}
+              <a className="text-foreground underline underline-offset-2" href={b.source.url} target="_blank" rel="noreferrer">
+                {b.source.name}
+              </a>
+              {b.source.fetched ? ` (fetched ${b.source.fetched})` : null}
+            </li>
+          ))}
           <li>
             Plan allowances:{" "}
             <a className="text-foreground underline underline-offset-2" href={pricing.url} target="_blank" rel="noreferrer">

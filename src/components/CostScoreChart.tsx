@@ -4,7 +4,7 @@ import { Chart } from "@tanstack/charts/react"
 import { scaleLinear } from "@tanstack/charts/scales/linear"
 import { scaleLog } from "d3-scale"
 import { labGroup } from "@/lib/data"
-import { cheaper, type CurrencyCode, EFFORT_LABEL, fee, money, moneyTick, pct, tokens, toCurrency } from "@/lib/format"
+import { cheaper, type CurrencyCode, EFFORT_LABEL, fee, money, moneyTick, scoreText, tokens, toCurrency } from "@/lib/format"
 import { paretoFrontier, type Row } from "@/lib/pricing"
 import type { ChartPalette } from "@/lib/theme"
 
@@ -30,6 +30,9 @@ interface Props {
   dimOnHover: boolean
   /** Display currency; costs are converted before plotting, so the scene rebuilds when it changes. */
   currency: CurrencyCode
+  /** Active benchmark's score name (hover card) and unit (y-axis ticks). */
+  scoreLabel: string
+  scoreUnit: string
 }
 
 /** Only effort points are hover targets; lines and guides share their positions. */
@@ -62,7 +65,7 @@ function decadeTicks(lo: number, hi: number): number[] {
 }
 
 export function CostScoreChart(props: Props) {
-  const { rows, palette, mode, scale, showFrontier, highlight, height, compact, showCard, dimOnHover, currency } = props
+  const { rows, palette, mode, scale, showFrontier, highlight, height, compact, showCard, dimOnHover, currency, scoreLabel, scoreUnit } = props
 
   const definition = useMemo(() => {
     const log = scale === "log"
@@ -143,7 +146,7 @@ export function CostScoreChart(props: Props) {
         y: {
           scale: scaleLinear().domain([0, yTop]),
           grid: { stroke: palette.grid, opacity: 1 },
-          axis: { line: false, ticks: { size: 0, padding: 10, format: (v: number) => `${v}%` } },
+          axis: { line: false, ticks: { size: 0, padding: 10, format: (v: number) => `${v}${scoreUnit}` } },
         },
       },
       margin: { top: 28, right: compact ? 12 : 24 },
@@ -155,7 +158,7 @@ export function CostScoreChart(props: Props) {
       tooltip: false,
       svgAnimation: true,
     })
-  }, [rows, palette, mode, scale, showFrontier, highlight, compact, dimOnHover, currency])
+  }, [rows, palette, mode, scale, showFrontier, highlight, compact, dimOnHover, currency, scoreUnit])
 
   // Focused point and the rendered dot positions (in scene pixels), for the overlays.
   const [focus, setFocus] = useState<ChartPoint<Plotted, number, number> | null>(null)
@@ -181,7 +184,7 @@ export function CostScoreChart(props: Props) {
         }}
       />
       {scene ? <LabelLayer labels={labels} active={active} /> : null}
-      {focus && scene ? <HoverOverlay point={focus} scene={scene} palette={palette} mode={mode} showCard={showCard} /> : null}
+      {focus && scene ? <HoverOverlay point={focus} scene={scene} palette={palette} mode={mode} showCard={showCard} scoreLabel={scoreLabel} /> : null}
     </div>
   )
 }
@@ -324,12 +327,14 @@ function HoverOverlay({
   palette,
   mode,
   showCard,
+  scoreLabel,
 }: {
   point: ChartPoint<Plotted, number, number>
   scene: SceneInfo
   palette: ChartPalette
   mode: "subscription" | "api"
   showCard: boolean
+  scoreLabel: string
 }) {
   const { bounds: b } = scene
   const r = point.datum
@@ -346,7 +351,7 @@ function HoverOverlay({
         className={`absolute -translate-y-full pb-1 text-[11px] font-medium tabular-nums ${cardLeft ? "-translate-x-full" : ""}`}
         style={{ left: cardLeft ? b.x + b.width - 6 : b.x + 6, top: point.y }}
       >
-        {r.score.toFixed(1)}%
+        {scoreText(r.score)}
       </span>
       <span className="absolute pb-1 text-[11px] font-medium tabular-nums" style={{ left: point.x + 6, top: b.y + b.height - 20 }}>
         {money(r.cost)}
@@ -359,6 +364,7 @@ function HoverOverlay({
         <DetailCard
           row={r}
           mode={mode}
+          scoreLabel={scoreLabel}
           style={cardLeft ? { left: b.x + CARD_INSET, bottom } : { right: scene.width - (b.x + b.width) + CARD_INSET, bottom }}
         />
       ) : null}
@@ -366,7 +372,7 @@ function HoverOverlay({
   )
 }
 
-function DetailCard({ row, mode, style }: { row: Row; mode: "subscription" | "api"; style: CSSProperties }) {
+function DetailCard({ row, mode, scoreLabel, style }: { row: Row; mode: "subscription" | "api"; scoreLabel: string; style: CSSProperties }) {
   const saving = row.source === "api" ? null : cheaper(row.apiCost, row.cost)
   const stat = (label: string, value: string, strong = false) => (
     <>
@@ -378,10 +384,10 @@ function DetailCard({ row, mode, style }: { row: Row; mode: "subscription" | "ap
     <div className="absolute w-64 rounded-xl border bg-popover/95 p-4 text-[12px] shadow-lg backdrop-blur" style={style}>
       <div className="text-[13px] font-semibold">{row.model.short}</div>
       <div className="mt-0.5 text-muted-foreground">
-        {EFFORT_LABEL[row.effort] ?? row.effort} effort · {row.model.harness}
+        {EFFORT_LABEL[row.effort] ?? row.effort} effort · {row.harness ?? `run by ${row.ranBy}`}
       </div>
       <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 tabular-nums">
-        {stat("FrontierCode score", pct(row.score), true)}
+        {stat(scoreLabel, scoreText(row.score), true)}
         {mode === "subscription" && row.plan ? (
           <>
             {stat("Cost per task", money(row.cost), true)}

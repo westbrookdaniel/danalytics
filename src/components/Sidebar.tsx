@@ -7,7 +7,7 @@ import { Switch } from "@/components/ui/switch"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { LAB_MARK, labOf } from "@/lib/colors"
 import { BRACKETS, bracketOf, data, EFFORT_ORDER, labGroup, type GlmScenario, type Model, type Plan } from "@/lib/data"
-import { bracketLabel, EFFORT_LABEL, fee } from "@/lib/format"
+import { bracketLabel, EFFORT_LABEL, fee, scoreText } from "@/lib/format"
 import { lowConfidenceModels, planExclusion, type Filters } from "@/lib/pricing"
 import { flip } from "@/lib/sets"
 import type { ChartPalette } from "@/lib/theme"
@@ -22,14 +22,16 @@ interface Props {
   onReset: () => void
   /** Plan controls only matter when the chart is priced by subscription. */
   showPlans: boolean
+  /** Models with results on the active benchmark. */
+  models: readonly Model[]
 }
 
-const EFFORTS = EFFORT_ORDER.filter((e) => data.models.some((m) => m.efforts.some((x) => x.effort === e)))
+const EFFORTS = EFFORT_ORDER.filter((e) => data.benchmarks.some((b) => Object.values(b.results).some((rs) => rs.some((r) => r.effort === e))))
 const bestScore = (m: Model) => Math.max(...m.efforts.map((e) => e.score))
 const byScore = (a: Model, b: Model) => bestScore(b) - bestScore(a)
 const modelNames = new Map(data.models.map((m) => [m.id, m.short]))
 
-export function Sidebar({ filters, setFilters, palette, highlight, onHover, onReset, showPlans }: Props) {
+export function Sidebar({ filters, setFilters, palette, highlight, onHover, onReset, showPlans, models }: Props) {
   const [query, setQuery] = useState("")
   const search = useRef<HTMLInputElement>(null)
   const patch = (p: Partial<Filters>) => setFilters((f) => ({ ...f, ...p }))
@@ -49,8 +51,8 @@ export function Sidebar({ filters, setFilters, palette, highlight, onHover, onRe
 
   const q = query.trim().toLowerCase()
   const matches = (m: Model) => !q || m.name.toLowerCase().includes(q) || labOf(m).toLowerCase().includes(q)
-  const current = data.models.filter((m) => !m.superseded && matches(m)).sort(byScore)
-  const older = data.models.filter((m) => m.superseded && matches(m)).sort(byScore)
+  const current = models.filter((m) => !m.superseded && matches(m)).sort(byScore)
+  const older = models.filter((m) => m.superseded && matches(m)).sort(byScore)
 
   const setModels = (ids: string[], on: boolean) => {
     const next = new Set(filters.models)
@@ -66,7 +68,7 @@ export function Sidebar({ filters, setFilters, palette, highlight, onHover, onRe
       <div className="flex items-center gap-2">
         <h2 className="flex flex-1 items-center gap-2 text-[15px] leading-none font-semibold">
           Models
-          <span className="rounded-md bg-muted px-1.5 py-1 text-[11px] leading-none font-medium text-muted-foreground tabular-nums">{filters.models.size}</span>
+          <span className="rounded-md bg-muted px-1.5 py-1 text-[11px] leading-none font-medium text-muted-foreground tabular-nums">{models.filter((m) => filters.models.has(m.id)).length}</span>
         </h2>
         <Hint content="Reset every filter to its default">
           <button type="button" onClick={onReset} aria-label="Reset all filters" className="grid size-7 place-items-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground">
@@ -179,7 +181,7 @@ function ModelGroup({
                 {LAB_MARK[labOf(m)] ?? "·"}
               </span>
               <span className="min-w-0 flex-1 truncate">{m.short}</span>
-              <span className="text-[12px] text-muted-foreground tabular-nums">{bestScore(m).toFixed(1)}%</span>
+              <span className="text-[12px] text-muted-foreground tabular-nums">{scoreText(bestScore(m))}</span>
               <span className="size-2 shrink-0 rounded-full" style={{ background: on ? color : "transparent", boxShadow: `inset 0 0 0 1.5px ${color}` }} />
             </button>
           )
@@ -248,7 +250,7 @@ function PlanControls({
           <SwitchRow
             id="kind-tool"
             label="Third-party tools"
-            info="Coding tools that resell model access from a shared pool: Cursor, Factory Droid, OpenCode, Command Code and Ollama."
+            info="Coding tools that resell model access from a shared pool: Cursor and OpenCode."
             checked={filters.kinds.has("tool")}
             onChange={() => toggleKind("tool")}
           />

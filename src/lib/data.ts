@@ -9,23 +9,39 @@ export type GlmScenario = "peak" | "mid" | "offpeak"
 export interface EffortResult {
   effort: Effort
   score: number
-  passRate: number | null
-  flaggedRate: number | null
   apiCost: number
   outputTokens: number | null
+  harness: string | null
+  /** Who ran it: "Cognition" or "Artificial Analysis". */
+  source: string
+  estimated?: boolean
 }
 
-export interface Model {
+export interface ModelMeta {
   id: string
   name: string
   short: string
   lab: string
-  harness: string | null
   pricingId: string | null
   superseded: boolean
   openWeights: boolean
   api: { usdPerMtok: number; basis: "metered" | "list" | "implied" | "estimated"; note: string } | null
+}
+
+/** A model with its results on the active benchmark. */
+export interface Model extends ModelMeta {
   efforts: EffortResult[]
+}
+
+export interface Benchmark {
+  id: string
+  name: string
+  detail: string
+  scoreLabel: string
+  /** Appended to scores: "%" for pass rates, "" for index points. */
+  scoreUnit: string
+  source: { name: string; url: string; fetched?: string }
+  results: Record<string, EffortResult[]>
 }
 
 export interface Offer {
@@ -52,18 +68,33 @@ export interface Plan {
 
 export interface Dataset {
   generatedAt: string
-  sources: Record<"benchmark" | "pricing" | "reference", { name: string; url: string; snapshot?: string }>
+  sources: Record<"pricing" | "reference", { name: string; url: string; snapshot?: string }>
   /** USD → currency multipliers (ECB reference rates) for the display-currency select. */
   fx: { date: string; source: string; rates: Record<string, number> }
-  models: Model[]
+  benchmarks: Benchmark[]
+  models: ModelMeta[]
   plans: Plan[]
 }
 
 export const data = raw as Dataset
 
+export const DEFAULT_BENCHMARK = data.benchmarks[0].id
+
+export const benchmarkById = (id: string): Benchmark => data.benchmarks.find((b) => b.id === id) ?? data.benchmarks[0]
+
+const modelsByBenchmark = new Map(
+  data.benchmarks.map((b) => [b.id, data.models.filter((m) => b.results[m.id]?.length).map((m): Model => ({ ...m, efforts: b.results[m.id] }))]),
+)
+
+/**
+ * Models that have results on a benchmark, each carrying those results as `efforts`.
+ * Built once per benchmark, so the array keeps a stable identity for memoised consumers.
+ */
+export const modelsFor = (benchmarkId: string): readonly Model[] => modelsByBenchmark.get(benchmarkById(benchmarkId).id)!
+
 export const EFFORT_ORDER = ["none", "minimal", "low", "medium", "high", "xhigh", "max", "na"]
 
-export const labGroup = (model: Model): LabGroup =>
+export const labGroup = (model: Pick<ModelMeta, "lab">): LabGroup =>
   model.lab === "OpenAI" ? "OpenAI" : model.lab === "Anthropic" ? "Anthropic" : "Other labs"
 
 /** Monthly-fee brackets used by the bracket toggles. Bounds are inclusive. */

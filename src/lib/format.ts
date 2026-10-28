@@ -68,7 +68,13 @@ export function bracketLabel(b: { min: number; max: number }): string {
   return `${current.symbol}${n(Math.ceil(b.min))}–${n(b.max)}`
 }
 
-export const pct = (value: number) => `${value.toFixed(1)}%`
+/** Unit for benchmark scores ("%" or "" for index points); App sets it from the active benchmark. */
+let scoreUnit = "%"
+export const setScoreUnit = (unit: string) => {
+  scoreUnit = unit
+}
+export const scoreText = (value: number) => `${value.toFixed(1)}${scoreUnit}`
+
 
 export function tokens(value: number | null): string {
   if (value == null) return "—"

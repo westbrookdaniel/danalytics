@@ -1,5 +1,6 @@
-// Joins Cognition's FrontierCode 2.0 results with Real API Pricing subscription allowances
-// into src/data/frontiercode.json. Run with `npm run data` after refreshing data-src/.
+// Joins benchmark results (Artificial Analysis Intelligence Index v5, Cognition FrontierCode 2.0)
+// with Real API Pricing subscription allowances into src/data/frontiercode.json.
+// Run with `npm run data` after refreshing data-src/.
 //
 // Subscription $/task = API $/task × (plan $/Mtok ÷ model API $/Mtok).
 // Both $/Mtok figures use the same Real API Pricing token mix, so the ratio is the
@@ -12,6 +13,7 @@ const read = (path) => JSON.parse(readFileSync(new URL(path, root), "utf8"));
 const cognition = read("data-src/cognition-frontiercode-2.0.json");
 const pricing = read("data-src/real-api-pricing-points.json");
 const fx = read("data-src/fx.json");
+const aa = read("data-src/artificial-analysis.json");
 
 // Token mixes from real-api-pricing/data/conventions.json.
 const MIX = {
@@ -49,21 +51,17 @@ const MODELS = {
   "GPT-5.5": { pricingId: "gpt-5.5", lab: "OpenAI", short: "GPT-5.5", superseded: true },
   "Gemini 4 Argon": { pricingId: "gemini-4-argon", lab: "Google", short: "Gemini 4 Argon" },
   "Grok 4.7": { pricingId: "grok-4.7", lab: "xAI", short: "Grok 4.7" },
-  "SWE-2": { pricingId: "swe-2", lab: "Cognition", short: "SWE-2" },
   "SWE-1.7": { pricingId: null, lab: "Cognition", short: "SWE-1.7", superseded: true },
   "SWE-1.6": { pricingId: null, lab: "Cognition", short: "SWE-1.6", superseded: true },
   "DeepSeek V4.1 Flash": { pricingId: "deepseek-v4.1-flash", lab: "Open weights", short: "DeepSeek V4.1 Flash", openWeights: true },
   "Kimi K3": { pricingId: "kimi-k3", lab: "Open weights", short: "Kimi K3", openWeights: true },
   "GLM 5.3": { pricingId: "glm-5.3", lab: "Open weights", short: "GLM 5.3", openWeights: true },
   "GLM 5.3 Flash": { pricingId: "glm-5.3-flash", lab: "Open weights", short: "GLM 5.3 Flash", openWeights: true },
-  "Mistral Large 4": { pricingId: null, lab: "Other", short: "Mistral Large 4" },
   "Muse Wonder 1.0": { pricingId: null, lab: "Other", short: "Muse Wonder 1.0" },
-  // Inkling Small has one third-party allowance but no published API price to normalise it against.
-  "Inkling Small": { pricingId: null, lab: "Other", short: "Inkling Small" },
-  "Beam 1.0": { pricingId: null, lab: "Other", short: "Beam 1.0" },
 };
-// Cognition hides Obsidian 3 on its own leaderboard; follow that.
-const HIDDEN = new Set(["Obsidian 3"]);
+// Left out: Obsidian 3 (Cognition hides it too), plus SWE-2, Mistral Large 4, Inkling Small
+// and Beam 1.0, which are niche or near-zero on these benchmarks.
+const HIDDEN = new Set(["Obsidian 3", "SWE-2", "Mistral Large 4", "Inkling Small", "Beam 1.0"]);
 
 // API $/Mtok for models with no metered row or list price in Real API Pricing.
 // GPT-6 Sol/6.1 Sol/Astra: implied by mypriors.com's published ChatGPT Plus $/task
@@ -104,6 +102,8 @@ function apiPrice(pricingId) {
 // rates and Kimi's v1 plans (replaced on 2026-10-26) are skipped.
 const LEGACY_PLANS = new Set(["kimi_moderato_cn", "kimi_allegretto_cn", "kimi_allegro_cn"]);
 const isLegacyPlan = (planId) => LEGACY_PLANS.has(planId) || /^glm_coding_\w+_cn_old_/.test(planId);
+// Resellers left out of the comparison: Factory Droid, Ollama, Devin and Command Code.
+const isExcludedPlan = (planId) => /^(droid_|ollama_|devin_|command_code_)/.test(planId);
 
 const PLAN_META = {
   claude_pro: { name: "Claude Pro", provider: "Anthropic", kind: "lab" },
@@ -149,38 +149,127 @@ function planMeta(planId) {
   return PLAN_META[planId] ?? null;
 }
 
+const modelId = (name) => name.toLowerCase().replace(/[^a-z0-9.]+/g, "-");
+
+// Models Cognition hasn't run yet; their results come only from Artificial Analysis.
+const EXTRA_MODELS = {
+  "GPT-6.1 Terra": { pricingId: "gpt-6.1-terra", lab: "OpenAI", short: "GPT-6.1 Terra" },
+};
+
 const models = [];
+for (const name of [...cognition.models.filter((n) => !HIDDEN.has(n)), ...Object.keys(EXTRA_MODELS)]) {
+  const meta = MODELS[name] ?? EXTRA_MODELS[name];
+  if (!meta) throw new Error(`No mapping for Cognition model ${name}`);
+  models.push({
+    id: modelId(name),
+    name,
+    short: meta.short,
+    lab: meta.lab,
+    pricingId: meta.pricingId,
+    superseded: !!meta.superseded,
+    openWeights: !!meta.openWeights,
+    api: apiPrice(meta.pricingId),
+  });
+}
+const modelIds = new Set(models.map((m) => m.id));
+
+// --- Benchmark results: { modelId: EffortResult[] } per benchmark -------------------------
+
+/** Effort level of an Artificial Analysis configuration, from its slug suffix or display suffix. */
+function aaEffort(config) {
+  if (config.slug.endsWith("-non-reasoning")) return "none";
+  const tail = config.slug.match(/-(low|medium|high|xhigh)$/)?.[1];
+  if (tail) return tail;
+  // Base pages are the model's top setting; their suffix says which (e.g. "Max, Default Fallback").
+  const word = (config.suffix ?? "").split(",")[0].trim().toLowerCase();
+  return ["low", "medium", "high", "xhigh", "max"].includes(word) ? word : "na";
+}
+
+// Artificial Analysis reports each evaluation's cost per task weighted by its share of the
+// Intelligence Index. FrontierCode 2.0 carries 1/6: weighted cost × 6 matches the cost from
+// its token totals ÷ 132 tasks within 3% for the five max-effort models that publish both
+// (and those agree with Cognition's own $/task to within a few percent).
+const FC2_INDEX_WEIGHT = 1 / 6;
+
+/** API $/task for an Artificial Analysis FrontierCode 2.0 run, from the index cost breakdown. */
+function aaFrontierCodeCost(config) {
+  const fc = config.intelligenceIndexEvalCosts?.find((e) => e.slug === "frontiercode-2-0");
+  return fc ? fc.weightedCostPerTask / FC2_INDEX_WEIGHT : null;
+}
+
+const frontierCode = {};
 for (const name of cognition.models) {
   if (HIDDEN.has(name)) continue;
-  const meta = MODELS[name];
-  if (!meta) throw new Error(`No mapping for Cognition model ${name}`);
-  const efforts = cognition.efforts[name]
+  frontierCode[modelId(name)] = cognition.efforts[name]
     .map((effort) => {
       const r = cognition.data[name]?.[effort]?.main;
       if (r?.new_score == null || r.cost == null) return null;
       return {
         effort,
         score: +(r.new_score * 100).toFixed(2),
-        passRate: r.correct == null ? null : +(r.correct * 100).toFixed(2),
-        flaggedRate: r.flagged_rate == null ? null : +(r.flagged_rate * 100).toFixed(2),
         apiCost: r.cost,
         outputTokens: r.tokens ?? null,
+        harness: cognition.harness[name] ?? null,
+        source: "Cognition",
       };
     })
     .filter(Boolean);
-  models.push({
-    id: name.toLowerCase().replace(/[^a-z0-9.]+/g, "-"),
-    name,
-    short: meta.short,
-    lab: meta.lab,
-    harness: cognition.harness[name] ?? null,
-    pricingId: meta.pricingId,
-    superseded: !!meta.superseded,
-    openWeights: !!meta.openWeights,
-    api: apiPrice(meta.pricingId),
-    efforts,
-  });
 }
+
+const intelligence = {};
+for (const [id, configs] of Object.entries(aa.models)) {
+  if (!modelIds.has(id)) continue;
+  const ii = configs
+    .filter((c) => c.intelligenceIndex != null && c.intelligenceIndexCostPerTask != null)
+    .map((c) => ({
+      effort: aaEffort(c),
+      score: +c.intelligenceIndex.toFixed(2),
+      apiCost: c.intelligenceIndexCostPerTask,
+      outputTokens: c.intelligenceIndexOutputTokensPerTask?.output != null ? Math.round(c.intelligenceIndexOutputTokensPerTask.output) : null,
+      harness: null,
+      source: "Artificial Analysis",
+      estimated: c.intelligenceIndexIsEstimated,
+    }));
+  if (ii.length) intelligence[id] = ii;
+
+  // Cognition's own runs are the FrontierCode source of record; only models it hasn't
+  // published yet borrow Artificial Analysis's run.
+  if (!frontierCode[id]) {
+    const fc = configs
+      .map((c) => ({ c, cost: aaFrontierCodeCost(c) }))
+      .filter(({ c, cost }) => c.frontierCode20 != null && cost != null)
+      .map(({ c, cost }) => ({
+        effort: aaEffort(c),
+        score: +(c.frontierCode20 * 100).toFixed(2),
+        apiCost: cost,
+        outputTokens: null,
+        harness: "Artificial Analysis",
+        source: "Artificial Analysis",
+      }));
+    if (fc.length) frontierCode[id] = fc;
+  }
+}
+
+const benchmarks = [
+  {
+    id: "aa-intelligence-v5",
+    name: "Intelligence Index v5",
+    detail: "Artificial Analysis · 9 evaluations",
+    scoreLabel: "Intelligence Index",
+    scoreUnit: "",
+    source: { name: "Artificial Analysis Intelligence Index v5", url: "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index", fetched: aa.fetchedAt },
+    results: intelligence,
+  },
+  {
+    id: "frontiercode-2.0",
+    name: "FrontierCode 2.0",
+    detail: "Cognition · main subset · 132 tasks",
+    scoreLabel: "FrontierCode score",
+    scoreUnit: "%",
+    source: { name: "Cognition FrontierCode 2.0 (main subset, 132 tasks)", url: "https://cognition.com/frontiercode" },
+    results: frontierCode,
+  },
+];
 
 const modelByPricingId = new Map(models.filter((m) => m.pricingId).map((m) => [m.pricingId, m]));
 const plans = new Map();
@@ -190,7 +279,7 @@ for (const p of points) {
   // Metered allowances need an API $/Mtok to normalise against; unmetered ones cost $0 regardless.
   if (!model || (!model.api && !p.unmetered)) continue;
   const planId = p.id.split("::")[0];
-  if (isLegacyPlan(planId)) continue;
+  if (isLegacyPlan(planId) || isExcludedPlan(planId)) continue;
   const meta = planMeta(planId);
   if (!meta) throw new Error(`No plan metadata for ${planId}`);
   if (!plans.has(planId)) {
@@ -218,16 +307,17 @@ for (const p of points) {
 const out = {
   generatedAt: new Date().toISOString().slice(0, 10),
   sources: {
-    benchmark: { name: "Cognition FrontierCode 2.0 (main subset, 132 tasks)", url: "https://cognition.com/frontiercode" },
     pricing: { name: "Real API Pricing", url: "https://github.com/Fei2411/real-api-pricing", snapshot: pricing.generatedAt },
     reference: { name: "mypriors FrontierCode 2.0", url: "https://mypriors.com/benchmarks/frontiercode-2.0-main" },
   },
   labs: LABS,
   // USD → currency multipliers for the currency select; every price in the data stays in USD.
   fx: { date: fx.date, source: "ECB reference rates via Frankfurter", rates: { USD: 1, ...fx.rates } },
+  benchmarks,
   models,
   plans: [...plans.values()].sort((a, b) => a.fee - b.fee || a.name.localeCompare(b.name)),
 };
 writeFileSync(new URL("src/data/frontiercode.json", root), JSON.stringify(out, null, 1) + "\n");
 console.log(`${models.length} models, ${out.plans.length} plans, ${out.plans.reduce((n, p) => n + p.offers.length, 0)} plan×model offers`);
+for (const b of benchmarks) console.log(`${b.name}: ${Object.keys(b.results).length} models, ${Object.values(b.results).flat().length} results`);
 for (const m of models) console.log(m.short.padEnd(22), m.api ? `${m.api.usdPerMtok.toFixed(4)} ${m.api.basis}` : "no API $/Mtok");

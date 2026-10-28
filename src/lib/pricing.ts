@@ -23,7 +23,9 @@ export interface Row {
   score: number
   apiCost: number
   outputTokens: number | null
-  passRate: number | null
+  harness: string | null
+  /** Who ran the benchmark for this result. */
+  ranBy: string
   /** Cost per task under the active pricing mode. 0 means unmetered. */
   cost: number
   source: PriceSource
@@ -76,9 +78,10 @@ export function quotesFor(model: Model, apiCost: number, f: Filters): PlanQuote[
   return quotes.sort((a, b) => a.cost - b.cost || a.plan.fee - b.plan.fee)
 }
 
-export function buildRows(f: Filters): Row[] {
+/** One row per model × effort on the active benchmark, priced under the filters. */
+export function buildRows(f: Filters, models: readonly Model[]): Row[] {
   const rows: Row[] = []
-  for (const model of data.models) {
+  for (const model of models) {
     if (!f.models.has(model.id)) continue
     const efforts = [...model.efforts]
       .filter((e) => f.efforts.has(e.effort))
@@ -92,7 +95,8 @@ export function buildRows(f: Filters): Row[] {
         score: e.score,
         apiCost: e.apiCost,
         outputTokens: e.outputTokens,
-        passRate: e.passRate,
+        harness: e.harness,
+        ranBy: e.source,
       }
       if (f.mode === "api") {
         rows.push({ ...base, cost: e.apiCost, source: "api", plan: null, offer: null })

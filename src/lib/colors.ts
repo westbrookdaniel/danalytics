@@ -1,4 +1,4 @@
-import type { Model } from "@/lib/data"
+import type { ModelMeta } from "@/lib/data"
 
 /** One-letter lab marks for the sidebar; neutral glyphs rather than brand logos. */
 export const LAB_MARK: Record<string, string> = {
@@ -17,7 +17,7 @@ export const LAB_MARK: Record<string, string> = {
 }
 
 /** The underlying lab behind the build-time lab group ("Open weights" / "Other"). */
-export function labOf(model: Model): string {
+export function labOf(model: ModelMeta): string {
   if (model.lab !== "Open weights" && model.lab !== "Other") return model.lab
   if (model.id.startsWith("kimi")) return "Moonshot"
   if (model.id.startsWith("glm")) return "Zhipu"

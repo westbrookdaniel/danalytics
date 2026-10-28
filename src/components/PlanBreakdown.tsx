@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { EFFORT_ORDER, labGroup, type Model } from "@/lib/data"
-import { cheaper, currencySymbol, EFFORT_LABEL, fee, money, pct, toCurrency } from "@/lib/format"
+import { cheaper, currencySymbol, EFFORT_LABEL, fee, money, scoreText, toCurrency } from "@/lib/format"
 import { quotesFor, type Filters } from "@/lib/pricing"
 import type { ChartPalette } from "@/lib/theme"
 
@@ -32,7 +32,7 @@ export function PlanBreakdown({ model, filters, palette }: Props) {
             {model.name}
           </div>
           <div className="text-xs text-muted-foreground">
-            Best at {EFFORT_LABEL[best.effort] ?? best.effort} effort · {pct(best.score)} · {model.harness}
+            Best at {EFFORT_LABEL[best.effort] ?? best.effort} effort · {scoreText(best.score)} · {best.harness ?? `run by ${best.source}`}
           </div>
         </div>
         {model.api ? (

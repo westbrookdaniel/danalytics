@@ -1,11 +1,16 @@
 # danalytics
 
-What a FrontierCode 2.0 task costs when you pay with a subscription instead of the API.
+What a benchmark task costs when you pay with a subscription instead of the API.
 
-Cognition's [FrontierCode 2.0](https://cognition.com/frontiercode) reports a score and an API cost per task for every model and reasoning effort. [Real API Pricing](https://github.com/Fei2411/real-api-pricing) measures how many tokens each subscription actually allows per month. This app joins the two and plots score against cost per task on a log scale, with controls for:
+Two benchmarks, picked from the select in the chart title (or `?benchmark=` in the URL):
 
-- a **max monthly subscription cost** slider and **fee bracket** toggles (≤ $20, $21–60, 5x, 20x, $250+)
-- lab plans vs third-party tools (Cursor, Factory Droid, OpenCode, Command Code, Ollama) and low-confidence allowances; only prices new customers can buy today are included
+- **Intelligence Index v5** (default): [Artificial Analysis](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) runs every reasoning-effort level of each model across nine evaluations and publishes an index score and an API cost per task.
+- **FrontierCode 2.0**: [Cognition](https://cognition.com/frontiercode) reports a score and an API cost per task for every model and reasoning effort. GPT-6.1 Terra, which Cognition hasn't published yet, comes from Artificial Analysis's FrontierCode 2.0 run.
+
+[Real API Pricing](https://github.com/Fei2411/real-api-pricing) measures how many tokens each subscription actually allows per month. The app joins the two and plots score against cost per task, with controls for:
+
+- a **max monthly cost** slider and **fee bracket** select (≤ $20, $21–60, 5x, 20x, $250+)
+- lab plans vs third-party tools (Cursor, OpenCode) and low-confidence allowances; only prices new customers can buy today are included
 - GLM peak / blended / off-peak metering
 - model and reasoning-effort selection, a log/linear cost axis and the Pareto frontier
 - a display currency (USD, AUD, EUR, GBP, CAD, NZD, JPY, CNY, INR), converted at a dated ECB reference-rate snapshot in `data-src/fx.json`
@@ -20,7 +25,7 @@ Inspired by [mypriors' FrontierCode 2.0 page](https://mypriors.com/benchmarks/fr
 subscription $/task = API $/task × (plan $ per Mtok ÷ model API $ per Mtok)
 ```
 
-Both per-token prices use Real API Pricing's token mixes (97% cache reads / 2.5% fresh input / 0.5% output; Anthropic bills fresh input as cache writes, Google uses the low-cache mix), so the ratio is the share of list price a subscriber pays when they use the whole allowance. For each model and effort the cheapest plan that passes the filters wins. Unmetered allowances (SWE-2 on Devin Pro, promo until 2026-10-31) cost $0 and sit on a "Free" tick.
+Both per-token prices use Real API Pricing's token mixes (97% cache reads / 2.5% fresh input / 0.5% output; Anthropic bills fresh input as cache writes, Google uses the low-cache mix), so the ratio is the share of list price a subscriber pays when they use the whole allowance. For each model and effort the cheapest plan that passes the filters wins; models with no plan in range stay at their API price, drawn hollow.
 
 Real API Pricing has no API price for some models. `scripts/build-data.mjs` documents the fallbacks:
 
@@ -29,7 +34,9 @@ Real API Pricing has no API price for some models. `scripts/build-data.mjs` docu
 | GPT-6 Astra, GPT-6 Sol, GPT-6.1 Sol | Implied from mypriors' published ChatGPT Plus $/task |
 | GPT-6 Luna | GPT-6 Sol × Factory Droid multiplier ratio (0.04 / 0.8) |
 | Gemini 4 Argon | Launch list price $0.10 / $2 / $10, low-cache mix |
-| Inkling Small, Mistral Large 4, Muse Wonder, SWE-1.x, Beam | No usable allowance: API price only |
+| GPT-6.1 Terra, Muse Wonder, SWE-1.x | No plan allowance measured yet: API price only |
+
+For GPT-6.1 Terra on FrontierCode 2.0, the cost per task is Artificial Analysis's FrontierCode share of the Intelligence Index cost (× 6). That matches the cost from its FrontierCode token totals within 3%, and Cognition's own figures within a few percent, for models where both are published.
 
 ## Stack
 
@@ -42,5 +49,6 @@ npm install
 npm run dev            # http://localhost:5173
 npm run build
 npm run fetch-sources  # refresh data-src/ from Cognition, Real API Pricing and Frankfurter (FX rates)
+npm run fetch-aa       # refresh data-src/artificial-analysis.json (one model page at a time, ~2 min)
 npm run data           # rebuild src/data/frontiercode.json from data-src/
 ```
