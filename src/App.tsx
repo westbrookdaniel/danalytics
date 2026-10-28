@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react"
-import { ChevronDownIcon, InfoIcon, MonitorIcon, MoonIcon, SlidersHorizontalIcon, SunIcon } from "lucide-react"
+import { ChevronDownIcon, InfoIcon, MonitorIcon, MoonIcon, SlidersHorizontalIcon, SunIcon, TriangleAlertIcon } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -42,7 +42,7 @@ import { CHART_COLORS, useTheme, type ChartPalette, type ThemePref } from "@/lib
 const DEFAULT_EFFORTS = ["low", "medium", "high", "xhigh", "na"]
 
 const INITIAL_FILTERS: Filters = {
-  mode: "subscription",
+  mode: "api",
   maxFee: MAX_FEE,
   brackets: new Set<BracketId>(BRACKETS.map((b) => b.id)),
   kinds: new Set(["lab", "tool"]),
@@ -227,6 +227,8 @@ export default function App() {
                 </div>
               </div>
 
+              {sub ? <SubscriptionDisclaimer /> : null}
+
               <div className="mt-5 rounded-xl border bg-card/50 px-3 pt-4 pb-3 sm:px-5">
                 {rows.length ? (
                   <CostScoreChart
@@ -262,7 +264,7 @@ export default function App() {
               <ResultsTable rows={rows} mode={filters.mode} palette={palette} />
             </section>
 
-            <section id="method">
+            <section id="method" className="scroll-mt-20">
               <Method />
             </section>
               </>
@@ -320,6 +322,30 @@ export default function App() {
 /** "28 Oct 2026" from an ISO date, read as a calendar date (no timezone shift). */
 const formatDate = (iso: string) =>
   new Date(`${iso}T00:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
+
+/** Caveat shown above the chart whenever prices are subscription estimates rather than measured API costs. */
+function SubscriptionDisclaimer() {
+  return (
+    <div role="note" className="mt-4 flex items-start gap-3 rounded-lg border border-amber-500/30 bg-amber-500/[0.07] px-4 py-3 text-[13px] leading-relaxed">
+      <TriangleAlertIcon className="mt-0.5 size-4 shrink-0 text-amber-600 dark:text-amber-400" />
+      <p className="text-muted-foreground">
+        <span className="font-medium text-foreground">Subscription costs are rough estimates.</span> They scale each benchmark's API cost by how many
+        tokens a plan allows, which assumes you use the whole monthly allowance and relies on community-measured (sometimes estimated) limits that providers
+        change without notice. Data last updated {formatDate(LAST_UPDATED)}.{" "}
+        <a
+          href="#method"
+          onClick={(e) => {
+            e.preventDefault()
+            document.getElementById("method")?.scrollIntoView({ behavior: "smooth", block: "start" })
+          }}
+          className="font-medium text-foreground underline underline-offset-2 hover:no-underline"
+        >
+          How these are computed
+        </a>
+      </p>
+    </div>
+  )
+}
 
 function UpdatedBadge() {
   return (
