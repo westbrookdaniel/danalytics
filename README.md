@@ -8,6 +8,9 @@ Cognition's [FrontierCode 2.0](https://cognition.com/frontiercode) reports a sco
 - lab plans vs third-party tools (Cursor, Factory Droid, OpenCode, Command Code, Ollama) and low-confidence allowances; only prices new customers can buy today are included
 - GLM peak / blended / off-peak metering
 - model and reasoning-effort selection, a log/linear cost axis and the Pareto frontier
+- a display currency (USD, AUD, EUR, GBP, CAD, NZD, JPY, CNY, INR), converted at a dated ECB reference-rate snapshot in `data-src/fx.json`
+
+Plans by model has its own page at `#/plans`.
 
 Inspired by [mypriors' FrontierCode 2.0 page](https://mypriors.com/benchmarks/frontiercode-2.0-main). Penguin icon by [Ayub Irawan](https://thenounproject.com/icon/penguin-1798134/) from Noun Project (CC BY 3.0), redrawn as SVG.
 
@@ -38,6 +41,6 @@ Vite, React 19, TypeScript, Tailwind CSS v4, shadcn/ui (radix-nova), [TanStack C
 npm install
 npm run dev            # http://localhost:5173
 npm run build
-npm run fetch-sources  # refresh data-src/ from Cognition and Real API Pricing
+npm run fetch-sources  # refresh data-src/ from Cognition, Real API Pricing and Frankfurter (FX rates)
 npm run data           # rebuild src/data/frontiercode.json from data-src/
 ```
