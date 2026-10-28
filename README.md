@@ -15,7 +15,7 @@ Two benchmarks, picked from the select in the chart title (or `?benchmark=` in t
 - model and reasoning-effort selection, a log/linear cost axis and the Pareto frontier
 - a display currency (USD, AUD, EUR, GBP, CAD, NZD, JPY, CNY, INR), converted at a dated ECB reference-rate snapshot in `data-src/fx.json`
 
-Plans by model has its own page at `#/plans`.
+Plans by model has its own page at `/plans`. Routing uses React Router with real paths, so a static host needs to serve `index.html` for unknown paths (an SPA rewrite).
 
 Inspired by [mypriors' FrontierCode 2.0 page](https://mypriors.com/benchmarks/frontiercode-2.0-main).
 

@@ -16,7 +16,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { CostScoreChart, type XScale } from "@/components/CostScoreChart"
 import { Hint } from "@/components/Hint"
-import { Badge } from "@/components/ui/badge"
+import { Link, NavLink, useLocation, useMatch, useSearchParams } from "react-router"
 import { LogoMark } from "@/components/LogoMark"
 import { PlanBreakdown } from "@/components/PlanBreakdown"
 import { ResultsTable } from "@/components/ResultsTable"
@@ -54,33 +54,35 @@ const INITIAL_FILTERS: Filters = {
 }
 
 
-type Page = "overview" | "plans"
-
-const PAGES: { id: Page; label: string; href: string }[] = [
-  { id: "overview", label: "Benchmarks", href: "#/" },
-  { id: "plans", label: "Plans", href: "#/plans" },
+const PAGES = [
+  { to: "/", label: "Benchmarks" },
+  { to: "/plans", label: "Plans" },
 ]
 
-const pageFromHash = (): Page => (location.hash === "#/plans" ? "plans" : "overview")
-
-/** Benchmark from `?benchmark=`, falling back to the default when it's missing or unknown. */
-const benchmarkFromUrl = (): string => {
-  const id = new URLSearchParams(location.search).get("benchmark")
-  return data.benchmarks.some((b) => b.id === id) ? id! : DEFAULT_BENCHMARK
+/** Active benchmark from `?benchmark=` (default when missing or unknown); non-default picks are kept in the URL. */
+function useBenchmarkParam() {
+  const [params, setParams] = useSearchParams()
+  const requested = params.get("benchmark")
+  const id = data.benchmarks.some((b) => b.id === requested) ? requested! : DEFAULT_BENCHMARK
+  const setId = (next: string) =>
+    setParams(
+      (prev) => {
+        const p = new URLSearchParams(prev)
+        if (next === DEFAULT_BENCHMARK) p.delete("benchmark")
+        else p.set("benchmark", next)
+        return p
+      },
+      { replace: true },
+    )
+  return [id, setId] as const
 }
 
-/** Tiny hash router: `#/plans` is the plans page, anything else the overview. */
-function usePage() {
-  const [page, setPage] = useState<Page>(pageFromHash)
+/** Start each page at the top. */
+function useScrollTopOnNavigate() {
+  const { pathname } = useLocation()
   useEffect(() => {
-    const onChange = () => {
-      setPage(pageFromHash())
-      window.scrollTo(0, 0)
-    }
-    window.addEventListener("hashchange", onChange)
-    return () => window.removeEventListener("hashchange", onChange)
-  }, [])
-  return page
+    window.scrollTo(0, 0)
+  }, [pathname])
 }
 
 const SIDEBAR_KEY = "danalytics-sidebar-width"
@@ -142,20 +144,14 @@ export default function App() {
   const [hovered, setHovered] = useState<string | null>(null)
   const wide = useWide()
   const [sidebarWidth, startResize, resetWidth] = useSidebarWidth()
-  const page = usePage()
+  const onPlans = useMatch("/plans") != null
+  const { search } = useLocation()
+  useScrollTopOnNavigate()
   const [currency, setCurrencyState] = useStoredCurrency()
   // Formatting helpers read the display currency from module state; set it before children render.
   setCurrency(currency)
 
-  const [benchmarkId, setBenchmarkState] = useState(benchmarkFromUrl)
-  // Mirror a non-default benchmark in `?benchmark=` so a view can be linked to directly.
-  const setBenchmarkId = (id: string) => {
-    setBenchmarkState(id)
-    const url = new URL(location.href)
-    if (id === DEFAULT_BENCHMARK) url.searchParams.delete("benchmark")
-    else url.searchParams.set("benchmark", id)
-    history.replaceState(null, "", url)
-  }
+  const [benchmarkId, setBenchmarkId] = useBenchmarkParam()
   const benchmark = benchmarkById(benchmarkId)
   const models = modelsFor(benchmarkId)
   // Like the currency, the score unit is read by formatting helpers; set it before children render.
@@ -170,20 +166,21 @@ export default function App() {
       <div className="min-h-dvh bg-background">
         <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur">
           <div className="mx-auto flex h-14 max-w-[1600px] items-center gap-4 px-4 sm:px-6">
-            <a href="#/" className="flex items-center gap-2 text-[17px] font-semibold tracking-tight">
+            <Link to={{ pathname: "/", search }} className="flex items-center gap-2 text-[17px] font-semibold tracking-tight">
               <LogoMark className="size-6" />
               danalytics
-            </a>
+            </Link>
             <nav className="ml-2 flex items-center gap-1">
               {PAGES.map((p) => (
-                <a
-                  key={p.id}
-                  href={p.href}
-                  aria-current={page === p.id ? "page" : undefined}
+                // NavLink sets aria-current="page" on the active route; keep ?benchmark= across pages.
+                <NavLink
+                  key={p.to}
+                  to={{ pathname: p.to, search }}
+                  end
                   className="rounded-md px-2.5 py-1.5 text-[13px] text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:bg-accent aria-[current=page]:font-medium aria-[current=page]:text-foreground"
                 >
                   {p.label}
-                </a>
+                </NavLink>
               ))}
             </nav>
             <UpdatedBadge />
@@ -198,7 +195,7 @@ export default function App() {
           style={{ "--sidebar-w": `${sidebarWidth}px` } as CSSProperties}
         >
           <main className="min-w-0 space-y-16">
-            {page === "plans" ? (
+            {onPlans ? (
               <section>
                 <PageHeading
                   title="Plans by model"
@@ -310,7 +307,7 @@ export default function App() {
               highlight={hovered}
               onHover={setHovered}
               onReset={() => setFilters(INITIAL_FILTERS)}
-              showPlans={sub || page === "plans"}
+              showPlans={sub || onPlans}
               models={models}
             />
           </aside>
@@ -337,9 +334,9 @@ function UpdatedBadge() {
         </div>
       }
     >
-      <Badge variant="secondary" className="hidden cursor-default sm:inline-flex" tabIndex={0}>
-        Updated <span className="font-semibold text-foreground">{formatDate(LAST_UPDATED)}</span>
-      </Badge>
+      <span tabIndex={0} className="hidden cursor-default border-l pl-4 text-[12px] text-muted-foreground sm:inline">
+        Updated {formatDate(LAST_UPDATED)}
+      </span>
     </Hint>
   )
 }
