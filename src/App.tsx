@@ -498,32 +498,17 @@ function PlansView({ filters, palette }: { filters: Filters; palette: ChartPalet
 
 const CURRENCY_KEY = "danalytics-currency"
 
-const EURO_REGIONS = new Set(["AT", "BE", "CY", "DE", "EE", "ES", "FI", "FR", "GR", "HR", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PT", "SI", "SK"])
-const REGION_CURRENCY: Record<string, CurrencyCode> = { AU: "AUD", GB: "GBP", CA: "CAD", NZ: "NZD", JP: "JPY", CN: "CNY", IN: "INR" }
-
-/** Best guess at the viewer's currency from the browser locale's region; USD when unsure. */
-function localeCurrency(): CurrencyCode {
-  try {
-    const region = new Intl.Locale(navigator.language).maximize().region ?? ""
-    if (EURO_REGIONS.has(region)) return "EUR"
-    return REGION_CURRENCY[region] ?? "USD"
-  } catch {
-    return "USD"
-  }
-}
-
-/** Display currency: a saved choice if there is one, otherwise the locale's currency. */
+/** Display currency: a saved choice if there is one, otherwise USD (the data's own currency). */
 function useStoredCurrency() {
   const [code, setCode] = useState<CurrencyCode>(() => {
     try {
       const saved = localStorage.getItem(CURRENCY_KEY)
       if (CURRENCIES.some((c) => c.code === saved)) return saved as CurrencyCode
     } catch {
-      // Storage can be blocked; fall back to the locale.
+      // Storage can be blocked; fall back to USD.
     }
-    return localeCurrency()
+    return "USD"
   })
-  // Only an explicit pick is saved, so the locale default keeps tracking the browser.
   const choose = (next: CurrencyCode) => {
     setCode(next)
     try {
@@ -538,7 +523,12 @@ function useStoredCurrency() {
 function CurrencySelect({ value, onChange }: { value: CurrencyCode; onChange: (c: CurrencyCode) => void }) {
   return (
     <Select value={value} onValueChange={(v) => onChange(v as CurrencyCode)}>
-      <span className="hidden text-[13px] text-muted-foreground sm:inline">Currency</span>
+      <span className="hidden items-center gap-1.5 text-[13px] text-muted-foreground sm:flex">
+        Currency
+        <Info
+          info={`Prices are in USD in the source data and simply converted at a fixed exchange rate (${data.fx.source}, ${data.fx.date}). They don't reflect what plans actually charge in that currency, which often differs because of local pricing and tax.`}
+        />
+      </span>
       <SelectTrigger size="sm" className="h-8 gap-1.5 text-[13px] font-medium tabular-nums" aria-label="Currency">
         {/* SelectValue with custom children: Radix needs the node to position the menu. */}
         <SelectValue>{value}</SelectValue>
