@@ -1,7 +1,5 @@
 import { useId, type SVGProps } from "react"
 
-const FACE = "M237 225c-11-15-24-22-41-22-24 0-39 22-39 52 0 65 35 117 80 117s80-52 80-117c0-30-15-52-39-52-17 0-30 7-41 22z"
-
 /**
  * danalytics penguin mark in `currentColor`, with the face cut out so it sits on any
  * surface. Same geometry as public/favicon.svg.
@@ -9,19 +7,21 @@ const FACE = "M237 225c-11-15-24-22-41-22-24 0-39 22-39 52 0 65 35 117 80 117s80
 export function PenguinMark(props: SVGProps<SVGSVGElement>) {
   const mask = useId()
   return (
-    <svg viewBox="104 118 266 284" fill="currentColor" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
       <defs>
-        <mask id={mask} maskUnits="userSpaceOnUse" x="104" y="118" width="266" height="284">
-          <rect x="104" y="118" width="266" height="284" fill="#fff" />
-          <path d={FACE} fill="#000" />
+        <mask id={mask} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+          <rect width="24" height="24" fill="#fff" />
+          {/* Face: two cheeks over a rounder chin; their meeting point leaves the forehead notch. */}
+          <circle cx="8.9" cy="12.4" r="4" fill="#000" />
+          <circle cx="15.1" cy="12.4" r="4" fill="#000" />
+          <circle cx="12" cy="15.8" r="5.2" fill="#000" />
         </mask>
       </defs>
-      <path d="M134 250 124 378M340 250l10 128" fill="none" stroke="currentColor" strokeWidth="20" strokeLinecap="round" />
-      <path d="M134 233a103 103 0 0 1 206 0v47c0 64-46 112-103 112S134 344 134 280z" mask={`url(#${mask})`} />
-      <path d="M216 198c13 14 16 32 17 104h8c1-72 4-90 17-104z" />
-      <circle cx="188" cy="266" r="12" />
-      <circle cx="286" cy="266" r="12" />
-      <path d="M219 306h36l-18 18z" stroke="currentColor" strokeWidth="10" strokeLinejoin="round" />
+      <path d="M4.2 13.2 3.3 20.4M19.8 13.2l.9 7.2" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M4 11a8 8 0 0 1 16 0v3a8 8 0 0 1-16 0z" mask={`url(#${mask})`} />
+      <circle cx="9.4" cy="13.1" r="1" />
+      <circle cx="14.6" cy="13.1" r="1" />
+      <path d="M11.2 15.7h1.6l-.8 1.1z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
     </svg>
   )
 }

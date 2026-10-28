@@ -1,18 +1,15 @@
-import { useMemo, useState } from "react"
-import { defineChart, dot, lineY, link, text, type ChartBounds, type ChartFocusStrategy, type ChartMark, type ChartMarkStateContext, type ChartPoint } from "@tanstack/charts"
+import { useMemo, useState, type CSSProperties } from "react"
+import { defineChart, dot, frame, lineY, link, type ChartBounds, type ChartFocusStrategy, type ChartMark, type ChartMarkStateContext, type ChartPoint } from "@tanstack/charts"
 import { Chart } from "@tanstack/charts/react"
 import { scaleLinear } from "@tanstack/charts/scales/linear"
 import { scaleLog } from "d3-scale"
-import { LAB_MARK, labOf } from "@/lib/colors"
 import { labGroup } from "@/lib/data"
-import { cheaper, EFFORT_LABEL, fee, pct, tokens, usd } from "@/lib/format"
+import { cheaper, EFFORT_LABEL, fee, pct, tokens, usd, usdTick } from "@/lib/format"
 import { paretoFrontier, type Row } from "@/lib/pricing"
 import type { ChartPalette } from "@/lib/theme"
 
-/** A row with its plotted x position; unmetered (free) rows sit on a dedicated "Free" tick. */
+/** A row with its plotted x position; unmetered (free) rows sit on a dedicated "Free" guide. */
 type Plotted = Row & { x: number }
-/** A model's best point plus where its gutter label landed after collision nudging. */
-type Labelled = Plotted & { labelY: number; gutterX: number }
 
 export type XScale = "log" | "linear"
 
@@ -29,7 +26,7 @@ interface Props {
   compact: boolean
 }
 
-/** Only effort points are hover targets; lines, labels and leaders share their positions or sit in the gutter. */
+/** Only effort points are hover targets; lines and guides share their positions. */
 const isDataPoint = (p: ChartPoint) => p.markId.startsWith("dot-") || p.markId.startsWith("api-dot-")
 
 /** Nearest effort point by straight-line pixel distance from the pointer. */
@@ -51,30 +48,11 @@ const nearestPoint: ChartFocusStrategy<Plotted, number, number> = {
   navigation: (points) => points.filter(isDataPoint).sort((a, b) => a.x - b.x || a.y - b.y),
 }
 
-const PLOT_CHROME = 64 // top padding (clears the score caption) + x-axis band, in px
-const LABEL_GAP = 15 // px between stacked gutter labels
-
-/** 1-2-5 ticks across [lo, hi] for a log axis. */
-function logTicks(lo: number, hi: number): number[] {
+/** Decade ticks across [lo, hi] for a log axis. */
+function decadeTicks(lo: number, hi: number): number[] {
   const out: number[] = []
-  for (let d = 10 ** Math.floor(Math.log10(lo)); d <= hi; d *= 10) {
-    for (const m of [1, 2, 5]) {
-      const v = d * m
-      if (v >= lo * 0.999 && v <= hi * 1.001) out.push(Number(v.toPrecision(3)))
-    }
-  }
+  for (let v = 10 ** Math.ceil(Math.log10(lo)); v <= hi * 1.001; v *= 10) out.push(Number(v.toPrecision(3)))
   return out
-}
-
-/** Pushes labels apart so each sits at least `gap` (score units) from its neighbours. */
-function spreadLabels(labels: Labelled[], gap: number, floor: number) {
-  labels.sort((a, b) => b.labelY - a.labelY)
-  for (let i = 1; i < labels.length; i++) labels[i].labelY = Math.min(labels[i].labelY, labels[i - 1].labelY - gap)
-  const last = labels.length - 1
-  if (last >= 0 && labels[last].labelY < floor) {
-    labels[last].labelY = floor
-    for (let i = last - 1; i >= 0; i--) labels[i].labelY = Math.max(labels[i].labelY, labels[i + 1].labelY + gap)
-  }
 }
 
 export function CostScoreChart(props: Props) {
@@ -87,12 +65,12 @@ export function CostScoreChart(props: Props) {
     const minPos = positive.length ? Math.min(...positive) : 0.01
     const maxCost = positive.length ? Math.max(...positive) : 1
 
-    // Log axes start a touch under the cheapest point; free rows get their own tick further left.
-    const lo = log ? minPos / 1.6 : 0
+    // Log axes start a touch under the cheapest point; free rows get their own guide further left.
+    const lo = log ? minPos / 2 : 0
     const freeX = lo / 2.5
     const xMin = hasFree ? freeX : lo
-    const xMax = log ? maxCost * 1.5 : maxCost * 1.06
-    const tickValues = log ? [...(hasFree ? [freeX] : []), ...logTicks(lo, xMax)] : undefined
+    const xMax = log ? maxCost * 1.8 : maxCost * 1.06
+    const tickValues = log ? [...(hasFree ? [freeX] : []), ...decadeTicks(lo, xMax)] : undefined
 
     const plotted: Plotted[] = rows.map((r) => ({ ...r, x: r.cost === 0 && log ? freeX : r.cost }))
     const byModel = new Map<string, Plotted[]>()
@@ -101,125 +79,83 @@ export function CostScoreChart(props: Props) {
     const yTop = Math.max(10, Math.ceil((Math.max(0, ...rows.map((r) => r.score)) + 4) / 10) * 10)
     const color = (r: Row) => palette[labGroup(r.model)]
 
-    const bests = [...byModel.values()].map((rs) => rs.reduce((a, b) => (b.score > a.score ? b : a)))
-    const leaders = new Set([...bests].sort((a, b) => b.score - a.score).slice(0, 6).map((r) => r.modelId))
-    const labels: Labelled[] = bests
-      .filter((b) => !compact || leaders.has(b.modelId) || highlight === b.modelId)
-      .map((b) => ({ ...b, labelY: b.score, gutterX: xMax }))
-    spreadLabels(labels, (LABEL_GAP * yTop) / Math.max(120, height - PLOT_CHROME), 1)
-
-    // Hovering any point dims every other model; a highlight does the same persistently.
+    // Hovering any point dims every other model; a sidebar highlight does the same persistently.
     const focusedOther = (modelId: string) => (ctx: ChartMarkStateContext<Plotted>) => (ctx.focus.primary.datum as Plotted).modelId !== modelId
-    const fade = (modelId: string) => (highlight && highlight !== modelId ? 0.12 : 1)
+    const fade = (modelId: string) => (highlight && highlight !== modelId ? 0.15 : 1)
 
     const marks: ChartMark<Plotted, number, number>[] = []
+
+    if (hasFree) {
+      // Dashed vertical guide marking where unmetered ("Free") points sit.
+      marks.push(
+        link([plotted[0]], { id: "free-guide", x1: () => freeX, y1: () => 0, x2: () => freeX, y2: () => yTop, stroke: palette.inkMuted, strokeOpacity: 0.6, strokeWidth: 1, strokeDasharray: "3 4" }),
+      )
+    }
 
     if (showFrontier) {
       const frontier = paretoFrontier(plotted) as Plotted[]
       if (frontier.length > 1) {
-        marks.push(
-          lineY(frontier, { id: "frontier", x: "x", y: "score", stroke: palette.frontier, strokeOpacity: 0.35, strokeWidth: 1, strokeDasharray: "3 4" }),
-        )
+        marks.push(lineY(frontier, { id: "frontier", x: "x", y: "score", stroke: palette.frontier, strokeOpacity: 0.4, strokeWidth: 1.25, strokeDasharray: "3 4" }))
       }
-    }
-
-    for (const label of labels) {
-      const o = fade(label.modelId)
-      marks.push(
-        link([label], {
-          id: `leader-${label.modelId}`,
-          x1: "x",
-          y1: "score",
-          x2: "gutterX",
-          y2: "labelY",
-          stroke: palette.grid,
-          strokeOpacity: o,
-          strokeWidth: 1,
-        }),
-        text([label], {
-          id: `label-${label.modelId}`,
-          x: "gutterX",
-          y: "labelY",
-          text: (r) => r.model.short,
-          dx: 11,
-          anchor: "start",
-          fontSize: 12.5,
-          fontWeight: highlight === label.modelId ? 650 : 500,
-          // Text has no opacity option, so a highlight elsewhere fades the label via its paint.
-          fill: o < 1 ? palette.inkMuted : palette.ink,
-          states: [{ when: focusedOther(label.modelId), style: { opacity: 0.25 } }],
-        }),
-        dot([label], {
-          id: `label-dot-${label.modelId}`,
-          x: "gutterX",
-          y: "labelY",
-          r: 3.5,
-          fill: color(label),
-          fillOpacity: o,
-          states: [{ when: focusedOther(label.modelId), style: { opacity: 0.25 } }],
-        }),
-      )
     }
 
     for (const [modelId, modelRows] of byModel) {
       const c = color(modelRows[0])
       const o = fade(modelId)
-      const states = [{ when: focusedOther(modelId), style: { opacity: 0.35 } }]
-
+      const states = [{ when: focusedOther(modelId), style: { opacity: 0.3 } }]
       marks.push(
         lineY(modelRows, { id: `line-${modelId}`, x: "x", y: "score", stroke: c, strokeWidth: highlight === modelId ? 3 : 2, strokeOpacity: 0.85 * o, states }),
       )
       const solid = modelRows.filter((r) => r.source !== "api" || mode === "api")
       const hollow = modelRows.filter((r) => r.source === "api" && mode !== "api")
       if (solid.length) {
-        marks.push(
-          dot(solid, { id: `dot-${modelId}`, x: "x", y: "score", r: 4.5, fill: c, fillOpacity: o, stroke: palette.surface, strokeWidth: 1.5, strokeOpacity: o, states }),
-        )
+        marks.push(dot(solid, { id: `dot-${modelId}`, x: "x", y: "score", r: 4.5, fill: c, fillOpacity: o, stroke: palette.surface, strokeWidth: 1.5, strokeOpacity: o, states }))
       }
       if (hollow.length) {
-        marks.push(
-          dot(hollow, { id: `api-dot-${modelId}`, x: "x", y: "score", r: 4, fill: palette.surface, fillOpacity: o, stroke: c, strokeWidth: 2, strokeOpacity: o, states }),
-        )
+        marks.push(dot(hollow, { id: `api-dot-${modelId}`, x: "x", y: "score", r: 4, fill: palette.surface, fillOpacity: o, stroke: c, strokeWidth: 2, strokeOpacity: o, states }))
       }
     }
 
     return defineChart({
-      marks,
+      marks: [frame({ stroke: palette.grid, strokeWidth: 1 }), ...marks],
       scales: {
         x: {
           scale: log ? scaleLog().domain([xMin, xMax]).clamp(true) : scaleLinear().domain([0, xMax]),
-          grid: false,
+          grid: { stroke: palette.grid, opacity: 1 },
           axis: {
-            label: `${mode === "api" ? "API cost" : "Cost"} per task (USD, ${log ? "log" : "linear"} scale)`,
-            line: { stroke: palette.grid },
+            label: { text: `${mode === "api" ? "API cost" : "Subscription cost"} per task (USD, ${log ? "log" : "linear"})`, offset: 38, fontWeight: 500, fill: palette.inkMuted },
+            line: false,
             ticks: {
               size: 0,
-              padding: 8,
+              padding: 10,
               ...(tickValues ? { values: tickValues } : {}),
-              format: (v: number) => (hasFree && v === freeX ? "Free" : usd(v)),
+              format: (v: number) => (hasFree && v === freeX ? "Free" : usdTick(v)),
             },
           },
         },
         y: {
           scale: scaleLinear().domain([0, yTop]),
-          grid: { stroke: palette.grid, strokeDasharray: "1 4", opacity: 1 },
-          axis: { line: false, ticks: { size: 0, padding: 10, format: (v: number) => `${v}` } },
+          grid: { stroke: palette.grid, opacity: 1 },
+          axis: { line: false, ticks: { size: 0, padding: 10, format: (v: number) => `${v}%` } },
         },
       },
-      margin: { top: 28, right: compact ? 112 : 150 },
+      margin: { top: 28, right: compact ? 12 : 24 },
       theme: { foreground: palette.ink, muted: palette.inkMuted, grid: palette.grid },
       focus: nearestPoint,
       maxFocusDistance: 36,
-      // The crosshair, enlarged point and detail card are drawn by the overlay below.
+      // The crosshair, enlarged point, labels and detail card are drawn by the overlay below.
       focusRing: false,
       tooltip: false,
       svgAnimation: true,
     })
-  }, [rows, palette, mode, scale, showFrontier, highlight, height, compact])
+  }, [rows, palette, mode, scale, showFrontier, highlight, compact])
 
-  // Focused point (in scene pixels) and the plot rectangle, for the hover overlay.
+  // Focused point and the rendered dot positions (in scene pixels), for the overlays.
   const [focus, setFocus] = useState<ChartPoint<Plotted, number, number> | null>(null)
-  const [plot, setPlot] = useState<{ bounds: ChartBounds; width: number; height: number } | null>(null)
+  const [scene, setScene] = useState<SceneInfo | null>(null)
+
+  const labels = useMemo(() => (scene ? placeLabels(scene, rows, compact) : []), [scene, rows, compact])
+  const active = focus?.datum.modelId ?? highlight
 
   // Mouse clicks shouldn't move keyboard focus onto the chart (it would hold the last
   // hovered point after the pointer leaves); Tab still reaches it for keyboard use.
@@ -231,32 +167,148 @@ export function CostScoreChart(props: Props) {
         ariaLabel="FrontierCode 2.0 score against cost per task"
         ariaDescription="Each line is one model; points along it are reasoning-effort levels. Further left is cheaper, higher is better."
         onFocusChange={(p) => setFocus(p as ChartPoint<Plotted, number, number> | null)}
-        onRender={({ scene }) => {
-          const b = scene.chart
-          setPlot((prev) =>
-            prev && prev.width === scene.width && prev.height === scene.height && prev.bounds.x === b.x && prev.bounds.y === b.y && prev.bounds.width === b.width && prev.bounds.height === b.height
-              ? prev
-              : { bounds: b, width: scene.width, height: scene.height },
-          )
+        onRender={({ scene: s }) => {
+          const dots = s.points.filter(isDataPoint).map((p) => ({ key: (p.datum as Plotted).key, x: p.x, y: p.y }))
+          const sig = `${s.width}x${s.height}:${s.chart.x},${s.chart.y},${s.chart.width},${s.chart.height}:${dots.map((d) => `${d.key}@${d.x.toFixed(1)},${d.y.toFixed(1)}`).join("|")}`
+          setScene((prev) => (prev?.sig === sig ? prev : { sig, bounds: s.chart, width: s.width, height: s.height, dots }))
         }}
       />
-      {focus && plot ? <HoverOverlay point={focus} plot={plot} palette={palette} mode={mode} /> : null}
+      {scene ? <LabelLayer labels={labels} active={active} /> : null}
+      {focus && scene ? <HoverOverlay point={focus} scene={scene} palette={palette} mode={mode} /> : null}
     </div>
   )
 }
 
-function HoverOverlay({
-  point,
-  plot,
-  palette,
-  mode,
-}: {
-  point: ChartPoint<Plotted, number, number>
-  plot: { bounds: ChartBounds; width: number; height: number }
-  palette: ChartPalette
-  mode: "subscription" | "api"
-}) {
-  const { bounds: b } = plot
+interface SceneInfo {
+  sig: string
+  bounds: ChartBounds
+  width: number
+  height: number
+  dots: { key: string; x: number; y: number }[]
+}
+
+interface PlacedLabel {
+  modelId: string
+  text: string
+  ax: number
+  ay: number
+  x: number
+  y: number
+  w: number
+  h: number
+  leader: boolean
+}
+
+const LABEL_FONT_PX = 12
+const LABEL_H = 16
+
+let measureCtx: CanvasRenderingContext2D | null = null
+function textWidth(text: string): number {
+  measureCtx ??= document.createElement("canvas").getContext("2d")
+  if (!measureCtx) return text.length * 6.8
+  measureCtx.font = `500 ${LABEL_FONT_PX}px ${getComputedStyle(document.body).fontFamily}`
+  return measureCtx.measureText(text).width
+}
+
+type Rect = { x: number; y: number; w: number; h: number }
+const overlaps = (a: Rect, b: Rect, pad = 2) => a.x < b.x + b.w + pad && b.x < a.x + a.w + pad && a.y < b.y + b.h + pad && b.y < a.y + a.h + pad
+
+// Candidate directions around an anchor, in preference order: right, left, up, down, then diagonals.
+const DIRECTIONS: [number, number][] = [
+  [1, 0],
+  [-1, 0],
+  [0, -1],
+  [0, 1],
+  [1, -1],
+  [-1, -1],
+  [1, 1],
+  [-1, 1],
+]
+const RADII = [9, 22, 38, 58, 82, 110]
+
+/**
+ * Labels each model's best point beside it, greedily from the highest score down. Each
+ * label tries eight directions at growing distances and takes the cheapest spot that
+ * stays inside the plot, clears every placed label, and covers as few dots as possible.
+ * Labels pushed away from their point get a leader line.
+ */
+function placeLabels(scene: SceneInfo, rows: readonly Row[], compact: boolean): PlacedLabel[] {
+  const pos = new Map(scene.dots.map((d) => [d.key, d]))
+  const best = new Map<string, Row>()
+  for (const r of rows) {
+    const cur = best.get(r.modelId)
+    if (!cur || r.score > cur.score) best.set(r.modelId, r)
+  }
+  let anchors = [...best.values()].sort((a, b) => b.score - a.score)
+  if (compact) anchors = anchors.slice(0, 6)
+
+  const b = scene.bounds
+  const placed: PlacedLabel[] = []
+  const dotRects = scene.dots.map((d) => ({ x: d.x - 5, y: d.y - 5, w: 10, h: 10 }))
+
+  for (const r of anchors) {
+    const p = pos.get(r.key)
+    if (!p) continue
+    const effort = r.effort === "na" ? "" : ` ${EFFORT_LABEL[r.effort] ?? r.effort}`
+    const text = `${r.model.short}${effort}`
+    const w = textWidth(text) + 2
+    const h = LABEL_H
+    let choice: { rect: Rect; cost: number; radius: number } | null = null
+
+    RADII.forEach((radius, ri) => {
+      DIRECTIONS.forEach(([dx, dy], di) => {
+        const k = dx && dy ? Math.SQRT1_2 : 1
+        const cx = p.x + dx * radius * k
+        const cy = p.y + dy * radius * k
+        const rect = {
+          x: dx > 0 ? cx : dx < 0 ? cx - w : cx - w / 2,
+          y: dy > 0 ? cy : dy < 0 ? cy - h : cy - h / 2,
+          w,
+          h,
+        }
+        if (rect.x < b.x + 2 || rect.x + w > b.x + b.width - 2 || rect.y < b.y + 2 || rect.y + h > b.y + b.height - 2) return
+        if (placed.some((l) => overlaps(rect, l))) return
+        const covered = dotRects.filter((d) => overlaps(rect, d, 0)).length
+        const cost = ri * 10 + di * 1.5 + covered * 25
+        if (!choice || cost < choice.cost) choice = { rect, cost, radius }
+      })
+    })
+    const chosen = choice as { rect: Rect; cost: number; radius: number } | null
+    if (!chosen) continue
+    placed.push({ modelId: r.modelId, text, ax: p.x, ay: p.y, ...chosen.rect, leader: chosen.radius > RADII[0] })
+  }
+  return placed
+}
+
+function LabelLayer({ labels, active }: { labels: PlacedLabel[]; active: string | null }) {
+  const dim = (id: string) => (active && active !== id ? 0.25 : 1)
+  return (
+    <div className="pointer-events-none absolute inset-0">
+      <svg className="absolute inset-0 size-full overflow-visible">
+        {labels
+          .filter((l) => l.leader)
+          .map((l) => {
+            // Leader runs from the point to the nearest edge of its label.
+            const tx = Math.min(Math.max(l.ax, l.x), l.x + l.w)
+            const ty = Math.min(Math.max(l.ay, l.y), l.y + l.h)
+            return <line key={l.modelId} x1={l.ax} y1={l.ay} x2={tx} y2={ty} className="stroke-muted-foreground" strokeWidth={1} opacity={0.6 * dim(l.modelId)} />
+          })}
+      </svg>
+      {labels.map((l) => (
+        <span
+          key={l.modelId}
+          className="chart-label absolute leading-4 font-medium whitespace-nowrap text-foreground transition-opacity"
+          style={{ left: l.x, top: l.y, fontSize: LABEL_FONT_PX, opacity: dim(l.modelId) }}
+        >
+          {l.text}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+function HoverOverlay({ point, scene, palette, mode }: { point: ChartPoint<Plotted, number, number>; scene: SceneInfo; palette: ChartPalette; mode: "subscription" | "api" }) {
+  const { bounds: b } = scene
   const r = point.datum
   const color = palette[labGroup(r.model)]
   const line = "pointer-events-none absolute border-dashed border-foreground/40"
@@ -265,7 +317,7 @@ function HoverOverlay({
       <div className={`${line} border-l`} style={{ left: point.x, top: b.y, height: b.height }} />
       <div className={`${line} border-t`} style={{ top: point.y, left: b.x, width: b.width }} />
       <span className="absolute -translate-y-full pb-1 text-[11px] font-medium tabular-nums" style={{ left: b.x + 6, top: point.y }}>
-        {r.score.toFixed(1)}
+        {r.score.toFixed(1)}%
       </span>
       <span className="absolute pb-1 text-[11px] font-medium tabular-nums" style={{ left: point.x + 6, top: b.y + b.height - 20 }}>
         {usd(r.cost)}
@@ -274,12 +326,12 @@ function HoverOverlay({
         className="absolute size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background"
         style={{ left: point.x, top: point.y, background: color, boxShadow: `0 0 0 1.5px ${color}` }}
       />
-      <DetailCard row={r} mode={mode} style={{ right: plot.width - (b.x + b.width) + 12, bottom: plot.height - (b.y + b.height) + 12 }} />
+      <DetailCard row={r} mode={mode} style={{ right: scene.width - (b.x + b.width) + 12, bottom: scene.height - (b.y + b.height) + 12 }} />
     </div>
   )
 }
 
-function DetailCard({ row, mode, style }: { row: Row; mode: "subscription" | "api"; style: React.CSSProperties }) {
+function DetailCard({ row, mode, style }: { row: Row; mode: "subscription" | "api"; style: CSSProperties }) {
   const saving = row.source === "api" ? null : cheaper(row.apiCost, row.cost)
   const stat = (label: string, value: string, strong = false) => (
     <>
@@ -289,10 +341,7 @@ function DetailCard({ row, mode, style }: { row: Row; mode: "subscription" | "ap
   )
   return (
     <div className="absolute w-64 rounded-xl border bg-popover/95 p-4 text-[12px] shadow-lg backdrop-blur" style={style}>
-      <div className="flex items-center gap-2">
-        <span className="grid size-5 place-items-center rounded-[5px] border bg-background text-[10px] font-semibold">{LAB_MARK[labOf(row.model)] ?? "·"}</span>
-        <span className="text-[13px] font-semibold">{row.model.short}</span>
-      </div>
+      <div className="text-[13px] font-semibold">{row.model.short}</div>
       <div className="mt-0.5 text-muted-foreground">
         {EFFORT_LABEL[row.effort] ?? row.effort} effort · {row.model.harness}
       </div>

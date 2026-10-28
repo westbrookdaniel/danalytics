@@ -11,7 +11,10 @@ export function usd(value: number): string {
   return `$${Number(value.toPrecision(2))}`
 }
 
-export const pct = (value: number) => `${value.toFixed(1)}%`
+/** Short axis tick for round dollar values: $0.001, $0.01, $0.1, $1, $10. */
+export const usdTick = (value: number) => `$${Number(value.toPrecision(2))}`
+
+export const pct =(value: number) => `${value.toFixed(1)}%`
 
 export const fee = (value: number) => (Number.isInteger(value) ? `$${value}` : `$${value.toFixed(2)}`)
 
