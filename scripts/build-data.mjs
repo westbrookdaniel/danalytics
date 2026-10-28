@@ -99,7 +99,11 @@ function apiPrice(pricingId) {
 }
 
 // Plan metadata keyed by Real API Pricing plan id. GLM plans come in peak / mid / off-peak
-// scenarios and existing-customer prices; Kimi's v1 names were replaced on 2026-10-26.
+// scenarios. Only prices a new customer can buy today are kept: GLM's existing-customer
+// rates and Kimi's v1 plans (replaced on 2026-10-26) are skipped.
+const LEGACY_PLANS = new Set(["kimi_moderato_cn", "kimi_allegretto_cn", "kimi_allegro_cn"]);
+const isLegacyPlan = (planId) => LEGACY_PLANS.has(planId) || /^glm_coding_\w+_cn_old_/.test(planId);
+
 const PLAN_META = {
   claude_pro: { name: "Claude Pro", provider: "Anthropic", kind: "lab" },
   claude_max_5x: { name: "Claude Max 5x", provider: "Anthropic", kind: "lab" },
@@ -118,9 +122,6 @@ const PLAN_META = {
   kimi_pro_cn: { name: "Kimi Pro", provider: "Moonshot", kind: "lab" },
   kimi_max_cn: { name: "Kimi Max", provider: "Moonshot", kind: "lab" },
   kimi_ultra_cn: { name: "Kimi Ultra", provider: "Moonshot", kind: "lab" },
-  kimi_moderato_cn: { name: "Kimi Moderato (v1)", provider: "Moonshot", kind: "lab", legacy: true },
-  kimi_allegretto_cn: { name: "Kimi Allegretto (v1)", provider: "Moonshot", kind: "lab", legacy: true },
-  kimi_allegro_cn: { name: "Kimi Allegro (v1)", provider: "Moonshot", kind: "lab", legacy: true },
   cursor_ultra: { name: "Cursor Ultra", provider: "Cursor", kind: "tool" },
   droid_pro: { name: "Factory Droid Pro", provider: "Factory", kind: "tool" },
   droid_max: { name: "Factory Droid Max", provider: "Factory", kind: "tool" },
@@ -133,16 +134,15 @@ const GLM_TIER = { lite: "Lite", pro: "Pro", max: "Max" };
 const GLM_SCENARIO = { peak: "peak", mid: "mid", offpeak: "offpeak" };
 
 function planMeta(planId) {
-  const glm = planId.match(/^glm_coding_(lite|pro|max)_cn_(new|old)_(peak|mid|offpeak)$/);
+  const glm = planId.match(/^glm_coding_(lite|pro|max)_cn_new_(peak|mid|offpeak)$/);
   if (glm) {
-    const [, tier, customer, scenario] = glm;
+    const [, tier, scenario] = glm;
     return {
-      name: `GLM Coding ${GLM_TIER[tier]}${customer === "old" ? " (existing customer)" : ""}`,
+      name: `GLM Coding ${GLM_TIER[tier]}`,
       provider: "Zhipu",
       kind: "lab",
-      legacy: customer === "old",
       scenario: GLM_SCENARIO[scenario],
-      group: `glm_coding_${tier}_cn_${customer}`,
+      group: `glm_coding_${tier}_cn`,
     };
   }
   return PLAN_META[planId] ?? null;
@@ -189,13 +189,13 @@ for (const p of points) {
   // Metered allowances need an API $/Mtok to normalise against; unmetered ones cost $0 regardless.
   if (!model || (!model.api && !p.unmetered)) continue;
   const planId = p.id.split("::")[0];
+  if (isLegacyPlan(planId)) continue;
   const meta = planMeta(planId);
   if (!meta) throw new Error(`No plan metadata for ${planId}`);
   if (!plans.has(planId)) {
     plans.set(planId, {
       id: planId,
       ...meta,
-      legacy: !!meta.legacy,
       scenario: meta.scenario ?? null,
       group: meta.group ?? planId,
       fee: p.price_usd,

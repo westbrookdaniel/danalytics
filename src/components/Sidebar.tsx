@@ -222,13 +222,6 @@ function PlanControls({ filters, patch, setFilters }: { filters: Filters; patch:
             onChange={() => toggleKind("tool")}
           />
           <SwitchRow
-            id="legacy"
-            label="Legacy pricing"
-            info="Prices new customers can no longer buy: GLM's existing-customer rates and Kimi's v1 plans (replaced on 2026-10-26)."
-            checked={filters.includeLegacy}
-            onChange={(on) => patch({ includeLegacy: on })}
-          />
-          <SwitchRow
             id="low-conf"
             label="Low-confidence allowances"
             info="Allowances backed by a single report or a cross-plan assumption rather than a measurement. Turning this off skips those plan × model pairs, so affected models move to their next-cheapest measured plan. Plans marked ≈ have some."

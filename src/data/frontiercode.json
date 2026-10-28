@@ -1215,104 +1215,10 @@
  ],
  "plans": [
   {
-   "id": "glm_coding_lite_cn_old_peak",
-   "name": "GLM Coding Lite (existing customer)",
-   "provider": "Zhipu",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": "peak",
-   "group": "glm_coding_lite_cn_old",
-   "fee": 7.23,
-   "localPrice": null,
-   "offers": [
-    {
-     "modelId": "glm-5.3",
-     "usdPerMtok": 0.035089925,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    },
-    {
-     "modelId": "glm-5.3-flash",
-     "usdPerMtok": 0.011584174,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    }
-   ]
-  },
-  {
-   "id": "glm_coding_lite_cn_old_mid",
-   "name": "GLM Coding Lite (existing customer)",
-   "provider": "Zhipu",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": "mid",
-   "group": "glm_coding_lite_cn_old",
-   "fee": 7.23,
-   "localPrice": null,
-   "offers": [
-    {
-     "modelId": "glm-5.3",
-     "usdPerMtok": 0.023393284,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    },
-    {
-     "modelId": "glm-5.3-flash",
-     "usdPerMtok": 0.0077227827,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    }
-   ]
-  },
-  {
-   "id": "glm_coding_lite_cn_old_offpeak",
-   "name": "GLM Coding Lite (existing customer)",
-   "provider": "Zhipu",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": "offpeak",
-   "group": "glm_coding_lite_cn_old",
-   "fee": 7.23,
-   "localPrice": null,
-   "offers": [
-    {
-     "modelId": "glm-5.3",
-     "usdPerMtok": 0.017544963,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    },
-    {
-     "modelId": "glm-5.3-flash",
-     "usdPerMtok": 0.0057874497,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    }
-   ]
-  },
-  {
    "id": "command_code_goat",
    "name": "Command Code GOAT",
    "provider": "Command Code",
    "kind": "tool",
-   "legacy": false,
    "scenario": null,
    "group": "command_code_goat",
    "fee": 10,
@@ -1406,7 +1312,6 @@
    "name": "OpenCode Go",
    "provider": "OpenCode",
    "kind": "tool",
-   "legacy": false,
    "scenario": null,
    "group": "opencode_go",
    "fee": 10,
@@ -1482,9 +1387,8 @@
    "name": "GLM Coding Lite",
    "provider": "Zhipu",
    "kind": "lab",
-   "legacy": false,
    "scenario": "peak",
-   "group": "glm_coding_lite_cn_new",
+   "group": "glm_coding_lite_cn",
    "fee": 17.41,
    "localPrice": null,
    "offers": [
@@ -1513,9 +1417,8 @@
    "name": "GLM Coding Lite",
    "provider": "Zhipu",
    "kind": "lab",
-   "legacy": false,
    "scenario": "mid",
-   "group": "glm_coding_lite_cn_new",
+   "group": "glm_coding_lite_cn",
    "fee": 17.41,
    "localPrice": null,
    "offers": [
@@ -1544,9 +1447,8 @@
    "name": "GLM Coding Lite",
    "provider": "Zhipu",
    "kind": "lab",
-   "legacy": false,
    "scenario": "offpeak",
-   "group": "glm_coding_lite_cn_new",
+   "group": "glm_coding_lite_cn",
    "fee": 17.41,
    "localPrice": null,
    "offers": [
@@ -1571,33 +1473,10 @@
    ]
   },
   {
-   "id": "kimi_moderato_cn",
-   "name": "Kimi Moderato (v1)",
-   "provider": "Moonshot",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": null,
-   "group": "kimi_moderato_cn",
-   "fee": 19,
-   "localPrice": "¥99",
-   "offers": [
-    {
-     "modelId": "kimi-k3",
-     "usdPerMtok": 0.048843188,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-10-27",
-     "source": "199档×官方4/20；kimi-allegretto-quota-round2-2026-10-27.json"
-    }
-   ]
-  },
-  {
    "id": "kimi_plus_cn",
    "name": "Kimi Plus",
    "provider": "Moonshot",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "kimi_plus_cn",
    "fee": 19,
@@ -1619,7 +1498,6 @@
    "name": "Google AI Pro",
    "provider": "Google",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "google_ai_pro_us",
    "fee": 19.99,
@@ -1641,7 +1519,6 @@
    "name": "ChatGPT Plus",
    "provider": "OpenAI",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "chatgpt_plus",
    "fee": 20,
@@ -1708,7 +1585,6 @@
    "name": "Claude Pro",
    "provider": "Anthropic",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "claude_pro",
    "fee": 20,
@@ -1766,7 +1642,6 @@
    "name": "Devin Pro",
    "provider": "Cognition",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "devin_pro",
    "fee": 20,
@@ -1788,7 +1663,6 @@
    "name": "Factory Droid Pro",
    "provider": "Factory",
    "kind": "tool",
-   "legacy": false,
    "scenario": null,
    "group": "droid_pro",
    "fee": 20,
@@ -1810,7 +1684,6 @@
    "name": "Ollama Pro",
    "provider": "Ollama",
    "kind": "tool",
-   "legacy": false,
    "scenario": null,
    "group": "ollama_pro",
    "fee": 20,
@@ -1855,104 +1728,10 @@
    ]
   },
   {
-   "id": "glm_coding_pro_cn_old_peak",
-   "name": "GLM Coding Pro (existing customer)",
-   "provider": "Zhipu",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": "peak",
-   "group": "glm_coding_pro_cn_old",
-   "fee": 21.98,
-   "localPrice": null,
-   "offers": [
-    {
-     "modelId": "glm-5.3",
-     "usdPerMtok": 0.01778367,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    },
-    {
-     "modelId": "glm-5.3-flash",
-     "usdPerMtok": 0.0058677565,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    }
-   ]
-  },
-  {
-   "id": "glm_coding_pro_cn_old_mid",
-   "name": "GLM Coding Pro (existing customer)",
-   "provider": "Zhipu",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": "mid",
-   "group": "glm_coding_pro_cn_old",
-   "fee": 21.98,
-   "localPrice": null,
-   "offers": [
-    {
-     "modelId": "glm-5.3",
-     "usdPerMtok": 0.01185578,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    },
-    {
-     "modelId": "glm-5.3-flash",
-     "usdPerMtok": 0.0039118376,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    }
-   ]
-  },
-  {
-   "id": "glm_coding_pro_cn_old_offpeak",
-   "name": "GLM Coding Pro (existing customer)",
-   "provider": "Zhipu",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": "offpeak",
-   "group": "glm_coding_pro_cn_old",
-   "fee": 21.98,
-   "localPrice": null,
-   "offers": [
-    {
-     "modelId": "glm-5.3",
-     "usdPerMtok": 0.0088918349,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    },
-    {
-     "modelId": "glm-5.3-flash",
-     "usdPerMtok": 0.0029338782,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    }
-   ]
-  },
-  {
    "id": "supergrok",
    "name": "SuperGrok",
    "provider": "xAI",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "supergrok",
    "fee": 30,
@@ -1970,33 +1749,10 @@
    ]
   },
   {
-   "id": "kimi_allegretto_cn",
-   "name": "Kimi Allegretto (v1)",
-   "provider": "Moonshot",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": null,
-   "group": "kimi_allegretto_cn",
-   "fee": 39,
-   "localPrice": "¥199",
-   "offers": [
-    {
-     "modelId": "kimi-k3",
-     "usdPerMtok": 0.02004111,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-10-27",
-     "source": "维护者实测：Allegretto(赠送) k3.1-pro 单日 37362656 ÷ 控制台月总1.92% 直推月池；kimi-allegretto-quota-round2-2026-10-27.json"
-    }
-   ]
-  },
-  {
    "id": "kimi_pro_cn",
    "name": "Kimi Pro",
    "provider": "Moonshot",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "kimi_pro_cn",
    "fee": 39,
@@ -2014,106 +1770,12 @@
    ]
   },
   {
-   "id": "glm_coding_max_cn_old_peak",
-   "name": "GLM Coding Max (existing customer)",
-   "provider": "Zhipu",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": "peak",
-   "group": "glm_coding_max_cn_old",
-   "fee": 69.19,
-   "localPrice": null,
-   "offers": [
-    {
-     "modelId": "glm-5.3",
-     "usdPerMtok": 0.023990051,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    },
-    {
-     "modelId": "glm-5.3-flash",
-     "usdPerMtok": 0.0079161679,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    }
-   ]
-  },
-  {
-   "id": "glm_coding_max_cn_old_mid",
-   "name": "GLM Coding Max (existing customer)",
-   "provider": "Zhipu",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": "mid",
-   "group": "glm_coding_max_cn_old",
-   "fee": 69.19,
-   "localPrice": null,
-   "offers": [
-    {
-     "modelId": "glm-5.3",
-     "usdPerMtok": 0.015989671,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    },
-    {
-     "modelId": "glm-5.3-flash",
-     "usdPerMtok": 0.0052770427,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    }
-   ]
-  },
-  {
-   "id": "glm_coding_max_cn_old_offpeak",
-   "name": "GLM Coding Max (existing customer)",
-   "provider": "Zhipu",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": "offpeak",
-   "group": "glm_coding_max_cn_old",
-   "fee": 69.19,
-   "localPrice": null,
-   "offers": [
-    {
-     "modelId": "glm-5.3",
-     "usdPerMtok": 0.011992946,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    },
-    {
-     "modelId": "glm-5.3-flash",
-     "usdPerMtok": 0.0039578575,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "high",
-     "dataDate": "2026-09-03",
-     "source": "docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
-    }
-   ]
-  },
-  {
    "id": "glm_coding_pro_cn_new_peak",
    "name": "GLM Coding Pro",
    "provider": "Zhipu",
    "kind": "lab",
-   "legacy": false,
    "scenario": "peak",
-   "group": "glm_coding_pro_cn_new",
+   "group": "glm_coding_pro_cn",
    "fee": 79.37,
    "localPrice": null,
    "offers": [
@@ -2142,9 +1804,8 @@
    "name": "GLM Coding Pro",
    "provider": "Zhipu",
    "kind": "lab",
-   "legacy": false,
    "scenario": "mid",
-   "group": "glm_coding_pro_cn_new",
+   "group": "glm_coding_pro_cn",
    "fee": 79.37,
    "localPrice": null,
    "offers": [
@@ -2173,9 +1834,8 @@
    "name": "GLM Coding Pro",
    "provider": "Zhipu",
    "kind": "lab",
-   "legacy": false,
    "scenario": "offpeak",
-   "group": "glm_coding_pro_cn_new",
+   "group": "glm_coding_pro_cn",
    "fee": 79.37,
    "localPrice": null,
    "offers": [
@@ -2200,33 +1860,10 @@
    ]
   },
   {
-   "id": "kimi_allegro_cn",
-   "name": "Kimi Allegro (v1)",
-   "provider": "Moonshot",
-   "kind": "lab",
-   "legacy": true,
-   "scenario": null,
-   "group": "kimi_allegro_cn",
-   "fee": 99,
-   "localPrice": "¥699",
-   "offers": [
-    {
-     "modelId": "kimi-k3",
-     "usdPerMtok": 0.016957862,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-10-27",
-     "source": "199档×官方60/20；kimi-allegretto-quota-round2-2026-10-27.json"
-    }
-   ]
-  },
-  {
    "id": "kimi_max_cn",
    "name": "Kimi Max",
    "provider": "Moonshot",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "kimi_max_cn",
    "fee": 99,
@@ -2248,7 +1885,6 @@
    "name": "ChatGPT Pro 5x",
    "provider": "OpenAI",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "chatgpt_pro_5x",
    "fee": 100,
@@ -2288,7 +1924,6 @@
    "name": "Claude Max 5x",
    "provider": "Anthropic",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "claude_max_5x",
    "fee": 100,
@@ -2346,7 +1981,6 @@
    "name": "Ollama Max",
    "provider": "Ollama",
    "kind": "tool",
-   "legacy": false,
    "scenario": null,
    "group": "ollama_max",
    "fee": 100,
@@ -2395,7 +2029,6 @@
    "name": "SuperGrok Plus",
    "provider": "xAI",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "supergrok_plus",
    "fee": 100,
@@ -2417,7 +2050,6 @@
    "name": "Claude Team Premium",
    "provider": "Anthropic",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "claude_team",
    "fee": 125,
@@ -2439,9 +2071,8 @@
    "name": "GLM Coding Max",
    "provider": "Zhipu",
    "kind": "lab",
-   "legacy": false,
    "scenario": "peak",
-   "group": "glm_coding_max_cn_new",
+   "group": "glm_coding_max_cn",
    "fee": 159.03,
    "localPrice": null,
    "offers": [
@@ -2470,9 +2101,8 @@
    "name": "GLM Coding Max",
    "provider": "Zhipu",
    "kind": "lab",
-   "legacy": false,
    "scenario": "mid",
-   "group": "glm_coding_max_cn_new",
+   "group": "glm_coding_max_cn",
    "fee": 159.03,
    "localPrice": null,
    "offers": [
@@ -2501,9 +2131,8 @@
    "name": "GLM Coding Max",
    "provider": "Zhipu",
    "kind": "lab",
-   "legacy": false,
    "scenario": "offpeak",
-   "group": "glm_coding_max_cn_new",
+   "group": "glm_coding_max_cn",
    "fee": 159.03,
    "localPrice": null,
    "offers": [
@@ -2532,7 +2161,6 @@
    "name": "Kimi Ultra",
    "provider": "Moonshot",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "kimi_ultra_cn",
    "fee": 199,
@@ -2554,7 +2182,6 @@
    "name": "ChatGPT Pro 20x",
    "provider": "OpenAI",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "chatgpt_pro_20x",
    "fee": 200,
@@ -2594,7 +2221,6 @@
    "name": "Claude Max 20x",
    "provider": "Anthropic",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "claude_max_20x",
    "fee": 200,
@@ -2661,7 +2287,6 @@
    "name": "Cursor Ultra",
    "provider": "Cursor",
    "kind": "tool",
-   "legacy": false,
    "scenario": null,
    "group": "cursor_ultra",
    "fee": 200,
@@ -2683,7 +2308,6 @@
    "name": "Devin Max",
    "provider": "Cognition",
    "kind": "tool",
-   "legacy": false,
    "scenario": null,
    "group": "devin_max",
    "fee": 200,
@@ -2714,7 +2338,6 @@
    "name": "Factory Droid Max",
    "provider": "Factory",
    "kind": "tool",
-   "legacy": false,
    "scenario": null,
    "group": "droid_max",
    "fee": 200,
@@ -2853,7 +2476,6 @@
    "name": "SuperGrok Heavy",
    "provider": "xAI",
    "kind": "lab",
-   "legacy": false,
    "scenario": null,
    "group": "supergrok_heavy",
    "fee": 300,

@@ -6,7 +6,6 @@ export interface Filters {
   brackets: ReadonlySet<BracketId>
   kinds: ReadonlySet<PlanKind>
   disabledPlans: ReadonlySet<string>
-  includeLegacy: boolean
   hideLowConfidence: boolean
   glmScenario: GlmScenario
   /** Reasoning-effort levels to keep; a model with none of them left drops out. */
@@ -37,7 +36,6 @@ export function planExclusion(plan: Plan, f: Filters): string | null {
   if (plan.fee > f.maxFee) return "Over max monthly cost"
   if (!f.brackets.has(bracketOf(plan.fee))) return "Bracket hidden"
   if (!f.kinds.has(plan.kind)) return plan.kind === "tool" ? "Third-party tools hidden" : "Lab plans hidden"
-  if (plan.legacy && !f.includeLegacy) return "Legacy pricing"
   if (plan.scenario && plan.scenario !== f.glmScenario) return "Other time-of-day scenario"
   if (f.hideLowConfidence && plan.offers.every((o) => o.confidence === "low")) return "Low-confidence allowance"
   if (f.disabledPlans.has(plan.id)) return "Turned off"

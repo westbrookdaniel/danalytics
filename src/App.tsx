@@ -35,7 +35,6 @@ const INITIAL_FILTERS: Filters = {
   brackets: new Set<BracketId>(BRACKETS.map((b) => b.id)),
   kinds: new Set(["lab", "tool"]),
   disabledPlans: new Set(),
-  includeLegacy: false,
   hideLowConfidence: false,
   glmScenario: "mid",
   efforts: new Set(DEFAULT_EFFORTS),

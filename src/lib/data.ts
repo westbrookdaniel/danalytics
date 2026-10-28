@@ -43,7 +43,6 @@ export interface Plan {
   name: string
   provider: string
   kind: PlanKind
-  legacy: boolean
   scenario: GlmScenario | null
   group: string
   fee: number

@@ -5,7 +5,7 @@ What a FrontierCode 2.0 task costs when you pay with a subscription instead of t
 Cognition's [FrontierCode 2.0](https://cognition.com/frontiercode) reports a score and an API cost per task for every model and reasoning effort. [Real API Pricing](https://github.com/Fei2411/real-api-pricing) measures how many tokens each subscription actually allows per month. This app joins the two and plots score against cost per task on a log scale, with controls for:
 
 - a **max monthly subscription cost** slider and **fee bracket** toggles (≤ $20, $21–60, 5x, 20x, $250+)
-- lab plans vs third-party tools (Cursor, Factory Droid, OpenCode, Command Code, Ollama), legacy pricing, low-confidence allowances
+- lab plans vs third-party tools (Cursor, Factory Droid, OpenCode, Command Code, Ollama) and low-confidence allowances; only prices new customers can buy today are included
 - GLM peak / blended / off-peak metering
 - model and reasoning-effort selection, a log/linear cost axis and the Pareto frontier
 
