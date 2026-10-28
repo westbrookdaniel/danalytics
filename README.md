@@ -9,7 +9,7 @@ Cognition's [FrontierCode 2.0](https://cognition.com/frontiercode) reports a sco
 - GLM peak / blended / off-peak metering
 - model and reasoning-effort selection, a log/linear cost axis and the Pareto frontier
 
-Inspired by [mypriors' FrontierCode 2.0 page](https://mypriors.com/benchmarks/frontiercode-2.0-main).
+Inspired by [mypriors' FrontierCode 2.0 page](https://mypriors.com/benchmarks/frontiercode-2.0-main). Penguin icon by [Ayub Irawan](https://thenounproject.com/icon/penguin-1798134/) from Noun Project (CC BY 3.0), redrawn as SVG.
 
 ## How a subscription task is priced
 

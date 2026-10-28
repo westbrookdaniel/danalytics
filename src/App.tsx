@@ -223,7 +223,13 @@ export default function App() {
                 </a>{" "}
                 ({data.sources.pricing.snapshot})
               </span>
-              <span>danalytics</span>
+              <span>
+                Penguin by{" "}
+                <a className="text-foreground hover:underline" href="https://thenounproject.com/icon/penguin-1798134/" target="_blank" rel="noreferrer">
+                  Ayub Irawan
+                </a>{" "}
+                from Noun Project (CC BY 3.0)
+              </span>
             </footer>
           </main>
 

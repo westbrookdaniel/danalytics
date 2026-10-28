@@ -1,27 +1,29 @@
 import { useId, type SVGProps } from "react"
 
+/** Face cut-out: two cheek lobes meeting in a rounded forehead notch over a wide chin. */
+const PENGUIN_FACE =
+  "M66 226C66 191 95 166 130 161C170 155 206 166 230 190Q256 214 282 190C306 166 342 155 382 161C417 166 446 191 446 226V300C446 394 360 456 256 456S66 394 66 300Z"
+const PENGUIN_BEAK = "M196 296C222 276 290 270 318 288C326 294 325 305 319 313L270 389C264 399 252 399 246 389L196 315C190 307 190 301 196 296Z"
+
 /**
  * danalytics penguin mark in `currentColor`, with the face cut out so it sits on any
- * surface. Same geometry as public/favicon.svg.
+ * surface. Traced from "Penguin" by Ayub Irawan (Noun Project icon 1798134, CC BY 3.0);
+ * same geometry as public/favicon.svg.
  */
 export function PenguinMark(props: SVGProps<SVGSVGElement>) {
   const mask = useId()
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+    <svg viewBox="24 30 464 464" fill="currentColor" aria-hidden="true" {...props}>
       <defs>
-        <mask id={mask} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-          <rect width="24" height="24" fill="#fff" />
-          {/* Face: two cheeks over a rounder chin; their meeting point leaves the forehead notch. */}
-          <circle cx="8.9" cy="12.4" r="4" fill="#000" />
-          <circle cx="15.1" cy="12.4" r="4" fill="#000" />
-          <circle cx="12" cy="15.8" r="5.2" fill="#000" />
+        <mask id={mask} maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+          <rect width="512" height="512" fill="#fff" />
+          <path d={PENGUIN_FACE} fill="#000" />
         </mask>
       </defs>
-      <path d="M4.2 13.2 3.3 20.4M19.8 13.2l.9 7.2" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M4 11a8 8 0 0 1 16 0v3a8 8 0 0 1-16 0z" mask={`url(#${mask})`} />
-      <circle cx="9.4" cy="13.1" r="1" />
-      <circle cx="14.6" cy="13.1" r="1" />
-      <path d="M11.2 15.7h1.6l-.8 1.1z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+      <circle cx="256" cy="262" r="226" mask={`url(#${mask})`} />
+      <circle cx="144" cy="238" r="32" />
+      <circle cx="368" cy="238" r="32" />
+      <path d={PENGUIN_BEAK} />
     </svg>
   )
 }
