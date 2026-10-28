@@ -326,23 +326,22 @@ const formatDate = (iso: string) =>
 /** Caveat shown above the chart whenever prices are subscription estimates rather than measured API costs. */
 function SubscriptionDisclaimer() {
   return (
-    <div role="note" className="mt-4 flex items-start gap-3 rounded-lg border border-amber-500/30 bg-amber-500/[0.07] px-4 py-3 text-[13px] leading-relaxed">
-      <TriangleAlertIcon className="mt-0.5 size-4 shrink-0 text-amber-600 dark:text-amber-400" />
-      <p className="text-muted-foreground">
-        <span className="font-medium text-foreground">Subscription costs are rough estimates.</span> They scale each benchmark's API cost by how many
-        tokens a plan allows, which assumes you use the whole monthly allowance and relies on community-measured (sometimes estimated) limits that providers
-        change without notice. Data last updated {formatDate(LAST_UPDATED)}.{" "}
-        <a
-          href="#method"
-          onClick={(e) => {
-            e.preventDefault()
-            document.getElementById("method")?.scrollIntoView({ behavior: "smooth", block: "start" })
-          }}
-          className="font-medium text-foreground underline underline-offset-2 hover:no-underline"
-        >
-          How these are computed
-        </a>
-      </p>
+    <div
+      role="note"
+      className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/[0.07] px-4 py-2.5 text-center text-[13px]"
+    >
+      <TriangleAlertIcon className="size-4 shrink-0 text-amber-600 dark:text-amber-400" />
+      <span className="font-medium">Subscription costs are rough estimates.</span>
+      <a
+        href="#method"
+        onClick={(e) => {
+          e.preventDefault()
+          document.getElementById("method")?.scrollIntoView({ behavior: "smooth", block: "start" })
+        }}
+        className="text-muted-foreground underline underline-offset-2 hover:text-foreground"
+      >
+        How these are computed
+      </a>
     </div>
   )
 }
