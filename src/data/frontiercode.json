@@ -496,6 +496,17 @@
       "estimated": false
      }
     ],
+    "deepseek-v4.1-flash-1017": [
+     {
+      "effort": "max",
+      "score": 32.49,
+      "apiCost": 0.60210514783598,
+      "outputTokens": 138962,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
     "glm-5.3": [
      {
       "effort": "max",
@@ -1303,6 +1314,16 @@
       "harness": "Artificial Analysis",
       "source": "Artificial Analysis"
      }
+    ],
+    "deepseek-v4.1-flash-1017": [
+     {
+      "effort": "max",
+      "score": 28.47,
+      "apiCost": 0.4669632309068641,
+      "outputTokens": null,
+      "harness": "Artificial Analysis",
+      "source": "Artificial Analysis"
+     }
     ]
    }
   }
@@ -1598,6 +1619,16 @@
    "pricingId": "gpt-6.1-terra",
    "superseded": false,
    "openWeights": false,
+   "api": null
+  },
+  {
+   "id": "deepseek-v4.1-flash-1017",
+   "name": "DeepSeek V4.1 Flash 1017",
+   "short": "DeepSeek V4.1 Flash 1017",
+   "lab": "Open weights",
+   "pricingId": "deepseek-v4.1-flash-1017",
+   "superseded": false,
+   "openWeights": true,
    "api": null
   }
  ],

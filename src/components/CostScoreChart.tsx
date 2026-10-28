@@ -5,7 +5,7 @@ import { scaleLinear } from "@tanstack/charts/scales/linear"
 import { scaleLog } from "d3-scale"
 import { labGroup } from "@/lib/data"
 import { cheaper, type CurrencyCode, EFFORT_LABEL, fee, money, moneyTick, scoreText, tokens, toCurrency } from "@/lib/format"
-import { paretoFrontier, type Row } from "@/lib/pricing"
+import { isLowConfidence, paretoFrontier, type Row } from "@/lib/pricing"
 import type { ChartPalette } from "@/lib/theme"
 
 /** A row with its plotted x position; unmetered (free) rows sit on a dedicated "Free" guide. */
@@ -28,6 +28,10 @@ interface Props {
   showCard: boolean
   /** Fade every other model while a point is hovered. */
   dimOnHover: boolean
+  /** Name each model beside its best point. */
+  showLabels: boolean
+  /** Fade models with no plan in range (every point API-priced) in subscription mode. */
+  dimUnpriced: boolean
   /** Display currency; costs are converted before plotting, so the scene rebuilds when it changes. */
   currency: CurrencyCode
   /** Active benchmark's score name (hover card) and unit (y-axis ticks). */
@@ -57,6 +61,16 @@ const nearestPoint: ChartFocusStrategy<Plotted, number, number> = {
   navigation: (points) => points.filter(isDataPoint).sort((a, b) => a.x - b.x || a.y - b.y),
 }
 
+/** Opacity for models with no plan in range when the view dims them. */
+const UNPRICED_OPACITY = 0.4
+
+/** Models whose every point is an API-priced fallback (no plan in range), when dimming them. */
+function unpricedModels(rows: readonly Row[], mode: "subscription" | "api", dim: boolean): Set<string> {
+  if (!dim || mode !== "subscription") return new Set()
+  const priced = new Set(rows.filter((r) => r.source !== "api").map((r) => r.modelId))
+  return new Set(rows.filter((r) => !priced.has(r.modelId)).map((r) => r.modelId))
+}
+
 /** Decade ticks across [lo, hi] for a log axis. */
 function decadeTicks(lo: number, hi: number): number[] {
   const out: number[] = []
@@ -65,7 +79,7 @@ function decadeTicks(lo: number, hi: number): number[] {
 }
 
 export function CostScoreChart(props: Props) {
-  const { rows, palette, mode, scale, showFrontier, highlight, height, compact, showCard, dimOnHover, currency, scoreLabel, scoreUnit } = props
+  const { rows, palette, mode, scale, showFrontier, highlight, height, compact, showCard, dimOnHover, showLabels, dimUnpriced, currency, scoreLabel, scoreUnit } = props
 
   const definition = useMemo(() => {
     const log = scale === "log"
@@ -91,7 +105,8 @@ export function CostScoreChart(props: Props) {
 
     // Hovering any point dims every other model; a sidebar highlight does the same persistently.
     const focusedOther = (modelId: string) => (ctx: ChartMarkStateContext<Plotted>) => (ctx.focus.primary.datum as Plotted).modelId !== modelId
-    const fade = (modelId: string) => (highlight && highlight !== modelId ? 0.15 : 1)
+    const unpriced = unpricedModels(rows, mode, dimUnpriced)
+    const fade = (modelId: string) => (highlight && highlight !== modelId ? 0.15 : unpriced.has(modelId) ? UNPRICED_OPACITY : 1)
 
     const marks: ChartMark<Plotted, number, number>[] = []
 
@@ -158,7 +173,7 @@ export function CostScoreChart(props: Props) {
       tooltip: false,
       svgAnimation: true,
     })
-  }, [rows, palette, mode, scale, showFrontier, highlight, compact, dimOnHover, currency, scoreUnit])
+  }, [rows, palette, mode, scale, showFrontier, highlight, compact, dimOnHover, dimUnpriced, currency, scoreUnit])
 
   // Focused point and the rendered dot positions (in scene pixels), for the overlays.
   const [focus, setFocus] = useState<ChartPoint<Plotted, number, number> | null>(null)
@@ -183,7 +198,8 @@ export function CostScoreChart(props: Props) {
           setScene((prev) => (prev?.sig === sig ? prev : { sig, bounds: s.chart, width: s.width, height: s.height, dots }))
         }}
       />
-      {scene ? <LabelLayer labels={labels} active={active} /> : null}
+      {scene ? <LowConfidenceRings scene={scene} rows={rows} active={active} /> : null}
+      {scene && showLabels ? <LabelLayer labels={labels} active={active} faded={unpricedModels(rows, mode, dimUnpriced)} /> : null}
       {focus && scene ? <HoverOverlay point={focus} scene={scene} palette={palette} mode={mode} showCard={showCard} scoreLabel={scoreLabel} /> : null}
     </div>
   )
@@ -290,8 +306,33 @@ function placeLabels(scene: SceneInfo, rows: readonly Row[], compact: boolean): 
   return placed
 }
 
-function LabelLayer({ labels, active }: { labels: PlacedLabel[]; active: string | null }) {
-  const dim = (id: string) => (active && active !== id ? 0.25 : 1)
+/** Dashed rings marking points whose plan price is a low-confidence allowance estimate. */
+function LowConfidenceRings({ scene, rows, active }: { scene: SceneInfo; rows: readonly Row[]; active: string | null }) {
+  const flagged = new Map(rows.filter(isLowConfidence).map((r) => [r.key, r.modelId]))
+  if (!flagged.size) return null
+  return (
+    <svg className="pointer-events-none absolute inset-0 size-full overflow-visible">
+      {scene.dots
+        .filter((d) => flagged.has(d.key))
+        .map((d) => (
+          <circle
+            key={d.key}
+            cx={d.x}
+            cy={d.y}
+            r={8}
+            fill="none"
+            className="stroke-foreground/70"
+            strokeWidth={1.25}
+            strokeDasharray="2.5 2.5"
+            opacity={active && active !== flagged.get(d.key) ? 0.25 : 1}
+          />
+        ))}
+    </svg>
+  )
+}
+
+function LabelLayer({ labels, active, faded }: { labels: PlacedLabel[]; active: string | null; faded: ReadonlySet<string> }) {
+  const dim = (id: string) => (active && active !== id ? 0.25 : faded.has(id) && active !== id ? UNPRICED_OPACITY : 1)
   return (
     <div className="pointer-events-none absolute inset-0">
       <svg className="absolute inset-0 size-full overflow-visible">
@@ -400,6 +441,7 @@ function DetailCard({ row, mode, scoreLabel, style }: { row: Row; mode: "subscri
         {stat("Output tokens", tokens(row.outputTokens))}
       </dl>
       {mode === "subscription" && row.source === "api" ? <p className="mt-2.5 text-muted-foreground">No plan in range, so this is the API price.</p> : null}
+      {isLowConfidence(row) ? <p className="mt-2.5 text-muted-foreground">≈ Plan allowance is a low-confidence estimate.</p> : null}
       {row.offer?.unmetered && row.offer.promoUntil ? <p className="mt-2.5 text-muted-foreground">Unmetered promo until {row.offer.promoUntil}.</p> : null}
     </div>
   )

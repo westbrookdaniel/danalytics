@@ -21,7 +21,7 @@ import { ResultsTable } from "@/components/ResultsTable"
 import { Sidebar } from "@/components/Sidebar"
 import { benchmarkById, BRACKETS, data, DEFAULT_BENCHMARK, MAX_FEE, modelsFor, type BracketId, type LabGroup, type Model } from "@/lib/data"
 import { bracketLabel, CURRENCIES, feeShort, setCurrency, setScoreUnit, type CurrencyCode } from "@/lib/format"
-import { buildRows, type Filters } from "@/lib/pricing"
+import { buildRows, isLowConfidence, type Filters } from "@/lib/pricing"
 import { CHART_COLORS, useTheme, type ChartPalette, type ThemePref } from "@/lib/theme"
 
 /** Effort levels that start hidden: the extremes, which most people don't run day to day. */
@@ -33,7 +33,8 @@ const INITIAL_FILTERS: Filters = {
   brackets: new Set<BracketId>(BRACKETS.map((b) => b.id)),
   kinds: new Set(["lab", "tool"]),
   disabledPlans: new Set(),
-  hideLowConfidence: false,
+  // Low-confidence allowances are estimates from other models or single reports; opt in via the sidebar.
+  hideLowConfidence: true,
   glmScenario: "mid",
   efforts: new Set(DEFAULT_EFFORTS),
   models: new Set(data.models.filter((m) => !m.superseded).map((m) => m.id)),
@@ -124,10 +125,7 @@ export default function App() {
   const { pref, setPref, isDark } = useTheme()
   const palette = isDark ? CHART_COLORS.dark : CHART_COLORS.light
   const [filters, setFilters] = useState<Filters>(INITIAL_FILTERS)
-  const [scale, setScale] = useState<XScale>("log")
-  const [showFrontier, setShowFrontier] = useState(true)
-  const [showCard, setShowCard] = useState(true)
-  const [dimOnHover, setDimOnHover] = useState(true)
+  const [view, setView] = useState<ViewOptions>(DEFAULT_VIEW)
   const [hovered, setHovered] = useState<string | null>(null)
   const wide = useWide()
   const [sidebarWidth, startResize, resetWidth] = useSidebarWidth()
@@ -150,8 +148,8 @@ export default function App() {
   // Like the currency, the score unit is read by formatting helpers; set it before children render.
   setScoreUnit(benchmark.scoreUnit)
 
-  const rows = useMemo(() => buildRows(filters, models), [filters, models])
   const sub = filters.mode === "subscription"
+  const rows = useMemo(() => buildRows(filters, models), [filters, models])
   const setMode = (mode: Filters["mode"]) => setFilters((f) => ({ ...f, mode }))
 
   return (
@@ -213,16 +211,7 @@ export default function App() {
                 </h1>
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
                   {sub ? <BudgetControls filters={filters} setFilters={setFilters} /> : null}
-                  <ViewMenu
-                    scale={scale}
-                    setScale={setScale}
-                    showFrontier={showFrontier}
-                    setShowFrontier={setShowFrontier}
-                    showCard={showCard}
-                    setShowCard={setShowCard}
-                    dimOnHover={dimOnHover}
-                    setDimOnHover={setDimOnHover}
-                  />
+                  <ViewMenu view={view} setView={setView} sub={sub} />
                 </div>
               </div>
 
@@ -232,13 +221,15 @@ export default function App() {
                     rows={rows}
                     palette={palette}
                     mode={filters.mode}
-                    scale={scale}
-                    showFrontier={showFrontier}
+                    scale={view.scale}
+                    showFrontier={view.showFrontier}
                     highlight={hovered}
                     height={wide ? 640 : 460}
                     compact={!wide}
-                    showCard={showCard}
-                    dimOnHover={dimOnHover}
+                    showCard={view.showCard}
+                    dimOnHover={view.dimOnHover}
+                    showLabels={view.showLabels}
+                    dimUnpriced={view.dimUnpriced}
                     currency={currency}
                     scoreLabel={benchmark.scoreLabel}
                     scoreUnit={benchmark.scoreUnit}
@@ -246,7 +237,12 @@ export default function App() {
                 ) : (
                   <div className="grid h-[460px] place-items-center text-sm text-muted-foreground">Nothing to plot. Pick some models or loosen the plan filters.</div>
                 )}
-                <Legend sub={sub} showFrontier={showFrontier} palette={palette} />
+                <Legend
+                  showUnpriced={sub}
+                  showFrontier={view.showFrontier}
+                  showLowConfidence={sub && rows.some(isLowConfidence)}
+                  palette={palette}
+                />
               </div>
             </section>
 
@@ -356,27 +352,34 @@ function Info({ info }: { info: ReactNode }) {
   )
 }
 
-function ViewMenu({
-  scale,
-  setScale,
-  showFrontier,
-  setShowFrontier,
-  showCard,
-  setShowCard,
-  dimOnHover,
-  setDimOnHover,
-}: {
+interface ViewOptions {
   scale: XScale
-  setScale: (s: XScale) => void
   showFrontier: boolean
-  setShowFrontier: (on: boolean) => void
+  showLabels: boolean
+  /** Fade models with no plan in range (API-priced fallbacks) in subscription mode. */
+  dimUnpriced: boolean
   showCard: boolean
-  setShowCard: (on: boolean) => void
   dimOnHover: boolean
-  setDimOnHover: (on: boolean) => void
-}) {
-  const option = (checked: boolean, set: (on: boolean) => void, label: string, hint: string) => (
-    <DropdownMenuCheckboxItem checked={checked} onCheckedChange={(v) => set(v === true)} onSelect={(e) => e.preventDefault()}>
+}
+
+const DEFAULT_VIEW: ViewOptions = {
+  scale: "log",
+  showFrontier: true,
+  showLabels: true,
+  dimUnpriced: true,
+  showCard: true,
+  dimOnHover: true,
+}
+
+type ViewToggle = Exclude<keyof ViewOptions, "scale">
+
+function ViewMenu({ view, setView, sub }: { view: ViewOptions; setView: (update: (v: ViewOptions) => ViewOptions) => void; sub: boolean }) {
+  const option = (key: ViewToggle, label: string, hint: string) => (
+    <DropdownMenuCheckboxItem
+      checked={view[key]}
+      onCheckedChange={(on) => setView((v) => ({ ...v, [key]: on === true }))}
+      onSelect={(e) => e.preventDefault()}
+    >
       <span className="flex flex-col">
         {label}
         <span className="text-[12px] text-muted-foreground">{hint}</span>
@@ -391,16 +394,19 @@ function ViewMenu({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-72">
         <DropdownMenuLabel className="text-[12px] text-muted-foreground">Cost axis</DropdownMenuLabel>
-        <DropdownMenuRadioGroup value={scale} onValueChange={(v) => setScale(v as XScale)}>
+        <DropdownMenuRadioGroup value={view.scale} onValueChange={(s) => setView((v) => ({ ...v, scale: s as XScale }))}>
           <DropdownMenuRadioItem value="log">Log scale</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="linear">Linear scale</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
         <DropdownMenuSeparator />
-        {option(showFrontier, setShowFrontier, "Pareto line", "Best score available at each price")}
+        <DropdownMenuLabel className="text-[12px] text-muted-foreground">Chart</DropdownMenuLabel>
+        {option("showFrontier", "Pareto line", "Best score available at each price")}
+        {option("showLabels", "Model labels", "Name each model beside its best point")}
+        {sub ? option("dimUnpriced", "Dim models with no plan in range", "Fade the hollow, API-priced models") : null}
         <DropdownMenuSeparator />
         <DropdownMenuLabel className="text-[12px] text-muted-foreground">On hover</DropdownMenuLabel>
-        {option(showCard, setShowCard, "Detail card", "Score, plan and prices for the hovered point")}
-        {option(dimOnHover, setDimOnHover, "Dim other models", "Fade every other line while hovering")}
+        {option("showCard", "Detail card", "Score, plan and prices for the hovered point")}
+        {option("dimOnHover", "Dim other models", "Fade every other line while hovering")}
       </DropdownMenuContent>
     </DropdownMenu>
   )
@@ -471,7 +477,17 @@ function BracketSelect({ value, onChange }: { value: ReadonlySet<BracketId>; onC
   )
 }
 
-function Legend({ sub, showFrontier, palette }: { sub: boolean; showFrontier: boolean; palette: ChartPalette }) {
+function Legend({
+  showUnpriced,
+  showFrontier,
+  showLowConfidence,
+  palette,
+}: {
+  showUnpriced: boolean
+  showFrontier: boolean
+  showLowConfidence: boolean
+  palette: ChartPalette
+}) {
   const groups: LabGroup[] = ["OpenAI", "Anthropic", "Other labs"]
   return (
     <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1.5 px-1 text-[12px] text-muted-foreground">
@@ -481,9 +497,13 @@ function Legend({ sub, showFrontier, palette }: { sub: boolean; showFrontier: bo
           {g}
         </span>
       ))}
-      <span className="hidden h-3 w-px bg-border sm:block" />
-      <span>Points run low → high reasoning effort</span>
-      {sub ? (
+      {showUnpriced || showFrontier || showLowConfidence ? <span className="hidden h-3 w-px bg-border sm:block" /> : null}
+      {showLowConfidence ? (
+        <span className="inline-flex items-center gap-1.5">
+          <span className="size-3 rounded-full border border-dashed border-foreground/70" /> low-confidence allowance estimate
+        </span>
+      ) : null}
+      {showUnpriced ? (
         <span className="inline-flex items-center gap-1.5">
           <span className="size-2.5 rounded-full border-2 border-muted-foreground" /> no plan in range, API price
         </span>

@@ -27,6 +27,7 @@ const FAMILIES = {
   "gemini-4-argon": "gemini-4-argon",
   "grok-4.7": "grok-4-7",
   "deepseek-v4.1-flash": "deepseek-v4-1-flash",
+  "deepseek-v4.1-flash-1017": "deepseek-v4-1-flash-1017",
   "kimi-k3": "kimi-k3",
   "glm-5.3": "glm-5-3",
   "glm-5.3-flash": "glm-5-3-flash",

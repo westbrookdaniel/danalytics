@@ -83,9 +83,10 @@ export function buildRows(f: Filters, models: readonly Model[]): Row[] {
   const rows: Row[] = []
   for (const model of models) {
     if (!f.models.has(model.id)) continue
-    const efforts = [...model.efforts]
-      .filter((e) => f.efforts.has(e.effort))
-      .sort((a, b) => EFFORT_ORDER.indexOf(a.effort) - EFFORT_ORDER.indexOf(b.effort))
+    // A model published at a single setting has no effort curve to filter, so it always shows.
+    const efforts = (model.efforts.length === 1 ? [...model.efforts] : model.efforts.filter((e) => f.efforts.has(e.effort))).sort(
+      (a, b) => EFFORT_ORDER.indexOf(a.effort) - EFFORT_ORDER.indexOf(b.effort),
+    )
     for (const e of efforts) {
       const base = {
         key: `${model.id}@${e.effort}`,
@@ -113,6 +114,9 @@ export function buildRows(f: Filters, models: readonly Model[]): Row[] {
   }
   return rows
 }
+
+/** True when a row's price rests on a low-confidence allowance estimate. */
+export const isLowConfidence = (r: Row) => r.source === "subscription" && r.offer?.confidence === "low"
 
 /** Upper-left Pareto frontier: points no other point beats on both cost and score. */
 export function paretoFrontier(rows: readonly Row[]): Row[] {

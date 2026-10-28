@@ -34,9 +34,11 @@ Real API Pricing has no API price for some models. `scripts/build-data.mjs` docu
 | GPT-6 Astra, GPT-6 Sol, GPT-6.1 Sol | Implied from mypriors' published ChatGPT Plus $/task |
 | GPT-6 Luna | GPT-6 Sol × Factory Droid multiplier ratio (0.04 / 0.8) |
 | Gemini 4 Argon | Launch list price $0.10 / $2 / $10, low-cache mix |
-| GPT-6.1 Terra, Muse Wonder, SWE-1.x | No plan allowance measured yet: API price only |
+| GPT-6.1 Terra, DeepSeek V4.1 Flash 1017, Muse Wonder, SWE-1.x | No plan allowance measured yet: API price only |
 
-For GPT-6.1 Terra on FrontierCode 2.0, the cost per task is Artificial Analysis's FrontierCode share of the Intelligence Index cost (× 6). That matches the cost from its FrontierCode token totals within 3%, and Cognition's own figures within a few percent, for models where both are published.
+Low-confidence allowances (estimates carried over from another model or plan tier, or a single report) are off by default. Switching them on in the sidebar rings the affected points with a dashed circle and marks their plan with ≈.
+
+For GPT-6.1 Terra and DeepSeek V4.1 Flash 1017 on FrontierCode 2.0, the cost per task is Artificial Analysis's FrontierCode share of the Intelligence Index cost (× 6). That matches the cost from its FrontierCode token totals within 3%, and Cognition's own figures within a few percent, for models where both are published.
 
 ## Stack
 

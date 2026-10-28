@@ -154,6 +154,9 @@ const modelId = (name) => name.toLowerCase().replace(/[^a-z0-9.]+/g, "-");
 // Models Cognition hasn't run yet; their results come only from Artificial Analysis.
 const EXTRA_MODELS = {
   "GPT-6.1 Terra": { pricingId: "gpt-6.1-terra", lab: "OpenAI", short: "GPT-6.1 Terra" },
+  // DeepSeek's 2026-10-17 snapshot. Real API Pricing only measures the original V4.1 Flash, so
+  // this has no plan allowances of its own and charts at API price.
+  "DeepSeek V4.1 Flash 1017": { pricingId: "deepseek-v4.1-flash-1017", lab: "Open weights", short: "DeepSeek V4.1 Flash 1017", openWeights: true },
 };
 
 const models = [];

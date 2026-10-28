@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { labGroup } from "@/lib/data"
 import { cheaper, currencySymbol, EFFORT_LABEL, fee, money, scoreText, tokens, toCurrency } from "@/lib/format"
-import type { Row } from "@/lib/pricing"
+import { isLowConfidence, type Row } from "@/lib/pricing"
 import type { ChartPalette } from "@/lib/theme"
 import { cn } from "@/lib/utils"
 
@@ -96,6 +96,11 @@ export function ResultsTable({ rows, mode, palette }: Props) {
                     <TableCell className="max-w-48 truncate">
                       {r.plan ? (
                         <>
+                          {isLowConfidence(r) ? (
+                            <span className="text-muted-foreground" title="Plan allowance is a low-confidence estimate">
+                              ≈{" "}
+                            </span>
+                          ) : null}
                           {r.plan.name} <span className="text-muted-foreground">{fee(r.plan.fee)}</span>
                         </>
                       ) : (
