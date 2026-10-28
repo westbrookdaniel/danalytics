@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { LAB_MARK, labOf } from "@/lib/colors"
-import { BRACKETS, bracketOf, data, EFFORT_ORDER, labGroup, type GlmScenario, type Model } from "@/lib/data"
+import { BRACKETS, bracketOf, data, EFFORT_ORDER, labGroup, type GlmScenario, type Model, type Plan } from "@/lib/data"
 import { EFFORT_LABEL, fee } from "@/lib/format"
 import { lowConfidenceModels, planExclusion, type Filters } from "@/lib/pricing"
 import { flip } from "@/lib/sets"
@@ -126,7 +126,7 @@ export function Sidebar({ filters, setFilters, palette, highlight, onHover, onRe
         />
       ) : null}
 
-      {showPlans ? <PlanControls filters={filters} patch={patch} setFilters={setFilters} /> : null}
+      {showPlans ? <PlanControls filters={filters} patch={patch} setFilters={setFilters} palette={palette} /> : null}
     </div>
   )
 }
@@ -189,11 +189,42 @@ function ModelGroup({
   )
 }
 
-function PlanControls({ filters, patch, setFilters }: { filters: Filters; patch: (p: Partial<Filters>) => void; setFilters: Props["setFilters"] }) {
+/** Lab plans take their provider's chart colour; third-party tools stay neutral. */
+function planColor(plan: Plan, palette: ChartPalette): string {
+  if (plan.kind === "tool") return palette.inkMuted
+  if (plan.provider === "Anthropic") return palette.Anthropic
+  if (plan.provider === "OpenAI") return palette.OpenAI
+  return palette["Other labs"]
+}
+
+function PlanControls({
+  filters,
+  patch,
+  setFilters,
+  palette,
+}: {
+  filters: Filters
+  patch: (p: Partial<Filters>) => void
+  setFilters: Props["setFilters"]
+  palette: ChartPalette
+}) {
   const plans = data.plans.filter((p) => !p.scenario || p.scenario === filters.glmScenario)
   const inPlay = plans.filter((p) => !planExclusion(p, filters)).length
   const toggleKind = (kind: "lab" | "tool") => patch({ kinds: flip(filters.kinds, kind) })
-  const togglePlan = (id: string) => setFilters((f) => ({ ...f, disabledPlans: flip(f.disabledPlans, id) }))
+  // A plan's peak / blended / off-peak readings share a group; switching one switches them all,
+  // so changing GLM hours never brings back a plan that was turned off.
+  const setPlansOn = (targets: readonly Plan[], on: boolean) =>
+    setFilters((f) => {
+      const groups = new Set(targets.map((p) => p.group))
+      const next = new Set(f.disabledPlans)
+      for (const p of data.plans) {
+        if (!groups.has(p.group)) continue
+        if (on) next.delete(p.id)
+        else next.add(p.id)
+      }
+      return { ...f, disabledPlans: next }
+    })
+  const togglePlan = (plan: Plan) => setPlansOn([plan], filters.disabledPlans.has(plan.id))
 
   return (
     <>
@@ -247,8 +278,18 @@ function PlanControls({ filters, patch, setFilters }: { filters: Filters; patch:
       {BRACKETS.map((b) => {
         const inBracket = plans.filter((p) => bracketOf(p.fee) === b.id)
         if (!inBracket.length) return null
+        const allOn = inBracket.every((p) => !filters.disabledPlans.has(p.id))
         return (
-          <Section key={b.id} title={b.label} hint={b.hint}>
+          <Section
+            key={b.id}
+            title={b.label}
+            hint={b.hint}
+            action={
+              <button type="button" onClick={() => setPlansOn(inBracket, !allOn)} className="text-[12px] text-muted-foreground hover:text-foreground">
+                {allOn ? "Hide all" : "Show all"}
+              </button>
+            }
+          >
             <div className="-mx-2">
               {inBracket.map((plan) => {
                 const reason = planExclusion(plan, filters)
@@ -266,20 +307,23 @@ function PlanControls({ filters, patch, setFilters }: { filters: Filters; patch:
                         </div>
                         <div>Serves {serves}</div>
                         {low.length ? <div>≈ Low-confidence for {low.map((id) => modelNames.get(id)).join(", ")}</div> : null}
-                        <div className="opacity-70">{reason ? `Out of play: ${reason.toLowerCase()}.` : "In play."} Click to turn this plan {off ? "on" : "off"}.</div>
+                        {reason ? <div className="opacity-70">Hidden: {reason.toLowerCase()}</div> : null}
                       </div>
                     }
                   >
                     <button
                       type="button"
                       aria-pressed={!off}
-                      onClick={() => togglePlan(plan.id)}
+                      onClick={() => togglePlan(plan)}
                       className={cn(
                         "flex h-8 w-full items-center gap-2.5 rounded-md px-2 text-left text-[13px] transition-colors hover:bg-accent",
                         reason ? "text-muted-foreground" : "text-foreground",
                       )}
                     >
-                      <span className={cn("size-2 shrink-0 rounded-full border-[1.5px] border-foreground/50", !reason && "border-foreground bg-foreground")} />
+                      <span
+                        className="size-2 shrink-0 rounded-full"
+                        style={{ background: reason ? "transparent" : planColor(plan, palette), boxShadow: `inset 0 0 0 1.5px ${planColor(plan, palette)}` }}
+                      />
                       <span className={cn("min-w-0 flex-1 truncate", off && "line-through")}>{plan.name}</span>
                       {low.length ? <span className="text-[12px] text-muted-foreground">≈</span> : null}
                       <span className="text-[12px] text-muted-foreground tabular-nums">{fee(plan.fee)}</span>

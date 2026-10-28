@@ -43,12 +43,28 @@ const INITIAL_FILTERS: Filters = {
 
 const BENCHMARKS = [{ id: "frontiercode-2.0-main", name: "FrontierCode 2.0", detail: "Cognition · main subset · 132 tasks" }]
 
-const SECTIONS = [
-  { id: "chart", label: "Chart" },
-  { id: "leaderboard", label: "Leaderboard" },
-  { id: "plans", label: "Plans" },
-  { id: "method", label: "Method" },
+type Page = "overview" | "plans"
+
+const PAGES: { id: Page; label: string; href: string }[] = [
+  { id: "overview", label: "Overview", href: "#/" },
+  { id: "plans", label: "Plans", href: "#/plans" },
 ]
+
+const pageFromHash = (): Page => (location.hash === "#/plans" ? "plans" : "overview")
+
+/** Tiny hash router: `#/plans` is the plans page, anything else the overview. */
+function usePage() {
+  const [page, setPage] = useState<Page>(pageFromHash)
+  useEffect(() => {
+    const onChange = () => {
+      setPage(pageFromHash())
+      window.scrollTo(0, 0)
+    }
+    window.addEventListener("hashchange", onChange)
+    return () => window.removeEventListener("hashchange", onChange)
+  }, [])
+  return page
+}
 
 const SIDEBAR_KEY = "danalytics-sidebar-width"
 const SIDEBAR_DEFAULT = 300
@@ -112,6 +128,7 @@ export default function App() {
   const [hovered, setHovered] = useState<string | null>(null)
   const wide = useWide()
   const [sidebarWidth, startResize, resetWidth] = useSidebarWidth()
+  const page = usePage()
 
   const rows = useMemo(() => buildRows(filters), [filters])
   const sub = filters.mode === "subscription"
@@ -122,18 +139,24 @@ export default function App() {
       <div className="min-h-dvh bg-background">
         <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur">
           <div className="mx-auto flex h-14 max-w-[1600px] items-center gap-4 px-4 sm:px-6">
-            <a href="#chart" className="flex items-center gap-2.5">
+            <a href="#/" className="flex items-center gap-2.5">
               <PenguinMark className="size-6" />
               <span className="text-[17px] font-semibold tracking-tight">danalytics</span>
             </a>
             <BenchmarkSelect />
-            <nav className="ml-auto hidden items-center gap-5 md:flex">
-              {SECTIONS.map((s) => (
-                <a key={s.id} href={`#${s.id}`} className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">
-                  {s.label}
+            <nav className="ml-2 flex items-center gap-1">
+              {PAGES.map((p) => (
+                <a
+                  key={p.id}
+                  href={p.href}
+                  aria-current={page === p.id ? "page" : undefined}
+                  className="rounded-md px-2.5 py-1.5 text-[13px] text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:bg-accent aria-[current=page]:font-medium aria-[current=page]:text-foreground"
+                >
+                  {p.label}
                 </a>
               ))}
             </nav>
+            <span className="ml-auto" />
             <ThemeSwitch pref={pref} onChange={setPref} />
           </div>
         </header>
@@ -143,7 +166,17 @@ export default function App() {
           style={{ "--sidebar-w": `${sidebarWidth}px` } as CSSProperties}
         >
           <main className="min-w-0 space-y-16">
-            <section id="chart" className="scroll-mt-20">
+            {page === "plans" ? (
+              <section>
+                <PageHeading
+                  title="Plans by model"
+                  detail="Every plan that serves each model, priced at its best effort level. Faded plans are outside your filters; bars are log-scaled against the API price."
+                />
+                <PlansView filters={filters} palette={palette} />
+              </section>
+            ) : (
+              <>
+            <section id="chart">
               <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
                 <h1 className="flex flex-wrap items-center gap-2 text-xl font-semibold tracking-tight">
                   Score vs
@@ -194,21 +227,15 @@ export default function App() {
               </div>
             </section>
 
-            <section id="leaderboard" className="scroll-mt-20">
+            <section id="leaderboard">
               <ResultsTable rows={rows} mode={filters.mode} palette={palette} />
             </section>
 
-            <section id="plans" className="scroll-mt-20">
-              <SectionTitle
-                title="Plans by model"
-                detail="Every plan that serves each model, priced at its best effort level. Faded plans are outside your filters; bars are log-scaled against the API price."
-              />
-              <PlansView filters={filters} palette={palette} />
-            </section>
-
-            <section id="method" className="scroll-mt-20">
+            <section id="method">
               <Method />
             </section>
+              </>
+            )}
 
             <footer className="flex flex-wrap justify-between gap-2 border-t pt-4 text-[12px] text-muted-foreground">
               <span>
@@ -250,7 +277,7 @@ export default function App() {
               highlight={hovered}
               onHover={setHovered}
               onReset={() => setFilters(INITIAL_FILTERS)}
-              showPlans={sub}
+              showPlans={sub || page === "plans"}
             />
           </aside>
         </div>
@@ -259,7 +286,7 @@ export default function App() {
   )
 }
 
-function SectionTitle({ title, detail }: { title: string; detail: string }) {
+function PageHeading({ title, detail }: { title: string; detail: string }) {
   return (
     <div className="mb-5">
       <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
@@ -477,7 +504,7 @@ function Method() {
   const { benchmark, pricing, reference } = data.sources
   return (
     <div className="max-w-3xl">
-      <SectionTitle title="Method" detail="How subscription costs per task are computed" />
+      <PageHeading title="Method" detail="How subscription costs per task are computed" />
       <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
         <p>
           <span className="font-medium text-foreground">Subscription $ / task</span> = Cognition's API $ / task × (plan's real $ per million tokens ÷ the
