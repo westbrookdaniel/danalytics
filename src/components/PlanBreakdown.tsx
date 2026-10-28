@@ -27,14 +27,19 @@ export function PlanBreakdown({ model, filters, palette }: Props) {
     <div className="space-y-3">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
-          <div className="text-[14px] font-medium">{model.name}</div>
+          <div className="flex items-center gap-2 text-[14px] font-medium">
+            <span className="size-2 shrink-0 rounded-full" style={{ background: color }} />
+            {model.name}
+          </div>
           <div className="text-xs text-muted-foreground">
             Best at {EFFORT_LABEL[best.effort] ?? best.effort} effort · {pct(best.score)} · {model.harness}
           </div>
         </div>
         {model.api ? (
-          <Badge variant="outline" title={model.api.note}>
-            API basis: ${model.api.usdPerMtok.toFixed(3)}/Mtok · {model.api.basis}
+          <Badge variant="secondary" title={model.api.note}>
+            API basis
+            <span className="font-semibold text-foreground tabular-nums">${model.api.usdPerMtok.toFixed(3)}/Mtok</span>
+            <span className="text-muted-foreground/80">{model.api.basis}</span>
           </Badge>
         ) : null}
       </div>

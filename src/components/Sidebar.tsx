@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react"
 import { InfoIcon, RotateCcwIcon, SearchIcon } from "lucide-react"
 import { Hint } from "@/components/Hint"
 import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { LAB_MARK, labOf } from "@/lib/colors"
@@ -63,8 +64,9 @@ export function Sidebar({ filters, setFilters, palette, highlight, onHover, onRe
   return (
     <div className="flex flex-col gap-6 p-5">
       <div className="flex items-center gap-2">
-        <h2 className="flex-1 text-[15px] font-semibold">
-          Models <span className="ml-1 rounded-full bg-muted px-1.5 py-0.5 text-[11px] font-medium text-muted-foreground tabular-nums">{filters.models.size}</span>
+        <h2 className="flex flex-1 items-center gap-2 text-[15px] leading-none font-semibold">
+          Models
+          <span className="rounded-md bg-muted px-1.5 py-1 text-[11px] leading-none font-medium text-muted-foreground tabular-nums">{filters.models.size}</span>
         </h2>
         <Hint content="Reset every filter to its default">
           <button type="button" onClick={onReset} aria-label="Reset all filters" className="grid size-7 place-items-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground">
@@ -236,17 +238,16 @@ function PlanControls({ filters, patch, setFilters }: { filters: Filters; patch:
         </div>
         <div className="flex items-center justify-between gap-3 pt-1">
           <LabelWithInfo label="GLM hours" info="Zhipu meters GLM Coding plans faster during Beijing peak hours. Blended assumes a typical day; off-peak assumes you only code outside peak." />
-          <ToggleGroup
-            type="single"
-            variant="outline"
-            size="sm"
-            value={filters.glmScenario}
-            onValueChange={(v) => v && patch({ glmScenario: v as GlmScenario })}
-          >
-            <ToggleGroupItem value="peak" className="h-7 px-2 text-[12px]">Peak</ToggleGroupItem>
-            <ToggleGroupItem value="mid" className="h-7 px-2 text-[12px]">Blended</ToggleGroupItem>
-            <ToggleGroupItem value="offpeak" className="h-7 px-2 text-[12px]">Off-peak</ToggleGroupItem>
-          </ToggleGroup>
+          <Select value={filters.glmScenario} onValueChange={(v) => patch({ glmScenario: v as GlmScenario })}>
+            <SelectTrigger size="sm" className="h-8 w-32 text-[13px]" aria-label="GLM hours">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent align="end">
+              <SelectItem value="peak">Peak hours</SelectItem>
+              <SelectItem value="mid">Blended day</SelectItem>
+              <SelectItem value="offpeak">Off-peak only</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </Section>
 
@@ -285,10 +286,10 @@ function PlanControls({ filters, patch, setFilters }: { filters: Filters; patch:
                         reason ? "text-muted-foreground" : "text-foreground",
                       )}
                     >
+                      <span className={cn("size-2 shrink-0 rounded-full border-[1.5px] border-foreground/50", !reason && "border-foreground bg-foreground")} />
                       <span className={cn("min-w-0 flex-1 truncate", off && "line-through")}>{plan.name}</span>
                       {low.length ? <span className="text-[12px] text-muted-foreground">≈</span> : null}
                       <span className="text-[12px] text-muted-foreground tabular-nums">{fee(plan.fee)}</span>
-                      <span className={cn("size-2 shrink-0 rounded-full border-[1.5px] border-foreground/50", !reason && "border-foreground bg-foreground")} />
                     </button>
                   </Hint>
                 )

@@ -78,8 +78,11 @@ export function ResultsTable({ rows, mode, palette }: Props) {
                 <TableRow key={r.key} className="tabular-nums">
                   <TableCell className="text-muted-foreground">{i + 1}</TableCell>
                   <TableCell className="whitespace-nowrap">
-                    <span className="font-medium">{r.model.short}</span>{" "}
-                    <span className="text-muted-foreground">[{EFFORT_LABEL[r.effort] ?? r.effort}]</span>
+                    <span className="inline-flex items-center gap-2">
+                      <span className="size-2 shrink-0 rounded-full" style={{ background: color }} />
+                      <span className="font-medium">{r.model.short}</span>
+                      <span className="text-muted-foreground">[{EFFORT_LABEL[r.effort] ?? r.effort}]</span>
+                    </span>
                   </TableCell>
                   <TableCell>
                     <span className="flex items-center gap-3">

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react"
-import { InfoIcon, MonitorIcon, MoonIcon, SlidersHorizontalIcon, SunIcon } from "lucide-react"
+import { ChevronDownIcon, InfoIcon, MonitorIcon, MoonIcon, SlidersHorizontalIcon, SunIcon } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { TooltipProvider } from "@/components/ui/tooltip"
@@ -108,6 +108,8 @@ export default function App() {
   const [filters, setFilters] = useState<Filters>(INITIAL_FILTERS)
   const [scale, setScale] = useState<XScale>("log")
   const [showFrontier, setShowFrontier] = useState(true)
+  const [showCard, setShowCard] = useState(true)
+  const [dimOnHover, setDimOnHover] = useState(true)
   const [hovered, setHovered] = useState<string | null>(null)
   const wide = useWide()
   const [sidebarWidth, startResize, resetWidth] = useSidebarWidth()
@@ -138,32 +140,41 @@ export default function App() {
         </header>
 
         <div
-          className="mx-auto grid max-w-[1600px] gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_var(--sidebar-w)]"
+          className="mx-auto grid max-w-[1600px] gap-8 px-4 pt-5 pb-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_var(--sidebar-w)]"
           style={{ "--sidebar-w": `${sidebarWidth}px` } as CSSProperties}
         >
           <main className="min-w-0 space-y-16">
             <section id="chart" className="scroll-mt-20">
-              <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b pb-4">
+              <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
                 <h1 className="flex flex-wrap items-center gap-2 text-xl font-semibold tracking-tight">
                   Score vs
-                  <ToggleGroup type="single" variant="outline" size="sm" value={filters.mode} onValueChange={(v) => v && setMode(v as Filters["mode"])} aria-label="Pricing">
-                    <ToggleGroupItem value="subscription" className="h-8 px-3 text-[14px]">
-                      Subscription
-                    </ToggleGroupItem>
-                    <ToggleGroupItem value="api" className="h-8 px-3 text-[14px]">
-                      API
-                    </ToggleGroupItem>
-                  </ToggleGroup>
+                  <Select value={filters.mode} onValueChange={(v) => setMode(v as Filters["mode"])}>
+                    <SelectTrigger className="h-9 gap-2 px-3 text-[15px] font-semibold" aria-label="Pricing">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent align="start">
+                      <SelectItem value="subscription">Subscription</SelectItem>
+                      <SelectItem value="api">API</SelectItem>
+                    </SelectContent>
+                  </Select>
                   cost per task
                 </h1>
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
                   {sub ? <BudgetControls filters={filters} setFilters={setFilters} /> : null}
-                  <ViewMenu scale={scale} setScale={setScale} showFrontier={showFrontier} setShowFrontier={setShowFrontier} />
+                  <ViewMenu
+                    scale={scale}
+                    setScale={setScale}
+                    showFrontier={showFrontier}
+                    setShowFrontier={setShowFrontier}
+                    showCard={showCard}
+                    setShowCard={setShowCard}
+                    dimOnHover={dimOnHover}
+                    setDimOnHover={setDimOnHover}
+                  />
                 </div>
               </div>
 
               <div className="mt-5 rounded-xl border bg-card/50 px-3 pt-4 pb-3 sm:px-5">
-                <div className="mb-1 pl-1 text-[13px] font-medium">FrontierCode 2.0 score</div>
                 {rows.length ? (
                   <CostScoreChart
                     rows={rows}
@@ -174,6 +185,8 @@ export default function App() {
                     highlight={hovered}
                     height={wide ? 640 : 460}
                     compact={!wide}
+                    showCard={showCard}
+                    dimOnHover={dimOnHover}
                   />
                 ) : (
                   <div className="grid h-[460px] place-items-center text-sm text-muted-foreground">Nothing to plot. Pick some models or loosen the plan filters.</div>
@@ -183,7 +196,6 @@ export default function App() {
             </section>
 
             <section id="leaderboard" className="scroll-mt-20">
-              <SectionTitle title="Leaderboard" detail={`${sub ? "Subscription" : "API"} pricing · ${filters.models.size} models in view`} />
               <ResultsTable rows={rows} mode={filters.mode} palette={palette} />
             </section>
 
@@ -288,12 +300,28 @@ function ViewMenu({
   setScale,
   showFrontier,
   setShowFrontier,
+  showCard,
+  setShowCard,
+  dimOnHover,
+  setDimOnHover,
 }: {
   scale: XScale
   setScale: (s: XScale) => void
   showFrontier: boolean
   setShowFrontier: (on: boolean) => void
+  showCard: boolean
+  setShowCard: (on: boolean) => void
+  dimOnHover: boolean
+  setDimOnHover: (on: boolean) => void
 }) {
+  const option = (checked: boolean, set: (on: boolean) => void, label: string, hint: string) => (
+    <DropdownMenuCheckboxItem checked={checked} onCheckedChange={(v) => set(v === true)} onSelect={(e) => e.preventDefault()}>
+      <span className="flex flex-col">
+        {label}
+        <span className="text-[12px] text-muted-foreground">{hint}</span>
+      </span>
+    </DropdownMenuCheckboxItem>
+  )
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="inline-flex h-8 items-center gap-2 rounded-md border px-2.5 text-[13px] transition-colors hover:bg-accent data-[state=open]:bg-accent">
@@ -307,12 +335,11 @@ function ViewMenu({
           <DropdownMenuRadioItem value="linear">Linear scale</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem checked={showFrontier} onCheckedChange={(v) => setShowFrontier(v === true)}>
-          <span className="flex flex-col">
-            Pareto line
-            <span className="text-[12px] text-muted-foreground">Best score available at each price</span>
-          </span>
-        </DropdownMenuCheckboxItem>
+        {option(showFrontier, setShowFrontier, "Pareto line", "Best score available at each price")}
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel className="text-[12px] text-muted-foreground">On hover</DropdownMenuLabel>
+        {option(showCard, setShowCard, "Detail card", "Score, plan and prices for the hovered point")}
+        {option(dimOnHover, setDimOnHover, "Dim other models", "Fade every other line while hovering")}
       </DropdownMenuContent>
     </DropdownMenu>
   )
@@ -341,32 +368,52 @@ function BudgetControls({ filters, setFilters }: { filters: Filters; setFilters:
       <div className="flex flex-wrap items-center gap-2">
         <span className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
           Brackets
-          <Info info="Monthly-fee bands. Turn a band off to drop every plan priced in it, e.g. keep only 20x-tier plans. Double-click a band to show only it." />
+          <Info info="Monthly-fee bands. Untick a band to drop every plan priced in it, e.g. keep only 20x-tier plans." />
         </span>
-        <ToggleGroup
-          type="multiple"
-          variant="outline"
-          size="sm"
-          spacing={1}
-          value={[...filters.brackets]}
-          onValueChange={(v) => patch({ brackets: new Set(v as BracketId[]) })}
-          className="flex-wrap"
-        >
-          {BRACKETS.map((b) => (
-            <ToggleGroupItem key={b.id} value={b.id} onDoubleClick={() => patch({ brackets: new Set([b.id]) })} title={b.hint} className="h-7 px-2 text-[12px] tabular-nums">
-              {b.label}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
+        <BracketSelect value={filters.brackets} onChange={(brackets) => patch({ brackets })} />
       </div>
     </>
+  )
+}
+
+/** Select-style multi-pick for fee brackets; stays open while ticking. */
+function BracketSelect({ value, onChange }: { value: ReadonlySet<BracketId>; onChange: (next: Set<BracketId>) => void }) {
+  const all = value.size === BRACKETS.length
+  const summary = all ? "All" : value.size === 0 ? "None" : BRACKETS.filter((b) => value.has(b.id)).map((b) => b.label).join(", ")
+  const toggle = (id: BracketId, on: boolean) => {
+    const next = new Set(value)
+    if (on) next.add(id)
+    else next.delete(id)
+    onChange(next)
+  }
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="inline-flex h-8 max-w-52 items-center gap-2 rounded-md border bg-transparent px-2.5 text-[13px] transition-colors hover:bg-accent data-[state=open]:bg-accent dark:bg-input/30">
+        <span className="truncate tabular-nums">{summary}</span>
+        <ChevronDownIcon className="size-3.5 shrink-0 opacity-60" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="w-56">
+        {BRACKETS.map((b) => (
+          <DropdownMenuCheckboxItem key={b.id} checked={value.has(b.id)} onCheckedChange={(v) => toggle(b.id, v === true)} onSelect={(e) => e.preventDefault()}>
+            <span className="flex w-full items-baseline justify-between gap-3">
+              <span className="tabular-nums">{b.label}</span>
+              <span className="text-[12px] text-muted-foreground">{b.hint}</span>
+            </span>
+          </DropdownMenuCheckboxItem>
+        ))}
+        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem checked={all} onCheckedChange={() => onChange(new Set(all ? [] : BRACKETS.map((b) => b.id)))} onSelect={(e) => e.preventDefault()}>
+          All brackets
+        </DropdownMenuCheckboxItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 
 function Legend({ sub, showFrontier, palette }: { sub: boolean; showFrontier: boolean; palette: ChartPalette }) {
   const groups: LabGroup[] = ["OpenAI", "Anthropic", "Other labs"]
   return (
-    <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 border-t px-1 pt-3 text-[12px] text-muted-foreground">
+    <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1.5 px-1 text-[12px] text-muted-foreground">
       {groups.map((g) => (
         <span key={g} className="inline-flex items-center gap-2">
           <span className="h-0.5 w-5 rounded-full" style={{ background: palette[g] }} />

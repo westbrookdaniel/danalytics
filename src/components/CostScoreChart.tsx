@@ -1,5 +1,5 @@
 import { useMemo, useState, type CSSProperties } from "react"
-import { defineChart, dot, frame, lineY, link, type ChartBounds, type ChartFocusStrategy, type ChartMark, type ChartMarkStateContext, type ChartPoint } from "@tanstack/charts"
+import { defineChart, dot, lineY, link, type ChartBounds, type ChartFocusStrategy, type ChartMark, type ChartMarkStateContext, type ChartPoint } from "@tanstack/charts"
 import { Chart } from "@tanstack/charts/react"
 import { scaleLinear } from "@tanstack/charts/scales/linear"
 import { scaleLog } from "d3-scale"
@@ -24,6 +24,10 @@ interface Props {
   height: number
   /** Narrow screens label only the leading models. */
   compact: boolean
+  /** Show the detail card for the hovered point. */
+  showCard: boolean
+  /** Fade every other model while a point is hovered. */
+  dimOnHover: boolean
 }
 
 /** Only effort points are hover targets; lines and guides share their positions. */
@@ -56,7 +60,7 @@ function decadeTicks(lo: number, hi: number): number[] {
 }
 
 export function CostScoreChart(props: Props) {
-  const { rows, palette, mode, scale, showFrontier, highlight, height, compact } = props
+  const { rows, palette, mode, scale, showFrontier, highlight, height, compact, showCard, dimOnHover } = props
 
   const definition = useMemo(() => {
     const log = scale === "log"
@@ -102,7 +106,7 @@ export function CostScoreChart(props: Props) {
     for (const [modelId, modelRows] of byModel) {
       const c = color(modelRows[0])
       const o = fade(modelId)
-      const states = [{ when: focusedOther(modelId), style: { opacity: 0.3 } }]
+      const states = dimOnHover ? [{ when: focusedOther(modelId), style: { opacity: 0.3 } }] : []
       marks.push(
         lineY(modelRows, { id: `line-${modelId}`, x: "x", y: "score", stroke: c, strokeWidth: highlight === modelId ? 3 : 2, strokeOpacity: 0.85 * o, states }),
       )
@@ -117,7 +121,7 @@ export function CostScoreChart(props: Props) {
     }
 
     return defineChart({
-      marks: [frame({ stroke: palette.grid, strokeWidth: 1 }), ...marks],
+      marks,
       scales: {
         x: {
           scale: log ? scaleLog().domain([xMin, xMax]).clamp(true) : scaleLinear().domain([0, xMax]),
@@ -148,14 +152,14 @@ export function CostScoreChart(props: Props) {
       tooltip: false,
       svgAnimation: true,
     })
-  }, [rows, palette, mode, scale, showFrontier, highlight, compact])
+  }, [rows, palette, mode, scale, showFrontier, highlight, compact, dimOnHover])
 
   // Focused point and the rendered dot positions (in scene pixels), for the overlays.
   const [focus, setFocus] = useState<ChartPoint<Plotted, number, number> | null>(null)
   const [scene, setScene] = useState<SceneInfo | null>(null)
 
   const labels = useMemo(() => (scene ? placeLabels(scene, rows, compact) : []), [scene, rows, compact])
-  const active = focus?.datum.modelId ?? highlight
+  const active = (dimOnHover ? focus?.datum.modelId : null) ?? highlight
 
   // Mouse clicks shouldn't move keyboard focus onto the chart (it would hold the last
   // hovered point after the pointer leaves); Tab still reaches it for keyboard use.
@@ -174,7 +178,7 @@ export function CostScoreChart(props: Props) {
         }}
       />
       {scene ? <LabelLayer labels={labels} active={active} /> : null}
-      {focus && scene ? <HoverOverlay point={focus} scene={scene} palette={palette} mode={mode} /> : null}
+      {focus && scene ? <HoverOverlay point={focus} scene={scene} palette={palette} mode={mode} showCard={showCard} /> : null}
     </div>
   )
 }
@@ -307,16 +311,38 @@ function LabelLayer({ labels, active }: { labels: PlacedLabel[]; active: string 
   )
 }
 
-function HoverOverlay({ point, scene, palette, mode }: { point: ChartPoint<Plotted, number, number>; scene: SceneInfo; palette: ChartPalette; mode: "subscription" | "api" }) {
+const CARD_W = 256
+const CARD_H = 272 // tallest card (subscription mode with a plan); used to keep it off the hovered point
+const CARD_INSET = 12
+
+function HoverOverlay({
+  point,
+  scene,
+  palette,
+  mode,
+  showCard,
+}: {
+  point: ChartPoint<Plotted, number, number>
+  scene: SceneInfo
+  palette: ChartPalette
+  mode: "subscription" | "api"
+  showCard: boolean
+}) {
   const { bounds: b } = scene
   const r = point.datum
   const color = palette[labGroup(r.model)]
   const line = "pointer-events-none absolute border-dashed border-foreground/40"
+  // Bottom-right by default; bottom-left when the card would sit on top of the hovered point.
+  const cardLeft = point.x > b.x + b.width - CARD_W - CARD_INSET * 2 && point.y > b.y + b.height - CARD_H - CARD_INSET * 2
+  const bottom = scene.height - (b.y + b.height) + CARD_INSET
   return (
     <div className="pointer-events-none absolute inset-0">
       <div className={`${line} border-l`} style={{ left: point.x, top: b.y, height: b.height }} />
       <div className={`${line} border-t`} style={{ top: point.y, left: b.x, width: b.width }} />
-      <span className="absolute -translate-y-full pb-1 text-[11px] font-medium tabular-nums" style={{ left: b.x + 6, top: point.y }}>
+      <span
+        className={`absolute -translate-y-full pb-1 text-[11px] font-medium tabular-nums ${cardLeft ? "-translate-x-full" : ""}`}
+        style={{ left: cardLeft ? b.x + b.width - 6 : b.x + 6, top: point.y }}
+      >
         {r.score.toFixed(1)}%
       </span>
       <span className="absolute pb-1 text-[11px] font-medium tabular-nums" style={{ left: point.x + 6, top: b.y + b.height - 20 }}>
@@ -326,7 +352,13 @@ function HoverOverlay({ point, scene, palette, mode }: { point: ChartPoint<Plott
         className="absolute size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background"
         style={{ left: point.x, top: point.y, background: color, boxShadow: `0 0 0 1.5px ${color}` }}
       />
-      <DetailCard row={r} mode={mode} style={{ right: scene.width - (b.x + b.width) + 12, bottom: scene.height - (b.y + b.height) + 12 }} />
+      {showCard ? (
+        <DetailCard
+          row={r}
+          mode={mode}
+          style={cardLeft ? { left: b.x + CARD_INSET, bottom } : { right: scene.width - (b.x + b.width) + CARD_INSET, bottom }}
+        />
+      ) : null}
     </div>
   )
 }
