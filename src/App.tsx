@@ -124,7 +124,7 @@ export default function App() {
         <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur">
           <div className="mx-auto flex h-14 max-w-[1600px] items-center gap-4 px-4 sm:px-6">
             <a href="#chart" className="flex items-center gap-2.5">
-              <PenguinMark className="size-7" />
+              <PenguinMark className="size-6" />
               <span className="text-[17px] font-semibold tracking-tight">danalytics</span>
             </a>
             <BenchmarkSelect />
@@ -233,7 +233,8 @@ export default function App() {
             </footer>
           </main>
 
-          <aside className="relative lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100dvh-6rem)] lg:self-start lg:overflow-y-auto lg:rounded-xl lg:border lg:bg-card/50">
+          {/* Sticky offset = header (56px + 1px border) + main's top padding (20px), so the panel doesn't jump when scrolling starts. */}
+          <aside className="relative lg:sticky lg:top-[77px] lg:max-h-[calc(100dvh-97px)] lg:self-start lg:overflow-y-auto lg:rounded-xl lg:border lg:bg-card/50">
             <div
               role="separator"
               aria-orientation="vertical"
@@ -261,7 +262,7 @@ export default function App() {
 
 function SectionTitle({ title, detail }: { title: string; detail: string }) {
   return (
-    <div className="mb-5 border-b pb-4">
+    <div className="mb-5">
       <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
       <p className="mt-1 text-[13px] text-muted-foreground">{detail}</p>
     </div>
