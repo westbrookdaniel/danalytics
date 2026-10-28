@@ -13,14 +13,12 @@ interface Props {
   rows: readonly Row[]
   mode: "subscription" | "api"
   palette: ChartPalette
-  highlight: string | null
-  onHighlight: (id: string | null) => void
 }
 
 /** Score points per dollar; free rows sort first. */
 const value = (r: Row) => (r.cost === 0 ? Infinity : r.score / r.cost)
 
-export function ResultsTable({ rows, mode, palette, highlight, onHighlight }: Props) {
+export function ResultsTable({ rows, mode, palette }: Props) {
   const [sort, setSort] = useState<SortKey>("score")
   const sorted = [...rows].sort((a, b) =>
     sort === "score" ? b.score - a.score : sort === "cost" ? a.cost - b.cost || b.score - a.score : value(b) - value(a),
@@ -52,12 +50,7 @@ export function ResultsTable({ rows, mode, palette, highlight, onHighlight }: Pr
         {sorted.map((r, i) => {
           const saving = r.source === "api" ? null : cheaper(r.apiCost, r.cost)
           return (
-            <TableRow
-              key={r.key}
-              data-state={highlight === r.modelId ? "selected" : undefined}
-              onClick={() => onHighlight(highlight === r.modelId ? null : r.modelId)}
-              className="cursor-pointer tabular-nums"
-            >
+            <TableRow key={r.key} className="tabular-nums">
               <TableCell className="text-muted-foreground">{i + 1}</TableCell>
               <TableCell>
                 <span className="inline-flex items-center gap-2 font-medium">

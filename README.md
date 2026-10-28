@@ -1,4 +1,4 @@
-# FrontierCode Costs
+# danalytics
 
 What a FrontierCode 2.0 task costs when you pay with a subscription instead of the API.
 
@@ -6,19 +6,18 @@ Cognition's [FrontierCode 2.0](https://cognition.com/frontiercode) reports a sco
 
 - a **max monthly subscription cost** slider and **fee bracket** toggles (≤ $20, $21–60, 5x, 20x, $250+)
 - lab plans vs third-party tools (Cursor, Factory Droid, OpenCode, Command Code, Ollama), legacy pricing, low-confidence allowances
-- **allowance used**: at 50% usage every subscription task costs twice as much
 - GLM peak / blended / off-peak metering
-- model selection, effort curves vs best effort only, the Pareto frontier, and API price "ghosts"
+- model and reasoning-effort selection, a log/linear cost axis and the Pareto frontier
 
 Inspired by [mypriors' FrontierCode 2.0 page](https://mypriors.com/benchmarks/frontiercode-2.0-main).
 
 ## How a subscription task is priced
 
 ```
-subscription $/task = API $/task × (plan $ per Mtok ÷ model API $ per Mtok) ÷ allowance used
+subscription $/task = API $/task × (plan $ per Mtok ÷ model API $ per Mtok)
 ```
 
-Both per-token prices use Real API Pricing's token mixes (97% cache reads / 2.5% fresh input / 0.5% output; Anthropic bills fresh input as cache writes, Google uses the low-cache mix), so the ratio is the share of list price a full-allowance subscriber pays. For each model and effort the cheapest plan that passes the filters wins. Unmetered allowances (SWE-2 on Devin Pro, promo until 2026-10-31) cost $0 and sit on a "Free" tick.
+Both per-token prices use Real API Pricing's token mixes (97% cache reads / 2.5% fresh input / 0.5% output; Anthropic bills fresh input as cache writes, Google uses the low-cache mix), so the ratio is the share of list price a subscriber pays when they use the whole allowance. For each model and effort the cheapest plan that passes the filters wins. Unmetered allowances (SWE-2 on Devin Pro, promo until 2026-10-31) cost $0 and sit on a "Free" tick.
 
 Real API Pricing has no API price for some models. `scripts/build-data.mjs` documents the fallbacks:
 

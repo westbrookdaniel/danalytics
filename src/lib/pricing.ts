@@ -9,11 +9,6 @@ export interface Filters {
   includeLegacy: boolean
   hideLowConfidence: boolean
   glmScenario: GlmScenario
-  /** Share of the monthly allowance actually used, 0–1. Half the usage doubles the real price. */
-  utilization: number
-  /** Show models with no eligible plan at their API price instead of dropping them. */
-  apiFallback: boolean
-  bestEffortOnly: boolean
   /** Reasoning-effort levels to keep; a model with none of them left drops out. */
   efforts: ReadonlySet<string>
   models: ReadonlySet<string>
@@ -44,15 +39,21 @@ export function planExclusion(plan: Plan, f: Filters): string | null {
   if (!f.kinds.has(plan.kind)) return plan.kind === "tool" ? "Third-party tools hidden" : "Lab plans hidden"
   if (plan.legacy && !f.includeLegacy) return "Legacy pricing"
   if (plan.scenario && plan.scenario !== f.glmScenario) return "Other time-of-day scenario"
+  if (f.hideLowConfidence && plan.offers.every((o) => o.confidence === "low")) return "Low-confidence allowance"
   if (f.disabledPlans.has(plan.id)) return "Turned off"
   return null
 }
 
-/** Subscription cost of one task: API $/task scaled by the plan's share of list price. */
-export function taskCost(model: Model, apiCost: number, offer: Offer, utilization: number): number {
+/** Models whose allowance on this plan is only a low-confidence estimate. */
+export function lowConfidenceModels(plan: Plan): string[] {
+  return plan.offers.filter((o) => o.confidence === "low").map((o) => o.modelId)
+}
+
+/** Subscription cost of one task: API $/task scaled by the plan's share of list price, at full allowance use. */
+export function taskCost(model: Model, apiCost: number, offer: Offer): number {
   if (offer.unmetered) return 0
   if (!model.api) return NaN
-  return (apiCost * offer.usdPerMtok) / model.api.usdPerMtok / utilization
+  return (apiCost * offer.usdPerMtok) / model.api.usdPerMtok
 }
 
 export interface PlanQuote {
@@ -72,7 +73,7 @@ export function quotesFor(model: Model, apiCost: number, f: Filters): PlanQuote[
     if (plan.scenario && plan.scenario !== f.glmScenario) continue
     let excludedBy = planExclusion(plan, f)
     if (!excludedBy && f.hideLowConfidence && offer.confidence === "low") excludedBy = "Low-confidence estimate"
-    quotes.push({ plan, offer, cost: taskCost(model, apiCost, offer, f.utilization), excludedBy })
+    quotes.push({ plan, offer, cost: taskCost(model, apiCost, offer), excludedBy })
   }
   return quotes.sort((a, b) => a.cost - b.cost || a.plan.fee - b.plan.fee)
 }
@@ -84,9 +85,7 @@ export function buildRows(f: Filters): Row[] {
     const efforts = [...model.efforts]
       .filter((e) => f.efforts.has(e.effort))
       .sort((a, b) => EFFORT_ORDER.indexOf(a.effort) - EFFORT_ORDER.indexOf(b.effort))
-    if (!efforts.length) continue
-    const picked = f.bestEffortOnly ? [efforts.reduce((best, e) => (e.score > best.score ? e : best))] : efforts
-    for (const e of picked) {
+    for (const e of efforts) {
       const base = {
         key: `${model.id}@${e.effort}`,
         modelId: model.id,
@@ -104,7 +103,8 @@ export function buildRows(f: Filters): Row[] {
       const best = quotesFor(model, e.apiCost, f).find((q) => !q.excludedBy)
       if (best) {
         rows.push({ ...base, cost: best.cost, source: best.cost === 0 ? "free" : "subscription", plan: best.plan, offer: best.offer })
-      } else if (f.apiFallback) {
+      } else {
+        // No plan survives the filters: keep the model on the chart at its API price.
         rows.push({ ...base, cost: e.apiCost, source: "api", plan: null, offer: null })
       }
     }
