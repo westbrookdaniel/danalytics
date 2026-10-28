@@ -16,6 +16,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { CostScoreChart, type XScale } from "@/components/CostScoreChart"
 import { Hint } from "@/components/Hint"
+import { LogoMark } from "@/components/LogoMark"
 import { PlanBreakdown } from "@/components/PlanBreakdown"
 import { ResultsTable } from "@/components/ResultsTable"
 import { Sidebar } from "@/components/Sidebar"
@@ -156,7 +157,8 @@ export default function App() {
       <div className="min-h-dvh bg-background">
         <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur">
           <div className="mx-auto flex h-14 max-w-[1600px] items-center gap-4 px-4 sm:px-6">
-            <a href="#/" className="text-[17px] font-semibold tracking-tight">
+            <a href="#/" className="flex items-center gap-2 text-[17px] font-semibold tracking-tight">
+              <LogoMark className="size-6" />
               danalytics
             </a>
             <nav className="ml-2 flex items-center gap-1">
@@ -238,6 +240,7 @@ export default function App() {
                 )}
                 <Legend
                   showUnpriced={sub}
+                  dimUnpriced={view.dimUnpriced}
                   showFrontier={view.showFrontier}
                   palette={palette}
                 />
@@ -271,13 +274,6 @@ export default function App() {
                     · prices converted from USD at 1 USD = {data.fx.rates[currency]} {currency} ({data.fx.source}, {data.fx.date})
                   </>
                 ) : null}
-              </span>
-              <span>
-                Penguin by{" "}
-                <a className="text-foreground hover:underline" href="https://thenounproject.com/icon/penguin-1798134/" target="_blank" rel="noreferrer">
-                  Ayub Irawan
-                </a>{" "}
-                from Noun Project (CC BY 3.0)
               </span>
             </footer>
           </main>
@@ -477,10 +473,12 @@ function BracketSelect({ value, onChange }: { value: ReadonlySet<BracketId>; onC
 
 function Legend({
   showUnpriced,
+  dimUnpriced,
   showFrontier,
   palette,
 }: {
   showUnpriced: boolean
+  dimUnpriced: boolean
   showFrontier: boolean
   palette: ChartPalette
 }) {
@@ -496,7 +494,12 @@ function Legend({
       {showUnpriced || showFrontier ? <span className="hidden h-3 w-px bg-border sm:block" /> : null}
       {showUnpriced ? (
         <span className="inline-flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full border-2 border-muted-foreground" /> no plan in range, API price
+          {/* Same treatment as the chart: hollow point, and faded line when dimming is on. */}
+          <svg viewBox="0 0 22 10" className="h-2.5 w-[22px] overflow-visible" style={{ opacity: dimUnpriced ? 0.4 : 1 }} aria-hidden="true">
+            <line x1="0" y1="5" x2="14" y2="5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="17" cy="5" r="3.5" fill="none" stroke="currentColor" strokeWidth="2" />
+          </svg>
+          {dimUnpriced ? "dimmed: no plan in range, shown at API price" : "no plan in range, API price"}
         </span>
       ) : null}
       {showFrontier ? (

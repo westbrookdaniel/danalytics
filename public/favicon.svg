@@ -1,16 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="24 30 464 464">
-  <!-- "Penguin" by Ayub Irawan, Noun Project icon 1798134 (CC BY 3.0), redrawn as SVG. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <!-- danalytics mark: a rising frontier through four points on a rounded tile. -->
   <style>
-    .ink { fill: #111; }
-    .face { fill: #fff; }
+    .tile { fill: #1c1a18; }
+    .ink { fill: #fbfaf8; stroke: #fbfaf8; }
     @media (prefers-color-scheme: dark) {
-      .ink { fill: #f4f4f5; }
-      .face { fill: #18181b; }
+      .tile { fill: #f3f1ef; }
+      .ink { fill: #1c1a18; stroke: #1c1a18; }
     }
   </style>
-  <circle class="ink" cx="256" cy="262" r="226" />
-  <path class="face" d="M66 226C66 191 95 166 130 161C170 155 206 166 230 190Q256 214 282 190C306 166 342 155 382 161C417 166 446 191 446 226V300C446 394 360 456 256 456S66 394 66 300Z" />
-  <circle class="ink" cx="144" cy="238" r="32" />
-  <circle class="ink" cx="368" cy="238" r="32" />
-  <path class="ink" d="M196 296C222 276 290 270 318 288C326 294 325 305 319 313L270 389C264 399 252 399 246 389L196 315C190 307 190 301 196 296Z" />
+  <rect class="tile" x="1" y="1" width="22" height="22" rx="6" />
+  <polyline class="ink" points="6,16.5 10,11.5 13.5,13.5 18,7" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <circle class="ink" cx="6" cy="16.5" r="1.7" stroke="none" />
+  <circle class="ink" cx="10" cy="11.5" r="1.7" stroke="none" />
+  <circle class="ink" cx="13.5" cy="13.5" r="1.7" stroke="none" />
+  <circle class="ink" cx="18" cy="7" r="2.1" stroke="none" />
 </svg>

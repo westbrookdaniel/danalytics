@@ -17,7 +17,7 @@ Two benchmarks, picked from the select in the chart title (or `?benchmark=` in t
 
 Plans by model has its own page at `#/plans`.
 
-Inspired by [mypriors' FrontierCode 2.0 page](https://mypriors.com/benchmarks/frontiercode-2.0-main). Penguin icon by [Ayub Irawan](https://thenounproject.com/icon/penguin-1798134/) from Noun Project (CC BY 3.0), redrawn as SVG.
+Inspired by [mypriors' FrontierCode 2.0 page](https://mypriors.com/benchmarks/frontiercode-2.0-main).
 
 ## How a subscription task is priced
 
