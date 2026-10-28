@@ -80,6 +80,16 @@ export const data = raw as Dataset
 
 export const DEFAULT_BENCHMARK = data.benchmarks[0].id
 
+/** Snapshot date of each data source that records one (ISO dates). */
+export const SOURCE_DATES: { name: string; date: string }[] = [
+  ...data.benchmarks.flatMap((b) => (b.source.fetched ? [{ name: b.name, date: b.source.fetched }] : [])),
+  ...(data.sources.pricing.snapshot ? [{ name: "Plan allowances", date: data.sources.pricing.snapshot }] : []),
+  { name: "Exchange rates", date: data.fx.date },
+]
+
+/** When the data was last refreshed: the newest source snapshot. */
+export const LAST_UPDATED = SOURCE_DATES.map((s) => s.date).sort().at(-1)!
+
 export const benchmarkById = (id: string): Benchmark => data.benchmarks.find((b) => b.id === id) ?? data.benchmarks[0]
 
 const modelsByBenchmark = new Map(

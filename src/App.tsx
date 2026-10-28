@@ -16,11 +16,24 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { CostScoreChart, type XScale } from "@/components/CostScoreChart"
 import { Hint } from "@/components/Hint"
+import { Badge } from "@/components/ui/badge"
 import { LogoMark } from "@/components/LogoMark"
 import { PlanBreakdown } from "@/components/PlanBreakdown"
 import { ResultsTable } from "@/components/ResultsTable"
 import { Sidebar } from "@/components/Sidebar"
-import { benchmarkById, BRACKETS, data, DEFAULT_BENCHMARK, MAX_FEE, modelsFor, type BracketId, type LabGroup, type Model } from "@/lib/data"
+import {
+  benchmarkById,
+  BRACKETS,
+  data,
+  DEFAULT_BENCHMARK,
+  LAST_UPDATED,
+  MAX_FEE,
+  modelsFor,
+  SOURCE_DATES,
+  type BracketId,
+  type LabGroup,
+  type Model,
+} from "@/lib/data"
 import { bracketLabel, CURRENCIES, feeShort, setCurrency, setScoreUnit, type CurrencyCode } from "@/lib/format"
 import { buildRows, type Filters } from "@/lib/pricing"
 import { CHART_COLORS, useTheme, type ChartPalette, type ThemePref } from "@/lib/theme"
@@ -173,6 +186,7 @@ export default function App() {
                 </a>
               ))}
             </nav>
+            <UpdatedBadge />
             <span className="ml-auto" />
             <CurrencySelect value={currency} onChange={setCurrencyState} />
             <ThemeSwitch pref={pref} onChange={setPref} />
@@ -303,6 +317,30 @@ export default function App() {
         </div>
       </div>
     </TooltipProvider>
+  )
+}
+
+/** "28 Oct 2026" from an ISO date, read as a calendar date (no timezone shift). */
+const formatDate = (iso: string) =>
+  new Date(`${iso}T00:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
+
+function UpdatedBadge() {
+  return (
+    <Hint
+      content={
+        <div className="space-y-0.5">
+          {SOURCE_DATES.map((s) => (
+            <div key={s.name}>
+              {s.name}: {formatDate(s.date)}
+            </div>
+          ))}
+        </div>
+      }
+    >
+      <Badge variant="secondary" className="hidden cursor-default sm:inline-flex" tabIndex={0}>
+        Updated <span className="font-semibold text-foreground">{formatDate(LAST_UPDATED)}</span>
+      </Badge>
+    </Hint>
   )
 }
 
