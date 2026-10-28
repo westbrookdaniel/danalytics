@@ -595,50 +595,93 @@ function Method() {
   const { pricing, reference } = data.sources
   return (
     <div className="max-w-3xl">
-      <PageHeading title="Method" detail="How subscription costs per task are computed" />
-      <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
-        <p>
-          <span className="font-medium text-foreground">Subscription $ / task</span> = the benchmark's API $ / task × (plan's real $ per million tokens ÷ the
-          model's API $ per million tokens), assuming the whole monthly allowance is used. Both per-token prices use Real API Pricing's standard workload (97%
-          cache reads, 2.5% fresh input, 0.5% output; Anthropic bills fresh input as cache writes, Google uses a low-cache mix), so the ratio is the share of list
-          price a subscriber pays.
-        </p>
-        <p>
-          Allowances are measured from dashboards, local logs and saturation runs where possible. The cheapest plan that passes your filters is picked per
-          model. GPT-6 Astra, Sol and 6.1 Sol have no published API price in the dataset, so their per-token basis is implied from mypriors' ChatGPT Plus
-          figures; GPT-6 Luna is estimated from Factory Droid multipliers. Models with no measurable allowance stay at API price, drawn hollow.
-        </p>
-        <p>
-          <span className="font-medium text-foreground">Intelligence Index v5</span> scores and costs per task come from Artificial Analysis, which runs every
-          effort level itself. <span className="font-medium text-foreground">FrontierCode 2.0</span> uses Cognition's own published runs; GPT-6.1 Terra, which
-          Cognition hasn't published yet, uses Artificial Analysis's FrontierCode 2.0 run (its cost per task is that run's share of the index cost, which
-          matches Cognition's figures within a few percent for models both have run).
-        </p>
-        <ul className="space-y-1">
-          {data.benchmarks.map((b) => (
-            <li key={b.id}>
-              {b.name} scores and API costs:{" "}
-              <a className="text-foreground underline underline-offset-2" href={b.source.url} target="_blank" rel="noreferrer">
-                {b.source.name}
-              </a>
-              {b.source.fetched ? ` (fetched ${b.source.fetched})` : null}
+      <PageHeading title="Method" detail="Where the numbers come from and how a subscription task is priced" />
+      <div className="space-y-6 text-sm leading-relaxed text-muted-foreground">
+        <MethodSection title="The benchmarks">
+          <p>
+            <Em>Intelligence Index v5</Em> is Artificial Analysis's composite of nine evaluations. They run every reasoning-effort level of each model
+            themselves and publish a score and an API cost per task, both used as-is.
+          </p>
+          <p>
+            <Em>FrontierCode 2.0</Em> grades coding-agent changes the way a maintainer would. Scores and API costs per task are Cognition's own published runs.
+            Models Cognition hasn't published yet (GPT-6.1 Terra, DeepSeek V4.1 Flash 1017) use Artificial Analysis's FrontierCode run instead.
+          </p>
+        </MethodSection>
+
+        <MethodSection title="Pricing a subscription task">
+          <p className="rounded-md border bg-card/50 px-3 py-2 font-mono text-[12.5px] text-foreground">
+            subscription $/task = API $/task × plan $ per Mtok ÷ API $ per Mtok
+          </p>
+          <p>
+            A plan's $ per Mtok is its monthly fee divided by the tokens it allows in a month, so the ratio is the share of list price a subscriber pays. Both
+            sides use the same token mix (mostly cache reads, as in real agent sessions), and the plan side assumes you use the whole allowance; use half and each
+            task costs twice as much. For each model and effort level, the cheapest plan that passes your filters wins.
+          </p>
+        </MethodSection>
+
+        <MethodSection title="Allowances and confidence">
+          <p>
+            Allowances come from Real API Pricing, which measures them from usage dashboards, local logs and runs that use a plan up to its limit. Each is rated
+            high, medium or low confidence. Low means a single report or an estimate carried over from another model or plan tier, for example Sonnet and Haiku
+            on Claude plans, scaled from the measured Opus allowance by list price. These are included by default and can be switched off in the sidebar; the
+            leaderboard marks them with ≈.
+          </p>
+        </MethodSection>
+
+        <MethodSection title="Gaps and estimates">
+          <p>
+            GPT-6 Astra, Sol and 6.1 Sol have no published API price in the pricing data, so their per-token basis is implied from mypriors' ChatGPT Plus
+            figures; GPT-6 Luna's is estimated from Factory Droid's price multipliers. For models that take FrontierCode results from Artificial Analysis, the
+            cost per task is FrontierCode's share of their Intelligence Index cost, which matches Cognition's own figures within a few percent where both exist.
+            Models with no plan in range, or no measured allowance at all, are shown at their API price.
+          </p>
+        </MethodSection>
+
+        <MethodSection title="Currency">
+          <p>
+            All source prices are in US dollars. Other currencies are a straight conversion at a fixed ECB reference rate ({data.fx.date}), not what plans charge
+            locally.
+          </p>
+        </MethodSection>
+
+        <MethodSection title="Sources">
+          <ul className="space-y-1">
+            {data.benchmarks.map((b) => (
+              <li key={b.id}>
+                {b.name} scores and API costs:{" "}
+                <a className="text-foreground underline underline-offset-2" href={b.source.url} target="_blank" rel="noreferrer">
+                  {b.source.name}
+                </a>
+                {b.source.fetched ? ` (fetched ${b.source.fetched})` : null}
+              </li>
+            ))}
+            <li>
+              Plan allowances:{" "}
+              <a className="text-foreground underline underline-offset-2" href={pricing.url} target="_blank" rel="noreferrer">
+                {pricing.name}
+              </a>{" "}
+              (snapshot {pricing.snapshot})
             </li>
-          ))}
-          <li>
-            Plan allowances:{" "}
-            <a className="text-foreground underline underline-offset-2" href={pricing.url} target="_blank" rel="noreferrer">
-              {pricing.name}
-            </a>{" "}
-            (snapshot {pricing.snapshot})
-          </li>
-          <li>
-            Inspired by{" "}
-            <a className="text-foreground underline underline-offset-2" href={reference.url} target="_blank" rel="noreferrer">
-              {reference.name}
-            </a>
-          </li>
-        </ul>
+            <li>
+              Inspired by{" "}
+              <a className="text-foreground underline underline-offset-2" href={reference.url} target="_blank" rel="noreferrer">
+                {reference.name}
+              </a>
+            </li>
+          </ul>
+        </MethodSection>
       </div>
     </div>
   )
 }
+
+function MethodSection({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="space-y-2">
+      <h3 className="text-[15px] font-semibold text-foreground">{title}</h3>
+      {children}
+    </section>
+  )
+}
+
+const Em = ({ children }: { children: ReactNode }) => <span className="font-medium text-foreground">{children}</span>
