@@ -27,7 +27,7 @@ export function PlanBreakdown({ model, filters, palette }: Props) {
     <div className="space-y-3">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
-          <div className="font-semibold">{model.name}</div>
+          <div className="text-[14px] font-medium">{model.name}</div>
           <div className="text-xs text-muted-foreground">
             Best at {EFFORT_LABEL[best.effort] ?? best.effort} effort · {pct(best.score)} · {model.harness}
           </div>
@@ -49,7 +49,7 @@ export function PlanBreakdown({ model, filters, palette }: Props) {
         {quotes.map((q) => {
           const saving = cheaper(best.apiCost, q.cost)
           return (
-            <li key={q.plan.id} data-out={!!q.excludedBy} className="grid grid-cols-[minmax(0,11rem)_1fr_auto] items-center gap-3 text-sm data-[out=true]:opacity-45">
+            <li key={q.plan.id} data-out={!!q.excludedBy} className="grid grid-cols-[minmax(0,11rem)_1fr_auto] items-center gap-3 text-[12.5px] data-[out=true]:opacity-45">
               <span className="truncate" title={q.excludedBy ?? q.offer.source}>
                 {q.plan.name} <span className="text-muted-foreground tabular-nums">{fee(q.plan.fee)}</span>
               </span>
@@ -62,7 +62,7 @@ export function PlanBreakdown({ model, filters, palette }: Props) {
             </li>
           )
         })}
-        <li className="grid grid-cols-[minmax(0,11rem)_1fr_auto] items-center gap-3 text-sm">
+        <li className="grid grid-cols-[minmax(0,11rem)_1fr_auto] items-center gap-3 text-[12.5px]">
           <span className="truncate font-medium">API list price</span>
           <span className="h-2.5 rounded-r-full bg-muted">
             <span className="block h-full rounded-r-full bg-foreground/35" style={{ width: `${width(best.apiCost)}%` }} />

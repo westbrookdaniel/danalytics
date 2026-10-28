@@ -14,6 +14,8 @@ export interface Filters {
   /** Show models with no eligible plan at their API price instead of dropping them. */
   apiFallback: boolean
   bestEffortOnly: boolean
+  /** Reasoning-effort levels to keep; a model with none of them left drops out. */
+  efforts: ReadonlySet<string>
   models: ReadonlySet<string>
 }
 
@@ -79,7 +81,10 @@ export function buildRows(f: Filters): Row[] {
   const rows: Row[] = []
   for (const model of data.models) {
     if (!f.models.has(model.id)) continue
-    const efforts = [...model.efforts].sort((a, b) => EFFORT_ORDER.indexOf(a.effort) - EFFORT_ORDER.indexOf(b.effort))
+    const efforts = [...model.efforts]
+      .filter((e) => f.efforts.has(e.effort))
+      .sort((a, b) => EFFORT_ORDER.indexOf(a.effort) - EFFORT_ORDER.indexOf(b.effort))
+    if (!efforts.length) continue
     const picked = f.bestEffortOnly ? [efforts.reduce((best, e) => (e.score > best.score ? e : best))] : efforts
     for (const e of picked) {
       const base = {

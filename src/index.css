@@ -128,3 +128,13 @@
     @apply font-sans;
     }
 }
+
+/* TanStack Charts tooltip surface, matched to the popover tokens. */
+.fc-tooltip {
+  --ts-chart-tooltip-background: var(--popover);
+  --ts-chart-tooltip-color: var(--popover-foreground);
+  --ts-chart-tooltip-border: 1px solid var(--border);
+  --ts-chart-tooltip-border-radius: 8px;
+  --ts-chart-tooltip-padding: 10px 12px;
+  --ts-chart-tooltip-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
+}
