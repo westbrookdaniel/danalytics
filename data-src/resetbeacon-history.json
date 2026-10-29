@@ -1,5 +1,5 @@
 {
- "fetched": "2026-10-28",
+ "fetched": "2026-10-29",
  "items": [
   {
    "id": "1968163721034994139",
@@ -645,7 +645,7 @@
    "date": "2026-09-06",
    "announcedAt": "2026-09-06T20:09:56.000Z",
    "eventKind": "intent",
-   "status": "completed",
+   "status": "expired",
    "scope": "all",
    "evidenceUrl": "/evidence/ff1ac898-b1b5-4fd8-b67c-87f1aebffe0d/"
   },
@@ -654,7 +654,7 @@
    "date": "2026-09-07",
    "announcedAt": "2026-09-07T19:24:57.000Z",
    "eventKind": "scheduled",
-   "status": "completed",
+   "status": "missed",
    "scope": "all",
    "evidenceUrl": "/evidence/8f6e2f3b-6dad-475b-9099-32febaa6092c/"
   },
@@ -672,7 +672,7 @@
    "date": "2026-09-07",
    "announcedAt": "2026-09-08T04:07:53.000Z",
    "eventKind": "intent",
-   "status": "completed",
+   "status": "expired",
    "scope": "all",
    "evidenceUrl": "/evidence/b84bc4cb-d496-4002-b39a-3f29fdd7ae39/"
   },
@@ -735,7 +735,7 @@
    "date": "2026-09-25",
    "announcedAt": "2026-09-26T00:07:13.000Z",
    "eventKind": "intent",
-   "status": "completed",
+   "status": "expired",
    "scope": "all",
    "evidenceUrl": "/evidence/95a0a970-fd44-4b12-a4d8-d01919074777/"
   },
@@ -825,7 +825,7 @@
    "date": "2026-10-04",
    "announcedAt": "2026-10-04T20:33:43.000Z",
    "eventKind": "intent",
-   "status": "completed",
+   "status": "expired",
    "scope": "all",
    "evidenceUrl": "/evidence/a5011094-4a0a-499f-885e-1edafcb4755f/"
   },
@@ -978,7 +978,7 @@
    "date": "2026-10-14",
    "announcedAt": "2026-10-15T04:55:51.000Z",
    "eventKind": "intent",
-   "status": "completed",
+   "status": "expired",
    "scope": "all",
    "evidenceUrl": "/evidence/ab366285-d980-4828-81c8-6383c0574437/"
   },
@@ -987,7 +987,7 @@
    "date": "2026-10-14",
    "announcedAt": "2026-10-15T04:56:07.000Z",
    "eventKind": "scheduled",
-   "status": "completed",
+   "status": "missed",
    "scope": "all",
    "evidenceUrl": "/evidence/37f44b14-87d2-4fe3-93d9-ff3c02f05f4f/"
   },
@@ -1005,7 +1005,7 @@
    "date": "2026-10-15",
    "announcedAt": "2026-10-16T04:30:52.339Z",
    "eventKind": "intent",
-   "status": "completed",
+   "status": "expired",
    "scope": "all",
    "evidenceUrl": "/evidence/5c77be43-acd9-4884-99ae-90f3ff0c4537/"
   },
@@ -1014,7 +1014,7 @@
    "date": "2026-10-17",
    "announcedAt": "2026-10-17T16:21:13.000Z",
    "eventKind": "scheduled",
-   "status": "completed",
+   "status": "missed",
    "scope": "all",
    "evidenceUrl": "/evidence/4b4d8f49-0375-4aa1-80c9-934c39daef2e/"
   },
@@ -1050,7 +1050,7 @@
    "date": "2026-10-21",
    "announcedAt": "2026-10-22T06:55:22.000Z",
    "eventKind": "intent",
-   "status": "completed",
+   "status": "expired",
    "scope": "all",
    "evidenceUrl": "/evidence/1d230aa0-f7c8-4773-a349-e35b48f8b058/"
   },
@@ -1068,7 +1068,7 @@
    "date": "2026-10-23",
    "announcedAt": "2026-10-23T04:47:34.000Z",
    "eventKind": "scheduled",
-   "status": "completed",
+   "status": "missed",
    "scope": "all",
    "evidenceUrl": "/evidence/a7b812e9-ca5c-4860-94a9-bb7f223db983/"
   },
@@ -1095,7 +1095,7 @@
    "date": "2026-10-25",
    "announcedAt": "2026-10-26T05:21:22.000Z",
    "eventKind": "intent",
-   "status": "completed",
+   "status": "active",
    "scope": "all",
    "evidenceUrl": "/evidence/f27ec56a-0020-41ab-a9ac-0ca4281faee8/"
   },
@@ -1104,7 +1104,7 @@
    "date": "2026-10-27",
    "announcedAt": "2026-10-28T02:43:38.000Z",
    "eventKind": "scheduled",
-   "status": "active",
+   "status": "missed",
    "scope": "all",
    "evidenceUrl": "/evidence/aa5f7cdb-4a64-4817-be49-8e0449771694/"
   }

@@ -154,7 +154,12 @@ const modelId = (name) => name.toLowerCase().replace(/[^a-z0-9.]+/g, "-");
 
 // Models Cognition hasn't run yet; their results come only from Artificial Analysis.
 const EXTRA_MODELS = {
+  // Released 2026-10-28; no plan allowance measured yet, so it charts at API price.
+  "Gemini 4 Carbon": { pricingId: "gemini-4-carbon", lab: "Google", short: "Gemini 4 Carbon" },
   "GPT-6.1 Terra": { pricingId: "gpt-6.1-terra", lab: "OpenAI", short: "GPT-6.1 Terra" },
+  // Proprietary, unlike Kimi K3. Real API Pricing's Kimi plan rows are adopted as kimi-k3 only (the K3.1 Pro
+  // sample that re-based them is research-only), so this charts at API price.
+  "Kimi K3.1 Pro": { pricingId: "kimi-k3.1-pro", lab: "Other", short: "Kimi K3.1 Pro" },
   // DeepSeek's 2026-10-17 snapshot. Real API Pricing only measures the original V4.1 Flash, so
   // this has no plan allowances of its own and charts at API price.
   "DeepSeek V4.1 Flash 1017": { pricingId: "deepseek-v4.1-flash-1017", lab: "Open weights", short: "DeepSeek V4.1 Flash 1017", openWeights: true },
@@ -254,6 +259,20 @@ for (const [id, configs] of Object.entries(aa.models)) {
   }
 }
 
+// Gemini 4 Argon's $0.10 / $2 / $10 is an introductory price (to 2026-11-30). Cognition's costs and the plan
+// allowances use it, but Artificial Analysis prices Argon at the $0.20 / $4 / $20 list price that follows, so
+// its Intelligence Index costs need the matching $/Mtok to keep the subscription ratio on the same basis.
+const argonAA = aa.models["gemini-4-argon"]?.[0]?.prices;
+const intelligenceApiPrices = argonAA
+  ? {
+      "gemini-4-argon": {
+        usdPerMtok: blend({ cached: argonAA.cacheHit, input: argonAA.input, output: argonAA.output }, MIX.lowCache),
+        basis: "list",
+        note: `Artificial Analysis list price $${argonAA.cacheHit} / $${argonAA.input} / $${argonAA.output}, low-cache mix`,
+      },
+    }
+  : {};
+
 const benchmarks = [
   {
     id: "aa-intelligence-v5",
@@ -263,6 +282,7 @@ const benchmarks = [
     scoreUnit: "",
     source: { name: "Artificial Analysis Intelligence Index v5", url: "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index", fetched: aa.fetchedAt },
     results: intelligence,
+    apiPrices: intelligenceApiPrices,
   },
   {
     id: "frontiercode-2.0",

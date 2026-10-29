@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-28",
+ "generatedAt": "2026-10-29",
  "sources": {
   "pricing": {
    "name": "Real API Pricing",
@@ -35,18 +35,18 @@
   }
  },
  "fx": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "source": "ECB reference rates via Frankfurter",
   "rates": {
    "USD": 1,
-   "AUD": 1.4221,
-   "CAD": 1.4023,
-   "CNY": 6.6675,
-   "EUR": 0.89686,
-   "GBP": 0.7503,
-   "INR": 95.12,
-   "JPY": 157.82,
-   "NZD": 1.7535
+   "AUD": 1.4219,
+   "CAD": 1.4047,
+   "CNY": 6.6664,
+   "EUR": 0.89823,
+   "GBP": 0.75258,
+   "INR": 95.22,
+   "JPY": 157.96,
+   "NZD": 1.7815
   }
  },
  "benchmarks": [
@@ -59,7 +59,7 @@
    "source": {
     "name": "Artificial Analysis Intelligence Index v5",
     "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
-    "fetched": "2026-10-28"
+    "fetched": "2026-10-29"
    },
    "results": {
     "claude-opus-5.5": [
@@ -456,11 +456,22 @@
       "estimated": false
      }
     ],
+    "gemini-4-carbon": [
+     {
+      "effort": "high",
+      "score": 59.43,
+      "apiCost": 7.755545745286556,
+      "outputTokens": 122768,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
     "gemini-4-argon": [
      {
       "effort": "high",
       "score": 50.41,
-      "apiCost": 3.8413356862577754,
+      "apiCost": 7.682671372515551,
       "outputTokens": 116368,
       "harness": null,
       "source": "Artificial Analysis",
@@ -507,6 +518,17 @@
       "estimated": false
      }
     ],
+    "kimi-k3.1-pro": [
+     {
+      "effort": "na",
+      "score": 46,
+      "apiCost": 3.6812002895742055,
+      "outputTokens": 72239,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
     "glm-5.3": [
      {
       "effort": "max",
@@ -538,6 +560,13 @@
       "estimated": false
      }
     ]
+   },
+   "apiPrices": {
+    "gemini-4-argon": {
+     "usdPerMtok": 0.85,
+     "basis": "list",
+     "note": "Artificial Analysis list price $0.2 / $4 / $20, low-cache mix"
+    }
    }
   },
   {
@@ -557,7 +586,7 @@
       "score": 15.96,
       "apiCost": 0.206,
       "outputTokens": 40659,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      },
      {
@@ -565,7 +594,7 @@
       "score": 18.21,
       "apiCost": 0.274,
       "outputTokens": 57169,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      },
      {
@@ -573,7 +602,7 @@
       "score": 19.3,
       "apiCost": 0.384,
       "outputTokens": 82220,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      }
     ],
@@ -625,7 +654,7 @@
       "score": 14.37,
       "apiCost": 3.189,
       "outputTokens": 47199,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      },
      {
@@ -633,7 +662,7 @@
       "score": 16.84,
       "apiCost": 5.181,
       "outputTokens": 73247,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      },
      {
@@ -641,7 +670,7 @@
       "score": 17.81,
       "apiCost": 7.516,
       "outputTokens": 100706,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      }
     ],
@@ -651,7 +680,7 @@
       "score": 7.81,
       "apiCost": 0.43,
       "outputTokens": 35321,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      },
      {
@@ -659,7 +688,7 @@
       "score": 12.41,
       "apiCost": 0.584,
       "outputTokens": 56914,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      },
      {
@@ -667,7 +696,7 @@
       "score": 14.18,
       "apiCost": 0.792,
       "outputTokens": 90044,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      }
     ],
@@ -921,7 +950,7 @@
       "score": 21.47,
       "apiCost": 3.977,
       "outputTokens": 63291,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      },
      {
@@ -929,7 +958,7 @@
       "score": 23.45,
       "apiCost": 5.688,
       "outputTokens": 123879,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      },
      {
@@ -937,7 +966,7 @@
       "score": 26.3,
       "apiCost": 6.514,
       "outputTokens": 148569,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      }
     ],
@@ -1023,7 +1052,7 @@
       "score": 11.1,
       "apiCost": 2.977,
       "outputTokens": 28740,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      },
      {
@@ -1031,7 +1060,7 @@
       "score": 17.74,
       "apiCost": 4.475,
       "outputTokens": 49854,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      },
      {
@@ -1039,7 +1068,7 @@
       "score": 17.31,
       "apiCost": 5.456,
       "outputTokens": 64271,
-      "harness": "chisel",
+      "harness": "devin-cli",
       "source": "Cognition"
      }
     ],
@@ -1251,7 +1280,7 @@
       "score": 1.34,
       "apiCost": 1.3592,
       "outputTokens": 23990,
-      "harness": "chisel_swe1",
+      "harness": "devin-cli-swe1",
       "source": "Cognition"
      }
     ],
@@ -1261,7 +1290,7 @@
       "score": 16.15,
       "apiCost": 3.5209,
       "outputTokens": 89251,
-      "harness": "chisel_swe1",
+      "harness": "devin-cli-swe1",
       "source": "Cognition"
      }
     ],
@@ -1315,11 +1344,31 @@
       "source": "Artificial Analysis"
      }
     ],
+    "gemini-4-carbon": [
+     {
+      "effort": "high",
+      "score": 40.56,
+      "apiCost": 10.816406108193123,
+      "outputTokens": null,
+      "harness": "Artificial Analysis",
+      "source": "Artificial Analysis"
+     }
+    ],
     "deepseek-v4.1-flash-1017": [
      {
       "effort": "max",
       "score": 28.47,
       "apiCost": 0.4669632309068641,
+      "outputTokens": null,
+      "harness": "Artificial Analysis",
+      "source": "Artificial Analysis"
+     }
+    ],
+    "kimi-k3.1-pro": [
+     {
+      "effort": "na",
+      "score": 25.45,
+      "apiCost": 2.1414267162758356,
       "outputTokens": null,
       "harness": "Artificial Analysis",
       "source": "Artificial Analysis"
@@ -1612,11 +1661,31 @@
    "api": null
   },
   {
+   "id": "gemini-4-carbon",
+   "name": "Gemini 4 Carbon",
+   "short": "Gemini 4 Carbon",
+   "lab": "Google",
+   "pricingId": "gemini-4-carbon",
+   "superseded": false,
+   "openWeights": false,
+   "api": null
+  },
+  {
    "id": "gpt-6.1-terra",
    "name": "GPT-6.1 Terra",
    "short": "GPT-6.1 Terra",
    "lab": "OpenAI",
    "pricingId": "gpt-6.1-terra",
+   "superseded": false,
+   "openWeights": false,
+   "api": null
+  },
+  {
+   "id": "kimi-k3.1-pro",
+   "name": "Kimi K3.1 Pro",
+   "short": "Kimi K3.1 Pro",
+   "lab": "Other",
+   "pricingId": "kimi-k3.1-pro",
    "superseded": false,
    "openWeights": false,
    "api": null
@@ -1633,14 +1702,13 @@
   }
  ],
  "codexResets": {
-  "fetched": "2026-10-28",
+  "fetched": "2026-10-29",
   "url": "https://resetbeacon.com/?filter=all",
   "windowDays": 90,
   "providers": [
    "OpenAI"
   ],
   "dates": [
-   "2026-07-31",
    "2026-08-08",
    "2026-08-10",
    "2026-08-12",
@@ -1661,8 +1729,8 @@
    "2026-10-19",
    "2026-10-24"
   ],
-  "avgGapDays": 4.473684210526316,
-  "multiplier": 1.5647058823529412
+  "avgGapDays": 4.277777777777778,
+  "multiplier": 1.6363636363636365
  },
  "plans": [
   {

@@ -750,7 +750,7 @@ function Method() {
           </p>
           <p>
             <Em>FrontierCode 2.0</Em> grades coding-agent changes the way a maintainer would. Scores and API costs per task are Cognition's own published runs.
-            Models Cognition hasn't published yet (GPT-6.1 Terra, DeepSeek V4.1 Flash 1017) use Artificial Analysis's FrontierCode run instead.
+            Models Cognition hasn't published yet (Gemini 4 Carbon, GPT-6.1 Terra, Kimi K3.1 Pro, DeepSeek V4.1 Flash 1017) use Artificial Analysis's FrontierCode run instead.
           </p>
         </MethodSection>
 

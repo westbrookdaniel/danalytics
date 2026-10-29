@@ -42,6 +42,8 @@ export interface Benchmark {
   scoreUnit: string
   source: { name: string; url: string; fetched?: string }
   results: Record<string, EffortResult[]>
+  /** API prices that replace a model's default where this benchmark's costs use a different list price. */
+  apiPrices?: Record<string, ModelMeta["api"]>
 }
 
 export interface Offer {
@@ -109,7 +111,10 @@ export const LAST_UPDATED = SOURCE_DATES.map((s) => s.date).sort().at(-1)!
 export const benchmarkById = (id: string): Benchmark => data.benchmarks.find((b) => b.id === id) ?? data.benchmarks[0]
 
 const modelsByBenchmark = new Map(
-  data.benchmarks.map((b) => [b.id, data.models.filter((m) => b.results[m.id]?.length).map((m): Model => ({ ...m, efforts: b.results[m.id] }))]),
+  data.benchmarks.map((b) => [
+    b.id,
+    data.models.filter((m) => b.results[m.id]?.length).map((m): Model => ({ ...m, api: b.apiPrices?.[m.id] ?? m.api, efforts: b.results[m.id] })),
+  ]),
 )
 
 /**
