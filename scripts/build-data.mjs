@@ -65,15 +65,9 @@ const MODELS = {
 const HIDDEN = new Set(["Obsidian 3", "SWE-2", "Mistral Large 4", "Inkling Small", "Beam 1.0"]);
 
 // API $/Mtok for models with no metered row or list price in Real API Pricing.
-// GPT-6 Sol/6.1 Sol/Astra: implied by mypriors.com's published ChatGPT Plus $/task
-// (plan $/Mtok × Cognition API $/task ÷ mypriors subscription $/task, median across efforts).
-// GPT-6 Luna: Factory Droid multiplier ratio to GPT-6 Sol (0.04× vs 0.8×).
-// Gemini 4 Argon: launch list price $0.10/$2/$10 on the low-cache mix (adopted.csv note).
+// Gemini 4 Argon: introductory price $0.10/$2/$10 on the low-cache mix (adopted.csv note), which its plan
+// allowance and Cognition's costs use. Everything else falls back to Artificial Analysis's list price below.
 const API_FALLBACK = {
-  "gpt-6-astra": { usdPerMtok: 1.464, basis: "implied", note: "Implied from mypriors ChatGPT Plus $/task (≈ $1 / $10 / $50 list)" },
-  "gpt-6-sol": { usdPerMtok: 0.29, basis: "implied", note: "Implied from mypriors ChatGPT Plus $/task (≈ $0.20 / $2 / $10 list)" },
-  "gpt-6.1-sol": { usdPerMtok: 0.197, basis: "implied", note: "Implied from mypriors ChatGPT Plus $/task" },
-  "gpt-6-luna": { usdPerMtok: 0.0145, basis: "estimated", note: "GPT-6 Sol × Factory Droid multiplier ratio (0.04 / 0.8)" },
   "gemini-4-argon": {
     usdPerMtok: blend({ cached: 0.1, input: 2, output: 10 }, MIX.lowCache),
     basis: "list",
@@ -82,8 +76,9 @@ const API_FALLBACK = {
 };
 
 const points = pricing.points;
+const mixFor = (lab) => (lab === "Anthropic" ? MIX.anthropic : lab === "Google" ? MIX.lowCache : MIX.standard);
 
-function apiPrice(pricingId) {
+function apiPrice(pricingId, lab) {
   if (!pricingId) return null;
   const metered = points.filter((p) => p.billing === "metered" && p.model === pricingId);
   // DeepSeek has peak/off-peak API rows; list (peak) price is the honest comparison.
@@ -94,6 +89,17 @@ function apiPrice(pricingId) {
   if (withList) {
     const mix = withList.vendor === "Anthropic" ? MIX.anthropic : withList.vendor === "Google" ? MIX.lowCache : MIX.standard;
     return { usdPerMtok: blend(withList.list_price, mix), basis: "list", note: "Official list price on the standard mix" };
+  }
+  // Artificial Analysis lists the provider's price for each model it runs (e.g. the GPT-6 family, which Real API
+  // Pricing only covers through plans).
+  const aaPrice = aa.models[pricingId]?.find((c) => c.prices?.input != null)?.prices;
+  if (aaPrice) {
+    const { cacheHit, input, output } = aaPrice;
+    return {
+      usdPerMtok: blend({ cached: cacheHit ?? input, input, output }, mixFor(lab)),
+      basis: "list",
+      note: `List price $${cacheHit ?? input} / $${input} / $${output} via Artificial Analysis`,
+    };
   }
   return null;
 }
@@ -177,7 +183,7 @@ for (const name of [...cognition.models.filter((n) => !HIDDEN.has(n)), ...Object
     pricingId: meta.pricingId,
     superseded: !!meta.superseded,
     openWeights: !!meta.openWeights,
-    api: apiPrice(meta.pricingId),
+    api: apiPrice(meta.pricingId, meta.lab),
   });
 }
 const modelIds = new Set(models.map((m) => m.id));

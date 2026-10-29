@@ -32,8 +32,7 @@ Real API Pricing has no API price for some models. `scripts/build-data.mjs` docu
 
 | Model | API basis |
 | --- | --- |
-| GPT-6 Astra, GPT-6 Sol, GPT-6.1 Sol | Implied from mypriors' published ChatGPT Plus $/task |
-| GPT-6 Luna | GPT-6 Sol × Factory Droid multiplier ratio (0.04 / 0.8) |
+| GPT-6 Astra, GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna | List price from Artificial Analysis, standard mix |
 | Gemini 4 Argon | Introductory price $0.10 / $2 / $10 (to 2026-11-30), low-cache mix. On the Intelligence Index, Artificial Analysis's $0.20 / $4 / $20 list price instead, since its costs use that price |
 | Gemini 4 Carbon, GPT-6.1 Terra, Kimi K3.1 Pro, DeepSeek V4.1 Flash 1017, Muse Wonder, SWE-1.x | No plan allowance measured yet: API price only |
 

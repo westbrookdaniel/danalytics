@@ -1471,9 +1471,9 @@
    "superseded": false,
    "openWeights": false,
    "api": {
-    "usdPerMtok": 1.464,
-    "basis": "implied",
-    "note": "Implied from mypriors ChatGPT Plus $/task (≈ $1 / $10 / $50 list)"
+    "usdPerMtok": 1.47,
+    "basis": "list",
+    "note": "List price $1 / $10 / $50 via Artificial Analysis"
    }
   },
   {
@@ -1485,9 +1485,9 @@
    "superseded": false,
    "openWeights": false,
    "api": {
-    "usdPerMtok": 0.0145,
-    "basis": "estimated",
-    "note": "GPT-6 Sol × Factory Droid multiplier ratio (0.04 / 0.8)"
+    "usdPerMtok": 0.014700000000000001,
+    "basis": "list",
+    "note": "List price $0.01 / $0.1 / $0.5 via Artificial Analysis"
    }
   },
   {
@@ -1499,9 +1499,9 @@
    "superseded": true,
    "openWeights": false,
    "api": {
-    "usdPerMtok": 0.29,
-    "basis": "implied",
-    "note": "Implied from mypriors ChatGPT Plus $/task (≈ $0.20 / $2 / $10 list)"
+    "usdPerMtok": 0.294,
+    "basis": "list",
+    "note": "List price $0.2 / $2 / $10 via Artificial Analysis"
    }
   },
   {
@@ -1514,8 +1514,8 @@
    "openWeights": false,
    "api": {
     "usdPerMtok": 0.197,
-    "basis": "implied",
-    "note": "Implied from mypriors ChatGPT Plus $/task"
+    "basis": "list",
+    "note": "List price $0.1 / $2 / $10 via Artificial Analysis"
    }
   },
   {
@@ -1668,7 +1668,11 @@
    "pricingId": "gemini-4-carbon",
    "superseded": false,
    "openWeights": false,
-   "api": null
+   "api": {
+    "usdPerMtok": 0.85,
+    "basis": "list",
+    "note": "List price $0.2 / $4 / $20 via Artificial Analysis"
+   }
   },
   {
    "id": "gpt-6.1-terra",
@@ -1678,7 +1682,11 @@
    "pricingId": "gpt-6.1-terra",
    "superseded": false,
    "openWeights": false,
-   "api": null
+   "api": {
+    "usdPerMtok": 0.0985,
+    "basis": "list",
+    "note": "List price $0.05 / $1 / $5 via Artificial Analysis"
+   }
   },
   {
    "id": "kimi-k3.1-pro",
@@ -1688,7 +1696,11 @@
    "pricingId": "kimi-k3.1-pro",
    "superseded": false,
    "openWeights": false,
-   "api": null
+   "api": {
+    "usdPerMtok": 0.294,
+    "basis": "list",
+    "note": "List price $0.2 / $2 / $10 via Artificial Analysis"
+   }
   },
   {
    "id": "deepseek-v4.1-flash-1017",
@@ -1698,7 +1710,11 @@
    "pricingId": "deepseek-v4.1-flash-1017",
    "superseded": false,
    "openWeights": true,
-   "api": null
+   "api": {
+    "usdPerMtok": 0.019319999999999997,
+    "basis": "list",
+    "note": "List price $0.006 / $0.3 / $1.2 via Artificial Analysis"
+   }
   }
  ],
  "codexResets": {
