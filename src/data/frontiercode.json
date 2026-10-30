@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-29",
+ "generatedAt": "2026-10-30",
  "sources": {
   "pricing": {
    "name": "Real API Pricing",
@@ -35,18 +35,18 @@
   }
  },
  "fx": {
-  "date": "2026-10-28",
+  "date": "2026-10-29",
   "source": "ECB reference rates via Frankfurter",
   "rates": {
    "USD": 1,
-   "AUD": 1.4219,
-   "CAD": 1.4047,
-   "CNY": 6.6664,
-   "EUR": 0.89823,
-   "GBP": 0.75258,
-   "INR": 95.22,
-   "JPY": 157.96,
-   "NZD": 1.7815
+   "AUD": 1.4234,
+   "CAD": 1.3996,
+   "CNY": 6.6616,
+   "EUR": 0.89847,
+   "GBP": 0.75093,
+   "INR": 95.27,
+   "JPY": 158.06,
+   "NZD": 1.7805
   }
  },
  "benchmarks": [
@@ -59,7 +59,7 @@
    "source": {
     "name": "Artificial Analysis Intelligence Index v5",
     "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
-    "fetched": "2026-10-29"
+    "fetched": "2026-10-30"
    },
    "results": {
     "claude-opus-5.5": [
@@ -207,7 +207,7 @@
      {
       "effort": "max",
       "score": 49.01,
-      "apiCost": 13.03926860806298,
+      "apiCost": 12.993997201178466,
       "outputTokens": 117941,
       "harness": null,
       "source": "Artificial Analysis",
@@ -216,7 +216,7 @@
      {
       "effort": "low",
       "score": 38.48,
-      "apiCost": 4.486736376258894,
+      "apiCost": 4.471135894646431,
       "outputTokens": 37837,
       "harness": null,
       "source": "Artificial Analysis",
@@ -225,7 +225,7 @@
      {
       "effort": "medium",
       "score": 42.97,
-      "apiCost": 5.58053808023747,
+      "apiCost": 5.564264690221474,
       "outputTokens": 48545,
       "harness": null,
       "source": "Artificial Analysis",
@@ -234,7 +234,7 @@
      {
       "effort": "high",
       "score": 47.02,
-      "apiCost": 7.560794697580411,
+      "apiCost": 7.539956160226559,
       "outputTokens": 66031,
       "harness": null,
       "source": "Artificial Analysis",
@@ -243,7 +243,7 @@
      {
       "effort": "xhigh",
       "score": 49.67,
-      "apiCost": 10.88545763790596,
+      "apiCost": 10.847474706140272,
       "outputTokens": 97059,
       "harness": null,
       "source": "Artificial Analysis",
@@ -529,6 +529,17 @@
       "estimated": false
      }
     ],
+    "kimi-k3": [
+     {
+      "effort": "low",
+      "score": 17.42,
+      "apiCost": 2.368773852349091,
+      "outputTokens": 39666,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
     "glm-5.3": [
      {
       "effort": "max",
@@ -544,6 +555,17 @@
       "score": 23.06,
       "apiCost": 1.5749301149593384,
       "outputTokens": 51986,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
+    "glm-5.3-flash": [
+     {
+      "effort": "na",
+      "score": 27.75,
+      "apiCost": 0.5833103440014082,
+      "outputTokens": 134205,
       "harness": null,
       "source": "Artificial Analysis",
       "estimated": false
@@ -970,6 +992,32 @@
       "source": "Cognition"
      }
     ],
+    "gemini-4-carbon": [
+     {
+      "effort": "low",
+      "score": 31.88,
+      "apiCost": 4.548,
+      "outputTokens": 57868,
+      "harness": "devin-cli",
+      "source": "Cognition"
+     },
+     {
+      "effort": "medium",
+      "score": 40,
+      "apiCost": 4.044,
+      "outputTokens": 109126,
+      "harness": "devin-cli",
+      "source": "Cognition"
+     },
+     {
+      "effort": "high",
+      "score": 37.48,
+      "apiCost": 4.434,
+      "outputTokens": 121442,
+      "harness": "devin-cli",
+      "source": "Cognition"
+     }
+    ],
     "grok-4.7": [
      {
       "effort": "low",
@@ -1344,16 +1392,6 @@
       "source": "Artificial Analysis"
      }
     ],
-    "gemini-4-carbon": [
-     {
-      "effort": "high",
-      "score": 40.56,
-      "apiCost": 10.816406108193123,
-      "outputTokens": null,
-      "harness": "Artificial Analysis",
-      "source": "Artificial Analysis"
-     }
-    ],
     "deepseek-v4.1-flash-1017": [
      {
       "effort": "max",
@@ -1533,6 +1571,20 @@
    }
   },
   {
+   "id": "gemini-4-carbon",
+   "name": "Gemini 4 Carbon",
+   "short": "Gemini 4 Carbon",
+   "lab": "Google",
+   "pricingId": "gemini-4-carbon",
+   "superseded": false,
+   "openWeights": false,
+   "api": {
+    "usdPerMtok": 0.85,
+    "basis": "list",
+    "note": "List price $0.2 / $4 / $20 via Artificial Analysis"
+   }
+  },
+  {
    "id": "grok-4.7",
    "name": "Grok 4.7",
    "short": "Grok 4.7",
@@ -1661,20 +1713,6 @@
    "api": null
   },
   {
-   "id": "gemini-4-carbon",
-   "name": "Gemini 4 Carbon",
-   "short": "Gemini 4 Carbon",
-   "lab": "Google",
-   "pricingId": "gemini-4-carbon",
-   "superseded": false,
-   "openWeights": false,
-   "api": {
-    "usdPerMtok": 0.85,
-    "basis": "list",
-    "note": "List price $0.2 / $4 / $20 via Artificial Analysis"
-   }
-  },
-  {
    "id": "gpt-6.1-terra",
    "name": "GPT-6.1 Terra",
    "short": "GPT-6.1 Terra",
@@ -1718,7 +1756,7 @@
   }
  ],
  "codexResets": {
-  "fetched": "2026-10-29",
+  "fetched": "2026-10-30",
   "url": "https://resetbeacon.com/?filter=all",
   "windowDays": 90,
   "providers": [

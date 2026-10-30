@@ -51,6 +51,8 @@ const MODELS = {
   "GPT-5.6 Sol": { pricingId: "gpt-5.6-sol", lab: "OpenAI", short: "GPT-5.6 Sol", superseded: true },
   "GPT-5.5": { pricingId: "gpt-5.5", lab: "OpenAI", short: "GPT-5.5", superseded: true },
   "Gemini 4 Argon": { pricingId: "gemini-4-argon", lab: "Google", short: "Gemini 4 Argon" },
+  // Released 2026-10-28; no plan allowance measured yet, so it charts at API price.
+  "Gemini 4 Carbon": { pricingId: "gemini-4-carbon", lab: "Google", short: "Gemini 4 Carbon" },
   "Grok 4.7": { pricingId: "grok-4.7", lab: "xAI", short: "Grok 4.7" },
   "SWE-1.7": { pricingId: null, lab: "Cognition", short: "SWE-1.7", superseded: true },
   "SWE-1.6": { pricingId: null, lab: "Cognition", short: "SWE-1.6", superseded: true },
@@ -160,8 +162,6 @@ const modelId = (name) => name.toLowerCase().replace(/[^a-z0-9.]+/g, "-");
 
 // Models Cognition hasn't run yet; their results come only from Artificial Analysis.
 const EXTRA_MODELS = {
-  // Released 2026-10-28; no plan allowance measured yet, so it charts at API price.
-  "Gemini 4 Carbon": { pricingId: "gemini-4-carbon", lab: "Google", short: "Gemini 4 Carbon" },
   "GPT-6.1 Terra": { pricingId: "gpt-6.1-terra", lab: "OpenAI", short: "GPT-6.1 Terra" },
   // Proprietary, unlike Kimi K3. Real API Pricing's Kimi plan rows are adopted as kimi-k3 only (the K3.1 Pro
   // sample that re-based them is research-only), so this charts at API price.

@@ -1,5 +1,5 @@
 {
- "fetched": "2026-10-29",
+ "fetched": "2026-10-30",
  "items": [
   {
    "id": "1968163721034994139",
@@ -1095,7 +1095,7 @@
    "date": "2026-10-25",
    "announcedAt": "2026-10-26T05:21:22.000Z",
    "eventKind": "intent",
-   "status": "active",
+   "status": "expired",
    "scope": "all",
    "evidenceUrl": "/evidence/f27ec56a-0020-41ab-a9ac-0ca4281faee8/"
   },
@@ -1107,6 +1107,15 @@
    "status": "missed",
    "scope": "all",
    "evidenceUrl": "/evidence/aa5f7cdb-4a64-4817-be49-8e0449771694/"
+  },
+  {
+   "id": "2115850175868727621",
+   "date": "2026-10-29",
+   "announcedAt": "2026-10-29T16:56:07.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "unknown",
+   "evidenceUrl": "/evidence/90257d24-4099-4760-b2df-391849bddd11/"
   }
  ]
 }

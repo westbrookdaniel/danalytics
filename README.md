@@ -5,7 +5,7 @@ What a benchmark task costs when you pay with a subscription instead of the API.
 Two benchmarks, picked from the select in the chart title (or `?benchmark=` in the URL):
 
 - **Intelligence Index v5** (default): [Artificial Analysis](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) runs every reasoning-effort level of each model across nine evaluations and publishes an index score and an API cost per task.
-- **FrontierCode 2.0**: [Cognition](https://cognition.com/frontiercode) reports a score and an API cost per task for every model and reasoning effort. Models Cognition hasn't published yet (Gemini 4 Carbon, GPT-6.1 Terra, Kimi K3.1 Pro, DeepSeek V4.1 Flash 1017) come from Artificial Analysis's FrontierCode 2.0 run.
+- **FrontierCode 2.0**: [Cognition](https://cognition.com/frontiercode) reports a score and an API cost per task for every model and reasoning effort. Models Cognition hasn't published yet (GPT-6.1 Terra, Kimi K3.1 Pro, DeepSeek V4.1 Flash 1017) come from Artificial Analysis's FrontierCode 2.0 run.
 
 [Real API Pricing](https://github.com/Fei2411/real-api-pricing) measures how many tokens each subscription actually allows per month. The app joins the two and plots score against cost per task, with controls for:
 
