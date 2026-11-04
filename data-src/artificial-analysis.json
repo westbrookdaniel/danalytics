@@ -1,5 +1,5 @@
 {
- "fetchedAt": "2026-10-30",
+ "fetchedAt": "2026-11-04",
  "source": "https://artificialanalysis.ai/models",
  "models": {
   "claude-opus-5.5": [
@@ -7,7 +7,7 @@
     "slug": "claude-opus-5-5",
     "name": "Claude Opus 5.5 (Max, Default Fallback)",
     "suffix": "Max, Default Fallback",
-    "intelligenceIndex": 58.4060336078904,
+    "intelligenceIndex": 59.1060336078904,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 10.036409719512749,
     "intelligenceIndexEvalCosts": [
@@ -55,6 +55,7 @@
     },
     "frontierCode20": 0.464359595959596,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -66,7 +67,7 @@
     "slug": "claude-opus-5-5-low",
     "name": "Claude Opus 5.5 (Low, Default Fallback)",
     "suffix": "Low, Default Fallback",
-    "intelligenceIndex": 34.502785007759,
+    "intelligenceIndex": 34.752785007759,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.9755293224458845,
     "intelligenceIndexEvalCosts": [
@@ -114,6 +115,7 @@
     },
     "frontierCode20": 0.158378282828283,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -125,7 +127,7 @@
     "slug": "claude-opus-5-5-medium",
     "name": "Claude Opus 5.5 (Medium, Default Fallback)",
     "suffix": "Medium, Default Fallback",
-    "intelligenceIndex": 48.0581024960691,
+    "intelligenceIndex": 48.2081024960691,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 2.4510894376611723,
     "intelligenceIndexEvalCosts": [
@@ -173,6 +175,7 @@
     },
     "frontierCode20": 0.330793181818182,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -184,7 +187,7 @@
     "slug": "claude-opus-5-5-high",
     "name": "Claude Opus 5.5 (High, Default Fallback)",
     "suffix": "High, Default Fallback",
-    "intelligenceIndex": 51.6859958227294,
+    "intelligenceIndex": 51.8359958227294,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 3.4646622820973185,
     "intelligenceIndexEvalCosts": [
@@ -232,6 +235,7 @@
     },
     "frontierCode20": 0.359278535353535,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -243,7 +247,7 @@
     "slug": "claude-opus-5-5-xhigh",
     "name": "Claude Opus 5.5 (Xhigh, Default Fallback)",
     "suffix": "Xhigh, Default Fallback",
-    "intelligenceIndex": 56.9947060170507,
+    "intelligenceIndex": 57.4447060170507,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 6.047194490848774,
     "intelligenceIndexEvalCosts": [
@@ -291,6 +295,7 @@
     },
     "frontierCode20": 0.437547474747475,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -304,7 +309,7 @@
     "slug": "claude-sonnet-5-5",
     "name": "Claude Sonnet 5.5 (Max, Default Fallback)",
     "suffix": "Max, Default Fallback",
-    "intelligenceIndex": 54.24133407109,
+    "intelligenceIndex": 54.54133407109,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 10.020621343395753,
     "intelligenceIndexEvalCosts": [
@@ -352,6 +357,7 @@
     },
     "frontierCode20": 0.416993434343434,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -363,7 +369,7 @@
     "slug": "claude-sonnet-5-5-low",
     "name": "Claude Sonnet 5.5 (Low, Default Fallback)",
     "suffix": "Low, Default Fallback",
-    "intelligenceIndex": 25.299704549789,
+    "intelligenceIndex": 25.649704549789,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.5113424463897498,
     "intelligenceIndexEvalCosts": [
@@ -411,6 +417,7 @@
     },
     "frontierCode20": 0.0712575757575758,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -422,7 +429,7 @@
     "slug": "claude-sonnet-5-5-medium",
     "name": "Claude Sonnet 5.5 (Medium, Default Fallback)",
     "suffix": "Medium, Default Fallback",
-    "intelligenceIndex": 30.3195522148431,
+    "intelligenceIndex": 30.8195522148431,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.7806560352024481,
     "intelligenceIndexEvalCosts": [
@@ -470,6 +477,7 @@
     },
     "frontierCode20": 0.109708080808081,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -481,7 +489,7 @@
     "slug": "claude-sonnet-5-5-high",
     "name": "Claude Sonnet 5.5 (High, Default Fallback)",
     "suffix": "High, Default Fallback",
-    "intelligenceIndex": 41.115109087048,
+    "intelligenceIndex": 41.515109087048,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 1.6361294399784785,
     "intelligenceIndexEvalCosts": [
@@ -529,6 +537,7 @@
     },
     "frontierCode20": 0.257380050505051,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -540,7 +549,7 @@
     "slug": "claude-sonnet-5-5-xhigh",
     "name": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
     "suffix": "Xhigh, Default Fallback",
-    "intelligenceIndex": 49.5740327787242,
+    "intelligenceIndex": 49.9240327787242,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 4.091984916321919,
     "intelligenceIndexEvalCosts": [
@@ -588,6 +597,7 @@
     },
     "frontierCode20": 0.356494696969697,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -601,7 +611,7 @@
     "slug": "claude-haiku-5-5",
     "name": "Claude Haiku 5.5 (Max)",
     "suffix": "Max",
-    "intelligenceIndex": 36.2345435880142,
+    "intelligenceIndex": 36.4845435880142,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.41100741536816304,
     "intelligenceIndexEvalCosts": [
@@ -649,6 +659,7 @@
     },
     "frontierCode20": 0.349325505050505,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -708,6 +719,7 @@
     },
     "frontierCode20": 0.0803666666666667,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -719,7 +731,7 @@
     "slug": "claude-haiku-5-5-medium",
     "name": "Claude Haiku 5.5 (Medium)",
     "suffix": "Medium",
-    "intelligenceIndex": 24.5513254343023,
+    "intelligenceIndex": 24.6013254343023,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.0917645584066771,
     "intelligenceIndexEvalCosts": [
@@ -767,6 +779,7 @@
     },
     "frontierCode20": 0.16091994949495,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -778,7 +791,7 @@
     "slug": "claude-haiku-5-5-high",
     "name": "Claude Haiku 5.5 (High)",
     "suffix": "High",
-    "intelligenceIndex": 29.624315467743,
+    "intelligenceIndex": 29.874315467743,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.15856031956679498,
     "intelligenceIndexEvalCosts": [
@@ -826,6 +839,7 @@
     },
     "frontierCode20": 0.232000505050505,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -837,7 +851,7 @@
     "slug": "claude-haiku-5-5-xhigh",
     "name": "Claude Haiku 5.5 (Xhigh)",
     "suffix": "Xhigh",
-    "intelligenceIndex": 34.3387759486628,
+    "intelligenceIndex": 34.6387759486628,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.24836110126596478,
     "intelligenceIndexEvalCosts": [
@@ -885,6 +899,7 @@
     },
     "frontierCode20": 0.299334090909091,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -898,7 +913,7 @@
     "slug": "claude-fable-5-1",
     "name": "Claude Fable 5.1 (Max, Default Fallback)",
     "suffix": "Max, Default Fallback",
-    "intelligenceIndex": 49.0102124158081,
+    "intelligenceIndex": 49.1602124158081,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 12.993997201178466,
     "intelligenceIndexEvalCosts": [
@@ -946,6 +961,7 @@
     },
     "frontierCode20": 0.316248737373737,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 10,
      "output": 50,
@@ -957,7 +973,7 @@
     "slug": "claude-fable-5-1-low",
     "name": "Claude Fable 5.1 (Low, Default Fallback)",
     "suffix": "Low, Default Fallback",
-    "intelligenceIndex": 38.483648810734,
+    "intelligenceIndex": 38.683648810734,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 4.471135894646431,
     "intelligenceIndexEvalCosts": [
@@ -1005,6 +1021,7 @@
     },
     "frontierCode20": 0.228400505050505,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 10,
      "output": 50,
@@ -1016,7 +1033,7 @@
     "slug": "claude-fable-5-1-medium",
     "name": "Claude Fable 5.1 (Medium, Default Fallback)",
     "suffix": "Medium, Default Fallback",
-    "intelligenceIndex": 42.971597828284,
+    "intelligenceIndex": 43.171597828284,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 5.564264690221474,
     "intelligenceIndexEvalCosts": [
@@ -1064,6 +1081,7 @@
     },
     "frontierCode20": 0.287730808080808,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 10,
      "output": 50,
@@ -1075,7 +1093,7 @@
     "slug": "claude-fable-5-1-high",
     "name": "Claude Fable 5.1 (High, Default Fallback)",
     "suffix": "High, Default Fallback",
-    "intelligenceIndex": 47.024988245604,
+    "intelligenceIndex": 47.174988245604,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 7.539956160226559,
     "intelligenceIndexEvalCosts": [
@@ -1123,6 +1141,7 @@
     },
     "frontierCode20": 0.302979545454545,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 10,
      "output": 50,
@@ -1134,7 +1153,7 @@
     "slug": "claude-fable-5-1-xhigh",
     "name": "Claude Fable 5.1 (Xhigh, Default Fallback)",
     "suffix": "Xhigh, Default Fallback",
-    "intelligenceIndex": 49.6716384248632,
+    "intelligenceIndex": 50.0216384248632,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 10.847474706140272,
     "intelligenceIndexEvalCosts": [
@@ -1182,6 +1201,7 @@
     },
     "frontierCode20": 0.357316919191919,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 10,
      "output": 50,
@@ -1202,6 +1222,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 25,
@@ -1220,6 +1241,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 25,
@@ -1238,6 +1260,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 25,
@@ -1256,6 +1279,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 25,
@@ -1274,6 +1298,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 25,
@@ -1294,6 +1319,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 25,
@@ -1355,6 +1381,7 @@
     },
     "frontierCode20": 0.42374797979798,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 10,
      "output": 50,
@@ -1366,7 +1393,7 @@
     "slug": "gpt-6-astra-low",
     "name": "GPT-6 Astra (Low)",
     "suffix": "Low",
-    "intelligenceIndex": 43.0349823228524,
+    "intelligenceIndex": 43.3349823228524,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 1.4237229635663595,
     "intelligenceIndexEvalCosts": [
@@ -1414,6 +1441,7 @@
     },
     "frontierCode20": 0.262162878787879,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 10,
      "output": 50,
@@ -1425,7 +1453,7 @@
     "slug": "gpt-6-astra-medium",
     "name": "GPT-6 Astra (Medium)",
     "suffix": "Medium",
-    "intelligenceIndex": 51.4548393864113,
+    "intelligenceIndex": 51.5548393864113,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 2.732438933013427,
     "intelligenceIndexEvalCosts": [
@@ -1473,6 +1501,7 @@
     },
     "frontierCode20": 0.365771717171717,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 10,
      "output": 50,
@@ -1532,6 +1561,7 @@
     },
     "frontierCode20": 0.401351515151515,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 10,
      "output": 50,
@@ -1543,7 +1573,7 @@
     "slug": "gpt-6-astra-xhigh",
     "name": "GPT-6 Astra (Xhigh)",
     "suffix": "Xhigh",
-    "intelligenceIndex": 55.2557468569681,
+    "intelligenceIndex": 55.3057468569681,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 3.6589264906126227,
     "intelligenceIndexEvalCosts": [
@@ -1591,6 +1621,7 @@
     },
     "frontierCode20": 0.414029545454545,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 10,
      "output": 50,
@@ -1604,7 +1635,7 @@
     "slug": "gpt-6-1-sol",
     "name": "GPT-6.1 Sol (Max)",
     "suffix": "Max",
-    "intelligenceIndex": 54.5087338138148,
+    "intelligenceIndex": 54.6087338138148,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 1.2720632679446995,
     "intelligenceIndexEvalCosts": [
@@ -1652,6 +1683,7 @@
     },
     "frontierCode20": 0.406262878787879,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -1663,7 +1695,7 @@
     "slug": "gpt-6-1-sol-low",
     "name": "GPT-6.1 Sol (Low)",
     "suffix": "Low",
-    "intelligenceIndex": 34.502924431456,
+    "intelligenceIndex": 34.8029244314559,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.16147357831822573,
     "intelligenceIndexEvalCosts": [
@@ -1711,6 +1743,7 @@
     },
     "frontierCode20": 0.201560858585859,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -1722,7 +1755,7 @@
     "slug": "gpt-6-1-sol-medium",
     "name": "GPT-6.1 Sol (Medium)",
     "suffix": "Medium",
-    "intelligenceIndex": 46.1468797067114,
+    "intelligenceIndex": 46.3468797067114,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.3593898648025732,
     "intelligenceIndexEvalCosts": [
@@ -1770,6 +1803,7 @@
     },
     "frontierCode20": 0.333875757575758,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -1781,7 +1815,7 @@
     "slug": "gpt-6-1-sol-high",
     "name": "GPT-6.1 Sol (High)",
     "suffix": "High",
-    "intelligenceIndex": 50.2291231936536,
+    "intelligenceIndex": 50.3291231936536,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.5909853515780825,
     "intelligenceIndexEvalCosts": [
@@ -1829,6 +1863,7 @@
     },
     "frontierCode20": 0.36737297979798,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -1840,7 +1875,7 @@
     "slug": "gpt-6-1-sol-xhigh",
     "name": "GPT-6.1 Sol (Xhigh)",
     "suffix": "Xhigh",
-    "intelligenceIndex": 52.308219253291,
+    "intelligenceIndex": 52.458219253291,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.7639949356156494,
     "intelligenceIndexEvalCosts": [
@@ -1888,6 +1923,7 @@
     },
     "frontierCode20": 0.385190909090909,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -1901,7 +1937,7 @@
     "slug": "gpt-6-1-terra",
     "name": "GPT-6.1 Terra (Max)",
     "suffix": "Max",
-    "intelligenceIndex": 50.9765188577015,
+    "intelligenceIndex": 51.3265188577015,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.961108031081634,
     "intelligenceIndexEvalCosts": [
@@ -1949,6 +1985,7 @@
     },
     "frontierCode20": 0.423200505050505,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 1,
      "output": 5,
@@ -1960,7 +1997,7 @@
     "slug": "gpt-6-1-terra-low",
     "name": "GPT-6.1 Terra (Low)",
     "suffix": "Low",
-    "intelligenceIndex": 29.2169280792131,
+    "intelligenceIndex": 29.4169280792131,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.07133756205169729,
     "intelligenceIndexEvalCosts": [
@@ -2008,6 +2045,7 @@
     },
     "frontierCode20": 0.244852272727273,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 1,
      "output": 5,
@@ -2019,7 +2057,7 @@
     "slug": "gpt-6-1-terra-medium",
     "name": "GPT-6.1 Terra (Medium)",
     "suffix": "Medium",
-    "intelligenceIndex": 38.1152076677975,
+    "intelligenceIndex": 38.1652076677975,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.16880458238389412,
     "intelligenceIndexEvalCosts": [
@@ -2067,6 +2105,7 @@
     },
     "frontierCode20": 0.345359343434343,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 1,
      "output": 5,
@@ -2078,7 +2117,7 @@
     "slug": "gpt-6-1-terra-high",
     "name": "GPT-6.1 Terra (High)",
     "suffix": "High",
-    "intelligenceIndex": 42.3344508712563,
+    "intelligenceIndex": 42.4344508712563,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.2592796466169722,
     "intelligenceIndexEvalCosts": [
@@ -2126,6 +2165,7 @@
     },
     "frontierCode20": 0.37457904040404,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 1,
      "output": 5,
@@ -2137,7 +2177,7 @@
     "slug": "gpt-6-1-terra-xhigh",
     "name": "GPT-6.1 Terra (Xhigh)",
     "suffix": "Xhigh",
-    "intelligenceIndex": 44.950051789066,
+    "intelligenceIndex": 45.250051789066,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.40068900166662513,
     "intelligenceIndexEvalCosts": [
@@ -2185,6 +2225,7 @@
     },
     "frontierCode20": 0.368595202020202,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 1,
      "output": 5,
@@ -2196,7 +2237,7 @@
     "slug": "gpt-6-1-terra-non-reasoning",
     "name": "GPT-6.1 Terra (Non-reasoning)",
     "suffix": "Non-reasoning",
-    "intelligenceIndex": 30.415898867357,
+    "intelligenceIndex": 30.515898867357,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.22589585897456366,
     "intelligenceIndexEvalCosts": [
@@ -2244,6 +2285,7 @@
     },
     "frontierCode20": 0.333510606060606,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 1,
      "output": 5,
@@ -2257,7 +2299,7 @@
     "slug": "gpt-6-luna",
     "name": "GPT-6 Luna (Max)",
     "suffix": "Max",
-    "intelligenceIndex": 27.7552004938153,
+    "intelligenceIndex": 27.8552004938153,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.15195575732105837,
     "intelligenceIndexEvalCosts": [
@@ -2305,6 +2347,7 @@
     },
     "frontierCode20": 0.251747727272727,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -2364,6 +2407,7 @@
     },
     "frontierCode20": 0.0219545454545455,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -2375,7 +2419,7 @@
     "slug": "gpt-6-luna-medium",
     "name": "GPT-6 Luna (Medium)",
     "suffix": "Medium",
-    "intelligenceIndex": 18.3042156192416,
+    "intelligenceIndex": 18.4542156192416,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.042201836106537785,
     "intelligenceIndexEvalCosts": [
@@ -2423,6 +2467,7 @@
     },
     "frontierCode20": 0.127693181818182,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -2434,7 +2479,7 @@
     "slug": "gpt-6-luna-high",
     "name": "GPT-6 Luna (High)",
     "suffix": "High",
-    "intelligenceIndex": 21.3790170864582,
+    "intelligenceIndex": 21.4290170864582,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.07294776473194697,
     "intelligenceIndexEvalCosts": [
@@ -2482,6 +2527,7 @@
     },
     "frontierCode20": 0.186015151515152,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -2493,7 +2539,7 @@
     "slug": "gpt-6-luna-xhigh",
     "name": "GPT-6 Luna (Xhigh)",
     "suffix": "Xhigh",
-    "intelligenceIndex": 23.3008728089378,
+    "intelligenceIndex": 23.4508728089378,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.10409320921120957,
     "intelligenceIndexEvalCosts": [
@@ -2541,6 +2587,7 @@
     },
     "frontierCode20": 0.184238888888889,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -2552,7 +2599,7 @@
     "slug": "gpt-6-luna-non-reasoning",
     "name": "GPT-6 Luna (Non-reasoning)",
     "suffix": "Non-reasoning",
-    "intelligenceIndex": 9.39244373619813,
+    "intelligenceIndex": 9.44244373619813,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.07141741932294249,
     "intelligenceIndexEvalCosts": [
@@ -2600,6 +2647,7 @@
     },
     "frontierCode20": 0.0158234848484848,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 0.1,
      "output": 0.5,
@@ -2613,13 +2661,55 @@
     "slug": "gpt-6-sol",
     "name": "GPT-6 Sol (Max)",
     "suffix": "Max",
-    "intelligenceIndex": null,
+    "intelligenceIndex": 44.1555010304265,
     "intelligenceIndexIsEstimated": false,
-    "intelligenceIndexCostPerTask": null,
-    "intelligenceIndexEvalCosts": null,
-    "intelligenceIndexOutputTokensPerTask": null,
-    "frontierCode20": null,
+    "intelligenceIndexCostPerTask": 2.465800491412395,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 0.3936467552519975
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.017888624893672295
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 0.4003379341944657
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 0.3508852203701542
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.0035458320999999997
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.021268547
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.0184751402
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.03839582738504539
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 1.2213566100170596
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 35370.01778779281,
+     "answer": 18519.666945519777,
+     "output": 53889.684733312584
+    },
+    "frontierCode20": 0.355770707070707,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -2638,6 +2728,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -2656,6 +2747,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -2674,6 +2766,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -2692,6 +2785,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -2710,6 +2804,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -2730,6 +2825,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -2748,6 +2844,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -2766,6 +2863,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -2784,6 +2882,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -2802,6 +2901,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -2820,6 +2920,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -2840,6 +2941,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 30,
@@ -2858,6 +2960,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 30,
@@ -2876,6 +2979,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 30,
@@ -2894,6 +2998,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 30,
@@ -2912,6 +3017,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 5,
      "output": 30,
@@ -2925,7 +3031,7 @@
     "slug": "gemini-4-carbon",
     "name": "Gemini 4 Carbon (High)",
     "suffix": "High",
-    "intelligenceIndex": 59.425738829526,
+    "intelligenceIndex": 60.025738829526,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 7.755545745286556,
     "intelligenceIndexEvalCosts": [
@@ -2973,6 +3079,127 @@
     },
     "frontierCode20": 0.405606060606061,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
+    "prices": {
+     "input": 4,
+     "output": 20,
+     "cacheHit": 0.2,
+     "cacheWrite": 4
+    }
+   },
+   {
+    "slug": "gemini-4-carbon-low",
+    "name": "Gemini 4 Carbon (Low)",
+    "suffix": "Low",
+    "intelligenceIndex": 54.2206114502924,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 7.186577262951972,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 1.0800081554937757
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.04490102588000222
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 0.856627842224004
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 1.9777626130876362
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.0002278754
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.019060948
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.0686678644
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.30551426937188897
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 2.833806669094666
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 32395.786253268423,
+     "answer": 53769.45183242579,
+     "output": 86165.2380856942
+    },
+    "frontierCode20": 0.296189898989899,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": false,
+    "prices": {
+     "input": 4,
+     "output": 20,
+     "cacheHit": 0.2,
+     "cacheWrite": 4
+    }
+   },
+   {
+    "slug": "gemini-4-carbon-medium",
+    "name": "Gemini 4 Carbon (Medium)",
+    "suffix": "Medium",
+    "intelligenceIndex": 58.2587824022788,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 6.585776867225546,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 1.059307978405552
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.08258517742782952
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 0.8820361115926918
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 1.5109199771040676
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.0037932656
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.023986394
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.0786094572
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.3089137907449558
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 2.635624715150449
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 56204.29841863973,
+     "answer": 46808.197019624364,
+     "output": 103012.4954382641
+    },
+    "frontierCode20": 0.394523232323232,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -3034,6 +3261,7 @@
     },
     "frontierCode20": 0.257076262626263,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
@@ -3047,9 +3275,9 @@
     "slug": "grok-4-7",
     "name": "Grok 4.7 (Xhigh)",
     "suffix": "Xhigh",
-    "intelligenceIndex": 34.3350117067196,
+    "intelligenceIndex": 35.4850117067196,
     "intelligenceIndexIsEstimated": false,
-    "intelligenceIndexCostPerTask": 7.511769586408455,
+    "intelligenceIndexCostPerTask": 7.771539401587139,
     "intelligenceIndexEvalCosts": [
      {
       "slug": "aa-briefcase",
@@ -3085,16 +3313,17 @@
      },
      {
       "slug": "terminal-bench-science",
-      "weightedCostPerTask": 2.6652288188745774
+      "weightedCostPerTask": 2.924998634053262
      }
     ],
     "intelligenceIndexOutputTokensPerTask": {
-     "reasoning": 53901.93692117775,
-     "answer": 39067.56951380316,
-     "output": 92969.50643498091
+     "reasoning": 69440.50334974918,
+     "answer": 35090.43737094602,
+     "output": 104530.9407206952
     },
     "frontierCode20": 0.286575505050505,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 6,
@@ -3106,7 +3335,7 @@
     "slug": "grok-4-7-low",
     "name": "Grok 4.7 (Low)",
     "suffix": "Low",
-    "intelligenceIndex": 30.882077602567,
+    "intelligenceIndex": 31.132077602567,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 2.9222013011913153,
     "intelligenceIndexEvalCosts": [
@@ -3154,6 +3383,7 @@
     },
     "frontierCode20": 0.218224494949495,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 6,
@@ -3165,7 +3395,7 @@
     "slug": "grok-4-7-high",
     "name": "Grok 4.7 (High)",
     "suffix": "High",
-    "intelligenceIndex": 35.0122962959703,
+    "intelligenceIndex": 35.2122962959703,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 6.18359556537658,
     "intelligenceIndexEvalCosts": [
@@ -3213,48 +3443,11 @@
     },
     "frontierCode20": 0.277836363636364,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 6,
      "cacheHit": 0.5,
-     "cacheWrite": null
-    }
-   }
-  ],
-  "deepseek-v4.1-flash": [
-   {
-    "slug": "deepseek-v4-1-flash",
-    "name": "DeepSeek V4.1 Flash (Max)",
-    "suffix": "Max",
-    "intelligenceIndex": null,
-    "intelligenceIndexIsEstimated": false,
-    "intelligenceIndexCostPerTask": null,
-    "intelligenceIndexEvalCosts": null,
-    "intelligenceIndexOutputTokensPerTask": null,
-    "frontierCode20": null,
-    "frontierCode20Tokens": null,
-    "prices": {
-     "input": 0.3,
-     "output": 1.2,
-     "cacheHit": 0.006,
-     "cacheWrite": null
-    }
-   },
-   {
-    "slug": "deepseek-v4-1-flash-non-reasoning",
-    "name": "DeepSeek V4.1 Flash (Non-reasoning)",
-    "suffix": "Non-reasoning",
-    "intelligenceIndex": null,
-    "intelligenceIndexIsEstimated": false,
-    "intelligenceIndexCostPerTask": null,
-    "intelligenceIndexEvalCosts": null,
-    "intelligenceIndexOutputTokensPerTask": null,
-    "frontierCode20": null,
-    "frontierCode20Tokens": null,
-    "prices": {
-     "input": 0.3,
-     "output": 1.2,
-     "cacheHit": 0.0105,
      "cacheWrite": null
     }
    }
@@ -3264,7 +3457,7 @@
     "slug": "deepseek-v4-1-flash-1017",
     "name": "DeepSeek V4.1 Flash 1017 (Max)",
     "suffix": "Max",
-    "intelligenceIndex": 32.4896393532027,
+    "intelligenceIndex": 32.5896393532027,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.60210514783598,
     "intelligenceIndexEvalCosts": [
@@ -3312,6 +3505,127 @@
     },
     "frontierCode20": 0.284711616161616,
     "frontierCode20Tokens": null,
+    "isOpenWeights": true,
+    "prices": {
+     "input": 0.3,
+     "output": 1.2,
+     "cacheHit": 0.006,
+     "cacheWrite": null
+    }
+   },
+   {
+    "slug": "deepseek-v4-1-flash-1017-high",
+    "name": "DeepSeek V4.1 Flash 1017 (High)",
+    "suffix": "High",
+    "intelligenceIndex": 28.6437391540402,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 0.45619449806633267,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 0.055770837531426275
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.006816059785576427
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 0.07829744053109795
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 0.05238859943602897
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.00022625589
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.0016751323499999999
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.0036169598700000003
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.018016094697278925
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 0.23938711797492412
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 74847.4482007694,
+     "answer": 35582.642787936195,
+     "output": 110430.0909887056
+    },
+    "frontierCode20": 0.168437878787879,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": true,
+    "prices": {
+     "input": 0.3,
+     "output": 1.2,
+     "cacheHit": 0.006,
+     "cacheWrite": null
+    }
+   },
+   {
+    "slug": "deepseek-v4-1-flash-1017-non-reasoning",
+    "name": "DeepSeek V4.1 Flash 1017 (Non-reasoning)",
+    "suffix": "Non-reasoning",
+    "intelligenceIndex": 18.5131594039446,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 0.4254202455035728,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 0.12238414116554121
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.002214134172281157
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 0.04814670586601159
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 0.13086843159632827
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.00001618128
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.00118907715
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.00013276674
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.004304171368944452
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 0.11616463616446615
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 0,
+     "answer": 65357.56974596415,
+     "output": 65357.56974596415
+    },
+    "frontierCode20": 0.060984595959596,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": true,
     "prices": {
      "input": 0.3,
      "output": 1.2,
@@ -3325,7 +3639,7 @@
     "slug": "kimi-k3-1-pro",
     "name": "Kimi K3.1 Pro",
     "suffix": null,
-    "intelligenceIndex": 46.0026236744189,
+    "intelligenceIndex": 46.4526236744189,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 3.6812002895742055,
     "intelligenceIndexEvalCosts": [
@@ -3373,6 +3687,7 @@
     },
     "frontierCode20": 0.254519444444444,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 2,
      "output": 10,
@@ -3393,6 +3708,7 @@
     "intelligenceIndexOutputTokensPerTask": null,
     "frontierCode20": null,
     "frontierCode20Tokens": null,
+    "isOpenWeights": true,
     "prices": {
      "input": 3,
      "output": 15,
@@ -3452,6 +3768,7 @@
     },
     "frontierCode20": 0.109,
     "frontierCode20Tokens": null,
+    "isOpenWeights": true,
     "prices": {
      "input": 3,
      "output": 15,
@@ -3513,6 +3830,7 @@
     },
     "frontierCode20": 0.21587095959596,
     "frontierCode20Tokens": null,
+    "isOpenWeights": true,
     "prices": {
      "input": 1.4,
      "output": 4.4,
@@ -3524,7 +3842,7 @@
     "slug": "glm-5-3-low",
     "name": "GLM-5.3 (Low)",
     "suffix": "Low",
-    "intelligenceIndex": 23.0579373025379,
+    "intelligenceIndex": 23.1079373025379,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 1.5749301149593384,
     "intelligenceIndexEvalCosts": [
@@ -3572,6 +3890,7 @@
     },
     "frontierCode20": 0.127379797979798,
     "frontierCode20Tokens": null,
+    "isOpenWeights": true,
     "prices": {
      "input": 1.4,
      "output": 4.4,
@@ -3585,7 +3904,7 @@
     "slug": "glm-5-3-flash",
     "name": "GLM-5.3-Flash",
     "suffix": null,
-    "intelligenceIndex": 27.753889160883,
+    "intelligenceIndex": 27.803889160883,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 0.5833103440014082,
     "intelligenceIndexEvalCosts": [
@@ -3633,6 +3952,7 @@
     },
     "frontierCode20": 0.176070454545455,
     "frontierCode20Tokens": null,
+    "isOpenWeights": true,
     "prices": {
      "input": 0.15,
      "output": 0.5,
@@ -3646,7 +3966,7 @@
     "slug": "muse-wonder",
     "name": "Muse Wonder (Max)",
     "suffix": "Max",
-    "intelligenceIndex": 43.3248225998431,
+    "intelligenceIndex": 43.5748225998431,
     "intelligenceIndexIsEstimated": false,
     "intelligenceIndexCostPerTask": 6.9520364786062245,
     "intelligenceIndexEvalCosts": [
@@ -3694,10 +4014,197 @@
     },
     "frontierCode20": 0.27875303030303,
     "frontierCode20Tokens": null,
+    "isOpenWeights": false,
     "prices": {
      "input": 4,
      "output": 20,
      "cacheHit": 0.2,
+     "cacheWrite": null
+    }
+   }
+  ],
+  "qwen3.8-max": [
+   {
+    "slug": "qwen3-8-max",
+    "name": "Qwen3.8 Max (0902)",
+    "suffix": null,
+    "intelligenceIndex": 33.6545627367888,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 10.023891571541945,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 2.936528640340602
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.019911801266293043
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 1.86760733252611
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 1.0067019811334694
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.0012513521999999997
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.016655345000000002
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.0206761774
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.17571364926659955
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 3.97884529240887
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 119697.63000886558,
+     "answer": 51096.33150528048,
+     "output": 170793.96151414607
+    },
+    "frontierCode20": 0.234232323232323,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": false,
+    "prices": {
+     "input": 2,
+     "output": 6,
+     "cacheHit": 0.25,
+     "cacheWrite": null
+    }
+   }
+  ],
+  "mimo-v2.6-pro": [
+   {
+    "slug": "mimo-v2-6-pro",
+    "name": "MiMo-V2.6-Pro",
+    "suffix": null,
+    "intelligenceIndex": 29.8897833093321,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 0.25718036275876155,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 0.057027382027649516
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.002113084625318502
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 0.04380502238483266
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 0.03848855612276165
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.0008334001875
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.0012011035125000001
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.0025758454095
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.016519579802209954
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 0.09461638868648926
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 86273.34533205075,
+     "answer": 34799.784499147805,
+     "output": 121073.12983119856
+    },
+    "frontierCode20": 0.239701262626263,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": true,
+    "prices": {
+     "input": 0.435,
+     "output": 0.87,
+     "cacheHit": 0.0036,
+     "cacheWrite": null
+    }
+   }
+  ],
+  "minimax-m3.1-flash": [
+   {
+    "slug": "minimax-m3-1-flash",
+    "name": "MiniMax-M3.1-Flash",
+    "suffix": null,
+    "intelligenceIndex": 29.0595214290458,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 0.49097067348453205,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 0.07929098373302253
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.003324294469046582
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 0.09241412160844685
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 0.07053947898732965
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.0004741549125
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.00181715745
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.0018617735400000002
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.0166462129434133
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 0.22460249584077316
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 102940.58190337746,
+     "answer": 35235.7763938493,
+     "output": 138176.35829722678
+    },
+    "frontierCode20": 0.208218181818182,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": true,
+    "prices": {
+     "input": 0.15,
+     "output": 0.6,
+     "cacheHit": 0.015,
      "cacheWrite": null
     }
    }

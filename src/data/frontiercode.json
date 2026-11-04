@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-30",
+ "generatedAt": "2026-11-04",
  "sources": {
   "pricing": {
    "name": "Real API Pricing",
@@ -35,18 +35,18 @@
   }
  },
  "fx": {
-  "date": "2026-10-29",
+  "date": "2026-11-03",
   "source": "ECB reference rates via Frankfurter",
   "rates": {
    "USD": 1,
-   "AUD": 1.4234,
-   "CAD": 1.3996,
-   "CNY": 6.6616,
-   "EUR": 0.89847,
-   "GBP": 0.75093,
-   "INR": 95.27,
-   "JPY": 158.06,
-   "NZD": 1.7805
+   "AUD": 1.4319,
+   "CAD": 1.3975,
+   "CNY": 6.6723,
+   "EUR": 0.89453,
+   "GBP": 0.74567,
+   "INR": 94.75,
+   "JPY": 158.29,
+   "NZD": 1.778
   }
  },
  "benchmarks": [
@@ -59,13 +59,13 @@
    "source": {
     "name": "Artificial Analysis Intelligence Index v5",
     "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
-    "fetched": "2026-10-30"
+    "fetched": "2026-11-04"
    },
    "results": {
     "claude-opus-5.5": [
      {
       "effort": "max",
-      "score": 58.41,
+      "score": 59.11,
       "apiCost": 10.036409719512749,
       "outputTokens": 173313,
       "harness": null,
@@ -74,7 +74,7 @@
      },
      {
       "effort": "low",
-      "score": 34.5,
+      "score": 34.75,
       "apiCost": 0.9755293224458845,
       "outputTokens": 19060,
       "harness": null,
@@ -83,7 +83,7 @@
      },
      {
       "effort": "medium",
-      "score": 48.06,
+      "score": 48.21,
       "apiCost": 2.4510894376611723,
       "outputTokens": 43817,
       "harness": null,
@@ -92,7 +92,7 @@
      },
      {
       "effort": "high",
-      "score": 51.69,
+      "score": 51.84,
       "apiCost": 3.4646622820973185,
       "outputTokens": 60071,
       "harness": null,
@@ -101,7 +101,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 56.99,
+      "score": 57.44,
       "apiCost": 6.047194490848774,
       "outputTokens": 103395,
       "harness": null,
@@ -112,7 +112,7 @@
     "claude-sonnet-5.5": [
      {
       "effort": "max",
-      "score": 54.24,
+      "score": 54.54,
       "apiCost": 10.020621343395753,
       "outputTokens": 285387,
       "harness": null,
@@ -121,7 +121,7 @@
      },
      {
       "effort": "low",
-      "score": 25.3,
+      "score": 25.65,
       "apiCost": 0.5113424463897498,
       "outputTokens": 20856,
       "harness": null,
@@ -130,7 +130,7 @@
      },
      {
       "effort": "medium",
-      "score": 30.32,
+      "score": 30.82,
       "apiCost": 0.7806560352024481,
       "outputTokens": 30746,
       "harness": null,
@@ -139,7 +139,7 @@
      },
      {
       "effort": "high",
-      "score": 41.12,
+      "score": 41.52,
       "apiCost": 1.6361294399784785,
       "outputTokens": 58421,
       "harness": null,
@@ -148,7 +148,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 49.57,
+      "score": 49.92,
       "apiCost": 4.091984916321919,
       "outputTokens": 122205,
       "harness": null,
@@ -159,7 +159,7 @@
     "claude-haiku-5.5": [
      {
       "effort": "max",
-      "score": 36.23,
+      "score": 36.48,
       "apiCost": 0.41100741536816304,
       "outputTokens": 225966,
       "harness": null,
@@ -177,7 +177,7 @@
      },
      {
       "effort": "medium",
-      "score": 24.55,
+      "score": 24.6,
       "apiCost": 0.0917645584066771,
       "outputTokens": 53335,
       "harness": null,
@@ -186,7 +186,7 @@
      },
      {
       "effort": "high",
-      "score": 29.62,
+      "score": 29.87,
       "apiCost": 0.15856031956679498,
       "outputTokens": 88064,
       "harness": null,
@@ -195,7 +195,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 34.34,
+      "score": 34.64,
       "apiCost": 0.24836110126596478,
       "outputTokens": 136177,
       "harness": null,
@@ -206,7 +206,7 @@
     "claude-fable-5.1": [
      {
       "effort": "max",
-      "score": 49.01,
+      "score": 49.16,
       "apiCost": 12.993997201178466,
       "outputTokens": 117941,
       "harness": null,
@@ -215,7 +215,7 @@
      },
      {
       "effort": "low",
-      "score": 38.48,
+      "score": 38.68,
       "apiCost": 4.471135894646431,
       "outputTokens": 37837,
       "harness": null,
@@ -224,7 +224,7 @@
      },
      {
       "effort": "medium",
-      "score": 42.97,
+      "score": 43.17,
       "apiCost": 5.564264690221474,
       "outputTokens": 48545,
       "harness": null,
@@ -233,7 +233,7 @@
      },
      {
       "effort": "high",
-      "score": 47.02,
+      "score": 47.17,
       "apiCost": 7.539956160226559,
       "outputTokens": 66031,
       "harness": null,
@@ -242,7 +242,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 49.67,
+      "score": 50.02,
       "apiCost": 10.847474706140272,
       "outputTokens": 97059,
       "harness": null,
@@ -262,7 +262,7 @@
      },
      {
       "effort": "low",
-      "score": 43.03,
+      "score": 43.33,
       "apiCost": 1.4237229635663595,
       "outputTokens": 9126,
       "harness": null,
@@ -271,7 +271,7 @@
      },
      {
       "effort": "medium",
-      "score": 51.45,
+      "score": 51.55,
       "apiCost": 2.732438933013427,
       "outputTokens": 18052,
       "harness": null,
@@ -289,7 +289,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 55.26,
+      "score": 55.31,
       "apiCost": 3.6589264906126227,
       "outputTokens": 26724,
       "harness": null,
@@ -300,7 +300,7 @@
     "gpt-6.1-sol": [
      {
       "effort": "max",
-      "score": 54.51,
+      "score": 54.61,
       "apiCost": 1.2720632679446995,
       "outputTokens": 67824,
       "harness": null,
@@ -309,7 +309,7 @@
      },
      {
       "effort": "low",
-      "score": 34.5,
+      "score": 34.8,
       "apiCost": 0.16147357831822573,
       "outputTokens": 5838,
       "harness": null,
@@ -318,7 +318,7 @@
      },
      {
       "effort": "medium",
-      "score": 46.15,
+      "score": 46.35,
       "apiCost": 0.3593898648025732,
       "outputTokens": 13518,
       "harness": null,
@@ -327,7 +327,7 @@
      },
      {
       "effort": "high",
-      "score": 50.23,
+      "score": 50.33,
       "apiCost": 0.5909853515780825,
       "outputTokens": 22606,
       "harness": null,
@@ -336,7 +336,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 52.31,
+      "score": 52.46,
       "apiCost": 0.7639949356156494,
       "outputTokens": 30241,
       "harness": null,
@@ -347,7 +347,7 @@
     "gpt-6.1-terra": [
      {
       "effort": "max",
-      "score": 50.98,
+      "score": 51.33,
       "apiCost": 0.961108031081634,
       "outputTokens": 59883,
       "harness": null,
@@ -356,7 +356,7 @@
      },
      {
       "effort": "low",
-      "score": 29.22,
+      "score": 29.42,
       "apiCost": 0.07133756205169729,
       "outputTokens": 4422,
       "harness": null,
@@ -365,7 +365,7 @@
      },
      {
       "effort": "medium",
-      "score": 38.12,
+      "score": 38.17,
       "apiCost": 0.16880458238389412,
       "outputTokens": 10875,
       "harness": null,
@@ -374,7 +374,7 @@
      },
      {
       "effort": "high",
-      "score": 42.33,
+      "score": 42.43,
       "apiCost": 0.2592796466169722,
       "outputTokens": 16746,
       "harness": null,
@@ -383,7 +383,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 44.95,
+      "score": 45.25,
       "apiCost": 0.40068900166662513,
       "outputTokens": 26200,
       "harness": null,
@@ -392,7 +392,7 @@
      },
      {
       "effort": "none",
-      "score": 30.42,
+      "score": 30.52,
       "apiCost": 0.22589585897456366,
       "outputTokens": 9488,
       "harness": null,
@@ -403,7 +403,7 @@
     "gpt-6-luna": [
      {
       "effort": "max",
-      "score": 27.76,
+      "score": 27.86,
       "apiCost": 0.15195575732105837,
       "outputTokens": 75296,
       "harness": null,
@@ -421,7 +421,7 @@
      },
      {
       "effort": "medium",
-      "score": 18.3,
+      "score": 18.45,
       "apiCost": 0.042201836106537785,
       "outputTokens": 19823,
       "harness": null,
@@ -430,7 +430,7 @@
      },
      {
       "effort": "high",
-      "score": 21.38,
+      "score": 21.43,
       "apiCost": 0.07294776473194697,
       "outputTokens": 32839,
       "harness": null,
@@ -439,7 +439,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 23.3,
+      "score": 23.45,
       "apiCost": 0.10409320921120957,
       "outputTokens": 43893,
       "harness": null,
@@ -448,9 +448,20 @@
      },
      {
       "effort": "none",
-      "score": 9.39,
+      "score": 9.44,
       "apiCost": 0.07141741932294249,
       "outputTokens": 10059,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
+    "gpt-6-sol": [
+     {
+      "effort": "max",
+      "score": 44.16,
+      "apiCost": 2.465800491412395,
+      "outputTokens": 53890,
       "harness": null,
       "source": "Artificial Analysis",
       "estimated": false
@@ -459,9 +470,27 @@
     "gemini-4-carbon": [
      {
       "effort": "high",
-      "score": 59.43,
+      "score": 60.03,
       "apiCost": 7.755545745286556,
       "outputTokens": 122768,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "low",
+      "score": 54.22,
+      "apiCost": 7.186577262951972,
+      "outputTokens": 86165,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "medium",
+      "score": 58.26,
+      "apiCost": 6.585776867225546,
+      "outputTokens": 103012,
       "harness": null,
       "source": "Artificial Analysis",
       "estimated": false
@@ -481,16 +510,16 @@
     "grok-4.7": [
      {
       "effort": "xhigh",
-      "score": 34.34,
-      "apiCost": 7.511769586408455,
-      "outputTokens": 92970,
+      "score": 35.49,
+      "apiCost": 7.771539401587139,
+      "outputTokens": 104531,
       "harness": null,
       "source": "Artificial Analysis",
       "estimated": false
      },
      {
       "effort": "low",
-      "score": 30.88,
+      "score": 31.13,
       "apiCost": 2.9222013011913153,
       "outputTokens": 42670,
       "harness": null,
@@ -499,7 +528,7 @@
      },
      {
       "effort": "high",
-      "score": 35.01,
+      "score": 35.21,
       "apiCost": 6.18359556537658,
       "outputTokens": 89127,
       "harness": null,
@@ -510,9 +539,27 @@
     "deepseek-v4.1-flash-1017": [
      {
       "effort": "max",
-      "score": 32.49,
+      "score": 32.59,
       "apiCost": 0.60210514783598,
       "outputTokens": 138962,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "high",
+      "score": 28.64,
+      "apiCost": 0.45619449806633267,
+      "outputTokens": 110430,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "none",
+      "score": 18.51,
+      "apiCost": 0.4254202455035728,
+      "outputTokens": 65358,
       "harness": null,
       "source": "Artificial Analysis",
       "estimated": false
@@ -521,7 +568,7 @@
     "kimi-k3.1-pro": [
      {
       "effort": "na",
-      "score": 46,
+      "score": 46.45,
       "apiCost": 3.6812002895742055,
       "outputTokens": 72239,
       "harness": null,
@@ -552,7 +599,7 @@
      },
      {
       "effort": "low",
-      "score": 23.06,
+      "score": 23.11,
       "apiCost": 1.5749301149593384,
       "outputTokens": 51986,
       "harness": null,
@@ -563,7 +610,7 @@
     "glm-5.3-flash": [
      {
       "effort": "na",
-      "score": 27.75,
+      "score": 27.8,
       "apiCost": 0.5833103440014082,
       "outputTokens": 134205,
       "harness": null,
@@ -574,9 +621,42 @@
     "muse-wonder-1.0": [
      {
       "effort": "max",
-      "score": 43.32,
+      "score": 43.57,
       "apiCost": 6.9520364786062245,
       "outputTokens": 96063,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
+    "qwen3.8-max": [
+     {
+      "effort": "na",
+      "score": 33.65,
+      "apiCost": 10.023891571541945,
+      "outputTokens": 170794,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
+    "mimo-v2.6-pro": [
+     {
+      "effort": "na",
+      "score": 29.89,
+      "apiCost": 0.25718036275876155,
+      "outputTokens": 121073,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
+    "minimax-m3.1-flash": [
+     {
+      "effort": "na",
+      "score": 29.06,
+      "apiCost": 0.49097067348453205,
+      "outputTokens": 138176,
       "harness": null,
       "source": "Artificial Analysis",
       "estimated": false
@@ -602,7 +682,7 @@
     "url": "https://cognition.com/frontiercode"
    },
    "results": {
-    "deepseek-v4.1-flash": [
+    "deepseek-v4.1-flash-1017": [
      {
       "effort": "low",
       "score": 15.96,
@@ -1346,7 +1426,7 @@
      {
       "effort": "max",
       "score": 42.32,
-      "apiCost": 1.1632633363981357,
+      "apiCost": 1.2925148182201507,
       "outputTokens": null,
       "harness": "Artificial Analysis",
       "source": "Artificial Analysis"
@@ -1354,7 +1434,7 @@
      {
       "effort": "low",
       "score": 24.49,
-      "apiCost": 0.09599005127756267,
+      "apiCost": 0.1066556125306252,
       "outputTokens": null,
       "harness": "Artificial Analysis",
       "source": "Artificial Analysis"
@@ -1362,7 +1442,7 @@
      {
       "effort": "medium",
       "score": 34.54,
-      "apiCost": 0.23173270314222047,
+      "apiCost": 0.2574807812691339,
       "outputTokens": null,
       "harness": "Artificial Analysis",
       "source": "Artificial Analysis"
@@ -1370,7 +1450,7 @@
      {
       "effort": "high",
       "score": 37.46,
-      "apiCost": 0.3526666595500541,
+      "apiCost": 0.39185184394450456,
       "outputTokens": null,
       "harness": "Artificial Analysis",
       "source": "Artificial Analysis"
@@ -1378,7 +1458,7 @@
      {
       "effort": "xhigh",
       "score": 36.86,
-      "apiCost": 0.5131886879851102,
+      "apiCost": 0.5702096533167891,
       "outputTokens": null,
       "harness": "Artificial Analysis",
       "source": "Artificial Analysis"
@@ -1386,17 +1466,7 @@
      {
       "effort": "none",
       "score": 33.35,
-      "apiCost": 0.38285203310525445,
-      "outputTokens": null,
-      "harness": "Artificial Analysis",
-      "source": "Artificial Analysis"
-     }
-    ],
-    "deepseek-v4.1-flash-1017": [
-     {
-      "effort": "max",
-      "score": 28.47,
-      "apiCost": 0.4669632309068641,
+      "apiCost": 0.4253911478947272,
       "outputTokens": null,
       "harness": "Artificial Analysis",
       "source": "Artificial Analysis"
@@ -1406,7 +1476,37 @@
      {
       "effort": "na",
       "score": 25.45,
-      "apiCost": 2.1414267162758356,
+      "apiCost": 2.3793630180842618,
+      "outputTokens": null,
+      "harness": "Artificial Analysis",
+      "source": "Artificial Analysis"
+     }
+    ],
+    "qwen3.8-max": [
+     {
+      "effort": "na",
+      "score": 23.42,
+      "apiCost": 6.711346540889797,
+      "outputTokens": null,
+      "harness": "Artificial Analysis",
+      "source": "Artificial Analysis"
+     }
+    ],
+    "mimo-v2.6-pro": [
+     {
+      "effort": "na",
+      "score": 23.97,
+      "apiCost": 0.25659037415174435,
+      "outputTokens": null,
+      "harness": "Artificial Analysis",
+      "source": "Artificial Analysis"
+     }
+    ],
+    "minimax-m3.1-flash": [
+     {
+      "effort": "na",
+      "score": 20.82,
+      "apiCost": 0.47026319324886434,
       "outputTokens": null,
       "harness": "Artificial Analysis",
       "source": "Artificial Analysis"
@@ -1417,17 +1517,17 @@
  ],
  "models": [
   {
-   "id": "deepseek-v4.1-flash",
-   "name": "DeepSeek V4.1 Flash",
-   "short": "DeepSeek V4.1 Flash",
+   "id": "deepseek-v4.1-flash-1017",
+   "name": "DeepSeek V4.1 Flash 1017",
+   "short": "DeepSeek V4.1 Flash 1017",
    "lab": "Open weights",
-   "pricingId": "deepseek-v4.1-flash",
+   "pricingId": "deepseek-v4.1-flash-1017",
    "superseded": false,
    "openWeights": true,
    "api": {
-    "usdPerMtok": 0.01932,
-    "basis": "metered",
-    "note": "DeepSeek V4.1 Flash API 忙时 metered API"
+    "usdPerMtok": 0.019319999999999997,
+    "basis": "list",
+    "note": "List price $0.006 / $0.3 / $1.2 via Artificial Analysis"
    }
   },
   {
@@ -1741,22 +1841,50 @@
    }
   },
   {
-   "id": "deepseek-v4.1-flash-1017",
-   "name": "DeepSeek V4.1 Flash 1017",
-   "short": "DeepSeek V4.1 Flash 1017",
+   "id": "qwen3.8-max",
+   "name": "Qwen3.8 Max",
+   "short": "Qwen3.8 Max",
+   "lab": "Other",
+   "pricingId": "qwen3.8-max",
+   "superseded": false,
+   "openWeights": false,
+   "api": {
+    "usdPerMtok": 0.3225,
+    "basis": "list",
+    "note": "List price $0.25 / $2 / $6 via Artificial Analysis"
+   }
+  },
+  {
+   "id": "mimo-v2.6-pro",
+   "name": "MiMo V2.6 Pro",
+   "short": "MiMo V2.6 Pro",
    "lab": "Open weights",
-   "pricingId": "deepseek-v4.1-flash-1017",
+   "pricingId": "mimo-v2.6-pro",
    "superseded": false,
    "openWeights": true,
    "api": {
-    "usdPerMtok": 0.019319999999999997,
+    "usdPerMtok": 0.018717,
+    "basis": "metered",
+    "note": "MiMo V2.6 Pro API metered API"
+   }
+  },
+  {
+   "id": "minimax-m3.1-flash",
+   "name": "MiniMax M3.1 Flash",
+   "short": "MiniMax M3.1 Flash",
+   "lab": "Open weights",
+   "pricingId": "minimax-m3.1-flash-preview",
+   "superseded": false,
+   "openWeights": true,
+   "api": {
+    "usdPerMtok": 0.021299999999999996,
     "basis": "list",
-    "note": "List price $0.006 / $0.3 / $1.2 via Artificial Analysis"
+    "note": "List price $0.015 / $0.15 / $0.6 via Artificial Analysis"
    }
   }
  ],
  "codexResets": {
-  "fetched": "2026-10-30",
+  "fetched": "2026-11-04",
   "url": "https://resetbeacon.com/?filter=all",
   "windowDays": 90,
   "providers": [
@@ -1788,6 +1916,69 @@
  },
  "plans": [
   {
+   "id": "mimo_token_lite_day",
+   "name": "MiMo Token Lite",
+   "provider": "Xiaomi",
+   "kind": "lab",
+   "scenario": null,
+   "group": "mimo_token_lite_day",
+   "fee": 6,
+   "localPrice": "¥39",
+   "offers": [
+    {
+     "modelId": "mimo-v2.6-pro",
+     "usdPerMtok": 0.018927445,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "medium",
+     "dataDate": "2026-09-22",
+     "source": "https://mimo.mi.com/docs Token Plan 官方档位/Credits池/burn率/夜间0.8×/首购88折；mimo-token-plan-round1-2026-09-22.json"
+    }
+   ]
+  },
+  {
+   "id": "minimax_m_plan_go_cn",
+   "name": "MiniMax M Plan Go (China)",
+   "provider": "MiniMax",
+   "kind": "lab",
+   "scenario": null,
+   "group": "minimax_m_plan_go_cn",
+   "fee": 7.23,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "minimax-m3.1-flash",
+     "usdPerMtok": 0.0045234823,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "medium",
+     "dataDate": "2026-10-01",
+     "source": "https://platform.minimax.cn/docs/m-plan/faq；https://platform.minimax.cn/docs/m-plan/intro；minimax-m31-flash-preview-cn-round1-2026-10-01.json；维护者截图及2026-10-01确认Go"
+    }
+   ]
+  },
+  {
+   "id": "x_plus",
+   "name": "X Subscription Plus",
+   "provider": "xAI",
+   "kind": "lab",
+   "scenario": null,
+   "group": "x_plus",
+   "fee": 8,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "grok-4.7",
+     "usdPerMtok": 0.05594405546666666,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-22",
+     "source": "1× X Subscription Plus; Premium anchored on legacy SuperGrok (scaled from SuperGrok: 维护者本机实测 round2：Grok Build xhigh「这次」窗 56,629,383 tok = 周额度 +45.5475%；supergrok-grok47-round2-2026-09-22.json；workload-conversion-round1-2026-09-30.json)"
+    }
+   ]
+  },
+  {
    "id": "opencode_go",
    "name": "OpenCode Go",
    "provider": "OpenCode",
@@ -1799,72 +1990,159 @@
    "offers": [
     {
      "modelId": "grok-4.7",
-     "usdPerMtok": 0.37735849,
+     "usdPerMtok": 0.3766666666666667,
      "unmetered": false,
      "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-09-30",
-     "source": "https://opencode.ai/docs/go/ official per-model Usage and three-part pricing; opencode-go-round5-2026-09-06.json; goat-opencode-catalogs-round3-2026-09-30.json"
-    },
-    {
-     "modelId": "claude-haiku-5.5",
-     "usdPerMtok": 0.0098000784,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-09-30",
-     "source": "https://opencode.ai/docs/go/ official per-model Usage and three-part pricing; opencode-go-round5-2026-09-06.json; goat-opencode-catalogs-round3-2026-09-30.json"
-    },
-    {
-     "modelId": "gpt-6-luna",
-     "usdPerMtok": 0.0098000784,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-09-30",
-     "source": "https://opencode.ai/docs/go/ official per-model Usage and three-part pricing; opencode-go-round5-2026-09-06.json; goat-opencode-catalogs-round3-2026-09-30.json"
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $15/month for Grok 4.7 (≤200K tokens) at $0.5 / $2 / $6"
     },
     {
      "modelId": "glm-5.3-flash",
-     "usdPerMtok": 0.0058917104,
+     "usdPerMtok": 0.005891666666666667,
      "unmetered": false,
      "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-09-30",
-     "source": "https://opencode.ai/docs/go/ official per-model Usage and three-part pricing; opencode-go-round5-2026-09-06.json; goat-opencode-catalogs-round3-2026-09-30.json"
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $60/month for GLM-5.3-Flash at $0.03 / $0.15 / $0.5"
     },
     {
      "modelId": "glm-5.3",
-     "usdPerMtok": 0.20618557,
+     "usdPerMtok": 0.2061333333333333,
      "unmetered": false,
      "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-09-30",
-     "source": "https://opencode.ai/docs/go/ official per-model Usage and three-part pricing; opencode-go-round5-2026-09-06.json; goat-opencode-catalogs-round3-2026-09-30.json"
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $15/month for GLM-5.3 at $0.26 / $1.4 / $4.4"
+    },
+    {
+     "modelId": "gpt-6-luna",
+     "usdPerMtok": 0.009800000000000001,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $15/month for GPT 6 Luna (≤272K tokens) at $0.01 / $0.1 / $0.5"
+    },
+    {
+     "modelId": "claude-haiku-5.5",
+     "usdPerMtok": 0.010216666666666667,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $15/month for Claude Haiku 5.5 (≤100K tokens) at $0.01 / $0.1 / $0.5"
+    },
+    {
+     "modelId": "gemini-4-argon",
+     "usdPerMtok": 0.14166666666666666,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $30/month for Gemini 4 Argon (50% off through 2026-11-30) at $0.1 / $2 / $10"
+    },
+    {
+     "modelId": "kimi-k3.1-pro",
+     "usdPerMtok": 0.19599999999999998,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $15/month for Kimi K3.1 Pro at $0.2 / $2 / $10"
     },
     {
      "modelId": "kimi-k3",
-     "usdPerMtok": 0.29411765,
+     "usdPerMtok": 0.29400000000000004,
      "unmetered": false,
      "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-09-30",
-     "source": "https://opencode.ai/docs/go/ official per-model Usage and three-part pricing; opencode-go-round5-2026-09-06.json; goat-opencode-catalogs-round3-2026-09-30.json"
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $15/month for Kimi K3 at $0.3 / $3 / $15"
     },
     {
-     "modelId": "deepseek-v4.1-flash",
-     "usdPerMtok": 0.0012074961,
+     "modelId": "mimo-v2.6-pro",
+     "usdPerMtok": 0.012494166666666667,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $15/month for MiMo-V2.6-Pro at $0.003625 / $0.435 / $0.87"
+    },
+    {
+     "modelId": "minimax-m3.1-flash",
+     "usdPerMtok": 0.010649999999999998,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $20/month for MiniMax M3.1 Flash at $0.015 / $0.15 / $0.6"
+    },
+    {
+     "modelId": "qwen3.8-max",
+     "usdPerMtok": 0.21500000000000002,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $15/month for Qwen3.8 Max at $0.25 / $2 / $6"
+    },
+    {
+     "modelId": "deepseek-v4.1-flash-1017",
+     "usdPerMtok": 0.0019319999999999997,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $100/month for DeepSeek V4.1 Flash (Peak; OpenCode lists the current snapshot, 1017) at $0.006 / $0.3 / $1.2"
+    }
+   ]
+  },
+  {
+   "id": "kimi_plus_cn",
+   "name": "Kimi Plus (China)",
+   "provider": "Moonshot",
+   "kind": "lab",
+   "scenario": null,
+   "group": "kimi_plus_cn",
+   "fee": 14.84,
+   "localPrice": "¥99",
+   "offers": [
+    {
+     "modelId": "kimi-k3",
+     "usdPerMtok": 0.07610256376210525,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "medium",
-     "dataDate": "2026-09-30",
-     "source": "https://opencode.ai/docs/go/ 官方每模型 Usage 与三段价格；opencode-go-deepseek-round7-2026-09-30.json"
+     "dataDate": "2026-10-27",
+     "source": "官方新套餐页+维护者裁定v2=v1×1/2；kimi-v2-plans-round1-2026-10-26.json"
+    }
+   ]
+  },
+  {
+   "id": "mimo_token_standard_day",
+   "name": "MiMo Token Standard",
+   "provider": "Xiaomi",
+   "kind": "lab",
+   "scenario": null,
+   "group": "mimo_token_standard_day",
+   "fee": 16,
+   "localPrice": "¥99",
+   "offers": [
+    {
+     "modelId": "mimo-v2.6-pro",
+     "usdPerMtok": 0.01880141,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "medium",
+     "dataDate": "2026-09-22",
+     "source": "https://mimo.mi.com/docs Token Plan 官方档位/Credits池/burn率/夜间0.8×/首购88折；mimo-token-plan-round1-2026-09-22.json"
     }
    ]
   },
   {
    "id": "glm_coding_lite_cn_new_peak",
-   "name": "GLM Coding Lite",
+   "name": "GLM Coding Lite (China)",
    "provider": "Zhipu",
    "kind": "lab",
    "scenario": "peak",
@@ -1894,7 +2172,7 @@
   },
   {
    "id": "glm_coding_lite_cn_new_mid",
-   "name": "GLM Coding Lite",
+   "name": "GLM Coding Lite (China)",
    "provider": "Zhipu",
    "kind": "lab",
    "scenario": "mid",
@@ -1924,7 +2202,7 @@
   },
   {
    "id": "glm_coding_lite_cn_new_offpeak",
-   "name": "GLM Coding Lite",
+   "name": "GLM Coding Lite (China)",
    "provider": "Zhipu",
    "kind": "lab",
    "scenario": "offpeak",
@@ -1953,23 +2231,113 @@
    ]
   },
   {
-   "id": "kimi_plus_cn",
-   "name": "Kimi Plus",
-   "provider": "Moonshot",
+   "id": "minimax_m_plan_explore_cn",
+   "name": "MiniMax M Plan Explore (China)",
+   "provider": "MiniMax",
    "kind": "lab",
    "scenario": null,
-   "group": "kimi_plus_cn",
-   "fee": 19,
-   "localPrice": "¥99",
+   "group": "minimax_m_plan_explore_cn",
+   "fee": 17.55,
+   "localPrice": null,
    "offers": [
     {
-     "modelId": "kimi-k3",
-     "usdPerMtok": 0.097435897,
+     "modelId": "minimax-m3.1-flash",
+     "usdPerMtok": 0.0036617902,
      "unmetered": false,
      "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-10-27",
-     "source": "官方新套餐页+维护者裁定v2=v1×1/2；kimi-v2-plans-round1-2026-10-26.json"
+     "confidence": "low",
+     "dataDate": "2026-10-01",
+     "source": "https://platform.minimax.cn/docs/m-plan/faq；https://platform.minimax.cn/docs/m-plan/intro；minimax-m31-flash-preview-cn-round1-2026-10-01.json；维护者截图及2026-10-01确认Go"
+    }
+   ]
+  },
+  {
+   "id": "glm_coding_lite_intl_peak",
+   "name": "GLM Coding Lite (z.ai)",
+   "provider": "Zhipu",
+   "kind": "lab",
+   "scenario": "peak",
+   "group": "glm_coding_lite_intl",
+   "fee": 18,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "glm-5.3",
+     "usdPerMtok": 0.08736593004020678,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    },
+    {
+     "modelId": "glm-5.3-flash",
+     "usdPerMtok": 0.028841958299827684,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    }
+   ]
+  },
+  {
+   "id": "glm_coding_lite_intl_mid",
+   "name": "GLM Coding Lite (z.ai)",
+   "provider": "Zhipu",
+   "kind": "lab",
+   "scenario": "mid",
+   "group": "glm_coding_lite_intl",
+   "fee": 18,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "glm-5.3",
+     "usdPerMtok": 0.05824395336013785,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    },
+    {
+     "modelId": "glm-5.3-flash",
+     "usdPerMtok": 0.019227972199885125,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    }
+   ]
+  },
+  {
+   "id": "glm_coding_lite_intl_offpeak",
+   "name": "GLM Coding Lite (z.ai)",
+   "provider": "Zhipu",
+   "kind": "lab",
+   "scenario": "offpeak",
+   "group": "glm_coding_lite_intl",
+   "fee": 18,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "glm-5.3",
+     "usdPerMtok": 0.043682965537047674,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    },
+    {
+     "modelId": "glm-5.3-flash",
+     "usdPerMtok": 0.014409433199310743,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
     }
    ]
   },
@@ -2057,6 +2425,15 @@
      "confidence": "medium",
      "dataDate": "2026-07-30",
      "source": "由同套餐 gpt-5.6-sol 6.16 亿 × 0.7736842105263158"
+    },
+    {
+     "modelId": "gpt-6.1-terra",
+     "usdPerMtok": 0.011494253,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-30",
+     "source": "Estimated from Codex credit rates: 0.5 × the gpt-6.1-sol allowance's $/Mtok on Plus (learn.chatgpt.com/docs/pricing)"
     }
    ]
   },
@@ -2118,39 +2495,18 @@
    ]
   },
   {
-   "id": "supergrok",
-   "name": "SuperGrok",
-   "provider": "xAI",
-   "kind": "lab",
-   "scenario": null,
-   "group": "supergrok",
-   "fee": 30,
-   "localPrice": null,
-   "offers": [
-    {
-     "modelId": "grok-4.7",
-     "usdPerMtok": 0.052447552,
-     "unmetered": false,
-     "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-09-22",
-     "source": "维护者本机实测 round2：Grok Build xhigh「这次」窗 56,629,383 tok = 周额度 +45.5475%；supergrok-grok47-round2-2026-09-22.json；workload-conversion-round1-2026-09-30.json"
-    }
-   ]
-  },
-  {
    "id": "kimi_pro_cn",
-   "name": "Kimi Pro",
+   "name": "Kimi Pro (China)",
    "provider": "Moonshot",
    "kind": "lab",
    "scenario": null,
    "group": "kimi_pro_cn",
-   "fee": 39,
+   "fee": 29.82,
    "localPrice": "¥199",
    "offers": [
     {
      "modelId": "kimi-k3",
-     "usdPerMtok": 0.04008222,
+     "usdPerMtok": 0.030647482061538462,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "medium",
@@ -2160,8 +2516,191 @@
    ]
   },
   {
+   "id": "x_premium",
+   "name": "X Subscription Premium",
+   "provider": "xAI",
+   "kind": "lab",
+   "scenario": null,
+   "group": "x_premium",
+   "fee": 30,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "grok-4.7",
+     "usdPerMtok": 0.052447552,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-22",
+     "source": "4× X Subscription Plus; Premium anchored on legacy SuperGrok (scaled from SuperGrok: 维护者本机实测 round2：Grok Build xhigh「这次」窗 56,629,383 tok = 周额度 +45.5475%；supergrok-grok47-round2-2026-09-22.json；workload-conversion-round1-2026-09-30.json)"
+    }
+   ]
+  },
+  {
+   "id": "opencode_go_plus",
+   "name": "OpenCode Go Plus",
+   "provider": "OpenCode",
+   "kind": "tool",
+   "scenario": null,
+   "group": "opencode_go_plus",
+   "fee": 40,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "grok-4.7",
+     "usdPerMtok": 0.3766666666666667,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $60/month for Grok 4.7 (≤200K tokens) at $0.5 / $2 / $6"
+    },
+    {
+     "modelId": "glm-5.3-flash",
+     "usdPerMtok": 0.007855555555555557,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $180/month for GLM-5.3-Flash at $0.03 / $0.15 / $0.5"
+    },
+    {
+     "modelId": "glm-5.3",
+     "usdPerMtok": 0.10306666666666665,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $120/month for GLM-5.3 at $0.26 / $1.4 / $4.4"
+    },
+    {
+     "modelId": "gpt-6-luna",
+     "usdPerMtok": 0.009800000000000001,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $60/month for GPT 6 Luna (≤272K tokens) at $0.01 / $0.1 / $0.5"
+    },
+    {
+     "modelId": "claude-haiku-5.5",
+     "usdPerMtok": 0.010216666666666667,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $60/month for Claude Haiku 5.5 (≤100K tokens) at $0.01 / $0.1 / $0.5"
+    },
+    {
+     "modelId": "gemini-4-argon",
+     "usdPerMtok": 0.14166666666666666,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $120/month for Gemini 4 Argon (50% off through 2026-11-30) at $0.1 / $2 / $10"
+    },
+    {
+     "modelId": "kimi-k3.1-pro",
+     "usdPerMtok": 0.19599999999999998,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $60/month for Kimi K3.1 Pro at $0.2 / $2 / $10"
+    },
+    {
+     "modelId": "kimi-k3",
+     "usdPerMtok": 0.29400000000000004,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $60/month for Kimi K3 at $0.3 / $3 / $15"
+    },
+    {
+     "modelId": "mimo-v2.6-pro",
+     "usdPerMtok": 0.012494166666666667,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $60/month for MiMo-V2.6-Pro at $0.003625 / $0.435 / $0.87"
+    },
+    {
+     "modelId": "minimax-m3.1-flash",
+     "usdPerMtok": 0.010649999999999998,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $80/month for MiniMax M3.1 Flash at $0.015 / $0.15 / $0.6"
+    },
+    {
+     "modelId": "qwen3.8-max",
+     "usdPerMtok": 0.21500000000000002,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $60/month for Qwen3.8 Max at $0.25 / $2 / $6"
+    },
+    {
+     "modelId": "deepseek-v4.1-flash-1017",
+     "usdPerMtok": 0.0038639999999999994,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-11-04",
+     "source": "https://opencode.ai/docs/go/: $200/month for DeepSeek V4.1 Flash (Peak; OpenCode lists the current snapshot, 1017) at $0.006 / $0.3 / $1.2"
+    }
+   ]
+  },
+  {
+   "id": "mimo_token_pro_day",
+   "name": "MiMo Token Pro",
+   "provider": "Xiaomi",
+   "kind": "lab",
+   "scenario": null,
+   "group": "mimo_token_pro_day",
+   "fee": 50,
+   "localPrice": "¥329",
+   "offers": [
+    {
+     "modelId": "mimo-v2.6-pro",
+     "usdPerMtok": 0.017006803,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "medium",
+     "dataDate": "2026-09-22",
+     "source": "https://mimo.mi.com/docs Token Plan 官方档位/Credits池/burn率/夜间0.8×/首购88折；mimo-token-plan-round1-2026-09-22.json"
+    }
+   ]
+  },
+  {
+   "id": "minimax_m_plan_build_cn",
+   "name": "MiniMax M Plan Build (China)",
+   "provider": "MiniMax",
+   "kind": "lab",
+   "scenario": null,
+   "group": "minimax_m_plan_build_cn",
+   "fee": 69.19,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "minimax-m3.1-flash",
+     "usdPerMtok": 0.0036079403,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-10-01",
+     "source": "https://platform.minimax.cn/docs/m-plan/faq；https://platform.minimax.cn/docs/m-plan/intro；minimax-m31-flash-preview-cn-round1-2026-10-01.json；维护者截图及2026-10-01确认Go"
+    }
+   ]
+  },
+  {
    "id": "glm_coding_pro_cn_new_peak",
-   "name": "GLM Coding Pro",
+   "name": "GLM Coding Pro (China)",
    "provider": "Zhipu",
    "kind": "lab",
    "scenario": "peak",
@@ -2191,7 +2730,7 @@
   },
   {
    "id": "glm_coding_pro_cn_new_mid",
-   "name": "GLM Coding Pro",
+   "name": "GLM Coding Pro (China)",
    "provider": "Zhipu",
    "kind": "lab",
    "scenario": "mid",
@@ -2221,7 +2760,7 @@
   },
   {
    "id": "glm_coding_pro_cn_new_offpeak",
-   "name": "GLM Coding Pro",
+   "name": "GLM Coding Pro (China)",
    "provider": "Zhipu",
    "kind": "lab",
    "scenario": "offpeak",
@@ -2250,29 +2789,119 @@
    ]
   },
   {
-   "id": "kimi_max_cn",
-   "name": "Kimi Max",
-   "provider": "Moonshot",
+   "id": "glm_coding_pro_intl_peak",
+   "name": "GLM Coding Pro (z.ai)",
+   "provider": "Zhipu",
    "kind": "lab",
-   "scenario": null,
-   "group": "kimi_max_cn",
-   "fee": 99,
-   "localPrice": "¥699",
+   "scenario": "peak",
+   "group": "glm_coding_pro_intl",
+   "fee": 80,
+   "localPrice": null,
    "offers": [
     {
-     "modelId": "kimi-k3",
-     "usdPerMtok": 0.033915725,
+     "modelId": "glm-5.3",
+     "usdPerMtok": 0.06472186166057703,
      "unmetered": false,
      "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-10-27",
-     "source": "官方新套餐页+维护者裁定v2=v1×1/2；kimi-v2-plans-round1-2026-10-26.json"
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    },
+    {
+     "modelId": "glm-5.3-flash",
+     "usdPerMtok": 0.021355104447524254,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    }
+   ]
+  },
+  {
+   "id": "glm_coding_pro_intl_mid",
+   "name": "GLM Coding Pro (z.ai)",
+   "provider": "Zhipu",
+   "kind": "lab",
+   "scenario": "mid",
+   "group": "glm_coding_pro_intl",
+   "fee": 80,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "glm-5.3",
+     "usdPerMtok": 0.043147907773718026,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    },
+    {
+     "modelId": "glm-5.3-flash",
+     "usdPerMtok": 0.014236736298349503,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    }
+   ]
+  },
+  {
+   "id": "glm_coding_pro_intl_offpeak",
+   "name": "GLM Coding Pro (z.ai)",
+   "provider": "Zhipu",
+   "kind": "lab",
+   "scenario": "offpeak",
+   "group": "glm_coding_pro_intl",
+   "fee": 80,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "glm-5.3",
+     "usdPerMtok": 0.032360930326319766,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    },
+    {
+     "modelId": "glm-5.3-flash",
+     "usdPerMtok": 0.010677551719793371,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    }
+   ]
+  },
+  {
+   "id": "google_ai_ultra_5x",
+   "name": "Google AI Ultra 5x",
+   "provider": "Google",
+   "kind": "lab",
+   "scenario": null,
+   "group": "google_ai_ultra_5x",
+   "fee": 99.99,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "gemini-4-argon",
+     "usdPerMtok": 0.303000002122061,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-10-16",
+     "source": "5× the AI Pro quota (scaled from Google AI Pro: X @leo114119 推文截图（维护者提供）：第三方网关面板 Gemini 4 Argon·7天 已用 15.1%，网关统计 23 次调用（输入 109K／输出 75.1K 含推理 28K／缓存读 955K，命中率 90%）；gemini-argon-round1-2026-10-16.json)"
     }
    ]
   },
   {
    "id": "chatgpt_pro_5x",
-   "name": "ChatGPT Pro 5x",
+   "name": "ChatGPT Pro 100",
    "provider": "OpenAI",
    "kind": "lab",
    "scenario": null,
@@ -2282,36 +2911,72 @@
    "offers": [
     {
      "modelId": "gpt-5.6-sol",
-     "usdPerMtok": 0.032467532,
+     "usdPerMtok": 0.016233766,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "medium",
      "dataDate": "2026-07-30",
-     "source": "Plus × 官方 5x"
+     "source": "Doubled 2026-10-29 (OpenAI release notes); Plus × 官方 5x"
     },
     {
      "modelId": "gpt-5.5",
-     "usdPerMtok": 0.041965672,
+     "usdPerMtok": 0.020982836,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "medium",
      "dataDate": "2026-07-30",
-     "source": "由同套餐 gpt-5.6-sol 30.8 亿 × 0.7736842105263158"
+     "source": "Doubled 2026-10-29 (OpenAI release notes); 由同套餐 gpt-5.6-sol 30.8 亿 × 0.7736842105263158"
     },
     {
      "modelId": "gpt-6-astra",
-     "usdPerMtok": 0.10989011,
+     "usdPerMtok": 0.054945055,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "low",
      "dataDate": "2026-07-30~2026-09-21",
-     "source": "由同套餐 gpt-5.6-sol 30.8 亿 × 0.295458068516509"
+     "source": "Doubled 2026-10-29 (OpenAI release notes); 由同套餐 gpt-5.6-sol 30.8 亿 × 0.295458068516509"
+    },
+    {
+     "modelId": "gpt-6-sol",
+     "usdPerMtok": 0.009090909,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-24",
+     "source": "10× the Plus allowance (this tier's measured multiple); Plus: 维护者本机Codex实测：当日增量gpt-6-sol total 15,716,975 tokens（input 693,878/output 46,713含reasoning 14,925/cache_read 14,976,384，hit 95.57%）= 周额度约6%；chatgpt-gpt6sol-plus-r"
+    },
+    {
+     "modelId": "gpt-6-luna",
+     "usdPerMtok": 0.0010866022,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-27~2026-09-28",
+     "source": "10× the Plus allowance (this tier's measured multiple); Plus: 维护者本机Codex实测（effort=max）：新一周窗09-27 22:09 97%→09-28 20:44 91%增量全为gpt-6-luna total 137,648,446 tokens（input 3,129,683/output 757,355含reasoning 471,268/cache_read "
+    },
+    {
+     "modelId": "gpt-6.1-sol",
+     "usdPerMtok": 0.011494253000000001,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-30",
+     "source": "10× the Plus allowance (this tier's measured multiple); Plus: 维护者本机Codex实测：周窗剩余81%→50%（31pp）整段 gpt-6.1-sol total 55,532,850 tokens（input 2,742,389/cache_read 52,536,064/cache_write 0/output 254,397含reasoning 72,105，hit 95."
+    },
+    {
+     "modelId": "gpt-6.1-terra",
+     "usdPerMtok": 0.005747126500000001,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-30",
+     "source": "10× the Plus allowance (this tier's measured multiple); Plus: Estimated from Codex credit rates: 0.5 × the gpt-6.1-sol allowance's $/Mtok on Plus (learn.chatgpt.com/docs/pricing)"
     }
    ]
   },
   {
    "id": "claude_max_5x",
-   "name": "Claude Max 5x",
+   "name": "Claude Max",
    "provider": "Anthropic",
    "kind": "lab",
    "scenario": null,
@@ -2367,23 +3032,65 @@
    ]
   },
   {
-   "id": "supergrok_plus",
-   "name": "SuperGrok Plus",
+   "id": "mimo_token_max_day",
+   "name": "MiMo Token Max",
+   "provider": "Xiaomi",
+   "kind": "lab",
+   "scenario": null,
+   "group": "mimo_token_max_day",
+   "fee": 100,
+   "localPrice": "¥659",
+   "offers": [
+    {
+     "modelId": "mimo-v2.6-pro",
+     "usdPerMtok": 0.015762926,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "medium",
+     "dataDate": "2026-09-22",
+     "source": "https://mimo.mi.com/docs Token Plan 官方档位/Credits池/burn率/夜间0.8×/首购88折；mimo-token-plan-round1-2026-09-22.json"
+    }
+   ]
+  },
+  {
+   "id": "x_super",
+   "name": "X Subscription Super",
    "provider": "xAI",
    "kind": "lab",
    "scenario": null,
-   "group": "supergrok_plus",
+   "group": "x_super",
    "fee": 100,
    "localPrice": null,
    "offers": [
     {
      "modelId": "grok-4.7",
-     "usdPerMtok": 0.043668122,
+     "usdPerMtok": 0.046620046222222225,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-22",
+     "source": "15× X Subscription Plus; Premium anchored on legacy SuperGrok (scaled from SuperGrok: 维护者本机实测 round2：Grok Build xhigh「这次」窗 56,629,383 tok = 周额度 +45.5475%；supergrok-grok47-round2-2026-09-22.json；workload-conversion-round1-2026-09-30.json)"
+    }
+   ]
+  },
+  {
+   "id": "kimi_max_cn",
+   "name": "Kimi Max (China)",
+   "provider": "Moonshot",
+   "kind": "lab",
+   "scenario": null,
+   "group": "kimi_max_cn",
+   "fee": 104.76,
+   "localPrice": "¥699",
+   "offers": [
+    {
+     "modelId": "kimi-k3",
+     "usdPerMtok": 0.03588900354545455,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "medium",
-     "dataDate": "2026-09-22",
-     "source": "面板周额度$100×Super 4.7实测标定×4周"
+     "dataDate": "2026-10-27",
+     "source": "官方新套餐页+维护者裁定v2=v1×1/2；kimi-v2-plans-round1-2026-10-26.json"
     }
    ]
   },
@@ -2410,7 +3117,7 @@
   },
   {
    "id": "glm_coding_max_cn_new_peak",
-   "name": "GLM Coding Max",
+   "name": "GLM Coding Max (China)",
    "provider": "Zhipu",
    "kind": "lab",
    "scenario": "peak",
@@ -2440,7 +3147,7 @@
   },
   {
    "id": "glm_coding_max_cn_new_mid",
-   "name": "GLM Coding Max",
+   "name": "GLM Coding Max (China)",
    "provider": "Zhipu",
    "kind": "lab",
    "scenario": "mid",
@@ -2470,7 +3177,7 @@
   },
   {
    "id": "glm_coding_max_cn_new_offpeak",
-   "name": "GLM Coding Max",
+   "name": "GLM Coding Max (China)",
    "provider": "Zhipu",
    "kind": "lab",
    "scenario": "offpeak",
@@ -2499,29 +3206,119 @@
    ]
   },
   {
-   "id": "kimi_ultra_cn",
-   "name": "Kimi Ultra",
-   "provider": "Moonshot",
+   "id": "glm_coding_max_intl_peak",
+   "name": "GLM Coding Max (z.ai)",
+   "provider": "Zhipu",
    "kind": "lab",
-   "scenario": null,
-   "group": "kimi_ultra_cn",
-   "fee": 199,
-   "localPrice": "¥1399",
+   "scenario": "peak",
+   "group": "glm_coding_max_intl",
+   "fee": 168,
+   "localPrice": null,
    "offers": [
     {
-     "modelId": "kimi-k3",
-     "usdPerMtok": 0.034087016,
+     "modelId": "glm-5.3",
+     "usdPerMtok": 0.05825152642897566,
      "unmetered": false,
      "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-10-27",
-     "source": "官方新套餐页「Ultra为Max的2倍」+维护者裁定v2=v1×1/2；kimi-v2-plans-round1-2026-10-26.json"
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    },
+    {
+     "modelId": "glm-5.3-flash",
+     "usdPerMtok": 0.0192216709300132,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    }
+   ]
+  },
+  {
+   "id": "glm_coding_max_intl_mid",
+   "name": "GLM Coding Max (z.ai)",
+   "provider": "Zhipu",
+   "kind": "lab",
+   "scenario": "mid",
+   "group": "glm_coding_max_intl",
+   "fee": 168,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "glm-5.3",
+     "usdPerMtok": 0.038825376796830784,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    },
+    {
+     "modelId": "glm-5.3-flash",
+     "usdPerMtok": 0.012813469760422563,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    }
+   ]
+  },
+  {
+   "id": "glm_coding_max_intl_offpeak",
+   "name": "GLM Coding Max (z.ai)",
+   "provider": "Zhipu",
+   "kind": "lab",
+   "scenario": "offpeak",
+   "group": "glm_coding_max_intl",
+   "fee": 168,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "glm-5.3",
+     "usdPerMtok": 0.029120715185813998,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    },
+    {
+     "modelId": "glm-5.3-flash",
+     "usdPerMtok": 0.009610285606489343,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "high",
+     "dataDate": "2026-09-03",
+     "source": "z.ai price, same credits as the China plan; docs.bigmodel.cn 官方周积分与三段积分系数；standard-token-mix-round1-2026-09-07.json"
+    }
+   ]
+  },
+  {
+   "id": "google_ai_ultra_20x",
+   "name": "Google AI Ultra 20x",
+   "provider": "Google",
+   "kind": "lab",
+   "scenario": null,
+   "group": "google_ai_ultra_20x",
+   "fee": 199.99,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "gemini-4-argon",
+     "usdPerMtok": 0.15150757681865934,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-10-16",
+     "source": "20× the AI Pro quota (scaled from Google AI Pro: X @leo114119 推文截图（维护者提供）：第三方网关面板 Gemini 4 Argon·7天 已用 15.1%，网关统计 23 次调用（输入 109K／输出 75.1K 含推理 28K／缓存读 955K，命中率 90%）；gemini-argon-round1-2026-10-16.json)"
     }
    ]
   },
   {
    "id": "chatgpt_pro_20x",
-   "name": "ChatGPT Pro 20x",
+   "name": "ChatGPT Pro 200",
    "provider": "OpenAI",
    "kind": "lab",
    "scenario": null,
@@ -2555,12 +3352,48 @@
      "confidence": "medium",
      "dataDate": "2026-06-10~2026-09-06",
      "source": "由同套餐 gpt-5.6-sol 129.02 亿 × 0.7736842105263158"
+    },
+    {
+     "modelId": "gpt-6-sol",
+     "usdPerMtok": 0.00868082491819563,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-24",
+     "source": "20.9× the Plus allowance (this tier's measured multiple); Plus: 维护者本机Codex实测：当日增量gpt-6-sol total 15,716,975 tokens（input 693,878/output 46,713含reasoning 14,925/cache_read 14,976,384，hit 95.57%）= 周额度约6%；chatgpt-gpt6sol-plus-r"
+    },
+    {
+     "modelId": "gpt-6-luna",
+     "usdPerMtok": 0.001037586390307745,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-27~2026-09-28",
+     "source": "20.9× the Plus allowance (this tier's measured multiple); Plus: 维护者本机Codex实测（effort=max）：新一周窗09-27 22:09 97%→09-28 20:44 91%增量全为gpt-6-luna total 137,648,446 tokens（input 3,129,683/output 757,355含reasoning 471,268/cache_read "
+    },
+    {
+     "modelId": "gpt-6.1-sol",
+     "usdPerMtok": 0.010975755874186494,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-30",
+     "source": "20.9× the Plus allowance (this tier's measured multiple); Plus: 维护者本机Codex实测：周窗剩余81%→50%（31pp）整段 gpt-6.1-sol total 55,532,850 tokens（input 2,742,389/cache_read 52,536,064/cache_write 0/output 254,397含reasoning 72,105，hit 95."
+    },
+    {
+     "modelId": "gpt-6.1-terra",
+     "usdPerMtok": 0.005487877937093247,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-30",
+     "source": "20.9× the Plus allowance (this tier's measured multiple); Plus: Estimated from Codex credit rates: 0.5 × the gpt-6.1-sol allowance's $/Mtok on Plus (learn.chatgpt.com/docs/pricing)"
     }
    ]
   },
   {
    "id": "claude_max_20x",
-   "name": "Claude Max 20x",
+   "name": "Claude Ultra",
    "provider": "Anthropic",
    "kind": "lab",
    "scenario": null,
@@ -2625,44 +3458,119 @@
    ]
   },
   {
-   "id": "cursor_ultra",
-   "name": "Cursor Ultra",
-   "provider": "Cursor",
-   "kind": "tool",
+   "id": "x_ultra",
+   "name": "X Subscription Ultra",
+   "provider": "xAI",
+   "kind": "lab",
    "scenario": null,
-   "group": "cursor_ultra",
+   "group": "x_ultra",
    "fee": 200,
    "localPrice": null,
    "offers": [
     {
-     "modelId": "claude-opus-5.5",
-     "usdPerMtok": 0.22321429,
+     "modelId": "grok-4.7",
+     "usdPerMtok": 0.027972027733333335,
      "unmetered": false,
      "promoUntil": null,
-     "confidence": "medium",
-     "dataDate": "2026-09-14~2026-10-05",
-     "source": "X @xuanwo 推文（2026-10-05，维护者转交截图）：Cursor Ultra 账期内 Other Models 用量全程 claude-opus-5-5-high；usage-events CSV 导出 9月14日–10月5日共 176 条 Opus 记录（集中北京时间10月2日22:35–5日14:14）；cursor-opus55-community-round1-2026-10-05.json"
+     "confidence": "low",
+     "dataDate": "2026-09-22",
+     "source": "50× X Subscription Plus; Premium anchored on legacy SuperGrok (scaled from SuperGrok: 维护者本机实测 round2：Grok Build xhigh「这次」窗 56,629,383 tok = 周额度 +45.5475%；supergrok-grok47-round2-2026-09-22.json；workload-conversion-round1-2026-09-30.json)"
     }
    ]
   },
   {
-   "id": "supergrok_heavy",
-   "name": "SuperGrok Heavy",
-   "provider": "xAI",
+   "id": "kimi_ultra_cn",
+   "name": "Kimi Ultra (China)",
+   "provider": "Moonshot",
    "kind": "lab",
    "scenario": null,
-   "group": "supergrok_heavy",
-   "fee": 300,
-   "localPrice": null,
+   "group": "kimi_ultra_cn",
+   "fee": 209.67,
+   "localPrice": "¥1399",
    "offers": [
     {
-     "modelId": "grok-4.7",
-     "usdPerMtok": 0.052447552,
+     "modelId": "kimi-k3",
+     "usdPerMtok": 0.03591469670713567,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "medium",
-     "dataDate": "2026-09-22",
-     "source": "面板周额度$250×Super 4.7实测标定×4周"
+     "dataDate": "2026-10-27",
+     "source": "官方新套餐页「Ultra为Max的2倍」+维护者裁定v2=v1×1/2；kimi-v2-plans-round1-2026-10-26.json"
+    }
+   ]
+  },
+  {
+   "id": "chatgpt_pro_500",
+   "name": "ChatGPT Pro 500",
+   "provider": "OpenAI",
+   "kind": "lab",
+   "scenario": null,
+   "group": "chatgpt_pro_500",
+   "fee": 500,
+   "localPrice": null,
+   "offers": [
+    {
+     "modelId": "gpt-5.6-sol",
+     "usdPerMtok": 0.015501472999999998,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-06-10~2026-09-06",
+     "source": "≈ 50× Plus: 25× at launch, doubled 2026-10-29 (scaled from ChatGPT Pro 200: 五源实测加权：Observatory 143.6×3 + 《财经》109×3 + 网关 139.5×2 + 健康周 131.2×2 + imon139 120×1；chatgpt-quotas-round5 / caijing-2026-08 / chatgpt-pro20x-gateway-measurement-2)"
+    },
+    {
+     "modelId": "gpt-6-astra",
+     "usdPerMtok": 0.052465897,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-07~2026-09-21",
+     "source": "≈ 50× Plus: 25× at launch, doubled 2026-10-29 (scaled from ChatGPT Pro 200: 8条实测源加权：Observatory 8.53、round10截图13.8、round13同框7.52、round14维护者面板10.0、msg7086 8.07、round14图4(2/3周)8.18、图2自述9.25、图3后台10.3亿/周；chatgpt-astra-round12/13/14)"
+    },
+    {
+     "modelId": "gpt-5.5",
+     "usdPerMtok": 0.020035864,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-06-10~2026-09-06",
+     "source": "≈ 50× Plus: 25× at launch, doubled 2026-10-29 (scaled from ChatGPT Pro 200: 由同套餐 gpt-5.6-sol 129.02 亿 × 0.7736842105263158)"
+    },
+    {
+     "modelId": "gpt-6-sol",
+     "usdPerMtok": 0.00868082491819563,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-24",
+     "source": "≈ 50× Plus: 25× at launch, doubled 2026-10-29 (scaled from ChatGPT Pro 200: 20.9× the Plus allowance (this tier's measured multiple); Plus: 维护者本机Codex实测：当日增量gpt-6-sol total 15,716,975 tokens（input 693,878/output 46,713含reasoning 14,925/)"
+    },
+    {
+     "modelId": "gpt-6-luna",
+     "usdPerMtok": 0.001037586390307745,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-27~2026-09-28",
+     "source": "≈ 50× Plus: 25× at launch, doubled 2026-10-29 (scaled from ChatGPT Pro 200: 20.9× the Plus allowance (this tier's measured multiple); Plus: 维护者本机Codex实测（effort=max）：新一周窗09-27 22:09 97%→09-28 20:44 91%增量全为gpt-6-luna total 137,648,446 tok)"
+    },
+    {
+     "modelId": "gpt-6.1-sol",
+     "usdPerMtok": 0.010975755874186494,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-30",
+     "source": "≈ 50× Plus: 25× at launch, doubled 2026-10-29 (scaled from ChatGPT Pro 200: 20.9× the Plus allowance (this tier's measured multiple); Plus: 维护者本机Codex实测：周窗剩余81%→50%（31pp）整段 gpt-6.1-sol total 55,532,850 tokens（input 2,742,389/cache_read )"
+    },
+    {
+     "modelId": "gpt-6.1-terra",
+     "usdPerMtok": 0.005487877937093247,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-30",
+     "source": "≈ 50× Plus: 25× at launch, doubled 2026-10-29 (scaled from ChatGPT Pro 200: 20.9× the Plus allowance (this tier's measured multiple); Plus: Estimated from Codex credit rates: 0.5 × the gpt-6.1-sol allowance's $/Mtok on Plus (learn.chatg)"
     }
    ]
   }

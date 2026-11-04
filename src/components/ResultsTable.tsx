@@ -63,7 +63,7 @@ export function ResultsTable({ rows, mode, palette }: Props) {
               <TableHead className="w-8">#</TableHead>
               <TableHead>Model</TableHead>
               <TableHead className="w-[28%]">{header("score", "Score")}</TableHead>
-              {sub ? <TableHead>Cheapest plan</TableHead> : null}
+              {sub ? <TableHead>Plan</TableHead> : null}
               <TableHead className="text-right">{header("cost", sub ? `${currencySymbol()} / task` : `API ${currencySymbol()} / task`)}</TableHead>
               {sub ? <TableHead className="text-right">API {currencySymbol()} / task</TableHead> : null}
               <TableHead className="text-right">{header("value", `Pts per ${currencySymbol()}`)}</TableHead>

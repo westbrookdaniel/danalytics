@@ -1,0 +1,23 @@
+{
+ "source": "https://opencode.ai/docs/go/",
+ "read": "2026-11-04",
+ "note": "Hand-copied from the official per-model table. One shared allowance; each model's monthly dollar limit (5-hour window 20%, weekly 50%), at OpenCode's token prices, says how much of it that model uses. Tiered models use the short-context tier. Go Teams ($20/member, $5 above Go on every model) is left out.",
+ "plans": [
+  { "id": "opencode_go", "name": "OpenCode Go", "fee": 10, "column": 0 },
+  { "id": "opencode_go_plus", "name": "OpenCode Go Plus", "fee": 40, "column": 1 }
+ ],
+ "models": {
+  "grok-4.7": { "label": "Grok 4.7 (≤200K tokens)", "input": 2, "cached": 0.5, "output": 6, "limits": [15, 60] },
+  "glm-5.3-flash": { "label": "GLM-5.3-Flash", "input": 0.15, "cached": 0.03, "output": 0.5, "limits": [60, 180] },
+  "glm-5.3": { "label": "GLM-5.3", "input": 1.4, "cached": 0.26, "output": 4.4, "limits": [15, 120] },
+  "gpt-6-luna": { "label": "GPT 6 Luna (≤272K tokens)", "input": 0.1, "cached": 0.01, "output": 0.5, "limits": [15, 60] },
+  "claude-haiku-5.5": { "label": "Claude Haiku 5.5 (≤100K tokens)", "input": 0.1, "cached": 0.01, "output": 0.5, "limits": [15, 60] },
+  "gemini-4-argon": { "label": "Gemini 4 Argon (50% off through 2026-11-30)", "input": 2, "cached": 0.1, "output": 10, "limits": [30, 120] },
+  "kimi-k3.1-pro": { "label": "Kimi K3.1 Pro", "input": 2, "cached": 0.2, "output": 10, "limits": [15, 60] },
+  "kimi-k3": { "label": "Kimi K3", "input": 3, "cached": 0.3, "output": 15, "limits": [15, 60] },
+  "mimo-v2.6-pro": { "label": "MiMo-V2.6-Pro", "input": 0.435, "cached": 0.003625, "output": 0.87, "limits": [15, 60] },
+  "minimax-m3.1-flash": { "label": "MiniMax M3.1 Flash", "input": 0.15, "cached": 0.015, "output": 0.6, "limits": [20, 80] },
+  "qwen3.8-max": { "label": "Qwen3.8 Max", "input": 2, "cached": 0.25, "output": 6, "limits": [15, 60] },
+  "deepseek-v4.1-flash-1017": { "label": "DeepSeek V4.1 Flash (Peak; OpenCode lists the current snapshot, 1017)", "input": 0.3, "cached": 0.006, "output": 1.2, "limits": [100, 200] }
+ }
+}

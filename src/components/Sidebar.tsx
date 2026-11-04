@@ -6,9 +6,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { LAB_MARK, labOf } from "@/lib/colors"
-import { BRACKETS, bracketOf, data, EFFORT_ORDER, labGroup, type GlmScenario, type Model, type Plan } from "@/lib/data"
+import { BRACKETS, bracketOf, data, EFFORT_ORDER, labGroup, PROVIDERS, type GlmScenario, type Model, type Plan } from "@/lib/data"
 import { bracketLabel, EFFORT_LABEL, fee, scoreText } from "@/lib/format"
-import { lowConfidenceModels, planExclusion, type Filters } from "@/lib/pricing"
+import { lowConfidenceModels, planExclusion, type Filters, type PlanPick } from "@/lib/pricing"
 import { flip } from "@/lib/sets"
 import type { ChartPalette } from "@/lib/theme"
 import { cn } from "@/lib/utils"
@@ -133,6 +133,34 @@ export function Sidebar({ filters, setFilters, palette, highlight, onHover, onRe
   )
 }
 
+/**
+ * Sidebar for the plan pages (/plans, /value): only the controls that decide which plans are in play. Models and
+ * reasoning effort don't apply there, so they're left out rather than filtering the page invisibly.
+ */
+export function PlanSidebar({
+  filters,
+  setFilters,
+  palette,
+  onReset,
+  budget,
+}: Pick<Props, "filters" | "setFilters" | "palette" | "onReset"> & { budget: ReactNode }) {
+  const patch = (p: Partial<Filters>) => setFilters((f) => ({ ...f, ...p }))
+  return (
+    <div className="flex flex-col gap-6 p-5">
+      <div className="flex items-center gap-2">
+        <h2 className="flex-1 text-[15px] leading-none font-semibold">Plan filters</h2>
+        <Hint content="Reset every filter to its default">
+          <button type="button" onClick={onReset} aria-label="Reset all filters" className="grid size-7 place-items-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground">
+            <RotateCcwIcon className="size-3.5" />
+          </button>
+        </Hint>
+      </div>
+      {budget}
+      <PlanControls filters={filters} patch={patch} setFilters={setFilters} palette={palette} standalone />
+    </div>
+  )
+}
+
 function ModelGroup({
   title,
   models,
@@ -204,11 +232,14 @@ function PlanControls({
   patch,
   setFilters,
   palette,
+  standalone = false,
 }: {
   filters: Filters
   patch: (p: Partial<Filters>) => void
   setFilters: Props["setFilters"]
   palette: ChartPalette
+  /** On the plan pages: no divider from the model controls, and no per-task pricing choice. */
+  standalone?: boolean
 }) {
   const plans = data.plans.filter((p) => !p.scenario || p.scenario === filters.glmScenario)
   const inPlay = plans.filter((p) => !planExclusion(p, filters)).length
@@ -230,34 +261,53 @@ function PlanControls({
 
   return (
     <>
-      <div className="h-px bg-border" />
+      {standalone ? null : <div className="h-px bg-border" />}
       <Section
         title={
           <>
             Plans <span className="ml-1 font-normal text-muted-foreground tabular-nums">{inPlay} of {plans.length} in play</span>
           </>
         }
-        info="Each model is priced on the cheapest plan that survives every filter here and in the budget bar. Models with no surviving plan fall back to their API price."
+        info={
+          standalone
+            ? "Plans that fail a filter here are faded on the page."
+            : "Each model is priced on one plan that survives every filter here and in the budget bar: the median by default, or the cheapest. Models with no surviving plan fall back to their API price."
+        }
       >
+        <div className={cn("flex items-center justify-between gap-3", standalone && "hidden")}>
+          <LabelWithInfo
+            label="Price on"
+            info="Median: the middle plan by cost per task among those in play, closer to what a typical subscriber pays. Cheapest: the best deal in range, which flatters models sold through many plans."
+          />
+          <Select value={filters.planPick} onValueChange={(v) => patch({ planPick: v as PlanPick })}>
+            <SelectTrigger size="sm" className="h-8 w-32 text-[13px]" aria-label="Plan to price on">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent align="end">
+              <SelectItem value="median">Median plan</SelectItem>
+              <SelectItem value="cheapest">Cheapest plan</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         <div className="space-y-2.5">
           <SwitchRow
             id="kind-lab"
             label="Lab plans"
-            info="Subscriptions sold by the model's own lab: Claude, ChatGPT, SuperGrok, Google AI Pro, Kimi, GLM Coding and Devin."
+            info="Subscriptions sold by the model's own lab: Claude, ChatGPT, X Subscription, Google AI, Kimi, GLM Coding, MiMo and MiniMax."
             checked={filters.kinds.has("lab")}
             onChange={() => toggleKind("lab")}
           />
           <SwitchRow
             id="kind-tool"
             label="Third-party tools"
-            info="Coding tools that resell model access from a shared pool: Cursor and OpenCode."
+            info="Coding tools that resell model access from a shared pool: OpenCode Go and Go Plus."
             checked={filters.kinds.has("tool")}
             onChange={() => toggleKind("tool")}
           />
           <SwitchRow
             id="low-conf"
             label="Low-confidence allowances"
-            info="Allowances backed by a single report or a cross-plan assumption rather than a measurement. Turning this off skips those plan × model pairs, so affected models move to their next-cheapest measured plan. Plans marked ≈ have some."
+            info="Allowances backed by a single report or a cross-plan assumption rather than a measurement. Turning this off skips those plan × model pairs, so affected models are priced on the remaining measured plans. Plans marked ≈ have some."
             checked={!filters.hideLowConfidence}
             onChange={(on) => patch({ hideLowConfidence: !on })}
           />
@@ -282,6 +332,36 @@ function PlanControls({
             </SelectContent>
           </Select>
         </div>
+      </Section>
+
+      <Section
+        title="Providers"
+        info="Who sells the plan. Turn a provider off to drop all of its plans. Double-click one to show only it."
+        action={
+          <button
+            type="button"
+            onClick={() => patch({ providers: new Set(filters.providers.size === PROVIDERS.length ? [] : PROVIDERS) })}
+            className="text-[12px] text-muted-foreground hover:text-foreground"
+          >
+            {filters.providers.size === PROVIDERS.length ? "Hide all" : "Show all"}
+          </button>
+        }
+      >
+        <ToggleGroup
+          type="multiple"
+          variant="outline"
+          size="sm"
+          spacing={1}
+          className="flex w-full flex-wrap"
+          value={[...filters.providers]}
+          onValueChange={(v) => patch({ providers: new Set(v) })}
+        >
+          {PROVIDERS.map((p) => (
+            <ToggleGroupItem key={p} value={p} onDoubleClick={() => patch({ providers: new Set([p]) })} className="h-7 px-2 text-[12px]">
+              {p}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
       </Section>
 
       {BRACKETS.map((b) => {

@@ -141,3 +141,10 @@ export type BracketId = (typeof BRACKETS)[number]["id"]
 export const bracketOf = (fee: number): BracketId => BRACKETS.find((b) => fee >= b.min && fee <= b.max)!.id
 
 export const MAX_FEE = Math.max(...data.plans.map((p) => p.fee))
+
+/** Plan sellers, most plans first, for the provider filter. */
+export const PROVIDERS: string[] = Object.entries(
+  data.plans.reduce<Record<string, Set<string>>>((acc, p) => ((acc[p.provider] ??= new Set()).add(p.group), acc), {}),
+)
+  .sort(([a, x], [b, y]) => y.size - x.size || a.localeCompare(b))
+  .map(([provider]) => provider)

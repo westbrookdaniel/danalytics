@@ -27,13 +27,15 @@ const FAMILIES = {
   "gemini-4-carbon": "gemini-4-carbon",
   "gemini-4-argon": "gemini-4-argon",
   "grok-4.7": "grok-4-7",
-  "deepseek-v4.1-flash": "deepseek-v4-1-flash",
   "deepseek-v4.1-flash-1017": "deepseek-v4-1-flash-1017",
   "kimi-k3.1-pro": "kimi-k3-1-pro",
   "kimi-k3": "kimi-k3",
   "glm-5.3": "glm-5-3",
   "glm-5.3-flash": "glm-5-3-flash",
   "muse-wonder-1.0": "muse-wonder",
+  "qwen3.8-max": "qwen3-8-max",
+  "mimo-v2.6-pro": "mimo-v2-6-pro",
+  "minimax-m3.1-flash": "minimax-m3-1-flash",
 }
 const EFFORT_SUFFIXES = ["low", "medium", "high", "xhigh", "non-reasoning"]
 
@@ -101,6 +103,7 @@ for (const [modelId, family] of Object.entries(FAMILIES)) {
       intelligenceIndexOutputTokensPerTask: rec.intelligenceIndexOutputTokensPerTask ?? null,
       frontierCode20: rec.frontierCode20 ?? null,
       frontierCode20Tokens: rec.canonicalEvalTokenCounts?.frontierCode20 ?? null,
+      isOpenWeights: !!rec.isOpenWeights,
       prices: {
         input: rec.price1mInputTokens,
         output: rec.price1mOutputTokens,

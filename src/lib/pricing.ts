@@ -5,15 +5,21 @@ export interface Filters {
   maxFee: number
   brackets: ReadonlySet<BracketId>
   kinds: ReadonlySet<PlanKind>
+  /** Plan sellers to keep (Anthropic, OpenAI, OpenCode, ...). */
+  providers: ReadonlySet<string>
   disabledPlans: ReadonlySet<string>
   hideLowConfidence: boolean
   /** Count Codex shared resets as extra allowance on OpenAI's plans. */
   codexResets: boolean
   glmScenario: GlmScenario
+  /** Which in-range plan prices a model: the cheapest, or the median, which is closer to what a typical subscriber pays. */
+  planPick: PlanPick
   /** Reasoning-effort levels to keep; a model with none of them left drops out. */
   efforts: ReadonlySet<string>
   models: ReadonlySet<string>
 }
+
+export type PlanPick = "median" | "cheapest"
 
 export type PriceSource = "subscription" | "free" | "api"
 
@@ -40,6 +46,7 @@ export function planExclusion(plan: Plan, f: Filters): string | null {
   if (plan.fee > f.maxFee) return "Over max monthly cost"
   if (!f.brackets.has(bracketOf(plan.fee))) return "Bracket hidden"
   if (!f.kinds.has(plan.kind)) return plan.kind === "tool" ? "Third-party tools hidden" : "Lab plans hidden"
+  if (!f.providers.has(plan.provider)) return "Provider hidden"
   if (plan.scenario && plan.scenario !== f.glmScenario) return "Other time-of-day scenario"
   if (f.hideLowConfidence && plan.offers.every((o) => o.confidence === "low")) return "Low-confidence allowance"
   if (f.disabledPlans.has(plan.id)) return "Turned off"
@@ -85,6 +92,12 @@ export function quotesFor(model: Model, apiCost: number, f: Filters): PlanQuote[
   return quotes.sort((a, b) => a.cost - b.cost || a.plan.fee - b.plan.fee)
 }
 
+/** The in-range quote that prices a model. Quotes arrive cheapest first; an even count takes the cheaper middle one. */
+export function pickQuote(quotes: readonly PlanQuote[], pick: PlanPick): PlanQuote | undefined {
+  const inRange = quotes.filter((q) => !q.excludedBy)
+  return pick === "cheapest" ? inRange[0] : inRange[Math.floor((inRange.length - 1) / 2)]
+}
+
 /** One row per model × effort on the active benchmark, priced under the filters. */
 export function buildRows(f: Filters, models: readonly Model[]): Row[] {
   const rows: Row[] = []
@@ -110,9 +123,9 @@ export function buildRows(f: Filters, models: readonly Model[]): Row[] {
         rows.push({ ...base, cost: e.apiCost, source: "api", plan: null, offer: null })
         continue
       }
-      const best = quotesFor(model, e.apiCost, f).find((q) => !q.excludedBy)
-      if (best) {
-        rows.push({ ...base, cost: best.cost, source: best.cost === 0 ? "free" : "subscription", plan: best.plan, offer: best.offer })
+      const pick = pickQuote(quotesFor(model, e.apiCost, f), f.planPick)
+      if (pick) {
+        rows.push({ ...base, cost: pick.cost, source: pick.cost === 0 ? "free" : "subscription", plan: pick.plan, offer: pick.offer })
       } else {
         // No plan survives the filters: keep the model on the chart at its API price.
         rows.push({ ...base, cost: e.apiCost, source: "api", plan: null, offer: null })

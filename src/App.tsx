@@ -30,8 +30,9 @@ import { Hint } from "@/components/Hint"
 import { Link, NavLink, useLocation, useMatch, useSearchParams } from "react-router"
 import { LogoMark } from "@/components/LogoMark"
 import { PlanBreakdown } from "@/components/PlanBreakdown"
+import { PlanValue } from "@/components/PlanValue"
 import { ResultsTable } from "@/components/ResultsTable"
-import { Sidebar } from "@/components/Sidebar"
+import { PlanSidebar, Sidebar } from "@/components/Sidebar"
 import {
   benchmarkById,
   BRACKETS,
@@ -40,6 +41,7 @@ import {
   LAST_UPDATED,
   MAX_FEE,
   modelsFor,
+  PROVIDERS,
   SOURCE_DATES,
   type BracketId,
   type LabGroup,
@@ -57,10 +59,12 @@ const INITIAL_FILTERS: Filters = {
   maxFee: MAX_FEE,
   brackets: new Set<BracketId>(BRACKETS.map((b) => b.id)),
   kinds: new Set(["lab", "tool"]),
+  providers: new Set(PROVIDERS),
   disabledPlans: new Set(),
   hideLowConfidence: false,
   codexResets: true,
   glmScenario: "mid",
+  planPick: "median",
   efforts: new Set(DEFAULT_EFFORTS),
   models: new Set(data.models.filter((m) => !m.superseded).map((m) => m.id)),
 }
@@ -69,6 +73,7 @@ const INITIAL_FILTERS: Filters = {
 const PAGES = [
   { to: "/", label: "Benchmarks" },
   { to: "/plans", label: "Plans" },
+  { to: "/value", label: "Plan value" },
 ]
 
 /** Active benchmark from `?benchmark=` (default when missing or unknown); non-default picks are kept in the URL. */
@@ -157,6 +162,7 @@ export default function App() {
   const wide = useWide()
   const [sidebarWidth, startResize, resetWidth] = useSidebarWidth()
   const onPlans = useMatch("/plans") != null
+  const onValue = useMatch("/value") != null
   const { search } = useLocation()
   useScrollTopOnNavigate()
   const [currency, setCurrencyState] = useStoredCurrency()
@@ -173,8 +179,17 @@ export default function App() {
   const rows = useMemo(() => buildRows(filters, models), [filters, models])
   const setMode = (mode: Filters["mode"]) => setFilters((f) => ({ ...f, mode }))
 
-  // Desktop shows this in the right column; phones open it from the Filters button.
-  const sidebar = (
+  // Desktop shows this in the right column; phones open it from the Filters button. The plan pages get their own,
+  // with only the controls that decide which plans are in play.
+  const sidebar = onPlans || onValue ? (
+    <PlanSidebar
+      filters={filters}
+      setFilters={setFilters}
+      palette={palette}
+      onReset={() => setFilters(INITIAL_FILTERS)}
+      budget={<BudgetControls filters={filters} setFilters={setFilters} stacked />}
+    />
+  ) : (
     <Sidebar
       filters={filters}
       setFilters={setFilters}
@@ -182,7 +197,7 @@ export default function App() {
       highlight={hovered}
       onHover={setHovered}
       onReset={() => setFilters(INITIAL_FILTERS)}
-      showPlans={sub || onPlans}
+      showPlans={sub}
       models={models}
     />
   )
@@ -225,12 +240,26 @@ export default function App() {
           style={{ "--sidebar-w": `${sidebarWidth}px` } as CSSProperties}
         >
           <main className="min-w-0 space-y-16">
-            {onPlans ? (
+            {onValue ? (
+              <section>
+                <PageHeading
+                  title="What each plan is worth at API prices"
+                  detail="A month of each plan's allowance, priced at the model's API rate: roughly how many API dollars you'd spend to use the same tokens. Assumes you use the whole allowance on that one model. Faded plans are outside your filters; bars share one log scale."
+                />
+                <div className="mb-4 lg:hidden">
+                  <FiltersSheet>{sidebar}</FiltersSheet>
+                </div>
+                <PlanValue filters={filters} palette={palette} />
+              </section>
+            ) : onPlans ? (
               <section>
                 <PageHeading
                   title="Plans by model"
-                  detail="Every plan that serves each model, priced at its best effort level. Faded plans are outside your filters; bars are log-scaled against the API price."
+                  detail="Every plan that serves each current model, priced at its best effort level. Faded plans are outside your filters; bars are log-scaled against the API price."
                 />
+                <div className="mb-4 lg:hidden">
+                  <FiltersSheet>{sidebar}</FiltersSheet>
+                </div>
                 <PlansView filters={filters} palette={palette} models={models} />
               </section>
             ) : (
@@ -491,17 +520,26 @@ function ViewMenu({ view, setView, sub }: { view: ViewOptions; setView: (update:
   )
 }
 
-function BudgetControls({ filters, setFilters }: { filters: Filters; setFilters: (u: (f: Filters) => Filters) => void }) {
+function BudgetControls({
+  filters,
+  setFilters,
+  stacked = false,
+}: {
+  filters: Filters
+  setFilters: (u: (f: Filters) => Filters) => void
+  /** One control per line, for the narrow plan-page sidebar. */
+  stacked?: boolean
+}) {
   const patch = (p: Partial<Filters>) => setFilters((f) => ({ ...f, ...p }))
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+    <div className={stacked ? "flex flex-col gap-3" : "flex flex-wrap items-center gap-x-3 gap-y-2"}>
       <div className="flex items-center gap-3">
         <span className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
           Max cost
           <Info info="Ignore any plan whose monthly fee is above this. Slide down to see what the best model costs per task on a cheaper budget." />
         </span>
         <Slider
-          className="w-40"
+          className={stacked ? "flex-1" : "w-40"}
           min={0}
           max={MAX_FEE}
           step={5}
@@ -597,8 +635,9 @@ function Legend({
 }
 
 function PlansView({ filters, palette, models: all }: { filters: Filters; palette: ChartPalette; models: readonly Model[] }) {
+  // Every current model, whatever the chart's model filter (hidden on this page); superseded models are left out.
   const models = all
-    .filter((m) => filters.models.has(m.id))
+    .filter((m) => !m.superseded)
     .sort((a, b) => Math.max(...b.efforts.map((e) => e.score)) - Math.max(...a.efforts.map((e) => e.score)))
   return (
     <div className="grid gap-4 xl:grid-cols-2">
@@ -750,8 +789,10 @@ function Method() {
           </p>
           <p>
             <Em>FrontierCode 2.0</Em> grades coding-agent changes the way a maintainer would. Scores and API costs per task are Cognition's own published runs.
-            Models Cognition hasn't published yet (GPT-6.1 Terra, Kimi K3.1 Pro, DeepSeek V4.1 Flash 1017) use Artificial Analysis's FrontierCode run instead.
+            Models Cognition hasn't published yet (GPT-6.1 Terra, Kimi K3.1 Pro, Qwen3.8 Max, MiMo V2.6 Pro, MiniMax M3.1 Flash) use Artificial
+            Analysis's FrontierCode run instead.
           </p>
+
         </MethodSection>
 
         <MethodSection title="Pricing a subscription task">
@@ -761,7 +802,8 @@ function Method() {
           <p>
             A plan's $ per Mtok is its monthly fee divided by the tokens it allows in a month, so the ratio is the share of list price a subscriber pays. Both
             sides use the same token mix (mostly cache reads, as in real agent sessions), and the plan side assumes you use the whole allowance; use half and each
-            task costs twice as much. For each model and effort level, the cheapest plan that passes your filters wins.
+            task costs twice as much. For each model and effort level, the median plan by cost among those that pass your filters prices it; the sidebar
+            can switch to the cheapest, which flatters models sold through many plans.
           </p>
         </MethodSection>
 
@@ -771,6 +813,17 @@ function Method() {
             high, medium or low confidence. Low means a single report or an estimate carried over from another model or plan tier, for example Sonnet and Haiku
             on Claude plans, scaled from the measured Opus allowance by list price. These are included by default and can be switched off in the sidebar; the
             leaderboard marks them with ≈.
+          </p>
+        </MethodSection>
+
+        <MethodSection title="Plan changes since the measurements">
+          <p>
+            Several vendors renamed or reworked their plans after the allowances were measured, so build-data applies the published changes on top
+            (official pages read 4 Nov 2026). Claude Max 5x and Max 20x are now Max and Ultra. ChatGPT's Pro tiers are Pro 100, 200 and 500: Pro 100's
+            allowance doubled on 29 Oct, and Pro 500 is scaled to about 50× Plus. SuperGrok became the X Subscription (Plus, Premium, Super, Ultra at 1×,
+            4×, 15×, 50×), anchored on SuperGrok's measured allowance. Google AI Ultra 5x and 20x scale from AI Pro. OpenCode Go and Go Plus use OpenCode's
+            own per-model dollar limits. Anything scaled rather than measured is marked low-confidence. Cursor is left out: its current plans include no
+            third-party models and publish no pool size.
           </p>
         </MethodSection>
 
@@ -794,10 +847,14 @@ function Method() {
 
         <MethodSection title="Gaps and estimates">
           <p>
-            GPT-6 Astra, Sol and 6.1 Sol have no published API price in the pricing data, so their per-token basis is implied from mypriors' ChatGPT Plus
-            figures; GPT-6 Luna's is estimated from Factory Droid's price multipliers. For models that take FrontierCode results from Artificial Analysis, the
-            cost per task is FrontierCode's share of their Intelligence Index cost, which matches Cognition's own figures within a few percent where both exist.
-            Models with no plan in range, or no measured allowance at all, are shown at their API price.
+            The GPT-6 family has no API price in the pricing data, so its per-token basis is the list price Artificial Analysis records. For models that take
+            FrontierCode results from Artificial Analysis, the cost per task is FrontierCode's weighted share of their Intelligence Index cost divided by its
+            published weight (3/20), which tracks Cognition's own figures where both exist.
+          </p>
+          <p>
+            GPT-6.1 Terra has no measured ChatGPT allowance. It is estimated from Codex's published credit rates: every model draws on one credit budget,
+            so Terra's allowance is a measured model's allowance scaled by their credits per token (half of GPT-6.1 Sol's on ChatGPT Plus). These count as
+            low-confidence. Models with no plan in range, or no allowance at all, are shown at their API price.
           </p>
         </MethodSection>
 
