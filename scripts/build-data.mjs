@@ -474,6 +474,22 @@ for (const plan of [plans.get("chatgpt_pro_10x"), plans.get("chatgpt_pro_20x")])
 }
 derivePlan("chatgpt_pro_20x", { id: "chatgpt_pro_500", name: "ChatGPT Pro 500", fee: 500, scale: 2.5, note: "≈ 50× Plus: 25× at launch, doubled 2026-10-29" });
 
+// Anthropic (claude.com/pricing): Max is 5× Pro and Ultra 10× Pro weekly. Models measured only on Pro (Claude Fable 5.2
+// so far) are filled into Max and Ultra at those official multiples, as low-confidence estimates.
+const claudePro = plans.get("claude_pro");
+for (const [planId, multiple] of [["claude_max_5x", 5], ["claude_max_20x", 10]]) {
+  const plan = plans.get(planId);
+  for (const p of claudePro.offers) {
+    if (plan.offers.some((o) => o.modelId === p.modelId)) continue;
+    plan.offers.push({
+      ...p,
+      usdPerMtok: plan.fee / (tokensPerMonth(claudePro, p) * multiple),
+      confidence: "low",
+      source: `${multiple}× the Claude Pro allowance (official tier multiple); Pro: ${p.source.slice(0, 160)}`,
+    });
+  }
+}
+
 // Google (support.google.com/googleone/answer/16286513): AI Ultra comes in 5× and 20× the AI Pro quota.
 derivePlan("google_ai_pro_us", { id: "google_ai_ultra_5x", name: "Google AI Ultra 5x", fee: 99.99, scale: 5, note: "5× the AI Pro quota" });
 derivePlan("google_ai_pro_us", { id: "google_ai_ultra_20x", name: "Google AI Ultra 20x", fee: 199.99, scale: 20, note: "20× the AI Pro quota" });

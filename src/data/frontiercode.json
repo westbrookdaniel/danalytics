@@ -3173,6 +3173,24 @@
      "confidence": "low",
      "dataDate": "2026-09-29~2026-10-03",
      "source": "由同套餐 claude-opus-5.5 183.34 亿 × 19.52924726171056"
+    },
+    {
+     "modelId": "claude-fable-5.2",
+     "usdPerMtok": 0.025575448000000004,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-11-09",
+     "source": "5× the Claude Pro allowance (official tier multiple); Pro: 维护者本机 Claude Code：2026-11-09 19:56–20:19 PT，44 次 claude-fable-5-2（入 89 / 出 60,022 / 缓存读 9,410,355 / 1h 缓存写 282,950）；同一 5h 窗 15%→64%（+49pp）、同一周条 22%→29%（+7pp）；lo"
+    },
+    {
+     "modelId": "claude-opus-4.8",
+     "usdPerMtok": 0.007724990299999999,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-14~2026-09-22",
+     "source": "5× the Claude Pro allowance (official tier multiple); Pro: 由同套餐 claude-opus-5 25.89 亿 × 1.0"
     }
    ]
   },
@@ -3599,6 +3617,15 @@
      "confidence": "low",
      "dataDate": "2026-09-22~2026-09-27",
      "source": "由同套餐 claude-opus-5.5 315.38 亿 × 19.52924726171056"
+    },
+    {
+     "modelId": "claude-fable-5.2",
+     "usdPerMtok": 0.025575448000000004,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-11-09",
+     "source": "10× the Claude Pro allowance (official tier multiple); Pro: 维护者本机 Claude Code：2026-11-09 19:56–20:19 PT，44 次 claude-fable-5-2（入 89 / 出 60,022 / 缓存读 9,410,355 / 1h 缓存写 282,950）；同一 5h 窗 15%→64%（+49pp）、同一周条 22%→29%（+7pp）；lo"
     }
    ]
   },
