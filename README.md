@@ -7,7 +7,7 @@ Two benchmarks, picked from the select in the chart title (or `?benchmark=` in t
 - **Intelligence Index v5** (default): [Artificial Analysis](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) publishes an index score and an API cost per task for each model and reasoning effort.
 - **FrontierCode 2.0**: [Cognition](https://cognition.com/frontiercode) publishes a score and an API cost per task for each model and reasoning effort. Models Cognition hasn't run yet use Artificial Analysis's FrontierCode 2.0 run instead.
 
-[Real API Pricing](https://github.com/Fei2411/real-api-pricing) measures how many tokens each subscription actually allows. The app joins the two and plots score against cost per task, with filters for monthly price, plan type, models, reasoning effort and display currency. Plans by model has its own page at `/plans`, and `/value` shows roughly how many API dollars a month of each plan's allowance is worth.
+[Real API Pricing](https://github.com/Fei2411/real-api-pricing) measures how many tokens each subscription actually allows. The app joins the two and plots score against cost per task, with filters for monthly price, plan type, models, reasoning effort and display currency. `/plans` shows roughly how many API dollars a month of each plan's allowance is worth, and `/calculator` turns an amount of API usage on one plan and model into a share of its weekly limit.
 
 Routing uses React Router with real paths, so a static host needs to serve `index.html` for unknown paths (an SPA rewrite).
 

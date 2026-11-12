@@ -27,9 +27,9 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { CostScoreChart, type XScale } from "@/components/CostScoreChart"
 import { Hint } from "@/components/Hint"
-import { Link, NavLink, useLocation, useMatch, useSearchParams } from "react-router"
+import { Link, Navigate, NavLink, useLocation, useMatch, useSearchParams } from "react-router"
+import { Calculator } from "@/components/Calculator"
 import { LogoMark } from "@/components/LogoMark"
-import { PlanBreakdown } from "@/components/PlanBreakdown"
 import { PlanValue } from "@/components/PlanValue"
 import { ResultsTable } from "@/components/ResultsTable"
 import { PlanSidebar, Sidebar } from "@/components/Sidebar"
@@ -45,7 +45,6 @@ import {
   SOURCE_DATES,
   type BracketId,
   type LabGroup,
-  type Model,
 } from "@/lib/data"
 import { bracketLabel, CURRENCIES, feeShort, setCurrency, setScoreUnit, type CurrencyCode } from "@/lib/format"
 import { buildRows, type Filters } from "@/lib/pricing"
@@ -53,6 +52,26 @@ import { CHART_COLORS, useTheme, type ChartPalette, type ThemePref } from "@/lib
 
 /** Effort levels that start hidden: the extremes, which most people don't run day to day. */
 const DEFAULT_EFFORTS = ["low", "medium", "high", "xhigh", "na"]
+
+/**
+ * Models ticked on first load: each lab's current lineup, cheap tiers included, plus the strongest open-weights picks. Everything else
+ * (older or smaller siblings, niche models) stays one click away in the sidebar.
+ */
+const DEFAULT_MODELS = [
+  "claude-fable-5.2",
+  "claude-opus-5.5",
+  "claude-sonnet-5.5",
+  "claude-haiku-5.5",
+  "gpt-6-astra",
+  "gpt-6.1-sol",
+  "gpt-6.1-terra",
+  "gpt-6-luna",
+  "gemini-4-carbon",
+  "grok-4.7",
+  "kimi-k3.1-pro",
+  "glm-5.3",
+  "deepseek-v4.1-flash-1017",
+]
 
 const INITIAL_FILTERS: Filters = {
   mode: "api",
@@ -66,14 +85,13 @@ const INITIAL_FILTERS: Filters = {
   glmScenario: "mid",
   planPick: "median",
   efforts: new Set(DEFAULT_EFFORTS),
-  models: new Set(data.models.filter((m) => !m.superseded).map((m) => m.id)),
+  models: new Set(DEFAULT_MODELS),
 }
-
 
 const PAGES = [
   { to: "/", label: "Benchmarks" },
   { to: "/plans", label: "Plans" },
-  { to: "/value", label: "Plan value" },
+  { to: "/calculator", label: "Calculator" },
 ]
 
 /** Active benchmark from `?benchmark=` (default when missing or unknown); non-default picks are kept in the URL. */
@@ -162,7 +180,9 @@ export default function App() {
   const wide = useWide()
   const [sidebarWidth, startResize, resetWidth] = useSidebarWidth()
   const onPlans = useMatch("/plans") != null
-  const onValue = useMatch("/value") != null
+  const onCalculator = useMatch("/calculator") != null
+  // The plan value page moved from /value to /plans; keep old links working.
+  const onOldValue = useMatch("/value") != null
   const { search } = useLocation()
   useScrollTopOnNavigate()
   const [currency, setCurrencyState] = useStoredCurrency()
@@ -181,7 +201,7 @@ export default function App() {
 
   // Desktop shows this in the right column; phones open it from the Filters button. The plan pages get their own,
   // with only the controls that decide which plans are in play.
-  const sidebar = onPlans || onValue ? (
+  const sidebar = onPlans ? (
     <PlanSidebar
       filters={filters}
       setFilters={setFilters}
@@ -202,14 +222,16 @@ export default function App() {
     />
   )
 
+  if (onOldValue) return <Navigate to={{ pathname: "/plans", search }} replace />
+
   return (
     <TooltipProvider>
-      <div className="min-h-dvh bg-background">
+      <div className="flex min-h-dvh flex-col bg-background">
         <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur">
           <div className="mx-auto flex h-14 max-w-[1600px] items-center gap-2 px-4 sm:gap-4 sm:px-6">
             <Link to={{ pathname: "/", search }} className="flex items-center gap-2 text-[17px] font-semibold tracking-tight">
               <LogoMark className="size-6" />
-              <span className="max-[359px]:sr-only">danalytics</span>
+              <span className="max-[439px]:sr-only">danalytics</span>
             </Link>
             <nav className="flex items-center gap-0.5 sm:ml-2 sm:gap-1">
               {PAGES.map((p) => (
@@ -236,11 +258,17 @@ export default function App() {
         </header>
 
         <div
-          className="mx-auto grid max-w-[1600px] grid-cols-[minmax(0,1fr)] gap-8 px-4 py-5 sm:px-6 lg:grid-cols-[minmax(0,1fr)_var(--sidebar-w)]"
+          className={
+            onCalculator
+              ? "mx-auto flex w-full max-w-[1600px] flex-1 px-4 py-5 sm:px-6"
+              : "mx-auto grid w-full max-w-[1600px] flex-1 grid-cols-[minmax(0,1fr)] gap-8 px-4 py-5 sm:px-6 lg:grid-cols-[minmax(0,1fr)_var(--sidebar-w)]"
+          }
           style={{ "--sidebar-w": `${sidebarWidth}px` } as CSSProperties}
         >
-          <main className="min-w-0 space-y-16">
-            {onValue ? (
+          <main className="flex min-w-0 flex-1 flex-col space-y-16">
+            {onCalculator ? (
+              <Calculator />
+            ) : onPlans ? (
               <section>
                 <PageHeading
                   title="What each plan is worth at API prices"
@@ -250,17 +278,6 @@ export default function App() {
                   <FiltersSheet>{sidebar}</FiltersSheet>
                 </div>
                 <PlanValue filters={filters} palette={palette} />
-              </section>
-            ) : onPlans ? (
-              <section>
-                <PageHeading
-                  title="Plans by model"
-                  detail="Every plan that serves each current model, priced at its best effort level. Faded plans are outside your filters; bars are log-scaled against the API price."
-                />
-                <div className="mb-4 lg:hidden">
-                  <FiltersSheet>{sidebar}</FiltersSheet>
-                </div>
-                <PlansView filters={filters} palette={palette} models={models} />
               </section>
             ) : (
               <>
@@ -330,7 +347,7 @@ export default function App() {
               </>
             )}
 
-            <footer className="flex flex-wrap justify-between gap-2 border-t pt-4 text-[12px] text-muted-foreground">
+            <footer className="mt-auto flex flex-wrap justify-between gap-2 border-t pt-4 text-[12px] text-muted-foreground">
               <span>
                 Data from{" "}
                 <a className="text-foreground hover:underline" href={benchmark.source.url} target="_blank" rel="noreferrer">
@@ -351,6 +368,8 @@ export default function App() {
             </footer>
           </main>
 
+          {onCalculator ? null : (
+          <>
           {/* Sticky offset = header (56px + 1px border) + main's top padding (20px), so the panel doesn't jump when scrolling starts. */}
           <aside className="relative hidden lg:sticky lg:top-[77px] lg:block lg:max-h-[calc(100dvh-97px)] lg:self-start lg:overflow-y-auto lg:rounded-xl lg:border lg:bg-card/50">
             <div
@@ -364,6 +383,8 @@ export default function App() {
             />
             {sidebar}
           </aside>
+          </>
+          )}
         </div>
       </div>
     </TooltipProvider>
@@ -630,22 +651,6 @@ function Legend({
           <span className="w-5 border-t border-dashed border-foreground/60" /> Pareto frontier
         </span>
       ) : null}
-    </div>
-  )
-}
-
-function PlansView({ filters, palette, models: all }: { filters: Filters; palette: ChartPalette; models: readonly Model[] }) {
-  // Every current model, whatever the chart's model filter (hidden on this page); superseded models are left out.
-  const models = all
-    .filter((m) => !m.superseded)
-    .sort((a, b) => Math.max(...b.efforts.map((e) => e.score)) - Math.max(...a.efforts.map((e) => e.score)))
-  return (
-    <div className="grid gap-4 xl:grid-cols-2">
-      {models.map((m) => (
-        <div key={m.id} className="rounded-xl border bg-card/50 p-4">
-          <PlanBreakdown model={m} filters={filters} palette={palette} />
-        </div>
-      ))}
     </div>
   )
 }

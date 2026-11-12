@@ -134,7 +134,7 @@ export function Sidebar({ filters, setFilters, palette, highlight, onHover, onRe
 }
 
 /**
- * Sidebar for the plan pages (/plans, /value): only the controls that decide which plans are in play. Models and
+ * Sidebar for the plans page (/plans): only the controls that decide which plans are in play. Models and
  * reasoning effort don't apply there, so they're left out rather than filtering the page invisibly.
  */
 export function PlanSidebar({
