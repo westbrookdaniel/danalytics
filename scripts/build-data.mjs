@@ -42,7 +42,9 @@ const MODELS = {
   "Claude Opus 5.5": { pricingId: "claude-opus-5.5", lab: "Anthropic", short: "Opus 5.5" },
   "Claude Sonnet 5.5": { pricingId: "claude-sonnet-5.5", lab: "Anthropic", short: "Sonnet 5.5" },
   "Claude Haiku 5.5": { pricingId: "claude-haiku-5.5", lab: "Anthropic", short: "Haiku 5.5" },
-  "Claude Fable 5.1": { pricingId: "claude-fable-5.1", lab: "Anthropic", short: "Fable 5.1" },
+  // Only Claude Pro has a measured Fable 5.2 allowance so far; Max and Ultra fall back to their other models.
+  "Claude Fable 5.2": { pricingId: "claude-fable-5.2", lab: "Anthropic", short: "Fable 5.2" },
+  "Claude Fable 5.1": { pricingId: "claude-fable-5.1", lab: "Anthropic", short: "Fable 5.1", superseded: true },
   "Claude Opus 5": { pricingId: "claude-opus-5", lab: "Anthropic", short: "Opus 5", superseded: true },
   "Claude Opus 4.8": { pricingId: "claude-opus-4.8", lab: "Anthropic", short: "Opus 4.8", superseded: true },
   "GPT-6 Astra": { pricingId: "gpt-6-astra", lab: "OpenAI", short: "GPT-6 Astra" },
@@ -61,13 +63,25 @@ const MODELS = {
   "GLM 5.3": { pricingId: "glm-5.3", lab: "Open weights", short: "GLM 5.3", openWeights: true },
   "GLM 5.3 Flash": { pricingId: "glm-5.3-flash", lab: "Open weights", short: "GLM 5.3 Flash", openWeights: true },
   "Muse Wonder 1.0": { pricingId: null, lab: "Other", short: "Muse Wonder 1.0" },
+  // Weights released 2026-11-04. Real API Pricing's Kimi plan rows are adopted as kimi-k3 only (the K3.1 Pro sample
+  // that re-based them is research-only), so outside OpenCode Go this charts at API price.
+  "Kimi K3.1 Pro": { pricingId: "kimi-k3.1-pro", lab: "Open weights", short: "Kimi K3.1 Pro", openWeights: true },
   // DeepSeek's 2026-10-17 snapshot. Real API Pricing only measures the original V4.1 Flash, so
   // this has no plan allowances of its own and charts at API price.
   "DeepSeek V4.1 Flash 1017": { pricingId: "deepseek-v4.1-flash-1017", lab: "Open weights", short: "DeepSeek V4.1 Flash 1017", openWeights: true },
 };
-// Left out: Obsidian 3 (Cognition hides it too), plus SWE-2, Mistral Large 4, Inkling Small
-// and Beam 1.0, which are niche or near-zero on these benchmarks.
-const HIDDEN = new Set(["Obsidian 3", "SWE-2", "Mistral Large 4", "Inkling Small", "Beam 1.0"]);
+// Left out: Obsidian 3 (Cognition hides it too), plus SWE-2, SWE-2 Flash, Mistral Large 4, Inkling Small,
+// Inkling 2 Small, Muse Spark Open and Beam 1.0, which are niche, unpriced or near-zero on these benchmarks.
+const HIDDEN = new Set([
+  "Obsidian 3",
+  "SWE-2",
+  "SWE-2 Flash",
+  "Mistral Large 4",
+  "Inkling Small",
+  "Inkling 2 Small",
+  "Muse Spark Open",
+  "Beam 1.0",
+]);
 
 // API $/Mtok for models with no metered row or list price in Real API Pricing.
 // Gemini 4 Argon: introductory price $0.10/$2/$10 on the low-cache mix (adopted.csv note), which its plan
@@ -129,8 +143,8 @@ const PLAN_META = {
   claude_team: { name: "Claude Team Premium", provider: "Anthropic", kind: "lab" },
   claude_max_20x: { name: "Claude Ultra", provider: "Anthropic", kind: "lab" },
   chatgpt_plus: { name: "ChatGPT Plus", provider: "OpenAI", kind: "lab" },
-  // Renamed to Pro 100 / Pro 200 below, with the Oct 2026 allowance changes.
-  chatgpt_pro_5x: { name: "ChatGPT Pro 5x", provider: "OpenAI", kind: "lab" },
+  // Renamed to Pro 100 / Pro 200 below. Upstream re-ids Pro 5x as Pro 10x after the 2026-10-29 doubling.
+  chatgpt_pro_10x: { name: "ChatGPT Pro 10x", provider: "OpenAI", kind: "lab" },
   chatgpt_pro_20x: { name: "ChatGPT Pro 20x", provider: "OpenAI", kind: "lab" },
   google_ai_pro_us: { name: "Google AI Pro", provider: "Google", kind: "lab" },
   supergrok: { name: "SuperGrok", provider: "xAI", kind: "lab" },
@@ -179,9 +193,6 @@ const modelId = (name) => name.toLowerCase().replace(/[^a-z0-9.]+/g, "-");
 // Models Cognition hasn't run yet; their results come only from Artificial Analysis.
 const EXTRA_MODELS = {
   "GPT-6.1 Terra": { pricingId: "gpt-6.1-terra", lab: "OpenAI", short: "GPT-6.1 Terra" },
-  // Proprietary, unlike Kimi K3. Real API Pricing's Kimi plan rows are adopted as kimi-k3 only (the K3.1 Pro
-  // sample that re-based them is research-only), so this charts at API price.
-  "Kimi K3.1 Pro": { pricingId: "kimi-k3.1-pro", lab: "Other", short: "Kimi K3.1 Pro" },
   // Proprietary; only OpenCode Go among the plans kept here serves it.
   "Qwen3.8 Max": { pricingId: "qwen3.8-max", lab: "Other", short: "Qwen3.8 Max" },
   "MiMo V2.6 Pro": { pricingId: "mimo-v2.6-pro", lab: "Open weights", short: "MiMo V2.6 Pro", openWeights: true },
@@ -404,22 +415,12 @@ function derivePlan(fromId, { id, name, fee, scale, note, provider, confidence =
   });
 }
 
-/** Scale a plan's allowance in place. */
-function scaleAllowance(planId, scale, note) {
-  const plan = plans.get(planId);
-  for (const o of plan.offers) {
-    o.usdPerMtok /= scale;
-    o.source = `${note}; ${o.source}`;
-  }
-}
-
 // OpenAI (help.openai.com/en/articles/9793128 "About ChatGPT Pro tiers", learn.chatgpt.com/docs/pricing). The Pro
-// tiers are now named by price. Pro 100 was measured at 5× Plus and OpenAI doubled its allowance on 2026-10-29;
-// Pro 200's measurement already matches the unified higher allowance (≈ 20× Plus). Pro 500 (launched 2026-09-29) has
+// tiers are now named by price. Pro 100 is 10× Plus since OpenAI doubled it on 2026-10-29 (Real API Pricing's
+// chatgpt_pro_10x rows already include the doubling); Pro 200's measurement matches the unified allowance (≈ 20× Plus). Pro 500 (launched 2026-09-29) has
 // no measurement: it was 25× Plus at launch and doubled on 2026-10-29, so ≈ 50× Plus, i.e. 2.5× Pro 200.
-plans.get("chatgpt_pro_5x").name = "ChatGPT Pro 100";
+plans.get("chatgpt_pro_10x").name = "ChatGPT Pro 100";
 plans.get("chatgpt_pro_20x").name = "ChatGPT Pro 200";
-scaleAllowance("chatgpt_pro_5x", 2, "Doubled 2026-10-29 (OpenAI release notes)");
 
 // OpenAI models with no measured allowance on ChatGPT Plus (GPT-6.1 Terra so far) are estimated from Codex's
 // published credit rates. Every model draws on one credit budget per plan, so a model's tokens per month scale with
@@ -458,7 +459,7 @@ for (const model of models) {
 
 // Pro tiers measured only some models. Fill the rest from Plus at the tier's own measured multiple of Plus (the
 // median token ratio over the models both measured), so every model sees the same tier multiple.
-for (const plan of [plans.get("chatgpt_pro_5x"), plans.get("chatgpt_pro_20x")]) {
+for (const plan of [plans.get("chatgpt_pro_10x"), plans.get("chatgpt_pro_20x")]) {
   const shared = plan.offers.map((o) => [o, plus.offers.find((p) => p.modelId === o.modelId)]).filter(([, p]) => p);
   const multiple = median(shared.map(([o, p]) => tokensPerMonth(plan, o) / tokensPerMonth(plus, p)));
   for (const p of plus.offers) {

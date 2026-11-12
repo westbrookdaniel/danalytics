@@ -1,5 +1,5 @@
 {
- "fetched": "2026-11-04",
+ "fetched": "2026-11-12",
  "items": [
   {
    "id": "1968163721034994139",
@@ -1143,6 +1143,33 @@
    "status": "recorded",
    "scope": "unknown",
    "evidenceUrl": "/evidence/47b06172-6661-4287-acff-81dc2117977d/"
+  },
+  {
+   "id": "2117868812657971442",
+   "date": "2026-11-03",
+   "announcedAt": "2026-11-04T06:37:27.000Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "pro",
+   "evidenceUrl": "/evidence/72ab6bb4-2572-4335-a3d9-2d1e8432e1fd/"
+  },
+  {
+   "id": "2119296267545419987",
+   "date": "2026-11-07",
+   "announcedAt": "2026-11-08T05:09:39.460Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "plus_pro",
+   "evidenceUrl": "/evidence/b2b13089-949b-4b06-b734-c6d864f39152/"
+  },
+  {
+   "id": "2120410480204525936",
+   "date": "2026-11-10",
+   "announcedAt": "2026-11-11T06:57:08.459Z",
+   "eventKind": "policy_change",
+   "status": "recorded",
+   "scope": "all",
+   "evidenceUrl": "/evidence/2ba83d64-e28c-4ecf-93f2-7ff1b19e2d33/"
   }
  ]
 }

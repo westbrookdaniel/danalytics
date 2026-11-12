@@ -1,5 +1,5 @@
 {
- "fetchedAt": "2026-11-04",
+ "fetchedAt": "2026-11-12",
  "source": "https://artificialanalysis.ai/models",
  "models": {
   "claude-opus-5.5": [
@@ -908,6 +908,308 @@
     }
    }
   ],
+  "claude-fable-5.2": [
+   {
+    "slug": "claude-fable-5-2",
+    "name": "Claude Fable 5.2 (Max, Default Fallback)",
+    "suffix": "Max, Default Fallback",
+    "intelligenceIndex": 64.563595756626,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 26.53855780398091,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 8.902730229707965
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.22241591274403966
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 3.15897693022129
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 6.506110742387084
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.03284773122176135
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.1258948491622445
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.1733883952
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.635304112146068
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 6.780888901190461
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 192700.52895423025,
+     "answer": 81075.43138606165,
+     "output": 273775.9603402919
+    },
+    "frontierCode20": 0.487597222222222,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": false,
+    "prices": {
+     "input": 8,
+     "output": 40,
+     "cacheHit": 0.2,
+     "cacheWrite": 10
+    }
+   },
+   {
+    "slug": "claude-fable-5-2-low",
+    "name": "Claude Fable 5.2 (Low, Default Fallback)",
+    "suffix": "Low, Default Fallback",
+    "intelligenceIndex": 53.9249388799182,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 3.097241904274546,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 0.8425991147169233
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.06391931730924605
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 0.43399185175244226
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 0.31748706371344754
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.0020625313294748496
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.076634633100451
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.0128247592
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.031296328663192194
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 1.3164263044893687
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 16503.012760827907,
+     "answer": 19357.209400393673,
+     "output": 35860.22216122158
+    },
+    "frontierCode20": 0.384397474747475,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": false,
+    "prices": {
+     "input": 8,
+     "output": 40,
+     "cacheHit": 0.2,
+     "cacheWrite": 10
+    }
+   },
+   {
+    "slug": "claude-fable-5-2-medium",
+    "name": "Claude Fable 5.2 (Medium, Default Fallback)",
+    "suffix": "Medium, Default Fallback",
+    "intelligenceIndex": 56.4083157101519,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 3.8026050641787634,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 1.025286859973574
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.06658318675877178
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 0.5251012275091596
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 0.40296734116223343
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.0023011982665591
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.07787361423193599
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.0183118464
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.036693128485600066
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 1.6474866613909291
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 20674.60599869932,
+     "answer": 22455.967757538427,
+     "output": 43130.57375623775
+    },
+    "frontierCode20": 0.412984090909091,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": false,
+    "prices": {
+     "input": 8,
+     "output": 40,
+     "cacheHit": 0.2,
+     "cacheWrite": 10
+    }
+   },
+   {
+    "slug": "claude-fable-5-2-high",
+    "name": "Claude Fable 5.2 (High, Default Fallback)",
+    "suffix": "High, Default Fallback",
+    "intelligenceIndex": 61.8218785440284,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 9.078414777860381,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 2.3229852805274547
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.08456010438232674
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 1.3468788577499402
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 1.445298346217908
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.00293308231915455
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.08221409868674348
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.046448924800000006
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.1049383457348336
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 3.6421577374420204
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 58240.62807764298,
+     "answer": 39600.37631626577,
+     "output": 97841.00439390875
+    },
+    "frontierCode20": 0.491275757575758,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": false,
+    "prices": {
+     "input": 8,
+     "output": 40,
+     "cacheHit": 0.2,
+     "cacheWrite": 10
+    }
+   },
+   {
+    "slug": "claude-fable-5-2-xhigh",
+    "name": "Claude Fable 5.2 (Xhigh, Default Fallback)",
+    "suffix": "Xhigh, Default Fallback",
+    "intelligenceIndex": 62.2167392403357,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 14.828587632511116,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 4.284497881546184
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.11370283492342466
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 2.08121385936618
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 3.2120853472627293
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.00488897301155435
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.09245762259271
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.08755616879999999
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.24721107765679204
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 4.7049738673515415
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 106355.64958936961,
+     "answer": 55588.474155676675,
+     "output": 161944.1237450463
+    },
+    "frontierCode20": 0.475810858585859,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": false,
+    "prices": {
+     "input": 8,
+     "output": 40,
+     "cacheHit": 0.2,
+     "cacheWrite": 10
+    }
+   }
+  ],
   "claude-fable-5.1": [
    {
     "slug": "claude-fable-5-1",
@@ -1215,12 +1517,53 @@
     "slug": "claude-opus-5",
     "name": "Claude Opus 5 (Max)",
     "suffix": "Max",
-    "intelligenceIndex": null,
+    "intelligenceIndex": 44.1646231569372,
     "intelligenceIndexIsEstimated": false,
-    "intelligenceIndexCostPerTask": null,
-    "intelligenceIndexEvalCosts": null,
-    "intelligenceIndexOutputTokensPerTask": null,
-    "frontierCode20": null,
+    "intelligenceIndexCostPerTask": 11.821495652976125,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 2.6689972791636283
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.06580202812402931
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 1.9289100239966006
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 1.8473494161313015
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.004008407
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.0542834825
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.10561535499999998
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.2904677127036649
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 4.856061948356901
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 72771.02800844345,
+     "answer": 45297.15737370202,
+     "output": 118068.18538214547
+    },
+    "frontierCode20": 0.311538888888889,
     "frontierCode20Tokens": null,
     "isOpenWeights": false,
     "prices": {
@@ -3215,23 +3558,23 @@
     "suffix": "High",
     "intelligenceIndex": 50.4121935905389,
     "intelligenceIndexIsEstimated": false,
-    "intelligenceIndexCostPerTask": 7.682671372515551,
+    "intelligenceIndexCostPerTask": 9.946608711550533,
     "intelligenceIndexEvalCosts": [
      {
       "slug": "aa-briefcase",
-      "weightedCostPerTask": 1.3753587753041854
+      "weightedCostPerTask": 1.748324814134487
      },
      {
       "slug": "automationbench-aa",
-      "weightedCostPerTask": 0.05617236146803732
+      "weightedCostPerTask": 0.06086564390329249
      },
      {
       "slug": "terminalbench-4-0",
-      "weightedCostPerTask": 1.0478942451285673
+      "weightedCostPerTask": 1.3560280362375645
      },
      {
       "slug": "frontiercode-2-0",
-      "weightedCostPerTask": 2.1066411567724996
+      "weightedCostPerTask": 2.8105456636342185
      },
      {
       "slug": "omniscience",
@@ -3247,11 +3590,11 @@
      },
      {
       "slug": "critpt-v2-hard",
-      "weightedCostPerTask": 0.21485751323650115
+      "weightedCostPerTask": 0.23487598180190072
      },
      {
       "slug": "terminal-bench-science",
-      "weightedCostPerTask": 2.80472580260576
+      "weightedCostPerTask": 3.6589470538390696
      }
     ],
     "intelligenceIndexOutputTokensPerTask": {
@@ -3687,7 +4030,7 @@
     },
     "frontierCode20": 0.254519444444444,
     "frontierCode20Tokens": null,
-    "isOpenWeights": false,
+    "isOpenWeights": true,
     "prices": {
      "input": 2,
      "output": 10,
@@ -4013,6 +4356,66 @@
      "output": 96063.09909177679
     },
     "frontierCode20": 0.27875303030303,
+    "frontierCode20Tokens": null,
+    "isOpenWeights": false,
+    "prices": {
+     "input": 4,
+     "output": 20,
+     "cacheHit": 0.2,
+     "cacheWrite": null
+    }
+   },
+   {
+    "slug": "muse-wonder-high",
+    "name": "Muse Wonder (High)",
+    "suffix": "High",
+    "intelligenceIndex": 40.5266079185604,
+    "intelligenceIndexIsEstimated": false,
+    "intelligenceIndexCostPerTask": 4.560546278670271,
+    "intelligenceIndexEvalCosts": [
+     {
+      "slug": "aa-briefcase",
+      "weightedCostPerTask": 0.8507579963927475
+     },
+     {
+      "slug": "automationbench-aa",
+      "weightedCostPerTask": 0.03141021249987825
+     },
+     {
+      "slug": "terminalbench-4-0",
+      "weightedCostPerTask": 0.8100120626478791
+     },
+     {
+      "slug": "frontiercode-2-0",
+      "weightedCostPerTask": 0.45551842180090923
+     },
+     {
+      "slug": "omniscience",
+      "weightedCostPerTask": 0.004465027399999999
+     },
+     {
+      "slug": "gdp-pdf",
+      "weightedCostPerTask": 0.02996892
+     },
+     {
+      "slug": "hle-diamond",
+      "weightedCostPerTask": 0.0424284164
+     },
+     {
+      "slug": "critpt-v2-hard",
+      "weightedCostPerTask": 0.11682043303600002
+     },
+     {
+      "slug": "terminal-bench-science",
+      "weightedCostPerTask": 2.2191647884928565
+     }
+    ],
+    "intelligenceIndexOutputTokensPerTask": {
+     "reasoning": 38749.91143938162,
+     "answer": 29176.967077211826,
+     "output": 67926.87851659345
+    },
+    "frontierCode20": 0.266252272727273,
     "frontierCode20Tokens": null,
     "isOpenWeights": false,
     "prices": {
