@@ -47,13 +47,18 @@ const MODELS = {
   "Claude Fable 5.1": { pricingId: "claude-fable-5.1", lab: "Anthropic", short: "Fable 5.1", superseded: true },
   "Claude Opus 5": { pricingId: "claude-opus-5", lab: "Anthropic", short: "Opus 5", superseded: true },
   "Claude Opus 4.8": { pricingId: "claude-opus-4.8", lab: "Anthropic", short: "Opus 4.8", superseded: true },
-  "GPT-6 Astra": { pricingId: "gpt-6-astra", lab: "OpenAI", short: "GPT-6 Astra" },
-  "GPT-6.1 Sol": { pricingId: "gpt-6.1-sol", lab: "OpenAI", short: "GPT-6.1 Sol" },
+  // Released 2026-11-17. No measured plan allowance yet; ChatGPT allowances are estimated from Codex credit rates below.
+  "GPT-6.2 Astra": { pricingId: "gpt-6.2-astra", lab: "OpenAI", short: "GPT-6.2 Astra" },
+  "GPT-6.2 Sol": { pricingId: "gpt-6.2-sol", lab: "OpenAI", short: "GPT-6.2 Sol" },
+  "GPT-6 Astra": { pricingId: "gpt-6-astra", lab: "OpenAI", short: "GPT-6 Astra", superseded: true },
+  "GPT-6.1 Sol": { pricingId: "gpt-6.1-sol", lab: "OpenAI", short: "GPT-6.1 Sol", superseded: true },
   "GPT-6 Luna": { pricingId: "gpt-6-luna", lab: "OpenAI", short: "GPT-6 Luna" },
   "GPT-6 Sol": { pricingId: "gpt-6-sol", lab: "OpenAI", short: "GPT-6 Sol", superseded: true },
   "GPT-5.6 Sol": { pricingId: "gpt-5.6-sol", lab: "OpenAI", short: "GPT-5.6 Sol", superseded: true },
   "GPT-5.5": { pricingId: "gpt-5.5", lab: "OpenAI", short: "GPT-5.5", superseded: true },
   "Gemini 4 Argon": { pricingId: "gemini-4-argon", lab: "Google", short: "Gemini 4 Argon" },
+  // No plan allowance measured yet, so it charts at API price.
+  "Gemini 4 Hydrogen": { pricingId: "gemini-4-hydrogen", lab: "Google", short: "Gemini 4 Hydrogen" },
   // Released 2026-10-28; no plan allowance measured yet, so it charts at API price.
   "Gemini 4 Carbon": { pricingId: "gemini-4-carbon", lab: "Google", short: "Gemini 4 Carbon" },
   "Grok 4.7": { pricingId: "grok-4.7", lab: "xAI", short: "Grok 4.7" },
@@ -293,9 +298,9 @@ for (const [id, configs] of Object.entries(aa.models)) {
   }
 }
 
-// Gemini 4 Argon's $0.10 / $2 / $10 is an introductory price (to 2026-11-30). Cognition's costs and the plan
-// allowances use it, but Artificial Analysis prices Argon at the $0.20 / $4 / $20 list price that follows, so
-// its Intelligence Index costs need the matching $/Mtok to keep the subscription ratio on the same basis.
+// Gemini 4 Argon's $0.10 / $2 / $10 is an introductory price (to 2026-11-30, then $0.20 / $4 / $20). Cognition's
+// costs and the plan allowances use it. Artificial Analysis has switched between the two, so its Intelligence Index
+// costs use whichever price it lists to keep the subscription ratio on the same basis.
 const argonAA = aa.models["gemini-4-argon"]?.[0]?.prices;
 const intelligenceApiPrices = argonAA
   ? {
@@ -422,12 +427,14 @@ function derivePlan(fromId, { id, name, fee, scale, note, provider, confidence =
 plans.get("chatgpt_pro_10x").name = "ChatGPT Pro 100";
 plans.get("chatgpt_pro_20x").name = "ChatGPT Pro 200";
 
-// OpenAI models with no measured allowance on ChatGPT Plus (GPT-6.1 Terra so far) are estimated from Codex's
+// OpenAI models with no measured allowance on ChatGPT Plus (GPT-6.1 Terra and the GPT-6.2 family so far) are estimated from Codex's
 // published credit rates. Every model draws on one credit budget per plan, so a model's tokens per month scale with
 // the inverse of its credits per token. Take the best-rated measured Plus offer whose model has a rate (ties go to the
 // closest rate, so the extrapolation is smallest: GPT-6.1 Sol for Terra) and scale by the two models' credits per Mtok
 // on the standard mix. Credits per Mtok (input / cached input / output) from learn.chatgpt.com/docs/pricing.
 const CODEX_CREDITS = {
+  "gpt-6.2-astra": { input: 200, cached: 10, output: 1000 },
+  "gpt-6.2-sol": { input: 50, cached: 2.5, output: 250 },
   "gpt-6-astra": { input: 250, cached: 25, output: 1250 },
   "gpt-6.1-sol": { input: 50, cached: 2.5, output: 250 },
   "gpt-6.1-terra": { input: 25, cached: 1.25, output: 125 },

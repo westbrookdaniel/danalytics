@@ -1,8 +1,8 @@
 // Fetches Artificial Analysis results for the models danalytics charts and writes
-// data-src/artificial-analysis.json. Each effort level has its own model page whose
-// server-rendered payload carries that configuration's record (Intelligence Index score,
-// cost per task, FrontierCode 2.0 score and eval token counts). Pages are fetched one at a
-// time with a pause; robots.txt allows it. Follow with `npm run data`.
+// data-src/artificial-analysis.json. Each model has one page whose server-rendered payload
+// carries a record per effort level (Intelligence Index score, cost per task, FrontierCode 2.0
+// score and eval token counts); the old per-effort URLs now redirect to it. Pages are fetched
+// one at a time with a pause; robots.txt allows it. Follow with `npm run data`.
 import { writeFileSync } from "node:fs"
 
 const root = new URL("..", import.meta.url)
@@ -18,6 +18,8 @@ const FAMILIES = {
   "claude-fable-5.1": "claude-fable-5-1",
   "claude-opus-5": "claude-opus-5",
   "claude-opus-4.8": "claude-opus-4-8",
+  "gpt-6.2-astra": "gpt-6-2-astra",
+  "gpt-6.2-sol": "gpt-6-2-sol",
   "gpt-6-astra": "gpt-6-astra",
   "gpt-6.1-sol": "gpt-6-1-sol",
   "gpt-6.1-terra": "gpt-6-1-terra",
@@ -26,6 +28,7 @@ const FAMILIES = {
   "gpt-5.6-sol": "gpt-5-6-sol",
   "gpt-5.5": "gpt-5-5",
   "gemini-4-carbon": "gemini-4-carbon",
+  "gemini-4-hydrogen": "gemini-4-hydrogen",
   "gemini-4-argon": "gemini-4-argon",
   "grok-4.7": "grok-4-7",
   "deepseek-v4.1-flash-1017": "deepseek-v4-1-flash-1017",
@@ -79,20 +82,14 @@ function findRecord(payload, slug) {
   return null
 }
 
-const sitemap = await getText(`${BASE}/sitemap.xml`)
-const allSlugs = new Set([...sitemap.matchAll(/artificialanalysis\.ai\/models\/([a-z0-9-]+)</g)].map((m) => m[1]))
-
 const out = { fetchedAt: new Date().toISOString().slice(0, 10), source: `${BASE}/models`, models: {} }
 for (const [modelId, family] of Object.entries(FAMILIES)) {
-  const variants = [family, ...EFFORT_SUFFIXES.map((e) => `${family}-${e}`)].filter((s) => allSlugs.has(s))
+  await sleep(PAUSE_MS)
+  const payload = rscPayload(await getText(`${BASE}/models/${family}`))
   out.models[modelId] = []
-  for (const slug of variants) {
-    await sleep(PAUSE_MS)
-    const rec = findRecord(rscPayload(await getText(`${BASE}/models/${slug}`)), slug)
-    if (!rec) {
-      console.warn(`  no record for ${slug}`)
-      continue
-    }
+  for (const slug of [family, ...EFFORT_SUFFIXES.map((e) => `${family}-${e}`)]) {
+    const rec = findRecord(payload, slug)
+    if (!rec) continue
     out.models[modelId].push({
       slug,
       name: rec.name,

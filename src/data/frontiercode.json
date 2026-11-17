@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-12",
+ "generatedAt": "2026-11-17",
  "sources": {
   "pricing": {
    "name": "Real API Pricing",
@@ -35,18 +35,18 @@
   }
  },
  "fx": {
-  "date": "2026-11-11",
+  "date": "2026-11-17",
   "source": "ECB reference rates via Frankfurter",
   "rates": {
    "USD": 1,
-   "AUD": 1.4579,
-   "CAD": 1.4235,
-   "CNY": 6.6707,
-   "EUR": 0.89871,
-   "GBP": 0.75149,
-   "INR": 93.69,
-   "JPY": 159.23,
-   "NZD": 1.791
+   "AUD": 1.4848,
+   "CAD": 1.4291,
+   "CNY": 6.6661,
+   "EUR": 0.91,
+   "GBP": 0.75808,
+   "INR": 93.48,
+   "JPY": 159.3,
+   "NZD": 1.8186
   }
  },
  "benchmarks": [
@@ -59,7 +59,7 @@
    "source": {
     "name": "Artificial Analysis Intelligence Index v5",
     "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
-    "fetched": "2026-11-12"
+    "fetched": "2026-11-17"
    },
    "results": {
     "claude-opus-5.5": [
@@ -308,6 +308,100 @@
       "estimated": false
      }
     ],
+    "gpt-6.2-astra": [
+     {
+      "effort": "max",
+      "score": 62.14,
+      "apiCost": 3.9979061566801852,
+      "outputTokens": 41029,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "low",
+      "score": 45.65,
+      "apiCost": 0.661705400010306,
+      "outputTokens": 5216,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "medium",
+      "score": 57,
+      "apiCost": 1.6176877362867854,
+      "outputTokens": 13165,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "high",
+      "score": 60.09,
+      "apiCost": 2.073874957362806,
+      "outputTokens": 17828,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "xhigh",
+      "score": 61.56,
+      "apiCost": 2.5211433764120375,
+      "outputTokens": 22238,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
+    "gpt-6.2-sol": [
+     {
+      "effort": "max",
+      "score": 57.26,
+      "apiCost": 1.014379970300768,
+      "outputTokens": 40360,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "low",
+      "score": 40.55,
+      "apiCost": 0.18358471526572703,
+      "outputTokens": 5980,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "medium",
+      "score": 52.68,
+      "apiCost": 0.40605590960076604,
+      "outputTokens": 13651,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "high",
+      "score": 54.89,
+      "apiCost": 0.563644652221075,
+      "outputTokens": 20160,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "xhigh",
+      "score": 55.74,
+      "apiCost": 0.6479676730055945,
+      "outputTokens": 24323,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
     "gpt-6-astra": [
      {
       "effort": "max",
@@ -529,7 +623,7 @@
      {
       "effort": "high",
       "score": 60.03,
-      "apiCost": 7.755545745286556,
+      "apiCost": 5.484780948230178,
       "outputTokens": 122768,
       "harness": null,
       "source": "Artificial Analysis",
@@ -538,7 +632,7 @@
      {
       "effort": "low",
       "score": 54.22,
-      "apiCost": 7.186577262951972,
+      "apiCost": 5.221404723668021,
       "outputTokens": 86165,
       "harness": null,
       "source": "Artificial Analysis",
@@ -547,8 +641,46 @@
      {
       "effort": "medium",
       "score": 58.26,
-      "apiCost": 6.585776867225546,
+      "apiCost": 4.677653677420589,
       "outputTokens": 103012,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     }
+    ],
+    "gemini-4-hydrogen": [
+     {
+      "effort": "xhigh",
+      "score": 53.92,
+      "apiCost": 3.1601590757006157,
+      "outputTokens": 154406,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "low",
+      "score": 26.89,
+      "apiCost": 0.2922227000200506,
+      "outputTokens": 14074,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "medium",
+      "score": 41.23,
+      "apiCost": 0.7979866055252406,
+      "outputTokens": 39353,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "high",
+      "score": 50.79,
+      "apiCost": 1.8733140062520008,
+      "outputTokens": 84978,
       "harness": null,
       "source": "Artificial Analysis",
       "estimated": false
@@ -558,8 +690,17 @@
      {
       "effort": "high",
       "score": 50.41,
-      "apiCost": 9.946608711550533,
+      "apiCost": 4.973304355775267,
       "outputTokens": 116368,
+      "harness": null,
+      "source": "Artificial Analysis",
+      "estimated": false
+     },
+     {
+      "effort": "medium",
+      "score": 47.6,
+      "apiCost": 4.314621569087732,
+      "outputTokens": 100407,
       "harness": null,
       "source": "Artificial Analysis",
       "estimated": false
@@ -732,9 +873,9 @@
    },
    "apiPrices": {
     "gemini-4-argon": {
-     "usdPerMtok": 0.85,
+     "usdPerMtok": 0.425,
      "basis": "list",
-     "note": "Artificial Analysis list price $0.2 / $4 / $20, low-cache mix"
+     "note": "Artificial Analysis list price $0.1 / $2 / $10, low-cache mix"
     }
    }
   },
@@ -752,7 +893,7 @@
     "deepseek-v4.1-flash-1017": [
      {
       "effort": "low",
-      "score": 15.96,
+      "score": 17.32,
       "apiCost": 0.206,
       "outputTokens": 40659,
       "harness": "devin-cli",
@@ -760,7 +901,7 @@
      },
      {
       "effort": "high",
-      "score": 18.21,
+      "score": 19.78,
       "apiCost": 0.274,
       "outputTokens": 57169,
       "harness": "devin-cli",
@@ -768,7 +909,7 @@
      },
      {
       "effort": "max",
-      "score": 19.3,
+      "score": 20.19,
       "apiCost": 0.384,
       "outputTokens": 82220,
       "harness": "devin-cli",
@@ -778,7 +919,7 @@
     "claude-fable-5.1": [
      {
       "effort": "low",
-      "score": 20.59,
+      "score": 21.21,
       "apiCost": 3.007,
       "outputTokens": 28797,
       "harness": "claude-code",
@@ -786,7 +927,7 @@
      },
      {
       "effort": "medium",
-      "score": 21.47,
+      "score": 22.25,
       "apiCost": 3.891,
       "outputTokens": 37911,
       "harness": "claude-code",
@@ -794,7 +935,7 @@
      },
      {
       "effort": "high",
-      "score": 25.67,
+      "score": 26.58,
       "apiCost": 5.386,
       "outputTokens": 54242,
       "harness": "claude-code",
@@ -802,7 +943,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 32.44,
+      "score": 34.03,
       "apiCost": 8.68,
       "outputTokens": 92813,
       "harness": "claude-code",
@@ -810,7 +951,7 @@
      },
      {
       "effort": "max",
-      "score": 31.67,
+      "score": 32.98,
       "apiCost": 11.457,
       "outputTokens": 119089,
       "harness": "claude-code",
@@ -820,7 +961,7 @@
     "claude-fable-5.2": [
      {
       "effort": "low",
-      "score": 34.2,
+      "score": 35.26,
       "apiCost": 2.623,
       "outputTokens": 23907,
       "harness": "claude-code",
@@ -828,7 +969,7 @@
      },
      {
       "effort": "medium",
-      "score": 37.59,
+      "score": 38.78,
       "apiCost": 3.103,
       "outputTokens": 28384,
       "harness": "claude-code",
@@ -836,7 +977,7 @@
      },
      {
       "effort": "high",
-      "score": 45.29,
+      "score": 46.24,
       "apiCost": 8.402,
       "outputTokens": 75978,
       "harness": "claude-code",
@@ -844,7 +985,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 49.11,
+      "score": 50.18,
       "apiCost": 17.734,
       "outputTokens": 156009,
       "harness": "claude-code",
@@ -852,7 +993,7 @@
      },
      {
       "effort": "max",
-      "score": 45.65,
+      "score": 48.23,
       "apiCost": 55.868,
       "outputTokens": 417808,
       "harness": "claude-code",
@@ -862,7 +1003,7 @@
     "glm-5.3": [
      {
       "effort": "low",
-      "score": 14.37,
+      "score": 14.36,
       "apiCost": 3.189,
       "outputTokens": 47199,
       "harness": "devin-cli",
@@ -870,7 +1011,7 @@
      },
      {
       "effort": "high",
-      "score": 16.84,
+      "score": 18.02,
       "apiCost": 5.181,
       "outputTokens": 73247,
       "harness": "devin-cli",
@@ -878,7 +1019,7 @@
      },
      {
       "effort": "max",
-      "score": 17.81,
+      "score": 20.15,
       "apiCost": 7.516,
       "outputTokens": 100706,
       "harness": "devin-cli",
@@ -888,7 +1029,7 @@
     "glm-5.3-flash": [
      {
       "effort": "low",
-      "score": 7.81,
+      "score": 8.01,
       "apiCost": 0.43,
       "outputTokens": 35321,
       "harness": "devin-cli",
@@ -896,7 +1037,7 @@
      },
      {
       "effort": "high",
-      "score": 12.41,
+      "score": 12.86,
       "apiCost": 0.584,
       "outputTokens": 56914,
       "harness": "devin-cli",
@@ -904,7 +1045,7 @@
      },
      {
       "effort": "max",
-      "score": 14.18,
+      "score": 14.95,
       "apiCost": 0.792,
       "outputTokens": 90044,
       "harness": "devin-cli",
@@ -914,7 +1055,7 @@
     "gpt-5.5": [
      {
       "effort": "low",
-      "score": 7.2,
+      "score": 7.32,
       "apiCost": 1.9753,
       "outputTokens": 10332,
       "harness": "codex",
@@ -922,7 +1063,7 @@
      },
      {
       "effort": "medium",
-      "score": 14.22,
+      "score": 14.65,
       "apiCost": 2.9515,
       "outputTokens": 16320,
       "harness": "codex",
@@ -930,7 +1071,7 @@
      },
      {
       "effort": "high",
-      "score": 19.09,
+      "score": 19.67,
       "apiCost": 3.8021,
       "outputTokens": 21907,
       "harness": "codex",
@@ -938,7 +1079,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 22.62,
+      "score": 23.62,
       "apiCost": 5.2771,
       "outputTokens": 30925,
       "harness": "codex",
@@ -948,7 +1089,7 @@
     "gpt-5.6-sol": [
      {
       "effort": "low",
-      "score": 12.79,
+      "score": 12.91,
       "apiCost": 1.451,
       "outputTokens": 9806,
       "harness": "codex",
@@ -956,7 +1097,7 @@
      },
      {
       "effort": "medium",
-      "score": 19.52,
+      "score": 20.02,
       "apiCost": 2.36,
       "outputTokens": 15446,
       "harness": "codex",
@@ -964,7 +1105,7 @@
      },
      {
       "effort": "high",
-      "score": 24.29,
+      "score": 24.85,
       "apiCost": 3.166,
       "outputTokens": 20920,
       "harness": "codex",
@@ -972,7 +1113,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 24.08,
+      "score": 25.02,
       "apiCost": 3.83,
       "outputTokens": 26415,
       "harness": "codex",
@@ -980,7 +1121,7 @@
      },
      {
       "effort": "max",
-      "score": 27.64,
+      "score": 28.89,
       "apiCost": 5.503,
       "outputTokens": 38352,
       "harness": "codex",
@@ -998,7 +1139,7 @@
      },
      {
       "effort": "medium",
-      "score": 36.75,
+      "score": 37.29,
       "apiCost": 3.493,
       "outputTokens": 14065,
       "harness": "codex",
@@ -1006,7 +1147,7 @@
      },
      {
       "effort": "high",
-      "score": 38.31,
+      "score": 38.83,
       "apiCost": 4.277,
       "outputTokens": 18433,
       "harness": "codex",
@@ -1014,7 +1155,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 41.41,
+      "score": 41.69,
       "apiCost": 4.539,
       "outputTokens": 20869,
       "harness": "codex",
@@ -1022,7 +1163,7 @@
      },
      {
       "effort": "max",
-      "score": 42.77,
+      "score": 44.02,
       "apiCost": 6.676,
       "outputTokens": 36354,
       "harness": "codex",
@@ -1040,7 +1181,7 @@
      },
      {
       "effort": "medium",
-      "score": 15.97,
+      "score": 16.12,
       "apiCost": 0.092,
       "outputTokens": 31360,
       "harness": "codex",
@@ -1064,7 +1205,7 @@
      },
      {
       "effort": "max",
-      "score": 21.87,
+      "score": 22.74,
       "apiCost": 0.174,
       "outputTokens": 79659,
       "harness": "codex",
@@ -1082,7 +1223,7 @@
      },
      {
       "effort": "medium",
-      "score": 21.63,
+      "score": 22.05,
       "apiCost": 0.8225,
       "outputTokens": 13750,
       "harness": "codex",
@@ -1090,7 +1231,7 @@
      },
      {
       "effort": "high",
-      "score": 22.81,
+      "score": 23.34,
       "apiCost": 1.0714,
       "outputTokens": 19393,
       "harness": "codex",
@@ -1098,7 +1239,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 30.32,
+      "score": 30.45,
       "apiCost": 1.4432,
       "outputTokens": 28587,
       "harness": "codex",
@@ -1106,7 +1247,7 @@
      },
      {
       "effort": "max",
-      "score": 34.25,
+      "score": 34.91,
       "apiCost": 2.3547,
       "outputTokens": 54181,
       "harness": "codex",
@@ -1116,7 +1257,7 @@
     "gpt-6.1-sol": [
      {
       "effort": "low",
-      "score": 25.6,
+      "score": 25.74,
       "apiCost": 0.341,
       "outputTokens": 10042,
       "harness": "codex",
@@ -1124,7 +1265,7 @@
      },
      {
       "effort": "medium",
-      "score": 29.58,
+      "score": 30.27,
       "apiCost": 0.492,
       "outputTokens": 15686,
       "harness": "codex",
@@ -1132,7 +1273,7 @@
      },
      {
       "effort": "high",
-      "score": 34.82,
+      "score": 35.09,
       "apiCost": 0.647,
       "outputTokens": 22419,
       "harness": "codex",
@@ -1140,7 +1281,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 32.33,
+      "score": 33.03,
       "apiCost": 0.695,
       "outputTokens": 24789,
       "harness": "codex",
@@ -1148,9 +1289,93 @@
      },
      {
       "effort": "max",
-      "score": 38.95,
+      "score": 39.65,
       "apiCost": 1.029,
       "outputTokens": 41479,
+      "harness": "codex",
+      "source": "Cognition"
+     }
+    ],
+    "gpt-6.2-astra": [
+     {
+      "effort": "low",
+      "score": 38.07,
+      "apiCost": 1.415,
+      "outputTokens": 8154,
+      "harness": "codex",
+      "source": "Cognition"
+     },
+     {
+      "effort": "medium",
+      "score": 42.2,
+      "apiCost": 2.469,
+      "outputTokens": 14364,
+      "harness": "codex",
+      "source": "Cognition"
+     },
+     {
+      "effort": "high",
+      "score": 43.56,
+      "apiCost": 3.952,
+      "outputTokens": 24452,
+      "harness": "codex",
+      "source": "Cognition"
+     },
+     {
+      "effort": "xhigh",
+      "score": 44.12,
+      "apiCost": 4.289,
+      "outputTokens": 28568,
+      "harness": "codex",
+      "source": "Cognition"
+     },
+     {
+      "effort": "max",
+      "score": 44.19,
+      "apiCost": 5.966,
+      "outputTokens": 45974,
+      "harness": "codex",
+      "source": "Cognition"
+     }
+    ],
+    "gpt-6.2-sol": [
+     {
+      "effort": "low",
+      "score": 33.14,
+      "apiCost": 0.402,
+      "outputTokens": 9789,
+      "harness": "codex",
+      "source": "Cognition"
+     },
+     {
+      "effort": "medium",
+      "score": 38.29,
+      "apiCost": 0.685,
+      "outputTokens": 16457,
+      "harness": "codex",
+      "source": "Cognition"
+     },
+     {
+      "effort": "high",
+      "score": 39.72,
+      "apiCost": 0.876,
+      "outputTokens": 22415,
+      "harness": "codex",
+      "source": "Cognition"
+     },
+     {
+      "effort": "xhigh",
+      "score": 39.78,
+      "apiCost": 0.98,
+      "outputTokens": 26387,
+      "harness": "codex",
+      "source": "Cognition"
+     },
+     {
+      "effort": "max",
+      "score": 43.76,
+      "apiCost": 1.287,
+      "outputTokens": 38078,
       "harness": "codex",
       "source": "Cognition"
      }
@@ -1158,7 +1383,7 @@
     "gemini-4-argon": [
      {
       "effort": "low",
-      "score": 21.47,
+      "score": 22.41,
       "apiCost": 3.977,
       "outputTokens": 63291,
       "harness": "devin-cli",
@@ -1166,7 +1391,7 @@
      },
      {
       "effort": "medium",
-      "score": 23.45,
+      "score": 24.43,
       "apiCost": 5.688,
       "outputTokens": 123879,
       "harness": "devin-cli",
@@ -1174,7 +1399,7 @@
      },
      {
       "effort": "high",
-      "score": 26.3,
+      "score": 27.63,
       "apiCost": 6.514,
       "outputTokens": 148569,
       "harness": "devin-cli",
@@ -1184,33 +1409,67 @@
     "gemini-4-carbon": [
      {
       "effort": "low",
-      "score": 31.88,
-      "apiCost": 4.548,
-      "outputTokens": 57868,
-      "harness": "devin-cli",
+      "score": 31.53,
+      "apiCost": 7.723,
+      "outputTokens": 51553,
+      "harness": "antigravity-cli",
       "source": "Cognition"
      },
      {
       "effort": "medium",
-      "score": 40,
-      "apiCost": 4.044,
-      "outputTokens": 109126,
-      "harness": "devin-cli",
+      "score": 40.9,
+      "apiCost": 4.486,
+      "outputTokens": 114385,
+      "harness": "antigravity-cli",
       "source": "Cognition"
      },
      {
       "effort": "high",
-      "score": 37.48,
-      "apiCost": 4.434,
-      "outputTokens": 121442,
-      "harness": "devin-cli",
+      "score": 42.62,
+      "apiCost": 5.057,
+      "outputTokens": 127641,
+      "harness": "antigravity-cli",
+      "source": "Cognition"
+     }
+    ],
+    "gemini-4-hydrogen": [
+     {
+      "effort": "low",
+      "score": 10.52,
+      "apiCost": 0.353,
+      "outputTokens": 14953,
+      "harness": "antigravity-cli",
+      "source": "Cognition"
+     },
+     {
+      "effort": "medium",
+      "score": 28.21,
+      "apiCost": 0.901,
+      "outputTokens": 37841,
+      "harness": "antigravity-cli",
+      "source": "Cognition"
+     },
+     {
+      "effort": "high",
+      "score": 38.23,
+      "apiCost": 2.404,
+      "outputTokens": 85996,
+      "harness": "antigravity-cli",
+      "source": "Cognition"
+     },
+     {
+      "effort": "xhigh",
+      "score": 38.87,
+      "apiCost": 4.953,
+      "outputTokens": 153739,
+      "harness": "antigravity-cli",
       "source": "Cognition"
      }
     ],
     "grok-4.7": [
      {
       "effort": "low",
-      "score": 20.8,
+      "score": 21.06,
       "apiCost": 3.873,
       "outputTokens": 38161,
       "harness": "grok-build",
@@ -1218,7 +1477,7 @@
      },
      {
       "effort": "medium",
-      "score": 25.94,
+      "score": 26.07,
       "apiCost": 8.028,
       "outputTokens": 72180,
       "harness": "grok-build",
@@ -1226,7 +1485,7 @@
      },
      {
       "effort": "high",
-      "score": 26.55,
+      "score": 26.54,
       "apiCost": 11.094,
       "outputTokens": 94341,
       "harness": "grok-build",
@@ -1234,7 +1493,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 28.62,
+      "score": 28.9,
       "apiCost": 14.36,
       "outputTokens": 110790,
       "harness": "grok-build",
@@ -1244,7 +1503,7 @@
     "claude-haiku-5.5": [
      {
       "effort": "low",
-      "score": 10.46,
+      "score": 10.59,
       "apiCost": 0.065,
       "outputTokens": 39366,
       "harness": "claude-code",
@@ -1252,7 +1511,7 @@
      },
      {
       "effort": "medium",
-      "score": 13.42,
+      "score": 14.05,
       "apiCost": 0.097,
       "outputTokens": 57582,
       "harness": "claude-code",
@@ -1260,7 +1519,7 @@
      },
      {
       "effort": "high",
-      "score": 18.64,
+      "score": 19.27,
       "apiCost": 0.139,
       "outputTokens": 80993,
       "harness": "claude-code",
@@ -1268,7 +1527,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 22.28,
+      "score": 22.92,
       "apiCost": 0.226,
       "outputTokens": 127735,
       "harness": "claude-code",
@@ -1276,7 +1535,7 @@
      },
      {
       "effort": "max",
-      "score": 27.72,
+      "score": 28.93,
       "apiCost": 0.366,
       "outputTokens": 205112,
       "harness": "claude-code",
@@ -1286,7 +1545,7 @@
     "kimi-k3": [
      {
       "effort": "low",
-      "score": 11.1,
+      "score": 11.32,
       "apiCost": 2.977,
       "outputTokens": 28740,
       "harness": "devin-cli",
@@ -1294,7 +1553,7 @@
      },
      {
       "effort": "high",
-      "score": 17.74,
+      "score": 18.85,
       "apiCost": 4.475,
       "outputTokens": 49854,
       "harness": "devin-cli",
@@ -1302,7 +1561,7 @@
      },
      {
       "effort": "max",
-      "score": 17.31,
+      "score": 18.43,
       "apiCost": 5.456,
       "outputTokens": 64271,
       "harness": "devin-cli",
@@ -1320,7 +1579,7 @@
      },
      {
       "effort": "high",
-      "score": 17.29,
+      "score": 17.51,
       "apiCost": 2.358,
       "outputTokens": 27628,
       "harness": "devin-cli",
@@ -1328,7 +1587,7 @@
      },
      {
       "effort": "max",
-      "score": 19.64,
+      "score": 19.89,
       "apiCost": 3.033,
       "outputTokens": 37242,
       "harness": "devin-cli",
@@ -1338,7 +1597,7 @@
     "muse-wonder-1.0": [
      {
       "effort": "low",
-      "score": 21.21,
+      "score": 21.6,
       "apiCost": 1.843,
       "outputTokens": 20301,
       "harness": "muse",
@@ -1346,7 +1605,7 @@
      },
      {
       "effort": "medium",
-      "score": 23.14,
+      "score": 23.92,
       "apiCost": 2.534,
       "outputTokens": 26714,
       "harness": "muse",
@@ -1354,7 +1613,7 @@
      },
      {
       "effort": "high",
-      "score": 24.28,
+      "score": 24.92,
       "apiCost": 3.143,
       "outputTokens": 32832,
       "harness": "muse",
@@ -1362,7 +1621,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 24.11,
+      "score": 25.32,
       "apiCost": 3.793,
       "outputTokens": 38672,
       "harness": "muse",
@@ -1372,7 +1631,7 @@
     "claude-opus-4.8": [
      {
       "effort": "low",
-      "score": 9.55,
+      "score": 9.79,
       "apiCost": 4.195,
       "outputTokens": 40687,
       "harness": "claude-code",
@@ -1380,7 +1639,7 @@
      },
      {
       "effort": "medium",
-      "score": 11.02,
+      "score": 11.26,
       "apiCost": 5.588,
       "outputTokens": 57192,
       "harness": "claude-code",
@@ -1388,7 +1647,7 @@
      },
      {
       "effort": "high",
-      "score": 10.86,
+      "score": 11.1,
       "apiCost": 6.316,
       "outputTokens": 62298,
       "harness": "claude-code",
@@ -1396,7 +1655,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 14.28,
+      "score": 14.87,
       "apiCost": 9.133,
       "outputTokens": 88364,
       "harness": "claude-code",
@@ -1404,7 +1663,7 @@
      },
      {
       "effort": "max",
-      "score": 14.72,
+      "score": 15.32,
       "apiCost": 12.129,
       "outputTokens": 125863,
       "harness": "claude-code",
@@ -1414,7 +1673,7 @@
     "claude-opus-5": [
      {
       "effort": "low",
-      "score": 18.69,
+      "score": 19.32,
       "apiCost": 3.276,
       "outputTokens": 26898,
       "harness": "claude-code",
@@ -1422,7 +1681,7 @@
      },
      {
       "effort": "medium",
-      "score": 23.97,
+      "score": 24.56,
       "apiCost": 5.217,
       "outputTokens": 39813,
       "harness": "claude-code",
@@ -1430,7 +1689,7 @@
      },
      {
       "effort": "high",
-      "score": 26.72,
+      "score": 28.13,
       "apiCost": 8.361,
       "outputTokens": 59260,
       "harness": "claude-code",
@@ -1438,7 +1697,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 26.74,
+      "score": 27.38,
       "apiCost": 11.093,
       "outputTokens": 76436,
       "harness": "claude-code",
@@ -1446,7 +1705,7 @@
      },
      {
       "effort": "max",
-      "score": 26.58,
+      "score": 27.2,
       "apiCost": 12.997,
       "outputTokens": 88196,
       "harness": "claude-code",
@@ -1456,7 +1715,7 @@
     "claude-opus-5.5": [
      {
       "effort": "low",
-      "score": 14.72,
+      "score": 14.85,
       "apiCost": 0.746,
       "outputTokens": 14230,
       "harness": "claude-code",
@@ -1464,7 +1723,7 @@
      },
      {
       "effort": "medium",
-      "score": 30.1,
+      "score": 31.43,
       "apiCost": 1.699,
       "outputTokens": 30068,
       "harness": "claude-code",
@@ -1472,7 +1731,7 @@
      },
      {
       "effort": "high",
-      "score": 34.53,
+      "score": 36.27,
       "apiCost": 2.423,
       "outputTokens": 41233,
       "harness": "claude-code",
@@ -1480,7 +1739,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 43.38,
+      "score": 44.72,
       "apiCost": 5.184,
       "outputTokens": 88053,
       "harness": "claude-code",
@@ -1488,7 +1747,7 @@
      },
      {
       "effort": "max",
-      "score": 45.45,
+      "score": 47.34,
       "apiCost": 12.821,
       "outputTokens": 201919,
       "harness": "claude-code",
@@ -1498,7 +1757,7 @@
     "claude-sonnet-5.5": [
      {
       "effort": "low",
-      "score": 9.41,
+      "score": 9.66,
       "apiCost": 0.369,
       "outputTokens": 11265,
       "harness": "claude-code",
@@ -1506,7 +1765,7 @@
      },
      {
       "effort": "medium",
-      "score": 14.17,
+      "score": 14.96,
       "apiCost": 0.482,
       "outputTokens": 14449,
       "harness": "claude-code",
@@ -1514,7 +1773,7 @@
      },
      {
       "effort": "high",
-      "score": 21.9,
+      "score": 22.95,
       "apiCost": 1.066,
       "outputTokens": 27839,
       "harness": "claude-code",
@@ -1522,7 +1781,7 @@
      },
      {
       "effort": "xhigh",
-      "score": 34.75,
+      "score": 36.5,
       "apiCost": 3.315,
       "outputTokens": 80433,
       "harness": "claude-code",
@@ -1530,7 +1789,7 @@
      },
      {
       "effort": "max",
-      "score": 40.96,
+      "score": 42.24,
       "apiCost": 19.941,
       "outputTokens": 514722,
       "harness": "claude-code",
@@ -1550,7 +1809,7 @@
     "swe-1.7": [
      {
       "effort": "na",
-      "score": 16.15,
+      "score": 15.51,
       "apiCost": 3.5209,
       "outputTokens": 89251,
       "harness": "devin-cli-swe1",
@@ -1745,7 +2004,7 @@
    "short": "GPT-6 Astra",
    "lab": "OpenAI",
    "pricingId": "gpt-6-astra",
-   "superseded": false,
+   "superseded": true,
    "openWeights": false,
    "api": {
     "usdPerMtok": 1.47,
@@ -1787,6 +2046,34 @@
    "short": "GPT-6.1 Sol",
    "lab": "OpenAI",
    "pricingId": "gpt-6.1-sol",
+   "superseded": true,
+   "openWeights": false,
+   "api": {
+    "usdPerMtok": 0.197,
+    "basis": "list",
+    "note": "List price $0.1 / $2 / $10 via Artificial Analysis"
+   }
+  },
+  {
+   "id": "gpt-6.2-astra",
+   "name": "GPT-6.2 Astra",
+   "short": "GPT-6.2 Astra",
+   "lab": "OpenAI",
+   "pricingId": "gpt-6.2-astra",
+   "superseded": false,
+   "openWeights": false,
+   "api": {
+    "usdPerMtok": 0.788,
+    "basis": "list",
+    "note": "List price $0.4 / $8 / $40 via Artificial Analysis"
+   }
+  },
+  {
+   "id": "gpt-6.2-sol",
+   "name": "GPT-6.2 Sol",
+   "short": "GPT-6.2 Sol",
+   "lab": "OpenAI",
+   "pricingId": "gpt-6.2-sol",
    "superseded": false,
    "openWeights": false,
    "api": {
@@ -1818,9 +2105,23 @@
    "superseded": false,
    "openWeights": false,
    "api": {
-    "usdPerMtok": 0.85,
+    "usdPerMtok": 0.425,
     "basis": "list",
-    "note": "List price $0.2 / $4 / $20 via Artificial Analysis"
+    "note": "List price $0.1 / $2 / $10 via Artificial Analysis"
+   }
+  },
+  {
+   "id": "gemini-4-hydrogen",
+   "name": "Gemini 4 Hydrogen",
+   "short": "Gemini 4 Hydrogen",
+   "lab": "Google",
+   "pricingId": "gemini-4-hydrogen",
+   "superseded": false,
+   "openWeights": false,
+   "api": {
+    "usdPerMtok": 0.31875,
+    "basis": "list",
+    "note": "List price $0.075 / $1.5 / $7.5 via Artificial Analysis"
    }
   },
   {
@@ -2023,7 +2324,7 @@
   }
  ],
  "codexResets": {
-  "fetched": "2026-11-12",
+  "fetched": "2026-11-17",
   "url": "https://resetbeacon.com/?filter=all",
   "windowDays": 90,
   "providers": [
@@ -2045,10 +2346,11 @@
    "2026-10-14",
    "2026-10-17",
    "2026-10-19",
-   "2026-10-24"
+   "2026-10-24",
+   "2026-10-27"
   ],
-  "avgGapDays": 4.133333333333334,
-  "multiplier": 1.693548387096774
+  "avgGapDays": 4.0625,
+  "multiplier": 1.7230769230769232
  },
  "plans": [
   {
@@ -2241,12 +2543,12 @@
    "kind": "lab",
    "scenario": null,
    "group": "kimi_plus_cn",
-   "fee": 14.84,
+   "fee": 14.85,
    "localPrice": "¥99",
    "offers": [
     {
      "modelId": "kimi-k3",
-     "usdPerMtok": 0.07610256376210525,
+     "usdPerMtok": 0.07615384581315789,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "medium",
@@ -2563,6 +2865,24 @@
      "source": "由同套餐 gpt-5.6-sol 6.16 亿 × 0.7736842105263158"
     },
     {
+     "modelId": "gpt-6.2-astra",
+     "usdPerMtok": 0.06742822726530612,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-11",
+     "source": "Estimated from Codex credit rates: 0.536 × the gpt-6-astra allowance's $/Mtok on Plus (learn.chatgpt.com/docs/pricing)"
+    },
+    {
+     "modelId": "gpt-6.2-sol",
+     "usdPerMtok": 0.013192612,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-11-09",
+     "source": "Estimated from Codex credit rates: 1 × the gpt-6.1-sol allowance's $/Mtok on Plus (learn.chatgpt.com/docs/pricing)"
+    },
+    {
      "modelId": "gpt-6.1-terra",
      "usdPerMtok": 0.006596306,
      "unmetered": false,
@@ -2646,12 +2966,12 @@
    "kind": "lab",
    "scenario": null,
    "group": "kimi_pro_cn",
-   "fee": 29.83,
+   "fee": 29.85,
    "localPrice": "¥199",
    "offers": [
     {
      "modelId": "kimi-k3",
-     "usdPerMtok": 0.030657759553846153,
+     "usdPerMtok": 0.03067831453846154,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "medium",
@@ -3109,6 +3429,24 @@
      "source": "10× the Plus allowance (this tier's measured multiple); Plus: 维护者本机 Codex，2026-11-09 周窗两条标准负载读数等权中点（旧 31pp / 8.70 亿不入权；整周 67% used 外推 2.151 亿、$38.47 已丢弃、不作输入）：日志 6 点 65%→71% 标准负载 4.08 亿、$73.17；7 点下降标准负载 3.50 亿、$62.71；local"
     },
     {
+     "modelId": "gpt-6.2-astra",
+     "usdPerMtok": 0.03371411363265306,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-11",
+     "source": "10× the Plus allowance (this tier's measured multiple); Plus: Estimated from Codex credit rates: 0.536 × the gpt-6-astra allowance's $/Mtok on Plus (learn.chatgpt.com/docs/pricing)"
+    },
+    {
+     "modelId": "gpt-6.2-sol",
+     "usdPerMtok": 0.006596306,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-11-09",
+     "source": "10× the Plus allowance (this tier's measured multiple); Plus: Estimated from Codex credit rates: 1 × the gpt-6.1-sol allowance's $/Mtok on Plus (learn.chatgpt.com/docs/pricing)"
+    },
+    {
      "modelId": "gpt-6.1-terra",
      "usdPerMtok": 0.003298153,
      "unmetered": false,
@@ -3243,12 +3581,12 @@
    "kind": "lab",
    "scenario": null,
    "group": "kimi_max_cn",
-   "fee": 104.79,
+   "fee": 104.86,
    "localPrice": "¥699",
    "offers": [
     {
      "modelId": "kimi-k3",
-     "usdPerMtok": 0.03589928103787879,
+     "usdPerMtok": 0.03592326185353536,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "medium",
@@ -3544,6 +3882,24 @@
      "source": "20.9× the Plus allowance (this tier's measured multiple); Plus: 维护者本机 Codex，2026-11-09 周窗两条标准负载读数等权中点（旧 31pp / 8.70 亿不入权；整周 67% used 外推 2.151 亿、$38.47 已丢弃、不作输入）：日志 6 点 65%→71% 标准负载 4.08 亿、$73.17；7 点下降标准负载 3.50 亿、$62.71；local"
     },
     {
+     "modelId": "gpt-6.2-astra",
+     "usdPerMtok": 0.03219329527082646,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-11",
+     "source": "20.9× the Plus allowance (this tier's measured multiple); Plus: Estimated from Codex credit rates: 0.536 × the gpt-6-astra allowance's $/Mtok on Plus (learn.chatgpt.com/docs/pricing)"
+    },
+    {
+     "modelId": "gpt-6.2-sol",
+     "usdPerMtok": 0.006298751587200283,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-11-09",
+     "source": "20.9× the Plus allowance (this tier's measured multiple); Plus: Estimated from Codex credit rates: 1 × the gpt-6.1-sol allowance's $/Mtok on Plus (learn.chatgpt.com/docs/pricing)"
+    },
+    {
      "modelId": "gpt-6.1-terra",
      "usdPerMtok": 0.0031493757936001416,
      "unmetered": false,
@@ -3657,12 +4013,12 @@
    "kind": "lab",
    "scenario": null,
    "group": "kimi_ultra_cn",
-   "fee": 209.72,
+   "fee": 209.87,
    "localPrice": "¥1399",
    "offers": [
     {
      "modelId": "kimi-k3",
-     "usdPerMtok": 0.0359232612840201,
+     "usdPerMtok": 0.03594895501467337,
      "unmetered": false,
      "promoUntil": null,
      "confidence": "medium",
@@ -3734,6 +4090,24 @@
      "confidence": "low",
      "dataDate": "2026-11-09",
      "source": "≈ 50× Plus: 25× at launch, doubled 2026-10-29 (scaled from ChatGPT Pro 200: 20.9× the Plus allowance (this tier's measured multiple); Plus: 维护者本机 Codex，2026-11-09 周窗两条标准负载读数等权中点（旧 31pp / 8.70 亿不入权；整周 67% used 外推 2.151 亿、$38.47 已丢弃、不作输入）)"
+    },
+    {
+     "modelId": "gpt-6.2-astra",
+     "usdPerMtok": 0.03219329527082646,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-09-11",
+     "source": "≈ 50× Plus: 25× at launch, doubled 2026-10-29 (scaled from ChatGPT Pro 200: 20.9× the Plus allowance (this tier's measured multiple); Plus: Estimated from Codex credit rates: 0.536 × the gpt-6-astra allowance's $/Mtok on Plus (learn.cha)"
+    },
+    {
+     "modelId": "gpt-6.2-sol",
+     "usdPerMtok": 0.006298751587200283,
+     "unmetered": false,
+     "promoUntil": null,
+     "confidence": "low",
+     "dataDate": "2026-11-09",
+     "source": "≈ 50× Plus: 25× at launch, doubled 2026-10-29 (scaled from ChatGPT Pro 200: 20.9× the Plus allowance (this tier's measured multiple); Plus: Estimated from Codex credit rates: 1 × the gpt-6.1-sol allowance's $/Mtok on Plus (learn.chatgpt)"
     },
     {
      "modelId": "gpt-6.1-terra",

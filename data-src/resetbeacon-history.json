@@ -1,5 +1,5 @@
 {
- "fetched": "2026-11-12",
+ "fetched": "2026-11-17",
  "items": [
   {
    "id": "1968163721034994139",
@@ -1100,6 +1100,15 @@
    "evidenceUrl": "/evidence/f27ec56a-0020-41ab-a9ac-0ca4281faee8/"
   },
   {
+   "id": "2115273064481218829",
+   "date": "2026-10-27",
+   "announcedAt": "2026-10-28T02:42:53.000Z",
+   "eventKind": "intent",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/01d9b664-f694-49e3-8c9f-c9ae4f1083fb/"
+  },
+  {
    "id": "2115273253711409208",
    "date": "2026-10-27",
    "announcedAt": "2026-10-28T02:43:38.000Z",
@@ -1107,6 +1116,15 @@
    "status": "missed",
    "scope": "all",
    "evidenceUrl": "/evidence/aa5f7cdb-4a64-4817-be49-8e0449771694/"
+  },
+  {
+   "id": "2115330127886463244",
+   "date": "2026-10-27",
+   "announcedAt": "2026-10-28T06:29:38.000Z",
+   "eventKind": "completed",
+   "status": "completed",
+   "scope": "all",
+   "evidenceUrl": "/evidence/45ffdf87-71ff-4520-9132-5bfa4b08f791/"
   },
   {
    "id": "2115850175868727621",
@@ -1136,13 +1154,13 @@
    "evidenceUrl": "/evidence/24e2e95c-e6d1-4c40-87fe-f210b59f2cbe/"
   },
   {
-   "id": "2116942192497533418",
+   "id": "2117035794678546764",
    "date": "2026-11-01",
-   "announcedAt": "2026-11-01T17:15:24.000Z",
+   "announcedAt": "2026-11-01T23:27:20.731Z",
    "eventKind": "policy_change",
    "status": "recorded",
-   "scope": "unknown",
-   "evidenceUrl": "/evidence/47b06172-6661-4287-acff-81dc2117977d/"
+   "scope": "all",
+   "evidenceUrl": "/evidence/27b95caa-518b-497e-9acc-c206f94b15a0/"
   },
   {
    "id": "2117868812657971442",
@@ -1166,10 +1184,19 @@
    "id": "2120410480204525936",
    "date": "2026-11-10",
    "announcedAt": "2026-11-11T06:57:08.459Z",
+   "eventKind": "intent",
+   "status": "expired",
+   "scope": "all",
+   "evidenceUrl": "/evidence/2ba83d64-e28c-4ecf-93f2-7ff1b19e2d33/"
+  },
+  {
+   "id": "2120999993079451919",
+   "date": "2026-11-12",
+   "announcedAt": "2026-11-12T21:59:39.000Z",
    "eventKind": "policy_change",
    "status": "recorded",
    "scope": "all",
-   "evidenceUrl": "/evidence/2ba83d64-e28c-4ecf-93f2-7ff1b19e2d33/"
+   "evidenceUrl": "/evidence/8671e7c9-4cc0-4141-8ce2-be6f81444311/"
   }
  ]
 }
